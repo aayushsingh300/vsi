@@ -8,29 +8,28 @@ import { COURSES_CERT } from "@/data/content";
 import { VSI_LOGO, VSI_LOGO_RATIO } from "@/data/assets";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useLang } from "@/context/LangContext";
+import ScrollProgress from "@/components/ScrollProgress";
 
 function useScrolled(threshold = 20) {
+  // Tracks only the boolean "have we scrolled past the threshold" — a state
+  // that flips at most twice per scroll session, so re-rendering the Navbar
+  // on it is cheap. The continuous scroll-progress value lives in its own
+  // <ScrollProgress /> leaf so it never re-renders this tree.
   const [scrolled, setScrolled] = useState(false);
-  const [progress, setProgress] = useState(0);
   useEffect(() => {
     let ticking = false;
     const h = () => {
       if (ticking) return;
       ticking = true;
-      // Batch the layout read + state writes into a single rAF so we never
-      // force a synchronous reflow (reading scrollHeight) on every scroll event.
       requestAnimationFrame(() => {
-        const y = window.scrollY;
-        setScrolled(y > threshold);
-        const docH = document.documentElement.scrollHeight - window.innerHeight;
-        setProgress(docH > 0 ? (y / docH) * 100 : 0);
+        setScrolled(window.scrollY > threshold);
         ticking = false;
       });
     };
     window.addEventListener("scroll", h, { passive: true });
     return () => window.removeEventListener("scroll", h);
   }, [threshold]);
-  return { scrolled, progress };
+  return scrolled;
 }
 
 const NAV_LINKS = [
@@ -53,7 +52,7 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
   const [formHeight, setFormHeight] = useState(0);
   const { lang, setLang, t } = useLang();
   const isMobile = useIsMobile(900);
-  const { scrolled, progress } = useScrolled();
+  const scrolled = useScrolled();
 
   useEffect(() => {
     if (formRef.current) {
@@ -79,9 +78,9 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
           position: "sticky",
           top: 0,
           zIndex: 100,
-          background: scrolled ? "rgba(var(--bg-rgb),.97)" : "rgba(var(--bg-rgb),.90)",
-          backdropFilter: scrolled ? "blur(24px) saturate(1.5)" : "blur(14px)",
-          WebkitBackdropFilter: scrolled ? "blur(24px) saturate(1.5)" : "blur(14px)",
+          background: scrolled ? "rgba(var(--bg-rgb),.95)" : "rgba(var(--bg-rgb),.86)",
+          backdropFilter: scrolled ? "blur(12px)" : "blur(8px)",
+          WebkitBackdropFilter: scrolled ? "blur(12px)" : "blur(8px)",
           borderBottom: scrolled ? "1px solid rgba(var(--accent-rgb),.14)" : "1px solid rgba(var(--accent-rgb),.08)",
           padding: "0 5%",
           display: "flex",
@@ -92,19 +91,8 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
           boxShadow: scrolled ? "0 4px 24px rgba(13,27,42,.07)" : "none",
         }}
       >
-        {/* Scroll progress bar */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            height: 2,
-            width: `${progress}%`,
-            background: "linear-gradient(to right, var(--accent), var(--accent-gold))",
-            transition: "width .1s linear",
-            borderRadius: "0 1px 1px 0",
-          }}
-        />
+        {/* Scroll progress bar — self-contained, updates via transform only */}
+        <ScrollProgress />
         <Link href="/" aria-label="Venture Skill India — home" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
           {(() => {
             const logoH = isMobile ? 26 : (scrolled ? 30 : 34);

@@ -967,6 +967,11 @@ textarea:focus-visible {
   filter: blur(80px);
   pointer-events: none;
   animation: orbFloat 12s ease-in-out infinite;
+  /* Promote to its own compositor layer so the 80px blur is rasterised once
+     and the float animation only transforms the cached bitmap — otherwise the
+     browser re-blurs this huge element every frame, stuttering hero scroll. */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* ── Glow Badge ── */
@@ -1032,10 +1037,14 @@ textarea:focus-visible {
   box-shadow: 0 0 8px rgba(248,247,244,.4);
 }
 
-/* ── Content Visibility optimization ── */
+/* ── Section paint containment ──
+   `content-visibility: auto` was removed: on this landing page it forced a
+   synchronous layout of each section as it scrolled into view and its
+   intrinsic-size estimate was wrong for these variable-height sections,
+   causing scroll-anchor jumps / stutter. `contain: layout` keeps the layout
+   isolation benefit without deferring rendering. */
 .lazy-section {
-  content-visibility: auto;
-  contain-intrinsic-block-size: auto 600px;
+  contain: layout;
 }
 
 /* ── Gradient text ── */
