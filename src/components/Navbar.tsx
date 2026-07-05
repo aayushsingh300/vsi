@@ -13,10 +13,19 @@ function useScrolled(threshold = 20) {
   const [scrolled, setScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
   useEffect(() => {
+    let ticking = false;
     const h = () => {
-      setScrolled(window.scrollY > threshold);
-      const docH = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(docH > 0 ? (window.scrollY / docH) * 100 : 0);
+      if (ticking) return;
+      ticking = true;
+      // Batch the layout read + state writes into a single rAF so we never
+      // force a synchronous reflow (reading scrollHeight) on every scroll event.
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        setScrolled(y > threshold);
+        const docH = document.documentElement.scrollHeight - window.innerHeight;
+        setProgress(docH > 0 ? (y / docH) * 100 : 0);
+        ticking = false;
+      });
     };
     window.addEventListener("scroll", h, { passive: true });
     return () => window.removeEventListener("scroll", h);
