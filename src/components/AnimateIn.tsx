@@ -27,21 +27,29 @@ export default function AnimateIn({
   as: Tag = "div",
 }: AnimateInProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
-  const [visible, setVisible] = useState(false);
+  // "idle"   → visible, no animation (matches SSR; the ONLY state ever painted
+  //            for content that is already on screen, so it never flickers).
+  // "hidden" → opacity:0, applied only to elements below the fold, where the
+  //            hide is off-screen and invisible to the user.
+  // "reveal" → play the entrance animation as the element scrolls into view.
+  const [phase, setPhase] = useState<"idle" | "hidden" | "reveal">("idle");
 
-  // Only hide on client mount (prevents SSR invisible content)
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted || !ref.current) return;
     const el = ref.current;
+    if (!el) return;
+
+    const r = el.getBoundingClientRect();
+    const inView = r.top < window.innerHeight && r.bottom > 0;
+    // Already on screen at mount → leave it exactly as SSR painted it. No hide,
+    // no re-animation, no flash.
+    if (inView) return;
+
+    // Below the fold → safe to hide now (unseen) and animate in on scroll.
+    setPhase("hidden");
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true);
+          setPhase("reveal");
           io.disconnect();
         }
       },
@@ -49,15 +57,15 @@ export default function AnimateIn({
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [mounted, threshold]);
+  }, [threshold]);
 
-  const animClass = visible ? `a-${animation}` : "";
-  const delayStyle = delay > 0 ? { animationDelay: `${delay}s` } : {};
+  const stateClass = phase === "hidden" ? "pre" : phase === "reveal" ? `a-${animation}` : "";
+  const delayStyle = phase === "reveal" && delay > 0 ? { animationDelay: `${delay}s` } : {};
 
   return (
     <Tag
       ref={ref}
-      className={`${mounted && !visible ? "pre" : ""} ${animClass} ${className}`}
+      className={`${stateClass} ${className}`}
       style={{ ...style, ...delayStyle }}
     >
       {children}

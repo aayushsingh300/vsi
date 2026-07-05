@@ -78,9 +78,14 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
           position: "sticky",
           top: 0,
           zIndex: 100,
-          background: scrolled ? "rgba(var(--bg-rgb),.95)" : "rgba(var(--bg-rgb),.86)",
-          backdropFilter: scrolled ? "blur(12px)" : "blur(8px)",
-          WebkitBackdropFilter: scrolled ? "blur(12px)" : "blur(8px)",
+          // On mobile (esp. iOS Safari) a sticky backdrop-filter flickers as
+          // content scrolls under it, so we drop the blur and use a near-solid
+          // background instead — visually near-identical, no scroll repaint.
+          background: isMobile
+            ? (scrolled ? "rgba(var(--bg-rgb),.98)" : "rgba(var(--bg-rgb),.96)")
+            : (scrolled ? "rgba(var(--bg-rgb),.95)" : "rgba(var(--bg-rgb),.86)"),
+          backdropFilter: isMobile ? "none" : (scrolled ? "blur(12px)" : "blur(8px)"),
+          WebkitBackdropFilter: isMobile ? "none" : (scrolled ? "blur(12px)" : "blur(8px)"),
           borderBottom: scrolled ? "1px solid rgba(var(--accent-rgb),.14)" : "1px solid rgba(var(--accent-rgb),.08)",
           padding: "0 5%",
           display: "flex",
