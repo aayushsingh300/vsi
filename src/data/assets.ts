@@ -38,18 +38,24 @@ export function programThumb(slug: string): string | undefined {
 // Employer logos — local, size-optimised files in /public/logos.
 // Keys must match the names in EMPLOYERS (see content.ts).
 export const EMPLOYER_LOGOS: Record<string, string> = {
-  "L&T": "/logos/lt.svg",
   "TATA Motors": "/logos/tata.png",
-  "Myntra": "/logos/myntra.png",
+  "TATA Electronics": "/logos/tata.png",
+  "Foxconn": "/logos/foxconn.svg",
+  "Wistron": "/logos/wistron.svg",
+  "Amazon": "/logos/amazon.svg",
+  "Flipkart": "/logos/flipkart.svg",
+  "Blinkit": "/logos/blinkit.svg",
+  "Zepto": "/logos/zepto.svg",
+  "Jupiter Hospitals": "/logos/jupiter.svg",
+  "HM Hospitals": "/logos/hm-hospitals.svg",
+  "S.P. Apparels": "/logos/sp-apparels.svg",
+  "Modenik Lifestyle": "/logos/modenik.svg",
+  "L&T": "/logos/lt.svg",
   "Wipro": "/logos/wipro.png",
   "Infosys": "/logos/infosys.webp",
-  "Maruti Suzuki": "/logos/maruti-suzuki.png",
-  "Mahindra": "/logos/mahindra.png",
   "Cognizant": "/logos/cognizant.jpg",
   "TCS": "/logos/tcs.webp",
   "HCL": "/logos/hcl.png",
-  "Cummins": "/logos/cummins.png",
-  "BHEL": "/logos/bhel.png",
 };
 
 // Homepage / brand logo (full VSI colour wordmark, vector).

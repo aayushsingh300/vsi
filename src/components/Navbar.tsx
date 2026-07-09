@@ -34,11 +34,12 @@ function useScrolled(threshold = 20) {
 
 const NAV_LINKS = [
   { href: "/courses", key: "navCourses" },
-  { href: "/centers", key: "navCenters" },
-  { href: "/placements", key: "navPlacements" },
+  { href: "/services", key: "navServices" },
+  { href: "/placements", key: "navRecruiters" },
+  { href: "/resources", key: "navResources" },
+  { href: "/centers", key: "navInfrastructure" },
   { href: "/about", key: "navAbout" },
-  { href: "/news", key: "navNews" },
-  { href: "/contact", key: "navContact" },
+  { href: "/work-abroad", key: "navWorkAbroad" },
 ];
 
 interface NavbarProps {
@@ -116,7 +117,7 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
 
         {!isMobile && (
           <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
-            {NAV_LINKS.slice(0, 4).map((n) => (
+            {NAV_LINKS.slice(0, 5).map((n) => (
               <Link key={n.href} href={n.href} className="nav-link">
                 {t(n.key)}
               </Link>

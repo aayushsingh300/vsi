@@ -30,7 +30,7 @@ export const COURSES_CERT: CourseCert[] = [
     thumb: "arch",
     desc: "Master AutoCAD, Revit, SketchUp and 3DS Max. Build photo-realistic architectural visualizations.",
     longDesc: "Unlock the power of technology in architectural design. A 320-hour offline programme covering drafting, design and visualization of architectural projects using the latest CAD software — from precise 2D drawings to photo-realistic 3D walkthroughs.",
-    software: ["AutoCAD Architecture", "Revit Architecture", "3ds Max", "SketchUp"],
+    software: ["Lumion", "AutoCAD", "V-Ray", "3ds Max", "Revit", "Pre-DCR", "Corona Renderer", "Photoshop MSP", "Enscape", "Vastu Shastra", "SketchUp", "STAAD.Pro"],
     modules: [
       { t: "Module 1 · AutoCAD Foundations", d: "Interface mastery, 2D drafting conventions, dimensioning, layer management and architectural symbol libraries." },
       { t: "Module 2 · Revit Architecture (BIM)", d: "Building Information Modeling — walls, floors, roofs, families, schedules and construction documentation." },
@@ -53,7 +53,7 @@ export const COURSES_CERT: CourseCert[] = [
     thumb: "civil",
     desc: "Structural drafting, site planning, surveying — the full civil engineering software stack.",
     longDesc: "Revolutionize how you approach civil engineering projects. 240 hours covering 2D and 3D modeling, structural analysis and design visualization across the most-used civil CAD toolchain in India.",
-    software: ["AutoCAD", "Revit", "STAAD Pro", "ETABS", "Oracle Primavera", "3ds Max", "Revit MEP", "BIM 360", "SketchUp", "MX Road"],
+    software: ["AutoCAD", "STAAD.Pro", "Civil 3D", "Revit Architecture", "Primavera", "MSP", "Photoshop"],
     modules: [
       { t: "Module 1 · AutoCAD & Drafting", d: "2D civil drafting, site plans, contour drawings, dimensioning and printing standards." },
       { t: "Module 2 · Revit + BIM 360", d: "Structural BIM, multi-discipline coordination, families and clash detection workflows." },
@@ -76,7 +76,7 @@ export const COURSES_CERT: CourseCert[] = [
     thumb: "fashion",
     desc: "Digital pattern making, garment design, fabric simulation. India's growing fashion industry needs you.",
     longDesc: "Transform your design ideas into digital reality. From sketching and pattern making to virtual prototyping and 3D visualization — 200 hours of hands-on training in the tools the Indian fashion industry actually uses.",
-    software: ["Adobe Photoshop", "Adobe Illustrator", "CorelDRAW", "MS Office", "Paint Brush"],
+    software: ["CorelDRAW", "Photoshop", "Wilcom", "Marvelous Designer"],
     modules: [
       { t: "Module 1 · Photoshop for Fashion", d: "Photo editing, digital illustration, fabric-texture simulation, mood boards." },
       { t: "Module 2 · Illustrator + CorelDRAW", d: "Vector-based flat sketches, technical drawings, repeat-print and pattern design." },
@@ -99,7 +99,7 @@ export const COURSES_CERT: CourseCert[] = [
     thumb: "mech",
     desc: "SolidWorks, CATIA, Inventor — the backbone of Indian manufacturing and engineering.",
     longDesc: "Equip yourself for the manufacturing industry. From precise 3D models to simulating complex mechanical systems — the most comprehensive mechanical CAD stack you'll find in Eastern India.",
-    software: ["AutoCAD", "SolidWorks", "CATIA", "CREO (Pro/E)", "NX CAD", "ANSYS", "Inventor", "Revit MEP", "Oracle Primavera"],
+    software: ["SolidWorks", "Solid Edge", "AutoCAD", "Pro/ENGINEER (Creo)", "CATIA", "Unigraphics NX (UGNX4)", "ANSYS 12", "CNC Turning", "Milling Programming", "Tekla Structures", "Autodesk Inventor"],
     modules: [
       { t: "Module 1 · 2D Drafting & 3D Modeling", d: "AutoCAD basics, sketch-based modeling, mechanical drawings, dimensioning standards." },
       { t: "Module 2 · SolidWorks / CATIA / CREO", d: "Part design, assembly modeling, sheet metal, surfacing — production-grade workflows." },
@@ -122,7 +122,7 @@ export const COURSES_CERT: CourseCert[] = [
     thumb: "elec",
     desc: "Industrial automation, control system design, electrical panel layouts.",
     longDesc: "From schematic capture and circuit simulation to PCB layout and electrical documentation — 200 hours of offline training on the PLC + SCADA stack that runs Indian factories.",
-    software: ["AutoCAD Electrical", "PLC programming environments", "SCADA platforms", "HMI tools"],
+    software: ["AutoCAD", "PLC", "SCADA", "AC/DC Drives", "Rockwell Systems", "Siemens Systems", "Plumbing Engineering Design"],
     modules: [
       { t: "Module 1 · Electrical Drafting", d: "AutoCAD Electrical, panel layouts, schematic capture and electrical documentation." },
       { t: "Module 2 · PLC Programming", d: "Ladder logic, I/O configuration, PLC languages, data handling and networking." },
@@ -145,7 +145,7 @@ export const COURSES_CERT: CourseCert[] = [
     thumb: "gis",
     desc: "Geographic Information Systems — used in urban planning, agriculture, disaster management.",
     longDesc: "Visualize, analyze and interpret geospatial data. Create stunning maps, run in-depth spatial analysis and make informed decisions — applied to environmental monitoring, urban planning, disaster management and market analysis.",
-    software: ["ArcGIS", "AutoCAD Map", "AutoCAD Civil 3D"],
+    software: ["AutoCAD", "Civil 3D", "AutoCAD Map 3D", "ArcGIS"],
     modules: [
       { t: "Module 1 · ArcGIS Foundations", d: "Interface, data formats, projections, symbology and cartographic principles." },
       { t: "Module 2 · Spatial Analysis", d: "Vector & raster analysis, geoprocessing, network and overlay analysis." },
@@ -462,10 +462,140 @@ export function getProgram(slug: string): Program | undefined {
   return ALL_PROGRAMS.find((p) => p.slug === slug);
 }
 
+// ════════════════════════════════════════════════════════════════════
+//  New Course Categories (from feedback)
+// ════════════════════════════════════════════════════════════════════
+
+export type CourseCategory = {
+  slug: string;
+  name: string;
+  icon: string;
+  desc: string;
+  tools: string[];
+};
+
+export const DATA_SCIENCE_COURSES: CourseCategory[] = [
+  { slug: "data-analytics", name: "Data Analytics", icon: "📊", desc: "Turn raw data into business insights with Excel, SQL and visualization tools.", tools: ["MS-Excel", "Advanced Excel", "SQL", "Power BI", "Tableau"] },
+  { slug: "business-analytics", name: "Business Analytics", icon: "📈", desc: "Drive strategic decisions with data-driven analysis and agile methodologies.", tools: ["Power BI", "Tableau", "SQL", "Python", "Agile Methodologies"] },
+  { slug: "ai-ml", name: "AI & Machine Learning", icon: "🤖", desc: "Build intelligent systems with machine learning, generative AI and Python.", tools: ["Python", "Generative AI Tools", "SQL", "Power BI", "Tableau"] },
+  { slug: "digital-marketing", name: "Digital Marketing", icon: "📱", desc: "Master digital campaigns, SEO, social media marketing and analytics.", tools: ["Generative AI Tools", "Power BI", "MS-Excel", "Advanced Excel", "Agile Methodologies"] },
+];
+
+export const DESIGN_STUDIO_COURSES: CourseCategory[] = [
+  { slug: "graphics-design", name: "Graphics Design", icon: "🎨", desc: "Create stunning visual content for print and digital media.", tools: ["Photoshop", "Illustrator", "InDesign", "CorelDRAW"] },
+  { slug: "multimedia", name: "Multimedia", icon: "🎬", desc: "Combine text, graphics, audio and video into interactive experiences.", tools: ["Photoshop", "Premiere Pro", "After Effects", "Animate CC"] },
+  { slug: "animation", name: "Animation", icon: "✨", desc: "2D & 3D animation — from concept art to fully rendered sequences.", tools: ["Photoshop", "Premiere Pro", "After Effects", "Sound FX", "Animate CC", "ToonBoom", "3D MAX", "Maya", "CorelDRAW", "Illustrator", "InDesign", "Blender"] },
+  { slug: "interior-design", name: "Interior Design", icon: "🏠", desc: "Design functional, aesthetic interior spaces with modern tools.", tools: ["3D MAX", "SketchUp", "V-Ray", "AutoCAD", "Photoshop"] },
+  { slug: "photography", name: "Photography", icon: "📷", desc: "Master camera technique, lighting, composition and post-production.", tools: ["Photoshop", "Premiere Pro", "After Effects"] },
+  { slug: "fashion-design", name: "Fashion Design", icon: "👗", desc: "From sketch to runway — digital fashion illustration and pattern making.", tools: ["CorelDRAW", "Photoshop", "Illustrator", "InDesign"] },
+];
+
+// ════════════════════════════════════════════════════════════════════
+//  Services Page Data
+// ════════════════════════════════════════════════════════════════════
+
+export const EMPLOYMENT_SECTORS = [
+  { name: "IT / ITeS", icon: "💻", desc: "Software development, IT support, BPO and tech-enabled services." },
+  { name: "Apparel & Textiles", icon: "🧵", desc: "Garment manufacturing, quality, and fashion CAD roles." },
+  { name: "Logistics & E-Commerce", icon: "📦", desc: "Warehousing, fulfilment, supply-chain and last-mile delivery." },
+  { name: "Automotive", icon: "🚗", desc: "Vehicle manufacturing, servicing, EV assembly and maintenance." },
+  { name: "Healthcare", icon: "🏥", desc: "Hospital support, nursing assistance and patient care." },
+];
+
+export const EMERGING_TECH = [
+  { name: "Drone Technology", icon: "🛩️", desc: "Unmanned aerial vehicle operation, maintenance and surveying applications." },
+  { name: "Industrial Automation", icon: "⚙️", desc: "PLC, SCADA, robotics and smart manufacturing systems." },
+  { name: "Electric Vehicle (EV)", icon: "⚡", desc: "EV servicing, battery technology, charging infrastructure and assembly." },
+];
+
+export const GOVT_MANDATES = [
+  { name: "DDU-GKY Project", fullName: "Deen Dayal Upadhyaya Grameen Kaushalya Yojana", desc: "Rural youth skill training and placement programme under the Ministry of Rural Development." },
+  { name: "SJGKY Project", fullName: "Swarnajayanti Gram Swarozgar Yojana / State Skill Initiatives", desc: "State-level self-employment and skill-building initiatives for gram panchayat youth." },
+  { name: "Birsa Scheme", fullName: "Jharkhand Skill Projects", desc: "Targeted tribal youth training and employment programmes across Jharkhand." },
+  { name: "DDU-KK", fullName: "Deen Dayal Upadhyaya Kaushal Kendras", desc: "Multi-skill training centres under the National Skill Qualification Framework." },
+  { name: "Samagra Shiksha", fullName: "Samagra Shiksha School Project", desc: "Integrated school education programme with vocational and skill components." },
+];
+
+// ════════════════════════════════════════════════════════════════════
+//  Infrastructure Page Data
+// ════════════════════════════════════════════════════════════════════
+
+export const INFRA_TABS = [
+  { key: "central", label: "Central-Driven Initiatives", desc: "Dedicated exclusively to tracking and showcasing DDU-GKY Programs." },
+  { key: "skill", label: "Skill-Driven Initiatives", desc: "State-level operational delivery frameworks — UPSDM (Uttar Pradesh), JSDM (Jharkhand), BSDM (Bihar)." },
+];
+
+export const TRAINING_INSTITUTIONS = [
+  { type: "PPP", name: "Government Polytechnic Colleges", count: 3, state: "Uttar Pradesh", desc: "Public-Private Partnership model polytechnic colleges." },
+  { type: "Vocational", name: "Industrial Training Institutes (ITI)", count: null, state: "Multiple", desc: "Vocational frameworks across ITI colleges." },
+  { type: "HQ", name: "Corporate Head Office", count: null, state: "Jharkhand", desc: "Ranchi, Panchwati Plaza — executive and administrative hub." },
+];
+
+export const SMART_CITY_BLOCKS = [
+  { block: 1, name: "Front Facade", desc: "Executive Office Space and modern Food & Beverage (F&B) / Canteen zones.", icon: "🏢" },
+  { block: 2, name: "Middle Wing", desc: "Modernized Nursing College.", icon: "🏥" },
+  { block: 3, name: "Rear Wing", desc: "Advanced Institutional Space, smart classrooms, and technical labs.", icon: "🔬" },
+  { block: 4, name: "Hostel Complex", desc: "On-campus residential housing space.", icon: "🏠" },
+];
+
+// ════════════════════════════════════════════════════════════════════
+//  Work Abroad Page Data
+// ════════════════════════════════════════════════════════════════════
+
+export const INTL_CORRIDORS = [
+  { region: "Middle East", cities: ["Dubai", "Riyadh"], desc: "Active employment drives in the Gulf region — hospitality, construction, healthcare and retail sectors.", icon: "🌍" },
+  { region: "Europe — Germany", cities: ["Berlin", "Munich", "Frankfurt"], desc: "German International Exchange Program — training and deploying qualified candidates directly into the European healthcare sector.", icon: "🇩🇪" },
+];
+
+// ════════════════════════════════════════════════════════════════════
+//  CSR Data
+// ════════════════════════════════════════════════════════════════════
+
+export const CSR_PARTNERS = [
+  { name: "Hero MotoCorp", desc: "Training rural youth for EV service sectors through joint CSR initiatives." },
+  { name: "RKS Builders", desc: "Infrastructure skill development for construction sector workers." },
+];
+
+export const CSR_ACTIVITIES = [
+  { title: "VSI Foundation Skills Drive", desc: "Self-funded skill development projects highlighting independent social footprint.", icon: "🎓" },
+  { title: "Rural Training Camps", desc: "Multi-day intensive training sessions in rural and tribal areas across Jharkhand and UP.", icon: "🏕️" },
+  { title: "Certification Distribution", desc: "Recognized credential distribution events empowering graduates with verifiable qualifications.", icon: "📜" },
+];
+
+// ════════════════════════════════════════════════════════════════════
+//  About Page — Contact Channels
+// ════════════════════════════════════════════════════════════════════
+
+export const CONTACT_CHANNELS = [
+  { dept: "Human Resources Department", phone: "+91 9431103263", email: "hr@ventureskillindia.co.in", icon: "👥" },
+  { dept: "Placement & Corporate Relations", phone: "+91 9431103263", email: "placements@ventureskillindia.co.in", icon: "💼" },
+  { dept: "Director & Executive Directors", phone: "+91 9431103263", email: "director@ventureskillindia.co.in", icon: "🏛️" },
+];
+
+export const ACCREDITATIONS = [
+  { name: "NASSCOM", fullName: "National Association of Software and Service Companies" },
+  { name: "NSDC", fullName: "National Skill Development Corporation" },
+  { name: "Autodesk", fullName: "Autodesk Certification Hub" },
+  { name: "AICTE", fullName: "All India Council for Technical Education" },
+  { name: "Skill India", fullName: "Skill India Mission" },
+  { name: "JSDM", fullName: "Jharkhand Skill Development Mission" },
+];
+
+// ════════════════════════════════════════════════════════════════════
+//  Resources Page Data
+// ════════════════════════════════════════════════════════════════════
+
+export const RESOURCE_TABS = [
+  { key: "news", label: "News & Blogs", icon: "📰" },
+  { key: "ads", label: "Advertisements", icon: "📢" },
+  { key: "recognition", label: "Recognition", icon: "🏆" },
+  { key: "brochures", label: "Brochures", icon: "📄" },
+];
+
 export const STATS = [
   { val: 23, sfx: "+", lbl: "Years" },
-  { val: 15000, sfx: "+", lbl: "Empowered" },
-  { val: 11000, sfx: "+", lbl: "Placed" },
+  { val: 20000, sfx: "+", lbl: "Placed" },
+  { val: 5000, sfx: "+", lbl: "Annual Jobs" },
   { val: 50, sfx: "+", lbl: "Centres" },
 ];
 
@@ -505,7 +635,15 @@ export const TESTIMONIALS = [
   { q: "EV training gave me a skill almost nobody else had. That's exactly what got me the job at Tata Motors when they were hiring for their EV division.", name: "Amit Kumar", course: "Mechanical CAD · 2022 Batch", placed: "TATA Motors, Pune", from: "Godda, Jharkhand" },
 ];
 
-export const EMPLOYERS = ["L&T", "TATA Motors", "Myntra", "Wipro", "Infosys", "Maruti Suzuki", "Mahindra", "Cognizant", "TCS", "HCL", "Cummins", "BHEL"];
+export const EMPLOYERS = ["TATA Motors", "TATA Electronics", "Foxconn", "Wistron", "Amazon", "Flipkart", "Blinkit", "Zepto", "Jupiter Hospitals", "HM Hospitals", "S.P. Apparels", "Modenik Lifestyle", "L&T", "Wipro", "Infosys", "Cognizant", "TCS", "HCL"];
+
+// Sector-specific grouping for the recruiter page
+export const RECRUITER_SECTORS = [
+  { sector: "Automotive & Manufacturing", companies: ["TATA Motors", "TATA Electronics", "Foxconn", "Wistron"] },
+  { sector: "Logistics & E-Commerce", companies: ["Amazon", "Flipkart", "Blinkit", "Zepto"] },
+  { sector: "Healthcare Ecosystems", companies: ["Jupiter Hospitals", "HM Hospitals"] },
+  { sector: "Apparel & Textiles", companies: ["S.P. Apparels", "Modenik Lifestyle"] },
+];
 
 export const NAV_ITEMS = [
   { id: "home", label: "Home" },
@@ -517,7 +655,7 @@ export const NAV_ITEMS = [
   { id: "contact", label: "Contact" },
 ];
 
-export const CREDS = ["NSDC Aligned", "AICTE Recognized", "Autodesk Authorized", "Skill India Partner"];
+export const CREDS = ["NASSCOM", "NSDC Aligned", "AICTE Recognized", "Autodesk Certified", "Skill India Partner"];
 
 export const MILESTONES = [
   { y: "2001", t: "Foundation", d: "Venture Skill India founded in Ranchi with a single CAD lab and a vision: world-class skill training in Eastern India." },
@@ -533,12 +671,12 @@ export const MILESTONES = [
 export const TRANSLATIONS: Record<string, Record<string, string>> = {
   en: {
     // Hero
-    heroTag: "23 years · Eastern India's most trusted",
-    heroTitle1: "You Don't Have to",
-    heroTitle2: "Leave Home to",
-    heroTitle3: "Build a Real Career.",
+    heroTag: "23 years · India's Career Transformation Partner",
+    heroTitle1: "Bridging the Skill Gap,",
+    heroTitle2: "Empowering",
+    heroTitle3: "Careers.",
     heroTitle4: "",
-    heroDesc: "For 23 years, we've done one thing well — get people into jobs. The kind of training and labs most institutes can't offer, and support that doesn't stop at graduation. Come see for yourself.",
+    heroDesc: "Transforming potential into professional excellence through industry-mapped training and global placement ecosystems.",
     // CTAs
     exploreCourses: "Explore Courses",
     freeCounseling: "Book Counseling",
@@ -566,14 +704,19 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     ctaTitle: "Start your career conversation today.",
     ctaDesc: "Free. 30-min response. No pressure. Ranchi-based since 2001.",
     // Tabs
-    tabCertificate: "Certificate",
-    tabDiploma: "Diploma",
-    tabVocational: "Vocational",
+    tabCertificate: "CAD Engineering",
+    tabDiploma: "Data Science",
+    tabVocational: "Design Studio",
     tabAll: "All Programs",
     // Nav
     navHome: "Home",
     navCourses: "Courses",
+    navServices: "Services",
+    navRecruiters: "Recruiters",
+    navResources: "Resources",
+    navInfrastructure: "Infrastructure",
     navAbout: "About",
+    navWorkAbroad: "Work Abroad",
     navCenters: "Centres",
     navPlacements: "Placements",
     navNews: "News",
@@ -589,15 +732,15 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     coursesEyebrow: "All Programs",
     coursesTitle1: "Pick the path that",
     coursesTitle2: "builds your career.",
-    coursesHeroDesc: "Government-recognized certificate, diploma, and vocational programs. Real curriculum. Real placement support. 11,000 students already placed.",
+    coursesHeroDesc: "Government-recognized certificate, diploma, and vocational programs. Real curriculum. Real placement support. 20,000+ students already placed.",
     aboutEyebrow: "Our Story",
     aboutTitle1: "23 Years of Building",
-    aboutTitle2: "Eastern India's Workforce.",
-    aboutHeroDesc: "We don't exist to be the biggest. We exist so that no student from Eastern India has to leave home to build a real career. That's been the mission since 2001.",
-    placementsEyebrow: "Placement Record",
-    placementsTitle1: "11,000+ placed.",
+    aboutTitle2: "India's Workforce.",
+    aboutHeroDesc: "Bridging the skill gap through employability, professional upskilling, and career-readiness. That's been the mission since 2001.",
+    placementsEyebrow: "Placements & Recruiters",
+    placementsTitle1: "20,000+ placed.",
     placementsTitle2: "Verifiable outcomes.",
-    placementsHeroDesc: "Not promises. Not projections. Actual students, actually placed, at companies you've heard of. Ask any of them.",
+    placementsHeroDesc: "4,000–5,000 jobs secured per year. Median CTC of ₹3.0–₹4.0 LPA. 20,000+ students deployed across formal workforce sectors.",
     newsEyebrow: "Latest Updates",
     newsTitle1: "News &",
     newsTitle2: "Recognition.",
@@ -605,10 +748,23 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     contactTitle1: "Let's talk about",
     contactTitle2: "your career path.",
     contactHeroDesc: "Free counseling session. No pressure. Just clarity on the right course for where you want to go.",
-    centersEyebrow: "Our Presence",
-    centersTitle1: "50+ Centres.",
-    centersTitle2: "One standard.",
-    centersHeroDesc: "From our flagship in Ranchi to rural training centres across Jharkhand and UP — same labs, same curriculum, same outcomes.",
+    centersEyebrow: "Infrastructure",
+    centersTitle1: "Labs & Infrastructure.",
+    centersTitle2: "Built for excellence.",
+    centersHeroDesc: "From our flagship Ranchi Smart City campus to government polytechnics and ITI centres — industry-grade labs across India.",
+    // New page heroes
+    servicesEyebrow: "Our Services",
+    servicesTitle1: "Skill Initiatives &",
+    servicesTitle2: "Government Mandates.",
+    servicesHeroDesc: "Large-scale capacity-building projects across B2G and institutional frameworks. Driving employability through public and private sector mandates.",
+    resourcesEyebrow: "Knowledge Hub",
+    resourcesTitle1: "Resources &",
+    resourcesTitle2: "Updates.",
+    resourcesHeroDesc: "News, blogs, accreditations, and downloadable brochures — everything you need in one place.",
+    workAbroadEyebrow: "Global Mobility",
+    workAbroadTitle1: "Work Abroad.",
+    workAbroadTitle2: "Global career pathways.",
+    workAbroadHeroDesc: "International placement corridors — Middle East employment drives and European healthcare exchange programs.",
     // Courses page sections
     certSectionTitle: "Certificate Courses",
     certSectionSub: "Industry-aligned · 200–320 hours · Certificate of completion",
@@ -645,12 +801,12 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     dRelatedTitle: "Related programmes",
   },
   hi: {
-    heroTag: "23 साल · पूर्वी भारत का सबसे भरोसेमंद संस्थान",
-    heroTitle1: "असली करियर बनाने के लिए",
-    heroTitle2: "घर छोड़ने की",
-    heroTitle3: "ज़रूरत नहीं।",
+    heroTag: "23 साल · भारत का करियर ट्रांसफ़ॉर्मेशन पार्टनर",
+    heroTitle1: "कौशल की खाई पाटना,",
+    heroTitle2: "करियर को",
+    heroTitle3: "सशक्त बनाना।",
     heroTitle4: "",
-    heroDesc: "23 सालों से, हमने एक काम बख़ूबी किया है — लोगों को नौकरी दिलाना। ऐसी ट्रेनिंग और लैब्स जो ज़्यादातर संस्थान नहीं दे पाते, और ऐसा साथ जो ग्रेजुएशन के बाद भी नहीं छूटता। खुद आकर देखिए।",
+    heroDesc: "उद्योग-मैप्ड प्रशिक्षण और वैश्विक प्लेसमेंट इकोसिस्टम के ज़रिए संभावनाओं को पेशेवर उत्कृष्टता में बदलना।",
     exploreCourses: "कोर्स देखें",
     freeCounseling: "परामर्श बुक करें",
     enquireNow: "पूछताछ →",
@@ -675,13 +831,18 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     recognizedDesc: "केंद्रीय मंत्री। राज्य सरकार। राष्ट्रीय निकाय। मान्यता वास्तविक और सार्वजनिक रूप से सत्यापन योग्य है।",
     ctaTitle: "आज ही अपनी करियर बातचीत शुरू करें।",
     ctaDesc: "मुफ्त। 30 मिनट में जवाब। कोई दबाव नहीं। 2001 से रांची में।",
-    tabCertificate: "सर्टिफिकेट",
-    tabDiploma: "डिप्लोमा",
-    tabVocational: "व्यावसायिक",
+    tabCertificate: "CAD इंजीनियरिंग",
+    tabDiploma: "डेटा साइंस",
+    tabVocational: "डिज़ाइन स्टूडियो",
     tabAll: "सभी कार्यक्रम",
     navHome: "होम",
     navCourses: "कोर्स",
+    navServices: "सेवाएं",
+    navRecruiters: "रिक्रूटर्स",
+    navResources: "संसाधन",
+    navInfrastructure: "बुनियादी ढांचा",
     navAbout: "हमारे बारे में",
+    navWorkAbroad: "विदेश में काम",
     navCenters: "केंद्र",
     navPlacements: "प्लेसमेंट",
     navNews: "समाचार",
@@ -695,15 +856,15 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     coursesEyebrow: "सभी कार्यक्रम",
     coursesTitle1: "वह रास्ता चुनें जो",
     coursesTitle2: "आपका करियर बनाए।",
-    coursesHeroDesc: "सरकारी-मान्यता प्राप्त सर्टिफिकेट, डिप्लोमा और व्यावसायिक कार्यक्रम। असली पाठ्यक्रम। असली प्लेसमेंट सहायता। 11,000 छात्र पहले से ही प्लेस्ड।",
+    coursesHeroDesc: "सरकारी-मान्यता प्राप्त सर्टिफिकेट, डिप्लोमा और व्यावसायिक कार्यक्रम। असली पाठ्यक्रम। असली प्लेसमेंट सहायता। 20,000+ छात्र प्लेस्ड।",
     aboutEyebrow: "हमारी कहानी",
     aboutTitle1: "23 साल से बना रहे हैं",
-    aboutTitle2: "पूर्वी भारत का कार्यबल।",
-    aboutHeroDesc: "हम सबसे बड़े बनने के लिए नहीं हैं। हम इसलिए हैं ताकि पूर्वी भारत के किसी छात्र को असली करियर बनाने के लिए घर न छोड़ना पड़े। 2001 से यही मिशन है।",
-    placementsEyebrow: "प्लेसमेंट रिकॉर्ड",
-    placementsTitle1: "11,000+ प्लेस्ड।",
+    aboutTitle2: "भारत का कार्यबल।",
+    aboutHeroDesc: "रोज़गार योग्यता, पेशेवर कौशल उन्नयन और करियर-तत्परता के माध्यम से कौशल अंतर को पाटना। 2001 से यही मिशन है।",
+    placementsEyebrow: "प्लेसमेंट और रिक्रूटर्स",
+    placementsTitle1: "20,000+ प्लेस्ड।",
     placementsTitle2: "सत्यापनयोग्य परिणाम।",
-    placementsHeroDesc: "वादे नहीं। अनुमान नहीं। असली छात्र, असली कंपनियों में प्लेस्ड। किसी से भी पूछिए।",
+    placementsHeroDesc: "हर साल 4,000-5,000 नौकरियां। औसत CTC ₹3.0-₹4.0 LPA। 20,000+ छात्र औपचारिक कार्यबल में तैनात।",
     newsEyebrow: "ताज़ा अपडेट",
     newsTitle1: "समाचार और",
     newsTitle2: "मान्यता।",
@@ -711,10 +872,22 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     contactTitle1: "आइए बात करते हैं",
     contactTitle2: "आपके करियर पथ की।",
     contactHeroDesc: "मुफ्त परामर्श सत्र। कोई दबाव नहीं। बस यह स्पष्टता कि आपके लक्ष्य के लिए कौन-सा कोर्स सही है।",
-    centersEyebrow: "हमारी मौजूदगी",
-    centersTitle1: "50+ केंद्र।",
-    centersTitle2: "एक ही मानक।",
-    centersHeroDesc: "रांची स्थित प्रमुख केंद्र से लेकर झारखंड और UP के ग्रामीण प्रशिक्षण केंद्रों तक — वही लैब, वही पाठ्यक्रम, वही परिणाम।",
+    centersEyebrow: "बुनियादी ढांचा",
+    centersTitle1: "लैब और इन्फ्रास्ट्रक्चर।",
+    centersTitle2: "उत्कृष्टता के लिए निर्मित।",
+    centersHeroDesc: "रांची स्मार्ट सिटी कैम्पस से लेकर सरकारी पॉलिटेक्निक और ITI केंद्रों तक — पूरे भारत में इंडस्ट्री-ग्रेड लैब।",
+    servicesEyebrow: "हमारी सेवाएं",
+    servicesTitle1: "कौशल पहल और",
+    servicesTitle2: "सरकारी परियोजनाएं।",
+    servicesHeroDesc: "B2G और संस्थागत ढांचे में बड़े पैमाने पर क्षमता निर्माण परियोजनाएं।",
+    resourcesEyebrow: "ज्ञान केंद्र",
+    resourcesTitle1: "संसाधन और",
+    resourcesTitle2: "अपडेट।",
+    resourcesHeroDesc: "समाचार, ब्लॉग, मान्यताएं और डाउनलोड करने योग्य ब्रोशर — सब कुछ एक ही जगह।",
+    workAbroadEyebrow: "वैश्विक गतिशीलता",
+    workAbroadTitle1: "विदेश में काम।",
+    workAbroadTitle2: "वैश्विक करियर पथ।",
+    workAbroadHeroDesc: "अंतरराष्ट्रीय प्लेसमेंट गलियारे — मध्य पूर्व रोज़गार अभियान और यूरोपीय स्वास्थ्य सेवा विनिमय कार्यक्रम।",
     // Courses page sections
     certSectionTitle: "सर्टिफिकेट कोर्स",
     certSectionSub: "इंडस्ट्री-अलाइंड · 200–320 घंटे · कोर्स पूरा होने का प्रमाणपत्र",

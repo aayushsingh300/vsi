@@ -53,11 +53,12 @@ const SocialLinks = [
 
 const NAV_LINKS = [
   { href: "/courses", key: "navCourses" },
-  { href: "/centers", key: "navCenters" },
-  { href: "/placements", key: "navPlacements" },
+  { href: "/services", key: "navServices" },
+  { href: "/placements", key: "navRecruiters" },
+  { href: "/resources", key: "navResources" },
+  { href: "/centers", key: "navInfrastructure" },
   { href: "/about", key: "navAbout" },
-  { href: "/news", key: "navNews" },
-  { href: "/contact", key: "navContact" },
+  { href: "/work-abroad", key: "navWorkAbroad" },
 ];
 
 export default function Footer() {
@@ -147,7 +148,7 @@ export default function Footer() {
               maxWidth: 340,
             }}
           >
-            Eastern India&apos;s most government-backed skill institution. 23 years. 11,000+ placed. NSDC · AICTE · Autodesk Authorized.
+            Eastern India&apos;s most government-backed skill institution. 23 years. 20,000+ placed. NASSCOM · NSDC · AICTE · Autodesk Certified.
           </p>
           <div style={{ display: "flex", gap: 8 }}>
             {SocialLinks.map((s) => (
@@ -382,7 +383,7 @@ export default function Footer() {
         }}
       >
         <div style={{ display: "flex", gap: 18, flexWrap: "wrap", alignItems: "center" }}>
-          {["NSDC", "AICTE", "NASSCOM", "JSDM", "Autodesk Authorized"].map((c) => (
+          {["NASSCOM", "NSDC", "AICTE", "Autodesk Certified", "JSDM", "Skill India"].map((c) => (
             <span
               key={c}
               style={{

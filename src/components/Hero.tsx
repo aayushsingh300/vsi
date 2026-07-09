@@ -374,7 +374,7 @@ export default function Hero() {
                     backgroundClip: "text",
                   }}
                 >
-                  11K+
+                  20K+
                 </div>
                 <div
                   style={{
@@ -386,7 +386,7 @@ export default function Hero() {
                     lineHeight: 1.3,
                   }}
                 >
-                  Students<br />Placed
+                  Students<br />Placed Nationally
                 </div>
               </div>
             </div>

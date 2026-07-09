@@ -3,9 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, GraduationCap, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import AnimateIn from "@/components/AnimateIn";
-import { COURSES_CERT, COURSES_DIP, COURSES_VOC } from "@/data/content";
+import { COURSES_CERT, DATA_SCIENCE_COURSES, DESIGN_STUDIO_COURSES } from "@/data/content";
 import { COURSE_THUMBS } from "@/data/assets";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useLang } from "@/context/LangContext";
@@ -16,8 +16,8 @@ export default function Courses() {
   const { t } = useLang();
   const tabs = [
     { key: "tabCertificate", n: COURSES_CERT.length },
-    { key: "tabDiploma", n: COURSES_DIP.length },
-    { key: "tabVocational", n: COURSES_VOC.length },
+    { key: "tabDiploma", n: DATA_SCIENCE_COURSES.length },
+    { key: "tabVocational", n: DESIGN_STUDIO_COURSES.length },
   ];
   const isMobile = useIsMobile(768);
 
@@ -85,7 +85,7 @@ export default function Courses() {
         </div>
       </div>
 
-      {/* Certificate — 2-col card grid */}
+      {/* CAD Engineering — 2-col card grid */}
       {tab === 0 && (
         <div
           style={{
@@ -242,120 +242,171 @@ export default function Courses() {
         </div>
       )}
 
-      {/* Diploma */}
+      {/* Data Science & Management */}
       {tab === 1 && (
         <div
           style={{
             display: "grid",
             gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)",
-            gap: 12,
+            gap: 16,
           }}
         >
-          {COURSES_DIP.map((c, i) => (
-            <AnimateIn key={i} animation="slideUp" delay={i * 0.05}>
+          {DATA_SCIENCE_COURSES.map((c, i) => (
+            <AnimateIn key={c.slug} animation="slideUp" delay={i * 0.06}>
               <div
                 className="course-row"
                 style={{
                   background: "var(--bg-card)",
                   border: "1px solid var(--border-card)",
-                  borderRadius: 8,
-                  padding: "22px 24px",
+                  borderRadius: 10,
+                  padding: "28px 24px",
                   display: "flex",
-                  alignItems: "center",
-                  gap: 16,
+                  flexDirection: "column",
+                  gap: 12,
+                  height: "100%",
                 }}
               >
-                <div
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 8,
-                    background: "rgba(var(--accent-rgb),.1)",
-                    border: "1px solid rgba(var(--accent-rgb),.18)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}
-                >
-                  <GraduationCap size={18} color="var(--accent)" />
+                <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                  <div
+                    style={{
+                      width: 48,
+                      height: 48,
+                      borderRadius: 10,
+                      background: "rgba(var(--accent-rgb),.08)",
+                      border: "1px solid rgba(var(--accent-rgb),.15)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: 24,
+                      flexShrink: 0,
+                    }}
+                  >
+                    {c.icon}
+                  </div>
+                  <div>
+                    <h3
+                      style={{
+                        fontFamily: "var(--serif)",
+                        fontWeight: 700,
+                        fontSize: 18,
+                        color: "var(--text)",
+                        letterSpacing: "-.02em",
+                      }}
+                    >
+                      {c.name}
+                    </h3>
+                  </div>
                 </div>
-                <h3
-                  style={{
-                    flex: 1,
-                    fontFamily: "var(--serif)",
-                    fontWeight: 700,
-                    fontSize: 16,
-                    color: "var(--text)",
-                    letterSpacing: "-.015em",
-                  }}
-                >
-                  {c.name}
-                </h3>
-                <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--text-muted)" }}>
-                  {c.hrs}
-                </span>
+                <p style={{ fontFamily: "var(--body)", fontSize: 13.5, color: "var(--text-muted)", lineHeight: 1.65 }}>
+                  {c.desc}
+                </p>
+                <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: "auto" }}>
+                  {c.tools.slice(0, 4).map((tool) => (
+                    <span
+                      key={tool}
+                      style={{
+                        fontFamily: "var(--mono)",
+                        fontSize: 9,
+                        letterSpacing: ".06em",
+                        background: "rgba(var(--accent-rgb),.06)",
+                        border: "1px solid rgba(var(--accent-rgb),.12)",
+                        color: "var(--text-muted)",
+                        padding: "3px 8px",
+                        borderRadius: 3,
+                      }}
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                  {c.tools.length > 4 && (
+                    <span style={{ fontFamily: "var(--mono)", fontSize: 9, color: "var(--text-muted)", padding: "3px 0" }}>
+                      +{c.tools.length - 4} more
+                    </span>
+                  )}
+                </div>
               </div>
             </AnimateIn>
           ))}
         </div>
       )}
 
-      {/* Vocational */}
+      {/* Design Studio */}
       {tab === 2 && (
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(2, 1fr)",
-            gap: 14,
+            gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
+            gap: 16,
           }}
         >
-          {COURSES_VOC.map((c, i) => (
-            <AnimateIn key={i} animation="scaleIn" delay={i * 0.045}>
+          {DESIGN_STUDIO_COURSES.map((c, i) => (
+            <AnimateIn key={c.slug} animation="scaleIn" delay={i * 0.06}>
               <div
                 className="course-row"
                 style={{
                   background: "var(--bg-card)",
                   border: "1px solid var(--border-card)",
-                  borderRadius: 8,
-                  padding: "26px 22px",
+                  borderRadius: 10,
+                  padding: "28px 22px",
                   display: "flex",
-                  alignItems: "center",
-                  gap: 16,
+                  flexDirection: "column",
+                  gap: 12,
+                  height: "100%",
                 }}
               >
                 <div
                   style={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: 10,
+                    width: 52,
+                    height: 52,
+                    borderRadius: 12,
                     background: "rgba(var(--accent-rgb),.08)",
                     border: "1px solid rgba(var(--accent-rgb),.15)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: 24,
+                    fontSize: 26,
                     flexShrink: 0,
                   }}
                 >
                   {c.icon}
                 </div>
-                <div style={{ flex: 1 }}>
-                  <h3
-                    style={{
-                      fontFamily: "var(--serif)",
-                      fontWeight: 700,
-                      fontSize: 16,
-                      color: "var(--text)",
-                      marginBottom: 3,
-                      letterSpacing: "-.015em",
-                    }}
-                  >
-                    {c.name}
-                  </h3>
-                  <p style={{ fontFamily: "var(--mono)", fontSize: 10.5, color: "var(--text-muted)" }}>
-                    {c.hrs} program
-                  </p>
+                <h3
+                  style={{
+                    fontFamily: "var(--serif)",
+                    fontWeight: 700,
+                    fontSize: 17,
+                    color: "var(--text)",
+                    letterSpacing: "-.015em",
+                  }}
+                >
+                  {c.name}
+                </h3>
+                <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6, flex: 1 }}>
+                  {c.desc}
+                </p>
+                <div style={{ display: "flex", gap: 5, flexWrap: "wrap", marginTop: "auto" }}>
+                  {c.tools.slice(0, 3).map((tool) => (
+                    <span
+                      key={tool}
+                      style={{
+                        fontFamily: "var(--mono)",
+                        fontSize: 8.5,
+                        letterSpacing: ".05em",
+                        background: "rgba(var(--accent-rgb),.06)",
+                        border: "1px solid rgba(var(--accent-rgb),.12)",
+                        color: "var(--text-muted)",
+                        padding: "2px 6px",
+                        borderRadius: 2,
+                      }}
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                  {c.tools.length > 3 && (
+                    <span style={{ fontFamily: "var(--mono)", fontSize: 8.5, color: "var(--text-muted)", padding: "2px 0" }}>
+                      +{c.tools.length - 3}
+                    </span>
+                  )}
                 </div>
               </div>
             </AnimateIn>
