@@ -52,23 +52,26 @@ img{display:block;max-width:100%;}
   --text-inv:    #FDFCF9;       /* inverse (light) text on dark */
   --text-inv-muted: rgba(253,252,249,.58);
 
-  /* Accent system — VSI Primary: Momentum Orange, Secondary: Venture Blue, Accent: Growth Green */
-  --accent:           #FF7B00;         /* Momentum Orange — primary accent */
-  --accent-rgb:       255,123,0;       /* for rgba() use */
-  --accent-dark:      #C25E00;         /* darker orange */
-  --accent-blue:      #0099FF;         /* Venture Blue — secondary accent */
-  --accent-green:     #06A95D;         /* Growth Green */
-  --accent-glow:      rgba(255,123,0,.35);  /* orange glow */
-  --accent-blue-glow: rgba(0,153,255,.28);  /* blue glow */
-  --accent-green-glow:rgba(6,169,93,.25);   /* green glow */
-  /* Legacy gold mapping → orange for consistency */
-  --gold-rgb:         255,123,0;
-  --gold-glow:        rgba(255,123,0,.35);
+  /* Accent system — VSI Aligned: Blue Primary (CTAs), Orange Accent (energy), Green Tertiary */
+  --accent:           #0099FF;         /* Venture Blue — PRIMARY (CTAs, main actions) */
+  --accent-rgb:       0,153,255;       /* for rgba() use */
+  --accent-dark:      #0077CC;         /* darker blue */
+  --accent-orange:    #FF7B00;         /* Momentum Orange — accent (energy, decorative) */
+  --accent-green:     #06A95D;         /* Growth Green — tertiary (success states) */
 
-  /* Borders — using orange accent */
-  --border:        rgba(255,123,0,.12);
-  --border-strong: rgba(255,123,0,.26);
-  --border-card:   rgba(255,123,0,.18);
+  /* Glows */
+  --accent-glow:      rgba(0,153,255,.32);   /* blue glow — primary */
+  --accent-orange-glow: rgba(255,123,0,.28); /* orange glow — accent */
+  --accent-green-glow:rgba(6,169,93,.25);    /* green glow — tertiary */
+
+  /* Legacy gold mapping → blue for consistency */
+  --gold-rgb:         0,153,255;
+  --gold-glow:        rgba(0,153,255,.32);
+
+  /* Borders — using blue primary */
+  --border:        rgba(0,153,255,.12);
+  --border-strong: rgba(0,153,255,.22);
+  --border-card:   rgba(0,153,255,.16);
 
   /* Social */
   --wa-green:    #25D366;
@@ -120,8 +123,8 @@ img{display:block;max-width:100%;}
   --shadow-sm:   0 2px 8px rgba(1,1,1,.08);
   --shadow-md:   0 8px 28px rgba(1,1,1,.12);
   --shadow-lg:   0 18px 54px rgba(1,1,1,.16);
-  --shadow-glow: 0 0 32px rgba(255,123,0,.22), 0 8px 28px rgba(1,1,1,.12);
-  --shadow-gold: 0 0 32px rgba(255,123,0,.28), 0 8px 24px rgba(1,1,1,.1);
+  --shadow-glow: 0 0 32px rgba(0,153,255,.20), 0 8px 28px rgba(1,1,1,.12);
+  --shadow-gold: 0 0 32px rgba(0,153,255,.26), 0 8px 24px rgba(1,1,1,.1);
 }
 
 /* ═══ Dark theme — charcoal with brand accents ═══
@@ -152,25 +155,25 @@ img{display:block;max-width:100%;}
     --text-inv:        #F3ECDF;        /* stays light on dark sections */
 
     /* Brand accents brighten in dark mode for visibility */
-    --accent:          #FF8C1A;        /* Momentum Orange (brightened) */
-    --accent-rgb:      255,140,26;
-    --accent-dark:     #E67300;
-    --accent-blue:     #33AAFF;        /* Venture Blue (brightened) */
+    --accent:          #33AAFF;        /* Venture Blue (brightened for dark mode) */
+    --accent-rgb:      51,170,255;
+    --accent-dark:     #0088DD;
+    --accent-orange:   #FF9933;        /* Momentum Orange (brightened) */
     --accent-green:    #2EC876;        /* Growth Green (brightened) */
 
     /* Glows adjusted for dark background */
-    --accent-glow:     rgba(255,140,26,.4);
-    --accent-blue-glow: rgba(51,170,255,.32);
-    --accent-green-glow:rgba(46,200,118,.30);
-    --gold-rgb:        255,140,26;
-    --gold-glow:       rgba(255,140,26,.4);
+    --accent-glow:     rgba(51,170,255,.40);
+    --accent-orange-glow: rgba(255,153,51,.32);
+    --accent-green-glow: rgba(46,200,118,.30);
+    --gold-rgb:        51,170,255;
+    --gold-glow:       rgba(51,170,255,.40);
 
     /* Shadows adapted for dark surfaces */
     --shadow-sm:       0 2px 8px rgba(0,0,0,.5);
     --shadow-md:       0 8px 28px rgba(0,0,0,.55);
     --shadow-lg:       0 18px 54px rgba(0,0,0,.6);
-    --shadow-glow:     0 0 32px rgba(255,140,26,.32), 0 8px 28px rgba(0,0,0,.5);
-    --shadow-gold:     0 0 32px rgba(255,140,26,.36), 0 8px 24px rgba(0,0,0,.45);
+    --shadow-glow:     0 0 32px rgba(51,170,255,.36), 0 8px 28px rgba(0,0,0,.5);
+    --shadow-gold:     0 0 32px rgba(51,170,255,.40), 0 8px 24px rgba(0,0,0,.45);
   }
 }
 
@@ -271,8 +274,8 @@ img{display:block;max-width:100%;}
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255,123,0,.048) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,123,0,.048) 1px, transparent 1px);
+    linear-gradient(rgba(0,153,255,.048) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,153,255,.048) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: radial-gradient(ellipse at 60% 40%, #000 40%, transparent 90%);
   -webkit-mask-image: radial-gradient(ellipse at 60% 40%, #000 40%, transparent 90%);
@@ -288,9 +291,9 @@ img{display:block;max-width:100%;}
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: radial-gradient(rgba(255,123,0,.2) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(0,153,255,.15) 1px, transparent 1px);
   background-size: 22px 22px;
-  opacity: .3;
+  opacity: .4;
   z-index: 0;
 }
 .dot-bg > * { position: relative; z-index: 1; }
@@ -306,8 +309,8 @@ img{display:block;max-width:100%;}
   pointer-events: none;
   background-image: repeating-linear-gradient(
     -45deg,
-    rgba(255,123,0,.04) 0px,
-    rgba(255,123,0,.04) 1px,
+    rgba(0,153,255,.04) 0px,
+    rgba(0,153,255,.04) 1px,
     transparent 1px,
     transparent 14px
   );
@@ -320,7 +323,7 @@ img{display:block;max-width:100%;}
   background: rgba(245,240,232,.72);
   backdrop-filter: blur(20px) saturate(1.4);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border: 1px solid rgba(255,123,0,.14);
+  border: 1px solid rgba(0,153,255,.14);
 }
 .glass-dark {
   background: rgba(20,17,13,.75);
@@ -500,7 +503,7 @@ img{display:block;max-width:100%;}
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  background: linear-gradient(135deg, var(--accent), var(--accent-blue), transparent);
+  background: linear-gradient(135deg, var(--accent), var(--accent-orange), transparent);
   opacity: 0;
   transition: opacity .3s ease;
   z-index: -1;
@@ -523,7 +526,7 @@ img{display:block;max-width:100%;}
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,123,0,.06) 0%, transparent 60%);
+  background: linear-gradient(135deg, rgba(0,153,255,.06) 0%, transparent 60%);
   opacity: 0;
   transition: opacity .3s ease;
 }
@@ -545,7 +548,7 @@ img{display:block;max-width:100%;}
   position: absolute;
   left: 0; top: 0; bottom: 0;
   width: 3px;
-  background: linear-gradient(to bottom, var(--accent), var(--accent-blue));
+  background: linear-gradient(to bottom, var(--accent), var(--accent-orange));
   transform: scaleY(0);
   transform-origin: top;
   transition: transform .28s var(--ease-expo);
@@ -562,9 +565,9 @@ img{display:block;max-width:100%;}
   background: linear-gradient(
     90deg,
     var(--accent) 0%,
-    var(--accent-blue) 30%,
+    var(--accent-orange) 30%,
     var(--accent) 60%,
-    var(--accent-blue) 100%
+    var(--accent-orange) 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -606,7 +609,7 @@ img{display:block;max-width:100%;}
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, var(--accent), var(--accent-blue));
+  background: linear-gradient(to bottom, var(--accent), var(--accent-orange));
   border-radius: 3px;
 }
 
@@ -721,9 +724,9 @@ img{display:block;max-width:100%;}
 }
 .filter-pill.active {
   background: rgba(0,153,255,.12);
-  color: var(--accent-blue);
-  border-color: var(--accent-blue);
-  box-shadow: 0 4px 16px rgba(0,153,255,.12);
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px rgba(0,153,255,.16);
 }
 
 /* ── Inner Hero ── */
@@ -732,7 +735,7 @@ img{display:block;max-width:100%;}
   text-align: center;
   position: relative;
   background:
-    radial-gradient(ellipse at top, rgba(255,123,0,.12) 0%, transparent 55%),
+    radial-gradient(ellipse at top, rgba(0,153,255,.08) 0%, transparent 55%),
     var(--bg);
   border-bottom: 1px solid var(--border);
   overflow: hidden;
@@ -743,8 +746,8 @@ img{display:block;max-width:100%;}
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255,123,0,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,123,0,.04) 1px, transparent 1px);
+    linear-gradient(rgba(0,153,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,153,255,.04) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: radial-gradient(ellipse at center top, #000 40%, transparent 90%);
   -webkit-mask-image: radial-gradient(ellipse at center top, #000 40%, transparent 90%);
@@ -918,16 +921,17 @@ textarea:focus-visible {
   width: 44px;
   height: 44px;
   border-radius: var(--r-md);
-  background: rgba(255,123,0,.08);
-  border: 1px solid rgba(255,123,0,.16);
+  background: rgba(0,153,255,.08);
+  border: 1px solid rgba(0,153,255,.16);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: background .22s ease, box-shadow .22s ease;
+  transition: background .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
 .icon-box:hover, .card-elevated:hover .icon-box {
-  background: rgba(255,123,0,.15);
+  background: rgba(0,153,255,.14);
+  border-color: rgba(255,123,0,.24);
   box-shadow: 0 0 12px var(--accent-glow);
 }
 
@@ -999,8 +1003,8 @@ textarea:focus-visible {
   align-items: center;
   gap: 6px;
   padding: 4px 12px 4px 8px;
-  background: rgba(255,123,0,.1);
-  border: 1px solid rgba(255,123,0,.22);
+  background: rgba(0,153,255,.1);
+  border: 1px solid rgba(0,153,255,.22);
   border-radius: 999px;
   font-family: var(--mono);
   font-size: 10.5px;
@@ -1012,8 +1016,8 @@ textarea:focus-visible {
 .badge-glow .dot {
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 6px var(--accent-glow);
+  background: var(--accent-orange);
+  box-shadow: 0 0 6px var(--accent-orange-glow);
   animation: glowPulse 2.2s ease-in-out infinite;
 }
 
@@ -1031,7 +1035,7 @@ textarea:focus-visible {
 .feature-bullet .dot {
   width: 7px; height: 7px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--accent-orange);
   box-shadow: 0 0 8px rgba(255,123,0,.5);
   flex-shrink: 0;
   transition: box-shadow .22s ease;
@@ -1068,7 +1072,7 @@ textarea:focus-visible {
 
 /* ── Gradient text ── */
 .grad-text {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-blue) 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-orange) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
