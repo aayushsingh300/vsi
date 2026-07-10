@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════
-   VSI — Premium Design System · Pro Max
-   Parchment · Navy · Amber · Fraunces serif · Syne sans
+   VSI — Premium Design System · Brand-Aligned Edition
+   Parchment · Venture Blue · Momentum Orange · Growth Green
    ═══════════════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,500;1,9..144,700&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=Epilogue:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
@@ -24,45 +24,51 @@ img{display:block;max-width:100%;}
   color-scheme: light;
 
   /* RGB triplets — enable alpha composition + one-line theme flips */
-  --navy-rgb:    13,27,42;    /* primary ink (text/border on light) */
-  --ink-rgb:     26,26,26;    /* near-black ink used on light surfaces */
-  --cream-rgb:   248,247,244; /* light element on dark surfaces */
-  --inv-rgb:     253,252,249; /* inverse text on dark surfaces */
-  --white-rgb:   255,255,255; /* pure light on dark surfaces */
-  --bg-rgb:      245,240,232; /* page parchment */
-  --accent-rgb:  200,120,42;  /* amber */
-  --gold-rgb:    232,184,75;  /* gold */
-  --green-rgb:   45,106,79;   /* forest */
-  --wa-rgb:      37,211,102;  /* whatsapp */
+  /* VSI Brand Palette: Venture Blue, Momentum Orange, Growth Green */
+  --venture-blue-rgb:  0,153,255;      /* primary blue accent */
+  --momentum-orange-rgb: 255,123,0;    /* primary orange accent */
+  --growth-green-rgb:  6,169,93;       /* secondary green */
+  --ink-rgb:           1,1,1;          /* VSI Ink — near-black */
+  --slate-rgb:         91,100,114;     /* mid-tone gray */
+  --cream-rgb:         248,247,244;    /* light element on dark surfaces */
+  --inv-rgb:           253,252,249;    /* inverse text on dark surfaces */
+  --white-rgb:         255,255,255;    /* pure light on dark surfaces */
+  --bg-rgb:            245,240,232;    /* paper parchment (unchanged) */
+  --wa-rgb:            37,211,102;     /* whatsapp */
 
-  /* Core palette */
-  --bg:          #F5F0E8;
-  --bg-card:     #FDFCF9;
-  --bg-dark:     #0D1B2A;
-  --bg-navy:     #1B2D4F;
-  --bg-muted:    #EFEAE0;
-  --surface:     #F8F7F4;   /* light section panel */
-  --ink:         #1A1A1A;   /* darkest section background */
-  --ink-soft:    #333333;
+  /* Core palette — VSI-aligned */
+  --bg:          #F5F0E8;       /* paper (unchanged) */
+  --bg-card:     #FDFCF9;       /* card background */
+  --bg-dark:     #0D1B2A;       /* dark section (legacy) */
+  --bg-navy:     #1B2D4F;       /* blue-tinted dark (legacy) */
+  --bg-muted:    #EFEAE0;       /* muted background */
+  --surface:     #F8F7F4;       /* light section panel */
+  --ink:         #010101;       /* VSI Ink — near-black */
+  --ink-soft:    #2D3440;       /* softened ink */
   --white:       #FFFFFF;
-  --text:        rgb(var(--navy-rgb));
-  --text-muted:  rgba(var(--navy-rgb),.48);
-  --text-faint:  rgba(var(--navy-rgb),.22);
-  --text-inv:    #FDFCF9;
-  --text-inv-muted: rgba(var(--inv-rgb),.52);
+  --text:        #010101;       /* VSI Ink text */
+  --text-muted:  rgba(1,1,1,.52);      /* muted text */
+  --text-faint:  rgba(1,1,1,.28);      /* faint text */
+  --text-inv:    #FDFCF9;       /* inverse (light) text on dark */
+  --text-inv-muted: rgba(253,252,249,.58);
 
-  /* Accent system */
-  --accent:      rgb(var(--accent-rgb));
-  --accent-dark: #A85F1A;
-  --accent-gold: rgb(var(--gold-rgb));
-  --accent-green:rgb(var(--green-rgb));
-  --accent-glow: rgba(var(--accent-rgb),.35);
-  --gold-glow:   rgba(var(--gold-rgb),.35);
+  /* Accent system — VSI Primary: Momentum Orange, Secondary: Venture Blue, Accent: Growth Green */
+  --accent:           #FF7B00;         /* Momentum Orange — primary accent */
+  --accent-rgb:       255,123,0;       /* for rgba() use */
+  --accent-dark:      #C25E00;         /* darker orange */
+  --accent-blue:      #0099FF;         /* Venture Blue — secondary accent */
+  --accent-green:     #06A95D;         /* Growth Green */
+  --accent-glow:      rgba(255,123,0,.35);  /* orange glow */
+  --accent-blue-glow: rgba(0,153,255,.28);  /* blue glow */
+  --accent-green-glow:rgba(6,169,93,.25);   /* green glow */
+  /* Legacy gold mapping → orange for consistency */
+  --gold-rgb:         255,123,0;
+  --gold-glow:        rgba(255,123,0,.35);
 
-  /* Borders */
-  --border:        rgba(var(--accent-rgb),.12);
-  --border-strong: rgba(var(--accent-rgb),.26);
-  --border-card:   rgba(var(--accent-rgb),.18);
+  /* Borders — using orange accent */
+  --border:        rgba(255,123,0,.12);
+  --border-strong: rgba(255,123,0,.26);
+  --border-card:   rgba(255,123,0,.18);
 
   /* Social */
   --wa-green:    #25D366;
@@ -111,14 +117,14 @@ img{display:block;max-width:100%;}
   --lh-loose:  2.0;
 
   /* Depth */
-  --shadow-sm:   0 2px 8px rgba(13,27,42,.08);
-  --shadow-md:   0 8px 28px rgba(13,27,42,.12);
-  --shadow-lg:   0 18px 54px rgba(13,27,42,.16);
-  --shadow-glow: 0 0 32px rgba(200,120,42,.22), 0 8px 28px rgba(13,27,42,.12);
-  --shadow-gold: 0 0 32px rgba(232,184,75,.28), 0 8px 24px rgba(13,27,42,.1);
+  --shadow-sm:   0 2px 8px rgba(1,1,1,.08);
+  --shadow-md:   0 8px 28px rgba(1,1,1,.12);
+  --shadow-lg:   0 18px 54px rgba(1,1,1,.16);
+  --shadow-glow: 0 0 32px rgba(255,123,0,.22), 0 8px 28px rgba(1,1,1,.12);
+  --shadow-gold: 0 0 32px rgba(255,123,0,.28), 0 8px 24px rgba(1,1,1,.1);
 }
 
-/* ═══ Dark theme — warm charcoal ═══
+/* ═══ Dark theme — charcoal with brand accents ═══
    Auto-activates from the browser/OS preference. Only the token values
    flip; every component that uses tokens follows automatically.
    `[data-theme]` overrides let a manual toggle be added later. */
@@ -126,32 +132,45 @@ img{display:block;max-width:100%;}
   :root:not([data-theme="light"]) {
     color-scheme: dark;
 
-    /* Ink that lived on light surfaces flips to warm cream */
-    --navy-rgb:    236,228,214;
-    --ink-rgb:     236,228,214;
-    /* cream / inv / white stay light — they sit on dark surfaces */
-    --bg-rgb:      20,17,13;      /* page parchment → warm black */
-    --accent-rgb:  217,138,61;    /* amber, brightened for dark */
-    --gold-rgb:    236,192,90;
-    --green-rgb:   74,160,120;
+    /* Text flips to light cream for dark surfaces */
+    --ink-rgb:         240,236,227;    /* light text on dark */
+    --text:            #F0ECE3;
+    --text-muted:      rgba(240,236,227,.58);
+    --text-faint:      rgba(240,236,227,.30);
 
-    --bg:          #14110D;       /* warm near-black page */
-    --bg-card:     #1E1A14;
-    --bg-muted:    #232019;
-    --bg-dark:     #0C0A07;       /* dark sections sink a touch */
-    --bg-navy:     #12203A;
-    --surface:     #1E1A14;       /* was-light panels → charcoal card */
-    --ink:         #0C0A07;
-    --ink-soft:    #2A2620;
-    --white:       #F3ECDF;       /* soften pure white to avoid glare */
-    --text-inv:    #F3ECDF;       /* stays light on dark sections */
-    --accent-dark: #C87434;
+    /* Page background → warm dark */
+    --bg:              #14110D;        /* warm near-black page */
+    --bg-card:         #1E1A14;        /* card background */
+    --bg-muted:        #232019;        /* muted dark bg */
+    --bg-dark:         #0C0A07;        /* darkest sections */
+    --bg-navy:         #12203A;        /* legacy */
+    --surface:         #1E1A14;        /* panel background */
+    --ink:             #0C0A07;
+    --ink-soft:        #2A2620;
 
-    --shadow-sm:   0 2px 8px rgba(0,0,0,.5);
-    --shadow-md:   0 8px 28px rgba(0,0,0,.55);
-    --shadow-lg:   0 18px 54px rgba(0,0,0,.6);
-    --shadow-glow: 0 0 32px rgba(var(--accent-rgb),.3), 0 8px 28px rgba(0,0,0,.5);
-    --shadow-gold: 0 0 32px rgba(var(--gold-rgb),.32), 0 8px 24px rgba(0,0,0,.45);
+    --white:           #F3ECDF;        /* soften pure white to avoid glare */
+    --text-inv:        #F3ECDF;        /* stays light on dark sections */
+
+    /* Brand accents brighten in dark mode for visibility */
+    --accent:          #FF8C1A;        /* Momentum Orange (brightened) */
+    --accent-rgb:      255,140,26;
+    --accent-dark:     #E67300;
+    --accent-blue:     #33AAFF;        /* Venture Blue (brightened) */
+    --accent-green:    #2EC876;        /* Growth Green (brightened) */
+
+    /* Glows adjusted for dark background */
+    --accent-glow:     rgba(255,140,26,.4);
+    --accent-blue-glow: rgba(51,170,255,.32);
+    --accent-green-glow:rgba(46,200,118,.30);
+    --gold-rgb:        255,140,26;
+    --gold-glow:       rgba(255,140,26,.4);
+
+    /* Shadows adapted for dark surfaces */
+    --shadow-sm:       0 2px 8px rgba(0,0,0,.5);
+    --shadow-md:       0 8px 28px rgba(0,0,0,.55);
+    --shadow-lg:       0 18px 54px rgba(0,0,0,.6);
+    --shadow-glow:     0 0 32px rgba(255,140,26,.32), 0 8px 28px rgba(0,0,0,.5);
+    --shadow-gold:     0 0 32px rgba(255,140,26,.36), 0 8px 24px rgba(0,0,0,.45);
   }
 }
 
@@ -252,8 +271,8 @@ img{display:block;max-width:100%;}
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(200,120,42,.048) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200,120,42,.048) 1px, transparent 1px);
+    linear-gradient(rgba(255,123,0,.048) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,123,0,.048) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: radial-gradient(ellipse at 60% 40%, #000 40%, transparent 90%);
   -webkit-mask-image: radial-gradient(ellipse at 60% 40%, #000 40%, transparent 90%);
@@ -269,7 +288,7 @@ img{display:block;max-width:100%;}
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: radial-gradient(rgba(200,120,42,.2) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255,123,0,.2) 1px, transparent 1px);
   background-size: 22px 22px;
   opacity: .3;
   z-index: 0;
@@ -287,8 +306,8 @@ img{display:block;max-width:100%;}
   pointer-events: none;
   background-image: repeating-linear-gradient(
     -45deg,
-    rgba(200,120,42,.04) 0px,
-    rgba(200,120,42,.04) 1px,
+    rgba(255,123,0,.04) 0px,
+    rgba(255,123,0,.04) 1px,
     transparent 1px,
     transparent 14px
   );
@@ -301,10 +320,10 @@ img{display:block;max-width:100%;}
   background: rgba(245,240,232,.72);
   backdrop-filter: blur(20px) saturate(1.4);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border: 1px solid rgba(200,120,42,.14);
+  border: 1px solid rgba(255,123,0,.14);
 }
 .glass-dark {
-  background: rgba(13,27,42,.75);
+  background: rgba(20,17,13,.75);
   backdrop-filter: blur(20px) saturate(1.2);
   -webkit-backdrop-filter: blur(20px) saturate(1.2);
   border: 1px solid rgba(255,255,255,.08);
@@ -481,7 +500,7 @@ img{display:block;max-width:100%;}
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  background: linear-gradient(135deg, var(--accent), var(--accent-gold), transparent);
+  background: linear-gradient(135deg, var(--accent), var(--accent-blue), transparent);
   opacity: 0;
   transition: opacity .3s ease;
   z-index: -1;
@@ -504,7 +523,7 @@ img{display:block;max-width:100%;}
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(200,120,42,.06) 0%, transparent 60%);
+  background: linear-gradient(135deg, rgba(255,123,0,.06) 0%, transparent 60%);
   opacity: 0;
   transition: opacity .3s ease;
 }
@@ -526,7 +545,7 @@ img{display:block;max-width:100%;}
   position: absolute;
   left: 0; top: 0; bottom: 0;
   width: 3px;
-  background: linear-gradient(to bottom, var(--accent), var(--accent-gold));
+  background: linear-gradient(to bottom, var(--accent), var(--accent-blue));
   transform: scaleY(0);
   transform-origin: top;
   transition: transform .28s var(--ease-expo);
@@ -543,9 +562,9 @@ img{display:block;max-width:100%;}
   background: linear-gradient(
     90deg,
     var(--accent) 0%,
-    var(--accent-gold) 30%,
+    var(--accent-blue) 30%,
     var(--accent) 60%,
-    var(--accent-gold) 100%
+    var(--accent-blue) 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -587,7 +606,7 @@ img{display:block;max-width:100%;}
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, var(--accent), var(--accent-gold));
+  background: linear-gradient(to bottom, var(--accent), var(--accent-blue));
   border-radius: 3px;
 }
 
@@ -701,10 +720,10 @@ img{display:block;max-width:100%;}
   box-shadow: 0 4px 12px rgba(200,120,42,.1);
 }
 .filter-pill.active {
-  background: var(--bg-navy);
-  color: var(--accent-gold);
-  border-color: var(--bg-navy);
-  box-shadow: 0 4px 16px rgba(27,45,79,.2);
+  background: rgba(0,153,255,.12);
+  color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  box-shadow: 0 4px 16px rgba(0,153,255,.12);
 }
 
 /* ── Inner Hero ── */
@@ -713,7 +732,7 @@ img{display:block;max-width:100%;}
   text-align: center;
   position: relative;
   background:
-    radial-gradient(ellipse at top, rgba(232,184,75,.12) 0%, transparent 55%),
+    radial-gradient(ellipse at top, rgba(255,123,0,.12) 0%, transparent 55%),
     var(--bg);
   border-bottom: 1px solid var(--border);
   overflow: hidden;
@@ -724,8 +743,8 @@ img{display:block;max-width:100%;}
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(200,120,42,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200,120,42,.04) 1px, transparent 1px);
+    linear-gradient(rgba(255,123,0,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,123,0,.04) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: radial-gradient(ellipse at center top, #000 40%, transparent 90%);
   -webkit-mask-image: radial-gradient(ellipse at center top, #000 40%, transparent 90%);
@@ -899,8 +918,8 @@ textarea:focus-visible {
   width: 44px;
   height: 44px;
   border-radius: var(--r-md);
-  background: rgba(200,120,42,.08);
-  border: 1px solid rgba(200,120,42,.16);
+  background: rgba(255,123,0,.08);
+  border: 1px solid rgba(255,123,0,.16);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -908,7 +927,7 @@ textarea:focus-visible {
   transition: background .22s ease, box-shadow .22s ease;
 }
 .icon-box:hover, .card-elevated:hover .icon-box {
-  background: rgba(200,120,42,.15);
+  background: rgba(255,123,0,.15);
   box-shadow: 0 0 12px var(--accent-glow);
 }
 
@@ -980,8 +999,8 @@ textarea:focus-visible {
   align-items: center;
   gap: 6px;
   padding: 4px 12px 4px 8px;
-  background: rgba(200,120,42,.1);
-  border: 1px solid rgba(200,120,42,.22);
+  background: rgba(255,123,0,.1);
+  border: 1px solid rgba(255,123,0,.22);
   border-radius: 999px;
   font-family: var(--mono);
   font-size: 10.5px;
@@ -1012,13 +1031,13 @@ textarea:focus-visible {
 .feature-bullet .dot {
   width: 7px; height: 7px;
   border-radius: 50%;
-  background: var(--accent-gold);
-  box-shadow: 0 0 8px rgba(232,184,75,.5);
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(255,123,0,.5);
   flex-shrink: 0;
   transition: box-shadow .22s ease;
 }
 .feature-bullet:hover .dot {
-  box-shadow: 0 0 14px rgba(232,184,75,.8);
+  box-shadow: 0 0 14px rgba(255,123,0,.8);
 }
 
 /* ── Progress Dot (testimonials) ── */
@@ -1049,7 +1068,7 @@ textarea:focus-visible {
 
 /* ── Gradient text ── */
 .grad-text {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-gold) 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-blue) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
