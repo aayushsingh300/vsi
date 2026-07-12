@@ -488,6 +488,17 @@ img{display:block;max-width:100%;}
   filter: grayscale(0);
   opacity: 1;
 }
+/* White-fill logos (e.g. Modenik SVG) — invert so they're visible on parchment */
+.employer-tile.logo-invert img,
+.logo-mono.logo-invert {
+  filter: grayscale(1) invert(1);
+  opacity: .55;
+}
+.employer-tile.logo-invert:hover img,
+.logo-mono.logo-invert:hover {
+  filter: invert(1);
+  opacity: 1;
+}
 @media (prefers-color-scheme: dark) {
   /* Dark wordmarks would disappear on charcoal — show them as light
      monochrome silhouettes, then reveal full colour on hover. */
@@ -498,6 +509,17 @@ img{display:block;max-width:100%;}
   }
   :root:not([data-theme="light"]) .employer-tile:hover img,
   :root:not([data-theme="light"]) .logo-mono:hover {
+    filter: none;
+    opacity: 1;
+  }
+  /* White-fill logos on dark — already white so just grayscale */
+  :root:not([data-theme="light"]) .employer-tile.logo-invert img,
+  :root:not([data-theme="light"]) .logo-mono.logo-invert {
+    filter: grayscale(1);
+    opacity: .72;
+  }
+  :root:not([data-theme="light"]) .employer-tile.logo-invert:hover img,
+  :root:not([data-theme="light"]) .logo-mono.logo-invert:hover {
     filter: none;
     opacity: 1;
   }

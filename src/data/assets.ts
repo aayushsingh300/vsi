@@ -40,15 +40,15 @@ export function programThumb(slug: string): string | undefined {
 export const EMPLOYER_LOGOS: Record<string, string> = {
   "TATA Motors": "/logos/tata.png",
   "TATA Electronics": "/logos/tata.png",
-  "Foxconn": "/logos/foxconn.svg",
+  // "Foxconn": no logo available — will show text fallback
   "Wistron": "/logos/wistron.svg",
   "Amazon": "/logos/amazon.svg",
   "Flipkart": "/logos/flipkart.svg",
   "Blinkit": "/logos/blinkit.svg",
   "Zepto": "/logos/zepto.svg",
-  "Jupiter Hospitals": "/logos/jupiter.svg",
-  "HM Hospitals": "/logos/hm-hospitals.svg",
-  "S.P. Apparels": "/logos/sp-apparels.svg",
+  "Jupiter Hospitals": "/logos/jupiter-hospitals.png",
+  "HM Hospitals": "/logos/hm-hospitals.png",
+  "S.P. Apparels": "/logos/sp-apparels.jpg",
   "Modenik Lifestyle": "/logos/modenik.svg",
   "L&T": "/logos/lt.svg",
   "Wipro": "/logos/wipro.png",
@@ -61,3 +61,6 @@ export const EMPLOYER_LOGOS: Record<string, string> = {
 // Homepage / brand logo (full VSI colour wordmark, vector).
 export const VSI_LOGO = "/logos/vsi.svg";
 export const VSI_LOGO_RATIO = 1132 / 312; // width / height
+
+// Logos that use white fills — need CSS invert() to be visible on light parchment bg.
+export const LOGO_INVERT_SET = new Set(["Modenik Lifestyle"]);

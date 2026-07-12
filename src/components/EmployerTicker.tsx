@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { EMPLOYERS } from "@/data/content";
-import { EMPLOYER_LOGOS } from "@/data/assets";
+import { EMPLOYER_LOGOS, LOGO_INVERT_SET } from "@/data/assets";
 
 export default function EmployerTicker() {
   return (
@@ -80,7 +80,7 @@ export default function EmployerTicker() {
               }}
             >
               <span
-                className="logo-mono"
+                className={`logo-mono${LOGO_INVERT_SET.has(e) ? " logo-invert" : ""}`}
                 style={{
                   position: "relative",
                   width: "100%",

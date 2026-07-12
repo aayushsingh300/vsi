@@ -9,7 +9,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
 import { TESTIMONIALS, RECRUITER_SECTORS } from "@/data/content";
-import { EMPLOYER_LOGOS } from "@/data/assets";
+import { EMPLOYER_LOGOS, LOGO_INVERT_SET } from "@/data/assets";
 import { useInView, useCountUp } from "@/hooks/useAnimations";
 import { useLang } from "@/context/LangContext";
 import useIsMobile from "@/hooks/useIsMobile";
@@ -86,7 +86,7 @@ export default function PlacementsPage() {
               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : `repeat(${Math.min(sector.companies.length, 4)},1fr)`, gap: 1, background: "rgba(var(--ink-rgb),.07)", borderRadius: 8, overflow: "hidden" }}>
                 {sector.companies.map((company, ci) => (
                   <AnimateIn key={company} animation="scaleIn" delay={ci * 0.04}>
-                    <div className="course-row employer-tile" style={{
+                    <div className={`course-row employer-tile${LOGO_INVERT_SET.has(company) ? " logo-invert" : ""}`} style={{
                       background: "var(--surface)", padding: "28px 18px", display: "flex", flexDirection: "column",
                       alignItems: "center", justifyContent: "center", gap: 8, minHeight: 90,
                     }}>
