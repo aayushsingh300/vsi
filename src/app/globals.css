@@ -426,6 +426,30 @@ img{display:block;max-width:100%;}
   }
 }
 
+/* Variant for buttons placed on always-dark sections (hero, CTA strip, dark cards) */
+.btn-secondary-on-dark {
+  background: rgba(255, 255, 255, 0.10);
+  color: rgba(253, 252, 249, 0.92);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: .05em;
+  padding: 14px 28px;
+  border-radius: 5px;
+  border: 1.5px solid rgba(255, 255, 255, 0.24);
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all .24s ease;
+}
+.btn-secondary-on-dark:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.17);
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
+
 .btn-wa {
   background: var(--wa-green);
   color: #fff;

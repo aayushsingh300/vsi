@@ -112,16 +112,7 @@ export default function Hero() {
               </button>
             </Link>
             <Link href="/contact" style={{ textDecoration: "none" }}>
-              <button
-                className="btn-secondary"
-                style={{
-                  background: "rgba(255,255,255,0.08)",
-                  backdropFilter: "blur(10px)",
-                  WebkitBackdropFilter: "blur(10px)",
-                  border: "1.5px solid rgba(255,255,255,0.22)",
-                  color: "rgba(253,252,249,0.9)",
-                }}
-              >
+              <button className="btn-secondary-on-dark">
                 {t("freeCounseling")}
               </button>
             </Link>

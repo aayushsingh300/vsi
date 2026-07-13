@@ -270,8 +270,8 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                     </button>
                   </a>
                   <button
-                    className="btn-secondary"
-                    style={{ color: "rgba(253,252,249,.7)", borderColor: "rgba(253,252,249,.2)", display: "inline-flex", alignItems: "center", gap: 7 }}
+                    className="btn-secondary-on-dark"
+                    style={{ display: "inline-flex", alignItems: "center", gap: 7 }}
                   >
                     <Download size={14} /> {t("downloadSyllabus")}
                   </button>

@@ -136,16 +136,13 @@ export default function CTA() {
           </Link>
 
           <button
-            className="btn-secondary"
+            className="btn-secondary-on-dark"
             style={{
-              color: "rgba(253,252,249,.85)",
-              borderColor: "rgba(253,252,249,.28)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               gap: 7,
               width: "100%",
-              backgroundColor: "rgba(253,252,249,.08)",
             }}
           >
             <Download size={13} /> {t("downloadBrochure")}
