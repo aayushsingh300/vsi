@@ -38,7 +38,7 @@ function StatItem({
           width: 100,
           height: 100,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(var(--accent-rgb),.1) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(var(--momentum-orange-rgb),.1) 0%, transparent 70%)",
           pointerEvents: "none",
         }}
       />
@@ -51,7 +51,7 @@ function StatItem({
           fontSize: isMobile ? "clamp(32px,9vw,44px)" : "clamp(44px,5vw,80px)",
           lineHeight: 1,
           letterSpacing: "-.04em",
-          color: go ? "var(--accent)" : "var(--text)",
+          color: go ? "var(--accent-orange)" : "var(--text)",
           transition: "color .4s ease",
         }}
       >
@@ -81,7 +81,7 @@ function StatItem({
           left: 0,
           right: 0,
           height: 2,
-          background: "linear-gradient(90deg, var(--accent), var(--accent-gold))",
+          background: "linear-gradient(90deg, var(--accent-orange), var(--accent))",
           transform: go ? "scaleX(1)" : "scaleX(0)",
           transformOrigin: "left",
           transition: `transform ${0.8 + delay}s var(--ease-expo)`,

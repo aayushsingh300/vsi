@@ -112,7 +112,7 @@ export default function Hero() {
               </button>
             </Link>
             <Link href="/contact" style={{ textDecoration: "none" }}>
-              <button className="btn-secondary-on-dark">
+              <button className="btn-secondary">
                 {t("freeCounseling")}
               </button>
             </Link>

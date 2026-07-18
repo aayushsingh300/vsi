@@ -65,8 +65,12 @@ img{display:block;max-width:100%;}
   --accent-green-glow:rgba(6,169,93,.25);    /* green glow — tertiary */
 
   /* Legacy gold mapping → blue for consistency */
+  --accent-gold:      #0099FF;
   --gold-rgb:         0,153,255;
   --gold-glow:        rgba(0,153,255,.32);
+
+  /* Legacy green mapping → Growth Green */
+  --green-rgb:        6,169,93;
 
   /* Borders — using blue primary */
   --border:        rgba(0,153,255,.12);
@@ -165,8 +169,10 @@ img{display:block;max-width:100%;}
     --accent-glow:     rgba(51,170,255,.40);
     --accent-orange-glow: rgba(255,153,51,.32);
     --accent-green-glow: rgba(46,200,118,.30);
+    --accent-gold:     #33AAFF;
     --gold-rgb:        51,170,255;
     --gold-glow:       rgba(51,170,255,.40);
+    --green-rgb:       46,200,118;
 
     /* Shadows adapted for dark surfaces */
     --shadow-sm:       0 2px 8px rgba(0,0,0,.5);

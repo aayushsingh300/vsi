@@ -119,8 +119,8 @@ export default function CTA() {
             <button
               className="btn-primary"
               style={{
-                background: "linear-gradient(135deg, var(--accent-gold), #d4a832)",
-                color: "var(--bg-dark)",
+                background: "linear-gradient(135deg, var(--accent), var(--accent-dark))",
+                color: "#fff",
                 textAlign: "center",
                 width: "100%",
                 display: "flex",
@@ -128,7 +128,7 @@ export default function CTA() {
                 justifyContent: "center",
                 gap: 8,
                 fontSize: 13,
-                boxShadow: "0 8px 28px var(--gold-glow)",
+                boxShadow: "0 8px 28px var(--accent-glow)",
               }}
             >
               {t("bookCounseling")} <ArrowUpRight size={14} />
