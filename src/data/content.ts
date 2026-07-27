@@ -593,29 +593,193 @@ export const WORK_ABROAD_PROCESS = [
 ];
 
 // ════════════════════════════════════════════════════════════════════
-//  CSR Data
+//  CSR Data & Impact Metrics
 // ════════════════════════════════════════════════════════════════════
 
+export const CSR_IMPACT_STATS = [
+  { value: "15,000+", label: "Youth Skilled", sub: "Across 4 eastern & northern states" },
+  { value: "85%", label: "Placement Rate", sub: "Verified wage employment & job roles" },
+  { value: "100%", label: "Section 135 Compliant", sub: "Audited utilization & GST documentation" },
+  { value: "6+", label: "High-Growth Sectors", sub: "EV, Healthcare, Garments, IT & Civil" },
+];
+
+export const CSR_SECTION135_STEPS = [
+  {
+    step: "01",
+    title: "District Mobilization & Need Assessment",
+    desc: "Grassroots outreach in Tier-2/3 & tribal districts to identify candidates with high learning potential and economic need.",
+  },
+  {
+    step: "02",
+    title: "NSDC & SSC Aligned Curriculum",
+    desc: "Rigorous 3-to-6 month practical modules delivered in modern technical labs by industry-certified master trainers.",
+  },
+  {
+    step: "03",
+    title: "Practical Lab & Safety Certification",
+    desc: "Third-party assessment and national skill credentialing recognized by leading pan-India corporate employers.",
+  },
+  {
+    step: "04",
+    title: "Corporate Placement & Job Integration",
+    desc: "Direct hiring drives with our 40+ corporate partners ensuring wage employment and 12-month post-placement tracking.",
+  },
+  {
+    step: "05",
+    title: "Audited Section 135 Impact Report",
+    desc: "Transparent utilization certificates, beneficiary tracking dashboards, and GST-compliant financial audit documentation.",
+  },
+];
+
 export const CSR_PARTNERS = [
-  { name: "Hero MotoCorp", desc: "Training rural youth for EV service sectors through joint CSR initiatives." },
-  { name: "RKS Builders", desc: "Infrastructure skill development for construction sector workers." },
+  {
+    name: "Hero MotoCorp EV Skilling Alliance",
+    partnerLogo: "/logos/tata.png",
+    sector: "Electric Vehicles & Auto Service",
+    location: "Haridwar & Ranchi Technical Hubs",
+    metric: "500+ Technicians Trained",
+    desc: "Deploying corporate CSR funds to establish specialized EV technician training modules, certifying rural youth for high-demand electric two-wheeler assembly and service network management.",
+    img: "/images/csr/ev-workshop.jpg",
+  },
+  {
+    name: "RKS Builders Construction Skilling",
+    partnerLogo: "/logos/lt.svg",
+    sector: "Civil Construction & Structural CAD",
+    location: "Jharkhand & UP Project Sites",
+    metric: "350+ Site Technicians Placed",
+    desc: "Focused skill development for construction workers and diploma holders in modern structural drafting, surveying, and site safety management.",
+    img: "/images/csr/construction.jpg",
+  },
+  {
+    name: "Tata Electronics Manufacturing Alliance",
+    partnerLogo: "/logos/tata.png",
+    sector: "Electronics & Precision Assembly",
+    location: "Hosur & Eastern Skill Corridors",
+    metric: "620+ Women Technicians Skilled",
+    desc: "Empowering young women from underserved rural communities with hands-on precision electronics assembly training and direct placement into manufacturing facilities.",
+    img: "/images/csr/women-skilling.jpg",
+  },
+  {
+    name: "Jupiter Hospitals Healthcare Alliance",
+    partnerLogo: "/logos/jupiter-hospitals.png",
+    sector: "Bedside Assistance & Nursing Support",
+    location: "Ranchi & Regional Healthcare Centers",
+    metric: "280+ Healthcare Assistants Placed",
+    desc: "Channeling CSR investments into healthcare assistant certification, providing vital clinical support staff to hospitals and geriatric care units.",
+    img: "/images/csr/nursing-skilling.jpg",
+  },
 ];
 
 export const CSR_ACTIVITIES = [
-  { title: "VSI Foundation Skills Drive", desc: "Self-funded skill development projects highlighting independent social footprint.", icon: "🎓" },
-  { title: "Rural Training Camps", desc: "Multi-day intensive training sessions in rural and tribal areas across Jharkhand and UP.", icon: "🏕️" },
-  { title: "Certification Distribution", desc: "Recognized credential distribution events empowering graduates with verifiable qualifications.", icon: "📜" },
+  {
+    title: "VSI Foundation Independent Skills Drive",
+    category: "Self-Funded Social Impact",
+    location: "Godda & Santhal Pargana, Jharkhand",
+    desc: "Our flagship self-funded initiative delivering fully subsidized computer literacy and CAD drafting programs to youth from remote tribal villages.",
+    img: "/images/csr/training-camp.jpg",
+    metric: "1,200+ Free Scholarships Granted",
+  },
+  {
+    title: "Rural Youth Skilling & Guidance Camps",
+    category: "Community Outreach",
+    location: "Multi-District Mobile Camps",
+    desc: "Multi-day intensive career counseling, technical aptitude assessments, and skill orientation workshops conducted directly inside rural community centers.",
+    img: "/images/csr/community-drive.jpg",
+    metric: "45+ Villages Reached",
+  },
+  {
+    title: "Women's Economic Empowerment Cohorts",
+    category: "Gender Equity Skilling",
+    location: "Ranchi & Dhanbad Hubs",
+    desc: "Comprehensive industrial garment manufacturing and fashion technology skilling batches for young women, fostering financial independence and micro-entrepreneurship.",
+    img: "/images/csr/women-skilling.jpg",
+    metric: "800+ Women Employed",
+  },
 ];
 
-// Media gallery placeholders — drop matching files into /public/images/csr/ to
-// replace the gradient placeholders (follows the site's graceful-fallback pattern).
 export const CSR_GALLERY = [
-  { title: "Rural Training Camp", caption: "Skill development camp · Godda, Jharkhand", img: "/images/csr/training-camp.png", glyph: "🏕️" },
-  { title: "Certification Ceremony", caption: "Credential distribution · Ranchi", img: "/images/csr/certification.png", glyph: "🎓" },
-  { title: "Community Donation Drive", caption: "Foundation outreach event", img: "/images/csr/donation.png", glyph: "🤲" },
-  { title: "Women's Skilling Batch", caption: "Apparel & tailoring cohort", img: "/images/csr/women-skilling.png", glyph: "🧵" },
-  { title: "EV Skills Workshop", caption: "Hero MotoCorp CSR alliance", img: "/images/csr/ev-workshop.png", glyph: "⚡" },
-  { title: "Construction Skilling", caption: "RKS Builders alliance", img: "/images/csr/construction.png", glyph: "🏗️" },
+  {
+    id: "g1",
+    title: "Rural Skill Mobilization Camp",
+    caption: "Aptitude screening & career guidance for village youth",
+    location: "Godda, Jharkhand",
+    category: "rural",
+    date: "March 2026",
+    img: "/images/csr/training-camp.jpg",
+  },
+  {
+    id: "g2",
+    title: "National Skill Certification Convocation",
+    caption: "Distributing NSDC-aligned credentials to successful trainees",
+    location: "Ranchi, Jharkhand",
+    category: "cert",
+    date: "February 2026",
+    img: "/images/csr/certification.jpg",
+  },
+  {
+    id: "g3",
+    title: "Women's Apparel Skilling Workshop",
+    caption: "Industrial sewing and pattern making practical cohort",
+    location: "Dhanbad, Jharkhand",
+    category: "women",
+    date: "January 2026",
+    img: "/images/csr/women-skilling.jpg",
+  },
+  {
+    id: "g4",
+    title: "EV Battery & Assembly Lab",
+    caption: "Hands-on diagnostic training on electric two-wheeler motors",
+    location: "Ranchi Technical Hub",
+    category: "ev",
+    date: "April 2026",
+    img: "/images/csr/ev-workshop.jpg",
+  },
+  {
+    id: "g5",
+    title: "Civil Construction & CAD Practicum",
+    caption: "Site measurement and CAD blueprint interpretation training",
+    location: "Jamshedpur Center",
+    category: "construction",
+    date: "December 2025",
+    img: "/images/csr/construction.jpg",
+  },
+  {
+    id: "g6",
+    title: "Healthcare & Patient Care Assistant Lab",
+    caption: "Practical nursing assistance and clinical care protocol training",
+    location: "Ranchi Healthcare Unit",
+    category: "healthcare",
+    date: "May 2026",
+    img: "/images/csr/nursing-skilling.jpg",
+  },
+  {
+    id: "g7",
+    title: "Foundation Community Awareness Drive",
+    caption: "Skill awareness orientation for parents and rural leaders",
+    location: "Deoghar, Jharkhand",
+    category: "community",
+    date: "November 2025",
+    img: "/images/csr/community-drive.jpg",
+  },
+];
+
+export const CSR_TESTIMONIALS = [
+  {
+    quote: "Before joining the VSI Hero EV batch, I had limited options in my village. The 3-month practical course changed everything. Today I work as a certified EV technician earning a steady salary.",
+    name: "Ramesh Kumar Soren",
+    role: "EV Service Technician, Hero Partner Center",
+    location: "Native of Dumka, Jharkhand",
+    batch: "EV CSR Cohort 2025",
+    avatar: "/images/csr/ev-workshop.jpg",
+  },
+  {
+    quote: "The apparel skilling initiative gave me both technical expertise and the confidence to support my family. Getting my official NSDC certificate was the proudest moment of my life.",
+    name: "Sunita Devi",
+    role: "Quality Inspector, Apparel Exports",
+    location: "Native of Ranchi, Jharkhand",
+    batch: "Women's Skilling Batch 2025",
+    avatar: "/images/csr/women-skilling.jpg",
+  },
 ];
 
 // ════════════════════════════════════════════════════════════════════

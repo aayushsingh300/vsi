@@ -9,8 +9,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
 import useIsMobile from "@/hooks/useIsMobile";
+import Image from "next/image";
 import { getProgram, ALL_PROGRAMS, EMPLOYERS } from "@/data/content";
-import { programThumb } from "@/data/assets";
+import { programThumb, EMPLOYER_LOGOS, LOGO_INVERT_SET } from "@/data/assets";
 import { useLang } from "@/context/LangContext";
 
 // Image that fills its container and falls back to a soft gradient placeholder
@@ -464,15 +465,25 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
               {EMPLOYERS.slice(0, 9).map((e, i) => (
                 <div
                   key={i}
+                  className={LOGO_INVERT_SET.has(e) ? "logo-invert" : undefined}
                   style={{
-                    background: "rgba(253,252,249,.04)",
+                    background: EMPLOYER_LOGOS[e] ? "#fff" : "rgba(253,252,249,.04)",
                     border: "1px solid rgba(253,252,249,.08)",
-                    borderRadius: 2,
-                    padding: "20px 8px",
-                    textAlign: "center",
+                    borderRadius: 4,
+                    padding: EMPLOYER_LOGOS[e] ? "18px 14px" : "20px 8px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    minHeight: isMobile ? 56 : 64,
                   }}
                 >
-                  <span style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 700, fontSize: isMobile ? 13 : 15, color: "rgba(253,252,249,.65)" }}>{e}</span>
+                  {EMPLOYER_LOGOS[e] ? (
+                    <span style={{ position: "relative", display: "block", width: "100%", height: isMobile ? 22 : 28 }}>
+                      <Image src={EMPLOYER_LOGOS[e]} alt={e} fill sizes="160px" style={{ objectFit: "contain" }} />
+                    </span>
+                  ) : (
+                    <span style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 700, fontSize: isMobile ? 13 : 15, color: "rgba(253,252,249,.65)" }}>{e}</span>
+                  )}
                 </div>
               ))}
             </div>

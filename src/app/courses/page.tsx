@@ -176,7 +176,7 @@ export default function CoursesPage() {
             ))}
           </div>
           {!isMobile && (
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 8, marginLeft: "auto" }}>
               <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--text-muted)" }}>{t("needHelp")}</span>
               <Link href="/contact" style={{ textDecoration: "none" }}>
                 <button className="btn-primary" style={{ padding: "8px 18px", fontSize: 11 }}>{t("freeCounseling")} →</button>

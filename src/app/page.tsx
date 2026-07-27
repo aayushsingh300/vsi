@@ -9,6 +9,7 @@ import Labs from "@/components/Labs";
 import Awards from "@/components/Awards";
 import Testimonials from "@/components/Testimonials";
 import EmployerTicker from "@/components/EmployerTicker";
+import HomeCSR from "@/components/HomeCSR";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
@@ -28,6 +29,7 @@ export default function Home() {
       <Awards />
       <EmployerTicker />
       <Testimonials />
+      <HomeCSR />
       <CTA />
       <Footer />
       <FloatingWA />
