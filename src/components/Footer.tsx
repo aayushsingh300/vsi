@@ -59,6 +59,7 @@ const NAV_LINKS = [
   { href: "/centers", key: "navInfrastructure" },
   { href: "/about", key: "navAbout" },
   { href: "/work-abroad", key: "navWorkAbroad" },
+  { href: "/csr", key: "navCSR" },
 ];
 
 export default function Footer() {

@@ -7,7 +7,7 @@ import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
-import { INTL_CORRIDORS } from "@/data/content";
+import { INTL_CORRIDORS, WORK_ABROAD_PROCESS } from "@/data/content";
 import { useLang } from "@/context/LangContext";
 import useIsMobile from "@/hooks/useIsMobile";
 
@@ -134,8 +134,55 @@ export default function WorkAbroadPage() {
         </div>
       </section>
 
+      {/* German healthcare — process timeline */}
+      <section style={{ padding: isMobile ? "64px 6%" : "96px 5%" }}>
+        <div style={{ maxWidth: 820, margin: "0 auto" }}>
+          <AnimateIn animation="slideUp">
+            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 12, fontWeight: 500 }}>
+              // How the Program Works
+            </p>
+            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(24px,3.5vw,40px)", color: "var(--text)", marginBottom: 16, letterSpacing: "-.03em" }}>
+              Your pathway to Germany.
+            </h2>
+            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", lineHeight: 1.75, maxWidth: 600, marginBottom: 48 }}>
+              A guided, end-to-end journey from first registration to on-ground deployment — every step supported by our mobility cell.
+            </p>
+          </AnimateIn>
+
+          <div style={{ position: "relative" }}>
+            {/* Vertical connector line */}
+            <div style={{
+              position: "absolute", left: isMobile ? 23 : 27, top: 8, bottom: 8, width: 2,
+              background: "linear-gradient(to bottom, rgba(var(--accent-rgb),.4), rgba(var(--gold-rgb),.25))",
+            }} />
+            {WORK_ABROAD_PROCESS.map((step, i) => (
+              <AnimateIn key={step.step} animation="slideUp" delay={i * 0.06}>
+                <div style={{ display: "flex", gap: isMobile ? 18 : 24, alignItems: "flex-start", paddingBottom: i === WORK_ABROAD_PROCESS.length - 1 ? 0 : 28, position: "relative" }}>
+                  {/* Step node */}
+                  <div style={{
+                    width: isMobile ? 48 : 56, height: isMobile ? 48 : 56, borderRadius: "50%", flexShrink: 0,
+                    background: "var(--bg-card)", border: "1px solid rgba(var(--accent-rgb),.25)",
+                    display: "flex", alignItems: "center", justifyContent: "center", position: "relative", zIndex: 2,
+                    boxShadow: "0 4px 16px rgba(13,27,42,.08)",
+                  }}>
+                    <span style={{ fontSize: isMobile ? 20 : 24 }}>{step.icon}</span>
+                  </div>
+                  <div style={{ flex: 1, paddingTop: isMobile ? 4 : 8 }}>
+                    <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 6, flexWrap: "wrap" }}>
+                      <span style={{ fontFamily: "var(--mono)", fontSize: 10, fontWeight: 500, letterSpacing: ".1em", color: "var(--accent)" }}>STEP {String(step.step).padStart(2, "0")}</span>
+                      <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? 17 : 19, color: "var(--text)", letterSpacing: "-.02em" }}>{step.title}</h3>
+                    </div>
+                    <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "var(--text-muted)", lineHeight: 1.7 }}>{step.desc}</p>
+                  </div>
+                </div>
+              </AnimateIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
-      <section style={{ padding: isMobile ? "64px 6%" : "80px 5%", textAlign: "center" }}>
+      <section style={{ padding: isMobile ? "64px 6%" : "80px 5%", textAlign: "center", background: "var(--bg-muted)" }}>
         <AnimateIn animation="slideUp">
           <div style={{
             width: 56, height: 56, borderRadius: "50%", margin: "0 auto 20px",

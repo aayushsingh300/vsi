@@ -3,12 +3,12 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Globe } from "lucide-react";
+import { ArrowUpRight, Globe, Mail, Phone, Briefcase } from "lucide-react";
 import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
-import { TESTIMONIALS, RECRUITER_SECTORS } from "@/data/content";
+import { TESTIMONIALS, RECRUITER_SECTORS, CONTACT_CHANNELS } from "@/data/content";
 import { EMPLOYER_LOGOS, LOGO_INVERT_SET } from "@/data/assets";
 import { useInView, useCountUp } from "@/hooks/useAnimations";
 import { useLang } from "@/context/LangContext";
@@ -173,6 +173,75 @@ export default function PlacementsPage() {
             </div>
           </div>
         </AnimateIn>
+      </section>
+
+      {/* Placement Team Contact */}
+      <section style={{ padding: isMobile ? "64px 6%" : "96px 5%", background: "var(--bg)", borderTop: "1px solid var(--border)" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <AnimateIn animation="slideUp">
+            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 10, fontWeight: 500 }}>// Hire Our Talent</p>
+            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(24px,3vw,42px)", color: "var(--text)", marginBottom: 16, letterSpacing: "-.03em" }}>Talk to our placement team.</h2>
+            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", lineHeight: 1.75, maxWidth: 620, marginBottom: 40 }}>
+              Recruiting for a role, running a hiring drive, or want a batch profile? Our Placement Cell and HR Department respond within one working day.
+            </p>
+          </AnimateIn>
+
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 16 }}>
+            {CONTACT_CHANNELS.slice(0, 2).map((ch, i) => (
+              <AnimateIn key={ch.dept} animation="slideUp" delay={i * 0.08}>
+                <div className="hover-lift" style={{
+                  background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 12,
+                  padding: "30px 26px", display: "flex", flexDirection: "column", gap: 14, height: "100%",
+                  transition: "box-shadow .3s ease",
+                }}>
+                  <div style={{
+                    width: 44, height: 44, borderRadius: 10,
+                    background: "linear-gradient(135deg, rgba(var(--accent-rgb),.15), rgba(var(--gold-rgb),.1))",
+                    border: "1px solid rgba(var(--accent-rgb),.2)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                  }}>
+                    <span style={{ fontSize: 22 }}>{ch.icon}</span>
+                  </div>
+                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 19, color: "var(--text)", letterSpacing: "-.02em" }}>{ch.dept}</h3>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 2 }}>
+                    <a href={`mailto:${ch.email}`} style={{ display: "flex", alignItems: "center", gap: 8, fontFamily: "var(--mono)", fontSize: 13, color: "var(--accent)", textDecoration: "none" }}>
+                      <Mail size={14} /> {ch.email}
+                    </a>
+                    <a href={`tel:${ch.phone.replace(/\s/g, "")}`} style={{ display: "flex", alignItems: "center", gap: 8, fontFamily: "var(--mono)", fontSize: 13, color: "var(--text-muted)", textDecoration: "none" }}>
+                      <Phone size={14} /> {ch.phone}
+                    </a>
+                  </div>
+                </div>
+              </AnimateIn>
+            ))}
+
+            {/* Job opportunities CTA card */}
+            <AnimateIn animation="slideUp" delay={0.16}>
+              <Link href="/contact" style={{ textDecoration: "none", display: "block", height: "100%" }}>
+                <div className="hover-lift" style={{
+                  background: "linear-gradient(145deg, var(--ink) 0%, #0d1b2a 100%)", borderRadius: 12,
+                  padding: "30px 26px", display: "flex", flexDirection: "column", gap: 14, height: "100%",
+                  border: "1px solid rgba(var(--accent-rgb),.15)", transition: "box-shadow .3s ease",
+                }}>
+                  <div style={{
+                    width: 44, height: 44, borderRadius: 10,
+                    background: "rgba(var(--gold-rgb),.12)", border: "1px solid rgba(var(--gold-rgb),.2)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                  }}>
+                    <Briefcase size={20} color="rgba(var(--gold-rgb),.9)" />
+                  </div>
+                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 19, color: "var(--text-inv)", letterSpacing: "-.02em" }}>Post a Job Opening</h3>
+                  <p style={{ fontFamily: "var(--body)", fontSize: 13.5, color: "rgba(248,247,244,.5)", lineHeight: 1.65, flex: 1 }}>
+                    Share your requirement and we&apos;ll match pre-screened, job-ready candidates from our latest batches.
+                  </p>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "var(--sans)", fontWeight: 700, fontSize: 12, letterSpacing: ".06em", textTransform: "uppercase", color: "rgba(var(--gold-rgb),.9)" }}>
+                    Get Started <ArrowUpRight size={14} />
+                  </span>
+                </div>
+              </Link>
+            </AnimateIn>
+          </div>
+        </div>
       </section>
 
       <Footer />

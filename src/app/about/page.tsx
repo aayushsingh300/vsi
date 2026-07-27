@@ -6,7 +6,7 @@ import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
-import { MILESTONES, FACULTY, STATS, CONTACT_CHANNELS, CSR_PARTNERS, CSR_ACTIVITIES, ACCREDITATIONS } from "@/data/content";
+import { MILESTONES, FACULTY, STATS, CONTACT_CHANNELS, ACCREDITATIONS } from "@/data/content";
 import { useInView, useCountUp } from "@/hooks/useAnimations";
 import { useLang } from "@/context/LangContext";
 
@@ -476,62 +476,6 @@ export default function AboutPage() {
                 </div>
               </AnimateIn>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CSR Section */}
-      <section style={{ background: "var(--ink)", padding: "96px 5%" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <AnimateIn animation="slideUp">
-            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "rgba(var(--gold-rgb),.5)", textTransform: "uppercase", marginBottom: 12, fontWeight: 500 }}>// Corporate Social Responsibility</p>
-            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(24px,3.5vw,44px)", color: "var(--text-inv)", marginBottom: 14, letterSpacing: "-.03em" }}>Section 135 Compliance & Impact.</h2>
-            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "rgba(248,247,244,.45)", lineHeight: 1.75, maxWidth: 640, marginBottom: 48 }}>How we operationalize CSR through corporate alliances and self-funded social impact programs.</p>
-          </AnimateIn>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
-            {/* Corporate Alliance */}
-            <div>
-              <AnimateIn animation="slideUp">
-                <h3 style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(248,247,244,.3)", marginBottom: 16 }}>Corporate Alliances</h3>
-              </AnimateIn>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14 }}>
-                {CSR_PARTNERS.map((p, i) => (
-                  <AnimateIn key={p.name} animation="slideUp" delay={i * 0.08}>
-                    <div style={{
-                      background: "rgba(255,255,255,.03)", border: "1px solid rgba(255,255,255,.08)", borderRadius: 8,
-                      padding: "24px 22px", display: "flex", flexDirection: "column", gap: 8,
-                    }}>
-                      <h4 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 16, color: "var(--text-inv)" }}>{p.name}</h4>
-                      <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "rgba(248,247,244,.4)", lineHeight: 1.6 }}>{p.desc}</p>
-                    </div>
-                  </AnimateIn>
-                ))}
-              </div>
-            </div>
-
-            {/* VSI Foundation Activities */}
-            <div>
-              <AnimateIn animation="slideUp">
-                <h3 style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(248,247,244,.3)", marginBottom: 16 }}>VSI Foundation Activities</h3>
-              </AnimateIn>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 14 }}>
-                {CSR_ACTIVITIES.map((a, i) => (
-                  <AnimateIn key={a.title} animation="slideUp" delay={i * 0.06}>
-                    <div style={{
-                      background: "rgba(255,255,255,.03)", border: "1px solid rgba(255,255,255,.08)", borderRadius: 8,
-                      padding: "24px 22px", display: "flex", gap: 14, alignItems: "flex-start",
-                    }}>
-                      <div style={{ fontSize: 24, flexShrink: 0 }}>{a.icon}</div>
-                      <div>
-                        <h4 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 15, color: "var(--text-inv)", marginBottom: 4 }}>{a.title}</h4>
-                        <p style={{ fontFamily: "var(--body)", fontSize: 12, color: "rgba(248,247,244,.4)", lineHeight: 1.6 }}>{a.desc}</p>
-                      </div>
-                    </div>
-                  </AnimateIn>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </section>

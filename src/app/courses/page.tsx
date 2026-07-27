@@ -5,7 +5,17 @@ import Image from "next/image";
 import Link from "next/link";
 import AnimateIn from "@/components/AnimateIn";
 import { ArrowRight, MessageCircle } from "lucide-react";
-import { COURSES_CERT, COURSES_DIP, COURSES_VOC } from "@/data/content";
+import {
+  COURSES_CERT,
+  COURSES_VOC,
+  CAD_DIPLOMAS,
+  COMPUTER_APP_COURSES,
+  DATA_SCIENCE_COURSES,
+  DESIGN_STUDIO_COURSES,
+  AUTOMATION_COURSES,
+  type CourseDip,
+  type CourseCategory,
+} from "@/data/content";
 import { COURSE_THUMBS, programThumb } from "@/data/assets";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -43,18 +53,93 @@ function ProgramThumb({ slug, alt, glyph }: { slug: string; alt: string; glyph?:
   );
 }
 
+// Section heading block, shared across the category sections.
+function SectionHead({ index, title, sub, isMobile }: { index: string; title: string; sub: string; isMobile: boolean }) {
+  return (
+    <div style={{ marginBottom: 28 }}>
+      <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 10 }}>{index}</p>
+      <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? "clamp(22px,6.5vw,30px)" : "clamp(24px,3vw,40px)", color: "var(--text)" }}>{title}</h2>
+      <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "var(--text-muted)", marginTop: 6, fontStyle: "italic" }}>{sub}</p>
+    </div>
+  );
+}
+
+// Detailed diploma card (links to a course detail page).
+function DiplomaCard({ c, isMobile, viewLabel }: { c: CourseDip; isMobile: boolean; viewLabel: string }) {
+  return (
+    <Link href={`/courses/${c.slug}`} style={{ textDecoration: "none", display: "block", height: "100%" }}>
+      <article className="hover-lift" style={{
+        background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 8,
+        overflow: "hidden", display: "flex", flexDirection: "column", height: "100%",
+      }}>
+        <div style={{ position: "relative", aspectRatio: "16/9" }}>
+          <ProgramThumb slug={c.slug} alt={c.name} glyph="🎓" />
+          <span style={{ position: "absolute", top: 12, left: 12, background: "var(--accent)", color: "var(--white)", fontFamily: "var(--sans)", fontWeight: 700, fontSize: 9.5, letterSpacing: ".12em", padding: "4px 9px", borderRadius: 2, textTransform: "uppercase" }}>{c.tag}</span>
+        </div>
+        <div style={{ padding: isMobile ? "18px 18px 20px" : "20px 20px 22px", display: "flex", flexDirection: "column", flex: 1 }}>
+          <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? 18 : 20, color: "var(--text)", letterSpacing: "-.02em", marginBottom: 8 }}>{c.name}</h3>
+          <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6, marginBottom: 16, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", flex: 1 }}>{c.desc}</p>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 14, borderTop: "1px solid var(--border)" }}>
+            <div style={{ display: "flex", gap: 14, alignItems: "baseline" }}>
+              <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--text-muted)" }}>{c.hrs}</span>
+              <span style={{ fontFamily: "var(--mono)", fontSize: 13, color: "var(--text)", fontWeight: 500 }}>{c.fee}</span>
+            </div>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "var(--sans)", fontWeight: 700, fontSize: 11, letterSpacing: ".06em", textTransform: "uppercase", color: "var(--accent)" }}>
+              {viewLabel} <ArrowRight size={13} className="course-arrow" />
+            </span>
+          </div>
+        </div>
+      </article>
+    </Link>
+  );
+}
+
+// Category card for course families without a dedicated detail page (Data
+// Science, Design). Shows the discipline, description and tool stack.
+function CategoryCard({ c }: { c: CourseCategory }) {
+  return (
+    <Link href="/contact" style={{ textDecoration: "none", display: "block", height: "100%" }}>
+      <article className="hover-lift" style={{
+        background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 8,
+        padding: "24px 22px", display: "flex", flexDirection: "column", gap: 12, height: "100%",
+      }}>
+        <div style={{ fontSize: 30 }}>{c.icon}</div>
+        <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 19, color: "var(--text)", letterSpacing: "-.02em" }}>{c.name}</h3>
+        <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6, flex: 1 }}>{c.desc}</p>
+        <div style={{ display: "flex", gap: 6, flexWrap: "wrap", paddingTop: 4 }}>
+          {c.tools.slice(0, 5).map((tool) => (
+            <span key={tool} style={{
+              fontFamily: "var(--mono)", fontSize: 9.5, letterSpacing: ".04em",
+              background: "rgba(var(--accent-rgb),.07)", color: "var(--accent)", padding: "3px 8px", borderRadius: 3,
+              border: "1px solid rgba(var(--accent-rgb),.14)",
+            }}>{tool}</span>
+          ))}
+          {c.tools.length > 5 && (
+            <span style={{ fontFamily: "var(--mono)", fontSize: 9.5, color: "var(--text-muted)", padding: "3px 4px" }}>+{c.tools.length - 5}</span>
+          )}
+        </div>
+      </article>
+    </Link>
+  );
+}
+
 export default function CoursesPage() {
   const [formOpen, setFormOpen] = useState(false);
   const [filter, setFilter] = useState("all");
   const isMobile = useIsMobile(768);
   const { t } = useLang();
 
+  const cadCount = COURSES_CERT.length + CAD_DIPLOMAS.length;
   const filters = [
-    { id: "all", key: "tabAll", n: COURSES_CERT.length + COURSES_DIP.length + COURSES_VOC.length },
-    { id: "cert", key: "tabCertificate", n: COURSES_CERT.length },
-    { id: "dip", key: "tabDiploma", n: COURSES_DIP.length },
-    { id: "voc", key: "tabVocational", n: COURSES_VOC.length },
+    { id: "all", key: "tabAll", n: cadCount + COMPUTER_APP_COURSES.length + DATA_SCIENCE_COURSES.length + DESIGN_STUDIO_COURSES.length + COURSES_VOC.length },
+    { id: "cad", key: "tabCAD", n: cadCount },
+    { id: "compapp", key: "tabCompApp", n: COMPUTER_APP_COURSES.length },
+    { id: "data", key: "tabDataBA", n: DATA_SCIENCE_COURSES.length },
+    { id: "design", key: "tabDesign", n: DESIGN_STUDIO_COURSES.length },
+    { id: "voc", key: "tabVoc", n: COURSES_VOC.length },
   ];
+
+  const show = (id: string) => filter === "all" || filter === id;
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--bg)" }}>
@@ -77,7 +162,7 @@ export default function CoursesPage() {
         position: "sticky", top: 57, zIndex: 50,
       }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-          <div className="segment" role="tablist">
+          <div className="segment" role="tablist" style={{ flexWrap: "wrap" }}>
             {filters.map(f => (
               <button
                 key={f.id}
@@ -101,15 +186,12 @@ export default function CoursesPage() {
         </div>
       </section>
 
-      {/* Certificate */}
-      {(filter === "all" || filter === "cert") && (
+      {/* CAD Courses */}
+      {show("cad") && (
         <section className="grid-bg" style={{ padding: isMobile ? "56px 6%" : "72px 5%" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <div style={{ marginBottom: 28 }}>
-              <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 10 }}>Section 01</p>
-              <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? "clamp(22px,6.5vw,30px)" : "clamp(24px,3vw,40px)", color: "var(--text)" }}>{t("certSectionTitle")}</h2>
-              <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "var(--text-muted)", marginTop: 6, fontStyle: "italic" }}>{t("certSectionSub")}</p>
-            </div>
+            <SectionHead index="Section 01" title={t("tabCAD")} sub="CAD engineering certificates & AICTE diplomas · 200–320 hrs / 3-yr" isMobile={isMobile} />
+            {/* Certificate CAD programs */}
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: isMobile ? 16 : 22 }}>
               {COURSES_CERT.map((c, i) => (
                 <AnimateIn key={c.slug} animation="slideUp" delay={i * 0.05}>
@@ -147,46 +229,45 @@ export default function CoursesPage() {
                 </AnimateIn>
               ))}
             </div>
+
+            {/* Automation specializations (delivered within Electrical CAD) */}
+            <div style={{ marginTop: 32, display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+              <span style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>Automation Specializations:</span>
+              {AUTOMATION_COURSES.map((a) => (
+                <span key={a.slug} style={{
+                  display: "inline-flex", alignItems: "center", gap: 6,
+                  fontFamily: "var(--sans)", fontSize: 12, fontWeight: 600, color: "var(--text)",
+                  background: "var(--bg-card)", border: "1px solid var(--border-card)", padding: "6px 12px", borderRadius: 6,
+                }}>
+                  <span>{a.icon}</span> {a.name}
+                </span>
+              ))}
+            </div>
+
+            {/* CAD-based diplomas */}
+            <div style={{ marginTop: 40 }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 18 }}>AICTE Polytechnic Diplomas</p>
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? 16 : 20 }}>
+                {CAD_DIPLOMAS.map((c, i) => (
+                  <AnimateIn key={c.slug} animation="slideUp" delay={i * 0.05}>
+                    <DiplomaCard c={c} isMobile={isMobile} viewLabel={t("viewProgram")} />
+                  </AnimateIn>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
       )}
 
-      {/* Diploma */}
-      {(filter === "all" || filter === "dip") && (
+      {/* Computer Application */}
+      {show("compapp") && (
         <section className="dot-bg" style={{ padding: isMobile ? "56px 6%" : "72px 5%", background: filter === "all" ? "var(--bg-muted)" : "transparent" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <div style={{ marginBottom: 28 }}>
-              <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 10 }}>Section 02</p>
-              <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? "clamp(22px,6.5vw,30px)" : "clamp(24px,3vw,40px)", color: "var(--text)" }}>{t("dipSectionTitle")}</h2>
-              <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "var(--text-muted)", marginTop: 6, fontStyle: "italic" }}>{t("dipSectionSub")}</p>
-            </div>
+            <SectionHead index="Section 02" title={t("tabCompApp")} sub="Software, IT & computing diplomas · 3-year AICTE-recognized" isMobile={isMobile} />
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? 16 : 20 }}>
-              {COURSES_DIP.map((c, i) => (
+              {COMPUTER_APP_COURSES.map((c, i) => (
                 <AnimateIn key={c.slug} animation="slideUp" delay={i * 0.05}>
-                  <Link href={`/courses/${c.slug}`} style={{ textDecoration: "none", display: "block", height: "100%" }}>
-                    <article className="hover-lift" style={{
-                      background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 8,
-                      overflow: "hidden", display: "flex", flexDirection: "column", height: "100%",
-                    }}>
-                      <div style={{ position: "relative", aspectRatio: "16/9" }}>
-                        <ProgramThumb slug={c.slug} alt={c.name} glyph="🎓" />
-                        <span style={{ position: "absolute", top: 12, left: 12, background: "var(--accent)", color: "var(--white)", fontFamily: "var(--sans)", fontWeight: 700, fontSize: 9.5, letterSpacing: ".12em", padding: "4px 9px", borderRadius: 2, textTransform: "uppercase" }}>{c.tag}</span>
-                      </div>
-                      <div style={{ padding: isMobile ? "18px 18px 20px" : "20px 20px 22px", display: "flex", flexDirection: "column", flex: 1 }}>
-                        <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? 18 : 20, color: "var(--text)", letterSpacing: "-.02em", marginBottom: 8 }}>{c.name}</h3>
-                        <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6, marginBottom: 16, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", flex: 1 }}>{c.desc}</p>
-                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 14, borderTop: "1px solid var(--border)" }}>
-                          <div style={{ display: "flex", gap: 14, alignItems: "baseline" }}>
-                            <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--text-muted)" }}>{c.hrs}</span>
-                            <span style={{ fontFamily: "var(--mono)", fontSize: 13, color: "var(--text)", fontWeight: 500 }}>{c.fee}</span>
-                          </div>
-                          <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "var(--sans)", fontWeight: 700, fontSize: 11, letterSpacing: ".06em", textTransform: "uppercase", color: "var(--accent)" }}>
-                            {t("viewProgram")} <ArrowRight size={13} className="course-arrow" />
-                          </span>
-                        </div>
-                      </div>
-                    </article>
-                  </Link>
+                  <DiplomaCard c={c} isMobile={isMobile} viewLabel={t("viewProgram")} />
                 </AnimateIn>
               ))}
             </div>
@@ -194,15 +275,43 @@ export default function CoursesPage() {
         </section>
       )}
 
-      {/* Vocational */}
-      {(filter === "all" || filter === "voc") && (
+      {/* Data Science & Business Analytics */}
+      {show("data") && (
         <section style={{ padding: isMobile ? "56px 6%" : "72px 5%" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <div style={{ marginBottom: 28 }}>
-              <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 10 }}>Section 03</p>
-              <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? "clamp(22px,6.5vw,30px)" : "clamp(24px,3vw,40px)", color: "var(--text)" }}>{t("vocSectionTitle")}</h2>
-              <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "var(--text-muted)", marginTop: 6, fontStyle: "italic" }}>{t("vocSectionSub")}</p>
+            <SectionHead index="Section 03" title={t("tabDataBA")} sub="Analytics, AI/ML & digital marketing · industry tool stacks" isMobile={isMobile} />
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(4,1fr)", gap: isMobile ? 14 : 18 }}>
+              {DATA_SCIENCE_COURSES.map((c, i) => (
+                <AnimateIn key={c.slug} animation="scaleIn" delay={i * 0.04}>
+                  <CategoryCard c={c} />
+                </AnimateIn>
+              ))}
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* Design Courses */}
+      {show("design") && (
+        <section className="dot-bg" style={{ padding: isMobile ? "56px 6%" : "72px 5%", background: filter === "all" ? "var(--bg-muted)" : "transparent" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <SectionHead index="Section 04" title={t("tabDesign")} sub="Graphics, multimedia, animation, interior & fashion design" isMobile={isMobile} />
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(3,1fr)", gap: isMobile ? 14 : 18 }}>
+              {DESIGN_STUDIO_COURSES.map((c, i) => (
+                <AnimateIn key={c.slug} animation="scaleIn" delay={i * 0.04}>
+                  <CategoryCard c={c} />
+                </AnimateIn>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Free Vocational */}
+      {show("voc") && (
+        <section style={{ padding: isMobile ? "56px 6%" : "72px 5%" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <SectionHead index="Section 05" title={t("tabVoc")} sub="Short-duration · NSDC-aligned · job-ready in months" isMobile={isMobile} />
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(4,1fr)", gap: isMobile ? 14 : 18 }}>
               {COURSES_VOC.map((c, i) => (
                 <AnimateIn key={c.slug} animation="scaleIn" delay={i * 0.04}>

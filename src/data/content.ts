@@ -490,6 +490,23 @@ export const DESIGN_STUDIO_COURSES: CourseCategory[] = [
   { slug: "fashion-design", name: "Fashion Design", icon: "👗", desc: "From sketch to runway — digital fashion illustration and pattern making.", tools: ["CorelDRAW", "Photoshop", "Illustrator", "InDesign"] },
 ];
 
+// Automation specializations sit under the CAD umbrella (already delivered in
+// depth inside the Electrical CAD certificate).
+export const AUTOMATION_COURSES: CourseCategory[] = [
+  { slug: "plc-automation", name: "PLC Programming", icon: "🔧", desc: "Ladder logic, I/O configuration and industrial control system programming.", tools: ["Rockwell", "Siemens", "Ladder Logic", "HMI"] },
+  { slug: "scada-systems", name: "SCADA Systems", icon: "🖥️", desc: "Supervisory control, real-time data acquisition and remote device visualization.", tools: ["SCADA", "AC/DC Drives", "Alarm Management"] },
+];
+
+// ── New 5-category course taxonomy (from HR restructuring blueprint) ──────────
+// The six CAD certificates plus the CAD-based polytechnic diplomas.
+export const CAD_DIPLOMAS: CourseDip[] = COURSES_DIP.filter(
+  (c) => !["diploma-cse", "diploma-it"].includes(c.slug),
+);
+// Computer Application — the software/IT polytechnic diplomas (CSE + IT).
+export const COMPUTER_APP_COURSES: CourseDip[] = COURSES_DIP.filter(
+  (c) => ["diploma-cse", "diploma-it"].includes(c.slug),
+);
+
 // ════════════════════════════════════════════════════════════════════
 //  Services Page Data
 // ════════════════════════════════════════════════════════════════════
@@ -506,6 +523,13 @@ export const EMERGING_TECH = [
   { name: "Drone Technology", icon: "🛩️", desc: "Unmanned aerial vehicle operation, maintenance and surveying applications." },
   { name: "Industrial Automation", icon: "⚙️", desc: "PLC, SCADA, robotics and smart manufacturing systems." },
   { name: "Electric Vehicle (EV)", icon: "⚡", desc: "EV servicing, battery technology, charging infrastructure and assembly." },
+];
+
+// PPP & Workforce initiatives (Priyadarshan Sir's input)
+export const SERVICES_PPP = [
+  { name: "Transforming Public Education", icon: "🏛️", desc: "Operating PPP-model Polytechnic and ITI institutions — modernizing government technical education with industry-grade curriculum, labs and placement delivery." },
+  { name: "Workforce for Industries", icon: "🏭", desc: "Sourcing, training and supplying job-ready workforce directly to manufacturing, service and infrastructure-sector industries at scale." },
+  { name: "Empowering Government Schools", icon: "🏫", desc: "Establishing vocational skill labs across 400+ government schools — embedding employable, hands-on skills into mainstream school education." },
 ];
 
 export const GOVT_MANDATES = [
@@ -525,7 +549,18 @@ export const INFRA_TABS = [
   { key: "skill", label: "Skill-Driven Initiatives", desc: "State-level operational delivery frameworks — UPSDM (Uttar Pradesh), JSDM (Jharkhand), BSDM (Bihar)." },
 ];
 
-export const TRAINING_INSTITUTIONS = [
+export const TRAINING_INSTITUTIONS: {
+  type: string;
+  name: string;
+  count: number | null;
+  state: string;
+  desc: string;
+}[] = [
+  { type: "Mega Skill Centre", name: "Venture Mega Skill Centres", count: 6, state: "Jharkhand", desc: "Flagship multi-program skill hubs delivering CAD, IT, healthcare and vocational training at scale across Jharkhand." },
+  { type: "Institute", name: "CAD Institute", count: null, state: "Multiple", desc: "Dedicated CAD training institutes spanning architecture, civil, mechanical and electrical engineering domains." },
+  { type: "Institute", name: "Fashion Institute", count: null, state: "Multiple", desc: "Fashion design and garment technology institutes — from pattern making to digital fashion CAD." },
+  { type: "Institute", name: "Computer Institute", count: null, state: "Multiple", desc: "Computer application, IT and software skilling institutes for job-ready digital careers." },
+  { type: "DDU-GKY", name: "DDU-GKY Centres", count: 5, state: "All-over India", desc: "Rural youth skill training and placement centres under Deen Dayal Upadhyaya Grameen Kaushalya Yojana." },
   { type: "PPP", name: "Government Polytechnic Colleges", count: 3, state: "Uttar Pradesh", desc: "Public-Private Partnership model polytechnic colleges." },
   { type: "Vocational", name: "Industrial Training Institutes (ITI)", count: null, state: "Multiple", desc: "Vocational frameworks across ITI colleges." },
   { type: "HQ", name: "Corporate Head Office", count: null, state: "Jharkhand", desc: "Ranchi, Panchwati Plaza — executive and administrative hub." },
@@ -547,6 +582,16 @@ export const INTL_CORRIDORS = [
   { region: "Europe — Germany", cities: ["Berlin", "Munich", "Frankfurt"], desc: "German International Exchange Program — training and deploying qualified candidates directly into the European healthcare sector.", icon: "🇩🇪" },
 ];
 
+// Step-by-step workflow for the German healthcare deployment program.
+export const WORK_ABROAD_PROCESS = [
+  { step: 1, title: "Registration & Eligibility", desc: "Profile assessment, document screening and eligibility check for the healthcare pathway to Germany.", icon: "📝" },
+  { step: 2, title: "Language Training (German B1/B2)", desc: "Structured German language instruction up to B1/B2 proficiency — the mandatory benchmark for healthcare roles.", icon: "🗣️" },
+  { step: 3, title: "Cultural Integration Program", desc: "Orientation on German workplace culture, patient-care etiquette and day-to-day life to ensure a smooth transition.", icon: "🤝" },
+  { step: 4, title: "Professional Nursing Certification", desc: "Recognition of nursing qualifications and bridging modules aligned to German healthcare standards.", icon: "🩺" },
+  { step: 5, title: "Visa Processing & Documentation", desc: "End-to-end visa filing, credential attestation and documentation support handled by our mobility cell.", icon: "🛂" },
+  { step: 6, title: "Deployment to Germany", desc: "Confirmed placement with a partner healthcare employer, relocation support and on-ground onboarding.", icon: "✈️" },
+];
+
 // ════════════════════════════════════════════════════════════════════
 //  CSR Data
 // ════════════════════════════════════════════════════════════════════
@@ -562,13 +607,24 @@ export const CSR_ACTIVITIES = [
   { title: "Certification Distribution", desc: "Recognized credential distribution events empowering graduates with verifiable qualifications.", icon: "📜" },
 ];
 
+// Media gallery placeholders — drop matching files into /public/images/csr/ to
+// replace the gradient placeholders (follows the site's graceful-fallback pattern).
+export const CSR_GALLERY = [
+  { title: "Rural Training Camp", caption: "Skill development camp · Godda, Jharkhand", img: "/images/csr/training-camp.png", glyph: "🏕️" },
+  { title: "Certification Ceremony", caption: "Credential distribution · Ranchi", img: "/images/csr/certification.png", glyph: "🎓" },
+  { title: "Community Donation Drive", caption: "Foundation outreach event", img: "/images/csr/donation.png", glyph: "🤲" },
+  { title: "Women's Skilling Batch", caption: "Apparel & tailoring cohort", img: "/images/csr/women-skilling.png", glyph: "🧵" },
+  { title: "EV Skills Workshop", caption: "Hero MotoCorp CSR alliance", img: "/images/csr/ev-workshop.png", glyph: "⚡" },
+  { title: "Construction Skilling", caption: "RKS Builders alliance", img: "/images/csr/construction.png", glyph: "🏗️" },
+];
+
 // ════════════════════════════════════════════════════════════════════
 //  About Page — Contact Channels
 // ════════════════════════════════════════════════════════════════════
 
 export const CONTACT_CHANNELS = [
-  { dept: "Human Resources Department", phone: "+91 9431103263", email: "hr@ventureskillindia.co.in", icon: "👥" },
-  { dept: "Placement & Corporate Relations", phone: "+91 9431103263", email: "placements@ventureskillindia.co.in", icon: "💼" },
+  { dept: "Placement Cell", phone: "+91 9431103263", email: "PM@venturecad.co.in", icon: "💼" },
+  { dept: "HR Department", phone: "+91 9431103263", email: "HR@venturecad.co.in", icon: "👥" },
   { dept: "Director & Executive Directors", phone: "+91 9431103263", email: "director@ventureskillindia.co.in", icon: "🏛️" },
 ];
 
@@ -717,10 +773,17 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     navInfrastructure: "Infrastructure",
     navAbout: "About",
     navWorkAbroad: "Work Abroad",
+    navCSR: "CSR",
     navCenters: "Centres",
     navPlacements: "Placements",
     navNews: "News",
     navContact: "Contact",
+    // Course category tabs (5-category taxonomy)
+    tabCAD: "CAD Courses",
+    tabCompApp: "Computer Application",
+    tabDataBA: "Data Science & BA",
+    tabDesign: "Design Courses",
+    tabVoc: "Free Vocational",
     // Form
     yourName: "Your name",
     phoneNumber: "Phone number",
@@ -765,6 +828,10 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     workAbroadTitle1: "Work Abroad.",
     workAbroadTitle2: "Global career pathways.",
     workAbroadHeroDesc: "International placement corridors — Middle East employment drives and European healthcare exchange programs.",
+    csrEyebrow: "Corporate Social Responsibility",
+    csrTitle1: "Skilling with",
+    csrTitle2: "social purpose.",
+    csrHeroDesc: "Section 135-compliant CSR through corporate alliances, self-funded VSI Foundation programs, and community skilling across rural and tribal India.",
     // Courses page sections
     certSectionTitle: "Certificate Courses",
     certSectionSub: "Industry-aligned · 200–320 hours · Certificate of completion",
@@ -843,10 +910,17 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     navInfrastructure: "बुनियादी ढांचा",
     navAbout: "हमारे बारे में",
     navWorkAbroad: "विदेश में काम",
+    navCSR: "CSR",
     navCenters: "केंद्र",
     navPlacements: "प्लेसमेंट",
     navNews: "समाचार",
     navContact: "संपर्क",
+    // Course category tabs (5-category taxonomy)
+    tabCAD: "CAD कोर्स",
+    tabCompApp: "कंप्यूटर एप्लिकेशन",
+    tabDataBA: "डेटा साइंस और BA",
+    tabDesign: "डिज़ाइन कोर्स",
+    tabVoc: "मुफ्त व्यावसायिक",
     yourName: "आपका नाम",
     phoneNumber: "फ़ोन नंबर",
     yourEmail: "ईमेल",
@@ -888,6 +962,10 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     workAbroadTitle1: "विदेश में काम।",
     workAbroadTitle2: "वैश्विक करियर पथ।",
     workAbroadHeroDesc: "अंतरराष्ट्रीय प्लेसमेंट गलियारे — मध्य पूर्व रोज़गार अभियान और यूरोपीय स्वास्थ्य सेवा विनिमय कार्यक्रम।",
+    csrEyebrow: "कॉर्पोरेट सामाजिक उत्तरदायित्व",
+    csrTitle1: "सामाजिक उद्देश्य के साथ",
+    csrTitle2: "कौशल निर्माण।",
+    csrHeroDesc: "धारा 135-अनुरूप CSR — कॉर्पोरेट गठबंधन, स्व-वित्तपोषित VSI फाउंडेशन कार्यक्रम और ग्रामीण व आदिवासी भारत में सामुदायिक कौशल।",
     // Courses page sections
     certSectionTitle: "सर्टिफिकेट कोर्स",
     certSectionSub: "इंडस्ट्री-अलाइंड · 200–320 घंटे · कोर्स पूरा होने का प्रमाणपत्र",

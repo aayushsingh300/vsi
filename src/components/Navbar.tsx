@@ -40,6 +40,7 @@ const NAV_LINKS = [
   { href: "/centers", key: "navInfrastructure" },
   { href: "/about", key: "navAbout" },
   { href: "/work-abroad", key: "navWorkAbroad" },
+  { href: "/csr", key: "navCSR" },
 ];
 
 interface NavbarProps {
@@ -117,7 +118,7 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
 
         {!isMobile && (
           <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
-            {NAV_LINKS.slice(0, 5).map((n) => (
+            {NAV_LINKS.slice(0, 6).map((n) => (
               <Link key={n.href} href={n.href} className="nav-link">
                 {t(n.key)}
               </Link>

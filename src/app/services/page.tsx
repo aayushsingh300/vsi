@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, Zap, Building2, Globe } from "lucide-react";
+import { ChevronDown, Zap, Building2, Globe, Landmark } from "lucide-react";
 import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
-import { EMPLOYMENT_SECTORS, EMERGING_TECH, GOVT_MANDATES } from "@/data/content";
+import { EMPLOYMENT_SECTORS, EMERGING_TECH, GOVT_MANDATES, SERVICES_PPP } from "@/data/content";
 import { useLang } from "@/context/LangContext";
 import useIsMobile from "@/hooks/useIsMobile";
 
@@ -103,6 +103,42 @@ export default function ServicesPage() {
                   <div style={{ fontSize: 32 }}>{tech.icon}</div>
                   <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 18, color: "var(--text)", letterSpacing: "-.02em" }}>{tech.name}</h3>
                   <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>{tech.desc}</p>
+                </div>
+              </AnimateIn>
+            ))}
+          </div>
+
+          {/* PPP & Workforce (Priyadarshan Sir's Input) */}
+          <AnimateIn animation="slideUp">
+            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
+              <div style={{
+                width: 40, height: 40, borderRadius: 10,
+                background: "linear-gradient(135deg, rgba(var(--accent-rgb),.15), rgba(var(--gold-rgb),.1))",
+                border: "1px solid rgba(var(--accent-rgb),.2)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <Landmark size={18} color="var(--accent)" />
+              </div>
+              <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", fontWeight: 500 }}>
+                // PPP & Workforce Solutions
+              </p>
+            </div>
+            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(22px,3vw,36px)", color: "var(--text)", marginBottom: 28, letterSpacing: "-.03em" }}>
+              Public-private partnership at scale.
+            </h2>
+          </AnimateIn>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 16, marginBottom: 64 }}>
+            {SERVICES_PPP.map((item, i) => (
+              <AnimateIn key={item.name} animation="slideUp" delay={i * 0.06}>
+                <div className="hover-lift" style={{
+                  background: "linear-gradient(145deg, var(--bg-card) 0%, rgba(var(--gold-rgb),.04) 100%)",
+                  border: "1px solid var(--border-card)", borderRadius: 10,
+                  padding: "28px 24px", display: "flex", flexDirection: "column", gap: 12, height: "100%",
+                  transition: "box-shadow .3s ease",
+                }}>
+                  <div style={{ fontSize: 32 }}>{item.icon}</div>
+                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 18, color: "var(--text)", letterSpacing: "-.02em" }}>{item.name}</h3>
+                  <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>{item.desc}</p>
                 </div>
               </AnimateIn>
             ))}
