@@ -578,8 +578,34 @@ export const SMART_CITY_BLOCKS = [
 // ════════════════════════════════════════════════════════════════════
 
 export const INTL_CORRIDORS = [
-  { region: "Middle East", cities: ["Dubai", "Riyadh"], desc: "Active employment drives in the Gulf region — hospitality, construction, healthcare and retail sectors.", icon: "🌍" },
-  { region: "Europe — Germany", cities: ["Berlin", "Munich", "Frankfurt"], desc: "German International Exchange Program — training and deploying qualified candidates directly into the European healthcare sector.", icon: "🇩🇪" },
+  {
+    region: "Middle East — Gulf Region",
+    cities: ["Dubai", "Riyadh", "Abu Dhabi", "Doha"],
+    desc: "Active employment drives across UAE & Saudi Arabia for qualified skilled professionals in hospitality, mega-construction projects, healthcare, and retail sectors.",
+    icon: "🌍",
+    flag: "🇦🇪 🇸🇦",
+    tagline: "Tax-Free Income · Direct Sponsorship",
+    image: "/images/corridor-middle-east.png",
+    fallbackColor: "linear-gradient(135deg, #1B2D4F 0%, #0D1B2A 60%, #3B2D12 100%)",
+    sectors: ["Construction & Civil Engineering", "Hospitality & Tourism", "Healthcare & Nursing", "Retail & Logistics"],
+    perks: ["100% Tax-Free Salary", "Employer-paid Housing & Visa", "Annual Paid Flight Allowance"],
+    statLabel: "Deployment Corridors",
+    statValue: "Dubai & Riyadh Drives",
+  },
+  {
+    region: "Europe — Germany",
+    cities: ["Berlin", "Munich", "Frankfurt", "Hamburg"],
+    desc: "German International Exchange Program — specialized language training, qualification recognition, and direct placement into the European healthcare and nursing sector.",
+    icon: "🇩🇪",
+    flag: "🇩🇪 🇪🇺",
+    tagline: "EU Residency Pathway · Fast-Track Visa",
+    image: "/images/work-abroad-germany.png",
+    fallbackColor: "linear-gradient(135deg, #0A192F 0%, #172A45 60%, #003366 100%)",
+    sectors: ["Geriatric & Clinical Nursing", "Hospital Patient Care", "Medical Technology", "Specialized Healthcare"],
+    perks: ["Paid German Language Prep (B1/B2)", "Recognized German Nursing License", "Permanent Residency Option"],
+    statLabel: "Target Sector",
+    statValue: "German Healthcare Network",
+  },
 ];
 
 // Step-by-step workflow for the German healthcare deployment program.
