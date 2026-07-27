@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { MessageCircle, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import Image from "next/image";
 import AnimateIn from "@/components/AnimateIn";
 import { CREDS } from "@/data/content";
@@ -123,7 +124,7 @@ export default function Hero() {
               style={{ textDecoration: "none" }}
             >
               <button className="btn-wa wa-pulse">
-                <MessageCircle size={15} />
+                <WhatsAppIcon size={15} />
               </button>
             </a>
           </div>

@@ -3,7 +3,8 @@
 import { use, useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronRight, MessageCircle, CheckCircle2, ArrowRight, Download } from "lucide-react";
+import { ChevronRight, CheckCircle2, ArrowRight, Download } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -518,7 +519,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                 rel="noopener noreferrer"
                 style={{ textDecoration: "none" }}
               >
-                <button className="btn-wa wa-pulse"><MessageCircle size={15} /> {t("whatsappEnquiry")}</button>
+                <button className="btn-wa wa-pulse"><WhatsAppIcon size={15} /> {t("whatsappEnquiry")}</button>
               </a>
             </div>
           </AnimateIn>

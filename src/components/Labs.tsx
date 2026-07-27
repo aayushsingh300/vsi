@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight, MapPin } from "lucide-react";
 import AnimateIn from "@/components/AnimateIn";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useLang } from "@/context/LangContext";
@@ -152,6 +154,52 @@ export default function Labs() {
                 {c}
               </span>
             ))}
+          </div>
+        </AnimateIn>
+
+        {/* CTA — tour the centres */}
+        <AnimateIn animation="fadeIn" delay={0.7}>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 34 }}>
+            <Link href="/centers" style={{ textDecoration: "none" }}>
+              <button
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  fontFamily: "var(--sans)",
+                  fontWeight: 600,
+                  fontSize: 13.5,
+                  color: "var(--bg-dark)",
+                  background: "var(--accent-gold)",
+                  border: "none",
+                  borderRadius: 3,
+                  padding: "12px 22px",
+                  cursor: "pointer",
+                }}
+              >
+                <MapPin size={15} /> Explore Our Centres <ArrowUpRight size={15} />
+              </button>
+            </Link>
+            <Link href="/contact" style={{ textDecoration: "none" }}>
+              <button
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  fontFamily: "var(--sans)",
+                  fontWeight: 600,
+                  fontSize: 13.5,
+                  color: "rgba(253,252,249,.8)",
+                  background: "transparent",
+                  border: "1px solid rgba(255,255,255,.16)",
+                  borderRadius: 3,
+                  padding: "12px 22px",
+                  cursor: "pointer",
+                }}
+              >
+                Book a Lab Visit
+              </button>
+            </Link>
           </div>
         </AnimateIn>
       </div>

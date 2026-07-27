@@ -1,7 +1,7 @@
 "use client";
 
-import { MessageCircle } from "lucide-react";
 import { useState } from "react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 
 export default function FloatingWA() {
   const [hovered, setHovered] = useState(false);
@@ -37,7 +37,7 @@ export default function FloatingWA() {
         whiteSpace: "nowrap",
       }}
     >
-      <MessageCircle size={22} color="#fff" style={{ flexShrink: 0 }} />
+      <WhatsAppIcon size={22} color="#fff" style={{ flexShrink: 0 }} />
       <span
         style={{
           fontFamily: "'Syne', sans-serif",

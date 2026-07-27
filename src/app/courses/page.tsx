@@ -4,7 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AnimateIn from "@/components/AnimateIn";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import {
   COURSES_CERT,
   COURSES_VOC,
@@ -353,7 +354,7 @@ export default function CoursesPage() {
             <button className="btn-primary" style={{ background: "var(--accent-gold)", color: "var(--bg-dark)" }}>{t("freeCounseling")}</button>
           </Link>
           <a href="https://wa.me/919431103263" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-            <button className="btn-wa wa-pulse"><MessageCircle size={15} /> {t("whatsappShort")}</button>
+            <button className="btn-wa wa-pulse"><WhatsAppIcon size={15} /> {t("whatsappShort")}</button>
           </a>
         </div>
       </section>

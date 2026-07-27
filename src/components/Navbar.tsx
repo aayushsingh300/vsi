@@ -3,9 +3,10 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { MessageCircle, X, Menu } from "lucide-react";
+import { X, Menu } from "lucide-react";
 import { COURSES_CERT } from "@/data/content";
 import { VSI_LOGO, VSI_LOGO_RATIO } from "@/data/assets";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useLang } from "@/context/LangContext";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -38,9 +39,9 @@ const NAV_LINKS = [
   { href: "/placements", key: "navRecruiters" },
   { href: "/resources", key: "navResources" },
   { href: "/centers", key: "navInfrastructure" },
-  { href: "/about", key: "navAbout" },
   { href: "/work-abroad", key: "navWorkAbroad" },
   { href: "/csr", key: "navCSR" },
+  { href: "/about", key: "navAbout" },
 ];
 
 interface NavbarProps {
@@ -117,8 +118,8 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
         </Link>
 
         {!isMobile && (
-          <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
-            {NAV_LINKS.slice(0, 6).map((n) => (
+          <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
+            {NAV_LINKS.map((n) => (
               <Link key={n.href} href={n.href} className="nav-link">
                 {t(n.key)}
               </Link>
@@ -330,7 +331,7 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
                 style={{ textDecoration: "none" }}
               >
                 <button className="btn-wa wa-pulse" style={{ width: "100%", justifyContent: "center" }}>
-                  <MessageCircle size={15} /> WhatsApp
+                  <WhatsAppIcon size={15} /> WhatsApp
                 </button>
               </a>
             </div>
@@ -412,7 +413,7 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
           </button>
           {!isMobile && (
             <button className="btn-wa" style={{ padding: "11px 18px" }}>
-              <MessageCircle size={15} /> WhatsApp
+              <WhatsAppIcon size={15} /> WhatsApp
             </button>
           )}
           <button

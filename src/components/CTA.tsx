@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Download, MessageCircle, ArrowUpRight } from "lucide-react";
+import { Download, ArrowUpRight } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import AnimateIn from "@/components/AnimateIn";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useLang } from "@/context/LangContext";
@@ -161,7 +162,7 @@ export default function CTA() {
                 width: "100%",
               }}
             >
-              <MessageCircle size={15} /> {t("whatsappNow")}
+              <WhatsAppIcon size={15} /> {t("whatsappNow")}
             </button>
           </a>
         </div>

@@ -592,6 +592,14 @@ export const WORK_ABROAD_PROCESS = [
   { step: 6, title: "Deployment to Germany", desc: "Confirmed placement with a partner healthcare employer, relocation support and on-ground onboarding.", icon: "✈️" },
 ];
 
+// Proof points for the homepage Work Abroad section.
+export const WORK_ABROAD_HIGHLIGHTS = [
+  { value: "2", label: "Global Corridors", sub: "Germany (healthcare) + active Gulf drives" },
+  { value: "B1/B2", label: "German Language Training", sub: "Job-ready proficiency benchmark" },
+  { value: "6-Step", label: "Guided Pathway", sub: "Registration to on-ground deployment" },
+  { value: "100%", label: "End-to-End Mobility", sub: "Visa, credentials & relocation support" },
+];
+
 // ════════════════════════════════════════════════════════════════════
 //  CSR Data & Impact Metrics
 // ════════════════════════════════════════════════════════════════════

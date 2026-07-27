@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { MessageCircle, Phone, Mail, MapPin, ArrowRight, CheckCircle, Loader2 } from "lucide-react";
+import { Phone, Mail, MapPin, ArrowRight, CheckCircle, Loader2 } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -301,7 +302,7 @@ export default function ContactPage() {
                   gap: "var(--sp-3)",
                 }}
               >
-                <MessageCircle size={20} />
+                <WhatsAppIcon size={20} />
                 <div style={{ textAlign: "left" }}>
                   <div style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-sm)", letterSpacing: ".04em" }}>
                     WhatsApp Us
