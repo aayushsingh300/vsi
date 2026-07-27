@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Plane, ArrowUpRight, Globe, HeartPulse, Building } from "lucide-react";
 import AnimateIn from "@/components/AnimateIn";
@@ -27,6 +28,25 @@ export default function WorkAbroadPage() {
           <h1>{t("workAbroadTitle1")}<br /><em>{t("workAbroadTitle2")}</em></h1>
           <p className="lead">{t("workAbroadHeroDesc")}</p>
         </AnimateIn>
+      </section>
+
+      {/* German Healthcare Program Banner */}
+      <section style={{ height: isMobile ? 240 : 360, position: "relative", overflow: "hidden" }}>
+        <Image
+          src="/images/work-abroad-germany.png"
+          alt="German Healthcare Exchange Program — VSI Nursing & Healthcare Mobility"
+          fill
+          style={{ objectFit: "cover" }}
+          sizes="100vw"
+        />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, var(--surface) 0%, transparent 40%)" }} />
+        <div style={{
+          position: "absolute", bottom: 20, left: "5%",
+          fontFamily: "var(--mono)", fontSize: 10, color: "rgba(248,247,244,.5)",
+          letterSpacing: ".12em", textTransform: "uppercase",
+        }}>
+          German Healthcare Exchange · International Placement Program
+        </div>
       </section>
 
       {/* Corridors */}

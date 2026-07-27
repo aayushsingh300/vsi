@@ -59,6 +59,25 @@ export default function PlacementsPage() {
         </AnimateIn>
       </section>
 
+      {/* Placement Drive Banner */}
+      <section style={{ height: isMobile ? 240 : 360, position: "relative", overflow: "hidden" }}>
+        <Image
+          src="/images/placements-drive.png"
+          alt="VSI Campus Placement Drive — connecting students with top recruiters"
+          fill
+          style={{ objectFit: "cover" }}
+          sizes="100vw"
+        />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, var(--surface) 0%, transparent 40%)" }} />
+        <div style={{
+          position: "absolute", bottom: 20, left: "5%",
+          fontFamily: "var(--mono)", fontSize: 10, color: "rgba(248,247,244,.5)",
+          letterSpacing: ".12em", textTransform: "uppercase",
+        }}>
+          Campus Placement Drive · Annual Recruitment Fair
+        </div>
+      </section>
+
       {/* Stats */}
       <section ref={sRef} style={{ borderBottom: "1px solid var(--border)" }}>
         <div data-stack="2" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(4,1fr)" }}>
