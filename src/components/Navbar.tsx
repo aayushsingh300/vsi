@@ -105,7 +105,9 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
           backdropFilter: isMobile ? "none" : (scrolled ? "blur(18px) saturate(1.7)" : "blur(14px) saturate(1.5)"),
           WebkitBackdropFilter: isMobile ? "none" : (scrolled ? "blur(18px) saturate(1.7)" : "blur(14px) saturate(1.5)"),
           borderBottom: scrolled ? "1px solid rgba(var(--accent-rgb),.14)" : "1px solid rgba(var(--accent-rgb),.08)",
-          padding: "0 5%",
+          // Tighter than the old flat 5% so the 8-item row has room to breathe
+          // at 1440; still generous on wide screens (caps at 60px a side).
+          padding: isMobile ? "0 5%" : "0 clamp(24px, 2.6vw, 60px)",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -137,15 +139,22 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
           })()}
         </Link>
 
+        {/* Two clusters — the 8 links, then the actions — with a wider gap
+            between them. The break reads as far less "packed" than one
+            evenly-spaced row. All gaps are fluid: airy on wide screens,
+            tightening toward 1440 so the row can't clip. */}
         {!isMobile && (
-          <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
-            {NAV_LINKS.map((n) => (
-              <Link key={n.href} href={n.href} className="nav-link">
-                <n.Icon size={15} strokeWidth={2} className="nav-ico" aria-hidden="true" focusable="false" />
-                {t(n.key)}
-              </Link>
-            ))}
+          <div style={{ display: "flex", gap: "clamp(20px, 2vw, 40px)", alignItems: "center" }}>
+            <div style={{ display: "flex", gap: "clamp(12px, 1.3vw, 24px)", alignItems: "center" }}>
+              {NAV_LINKS.map((n) => (
+                <Link key={n.href} href={n.href} className="nav-link">
+                  <n.Icon size={15} strokeWidth={2} className="nav-ico" aria-hidden="true" focusable="false" />
+                  {t(n.key)}
+                </Link>
+              ))}
+            </div>
 
+            <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
             <div
               role="group"
               aria-label="Language"
@@ -177,6 +186,7 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
             <button onClick={() => setFormOpen((f: boolean) => !f)} className="btn-primary" style={{ padding: "9px 22px" }}>
               {t("enquireNow")}
             </button>
+            </div>
           </div>
         )}
 
