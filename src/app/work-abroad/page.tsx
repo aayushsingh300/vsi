@@ -14,10 +14,8 @@ import {
   MapPin,
   Sparkles,
   Award,
-  Compass,
-  FileCheck,
-  Briefcase,
   Users,
+  GraduationCap,
 } from "lucide-react";
 import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
@@ -36,129 +34,180 @@ export default function WorkAbroadPage() {
     <div style={{ minHeight: "100vh", background: "var(--bg)" }}>
       <Navbar formOpen={formOpen} setFormOpen={setFormOpen} />
 
-      {/* ── 1. Hero Section (Centered Parchment Elegance) ── */}
+      {/* ── 1. Hero Section (Split Layout with Hero Picture) ── */}
       <section
-        className="inner-hero-warm"
         style={{
+          padding: isMobile ? "56px 6% 48px" : "80px 5% 64px",
           position: "relative",
           overflow: "hidden",
-          textAlign: "center",
-          paddingTop: isMobile ? 56 : 80,
-          paddingBottom: isMobile ? 56 : 80,
         }}
       >
-        <AnimateIn animation="slideUp">
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              padding: "6px 18px",
-              borderRadius: 999,
-              background: "rgba(var(--accent-rgb),.09)",
-              border: "1px solid rgba(var(--accent-rgb),.2)",
-              marginBottom: 24,
-            }}
-          >
-            <Plane size={14} color="var(--accent)" />
-            <span
-              style={{
-                fontFamily: "var(--mono)",
-                fontSize: 11,
-                letterSpacing: ".14em",
-                textTransform: "uppercase",
-                color: "var(--accent)",
-                fontWeight: 600,
-              }}
-            >
-              Global Mobility Pathways · Germany & Gulf Region
-            </span>
-          </div>
-
-          <h1 style={{ margin: "0 auto 18px", maxWidth: 840 }}>
-            {t("workAbroadTitle1")}
-            <br />
-            <em style={{ fontStyle: "italic", color: "var(--accent)", fontWeight: 400 }}>
-              {t("workAbroadTitle2")}
-            </em>
-          </h1>
-
-          <p className="lead" style={{ maxWidth: 640, margin: "0 auto 40px" }}>
-            {t("workAbroadHeroDesc")}
-          </p>
-
-          {/* Centered Metric Ribbon */}
+        <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
-              gap: 16,
-              maxWidth: 960,
-              margin: "0 auto",
+              gridTemplateColumns: isMobile ? "1fr" : "1.1fr 0.9fr",
+              gap: isMobile ? 36 : 56,
+              alignItems: "center",
             }}
           >
-            {[
-              { val: "1,200+", label: "Global Placements", sub: "Germany & Gulf Corridors" },
-              { val: "B1 / B2", label: "German Academy", sub: "Language & Cultural Prep" },
-              { val: "100%", label: "Visa Compliance", sub: "Direct Employer Contracts" },
-              { val: "0%", label: "Upfront Exploitation", sub: "Govt-Aligned Mobility" },
-            ].map((stat) => (
+            {/* Hero Left Content */}
+            <AnimateIn animation="slideUp">
               <div
-                key={stat.label}
                 style={{
-                  background: "var(--bg-card)",
-                  border: "1px solid var(--border-card)",
-                  borderRadius: 12,
-                  padding: "20px 16px",
-                  textAlign: "center",
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.03)",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "6px 16px",
+                  borderRadius: 999,
+                  background: "rgba(var(--accent-rgb),.09)",
+                  border: "1px solid rgba(var(--accent-rgb),.2)",
+                  marginBottom: 20,
                 }}
               >
-                <div
+                <Plane size={14} color="var(--accent)" />
+                <span
                   style={{
-                    fontFamily: "var(--serif)",
-                    fontSize: isMobile ? 24 : 28,
-                    fontWeight: 700,
+                    fontFamily: "var(--mono)",
+                    fontSize: 10.5,
+                    letterSpacing: ".14em",
+                    textTransform: "uppercase",
                     color: "var(--accent)",
-                    letterSpacing: "-.02em",
+                    fontWeight: 600,
                   }}
                 >
-                  {stat.val}
-                </div>
-                <div style={{ fontFamily: "var(--sans)", fontSize: 12.5, fontWeight: 700, color: "var(--text)", marginTop: 4 }}>
-                  {stat.label}
-                </div>
-                <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text-muted)", marginTop: 2 }}>
-                  {stat.sub}
+                  Global Mobility Pathways · Germany & Gulf
+                </span>
+              </div>
+
+              <h1 style={{ fontSize: "clamp(32px, 4vw, 54px)", lineHeight: 1.12, letterSpacing: "-.03em", marginBottom: 20 }}>
+                {t("workAbroadTitle1")}
+                <br />
+                <em style={{ fontStyle: "italic", color: "var(--accent)", fontWeight: 400 }}>
+                  {t("workAbroadTitle2")}
+                </em>
+              </h1>
+
+              <p className="lead" style={{ maxWidth: 560, marginBottom: 32, fontSize: 16, lineHeight: 1.7 }}>
+                {t("workAbroadHeroDesc")}
+              </p>
+
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 36 }}>
+                <Link href="/contact" style={{ textDecoration: "none" }}>
+                  <button className="btn-primary" style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    Apply for Global Mobility <ArrowUpRight size={15} />
+                  </button>
+                </Link>
+                <Link href="#corridors" style={{ textDecoration: "none" }}>
+                  <button className="btn-secondary" style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                    <Globe size={15} /> View Corridors
+                  </button>
+                </Link>
+              </div>
+
+              {/* 4 Stat Badges */}
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12, maxWidth: 520 }}>
+                {[
+                  { val: "1,200+", label: "Candidates Deployed" },
+                  { val: "B1 / B2", label: "German Academy Prep" },
+                  { val: "100%", label: "Verified Direct Visas" },
+                  { val: "0%", label: "Candidate Exploitation" },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    style={{
+                      background: "var(--bg-card)",
+                      border: "1px solid var(--border-card)",
+                      borderRadius: 10,
+                      padding: "12px 14px",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 2,
+                    }}
+                  >
+                    <span style={{ fontFamily: "var(--serif)", fontSize: 20, fontWeight: 700, color: "var(--accent)" }}>
+                      {stat.val}
+                    </span>
+                    <span style={{ fontFamily: "var(--sans)", fontSize: 11.5, fontWeight: 600, color: "var(--text)" }}>
+                      {stat.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </AnimateIn>
+
+            {/* Hero Right Visual Picture */}
+            <AnimateIn animation="scaleIn" delay={0.15}>
+              <div
+                style={{
+                  position: "relative",
+                  borderRadius: 20,
+                  overflow: "hidden",
+                  boxShadow: "0 20px 48px rgba(0,0,0,0.12)",
+                  height: isMobile ? 280 : 420,
+                  border: "1px solid var(--border)",
+                }}
+              >
+                <Image
+                  src="/images/students-campus.png"
+                  alt="VSI International Placement Orientation & Global Candidate Training"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  priority
+                  sizes="(max-width: 900px) 100vw, 45vw"
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: "linear-gradient(to top, rgba(13,27,42,0.85) 0%, transparent 60%)",
+                  }}
+                />
+
+                {/* Floating Image Badge */}
+                <div style={{ position: "absolute", bottom: 20, left: 20, right: 20 }}>
+                  <div
+                    style={{
+                      background: "rgba(255,255,255,0.15)",
+                      backdropFilter: "blur(10px)",
+                      border: "1px solid rgba(255,255,255,0.25)",
+                      borderRadius: 12,
+                      padding: "14px 18px",
+                      color: "#FFF",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 12,
+                    }}
+                  >
+                    <div style={{ width: 40, height: 40, borderRadius: "50%", background: "var(--accent)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      <Globe size={20} color="#FFF" />
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: "var(--sans)", fontSize: 13, fontWeight: 700 }}>
+                        VSI Global Candidate Cell
+                      </div>
+                      <div style={{ fontFamily: "var(--mono)", fontSize: 10.5, color: "rgba(255,255,255,0.8)" }}>
+                        Pre-departure briefing & document attestation
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            ))}
+            </AnimateIn>
           </div>
-        </AnimateIn>
+        </div>
       </section>
 
-      {/* ── 2. Unified Deployment Corridors Section (Dark Space Section) ── */}
+      {/* ── 2. Active Deployment Corridors Section (Dark Navy with Cover Pictures) ── */}
       <section
+        id="corridors"
         style={{
           background: "linear-gradient(180deg, #09131F 0%, #0D1B2A 100%)",
           padding: isMobile ? "72px 6%" : "104px 5%",
-          position: "relative",
-          overflow: "hidden",
           color: "#FFF",
         }}
       >
-        {/* Subtle Ambient Flight Grid Background Pattern */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "radial-gradient(circle at 50% 30%, rgba(0, 153, 255, 0.12) 0%, transparent 65%), radial-gradient(circle at 80% 80%, rgba(255, 183, 3, 0.08) 0%, transparent 50%)",
-            pointerEvents: "none",
-          }}
-        />
-
-        <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
               <Globe size={18} color="#0099FF" />
@@ -192,17 +241,17 @@ export default function WorkAbroadPage() {
               style={{
                 fontFamily: "var(--body)",
                 fontSize: 16,
-                color: "rgba(255, 255, 255, 0.65)",
+                color: "rgba(255, 255, 255, 0.68)",
                 lineHeight: 1.75,
                 maxWidth: 660,
                 marginBottom: 52,
               }}
             >
-              Verified employment pathways across the Middle East and Germany — complete with legal contracts, visa processing, structured training, and zero candidate exploitation.
+              Explore our primary employment hubs across the Middle East and Germany — complete with verified employer contracts, full visa support, and relocation assistance.
             </p>
           </AnimateIn>
 
-          {/* Destination Cards Grid */}
+          {/* Cards Grid */}
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: 32 }}>
             
             {/* ── CARD 1: MIDDLE EAST ── */}
@@ -210,341 +259,289 @@ export default function WorkAbroadPage() {
               <div
                 className="hover-lift"
                 style={{
-                  background: "linear-gradient(155deg, rgba(20, 36, 62, 0.9) 0%, rgba(11, 22, 38, 0.95) 100%)",
-                  border: "1px solid rgba(255, 183, 3, 0.25)",
+                  background: "linear-gradient(155deg, rgba(20, 36, 62, 0.95) 0%, rgba(11, 22, 38, 0.98) 100%)",
+                  border: "1px solid rgba(255, 183, 3, 0.3)",
                   borderRadius: 20,
-                  padding: isMobile ? "28px 22px" : "36px 32px",
+                  overflow: "hidden",
                   display: "flex",
                   flexDirection: "column",
                   height: "100%",
-                  boxShadow: "0 20px 48px rgba(0,0,0,0.4), 0 0 20px rgba(255,183,3,0.05)",
-                  position: "relative",
-                  overflow: "hidden",
+                  boxShadow: "0 20px 48px rgba(0,0,0,0.4)",
                 }}
               >
-                {/* Visual Header Graphic */}
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+                {/* Visual Cover Picture Header */}
+                <div style={{ height: 180, position: "relative", overflow: "hidden" }}>
+                  <Image
+                    src="/images/corridor-middle-east.png"
+                    alt="Middle East Placement Drives — Dubai & Riyadh"
+                    fill
+                    style={{ objectFit: "cover", objectPosition: "center 30%" }}
+                    sizes="(max-width: 900px) 100vw, 50vw"
+                  />
                   <div
                     style={{
-                      background: "rgba(255, 183, 3, 0.12)",
-                      border: "1px solid rgba(255, 183, 3, 0.3)",
-                      borderRadius: 30,
-                      padding: "6px 14px",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 8,
+                      position: "absolute",
+                      inset: 0,
+                      background: "linear-gradient(to top, rgba(11, 22, 38, 1) 0%, rgba(11, 22, 38, 0.3) 100%)",
                     }}
-                  >
-                    <span style={{ fontSize: 16 }}>🇦🇪 🇸🇦</span>
-                    <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, color: "#FFB703", letterSpacing: ".08em" }}>
-                      GULF REGION
-                    </span>
-                  </div>
+                  />
 
-                  <span
-                    style={{
-                      fontFamily: "var(--mono)",
-                      fontSize: 10,
-                      fontWeight: 700,
-                      background: "#0099FF",
-                      color: "#FFF",
-                      padding: "4px 10px",
-                      borderRadius: 20,
-                      textTransform: "uppercase",
-                      letterSpacing: ".08em",
-                    }}
-                  >
-                    Active Drives
-                  </span>
-                </div>
-
-                {/* Card Title & Cities */}
-                <h3
-                  style={{
-                    fontFamily: "var(--serif)",
-                    fontSize: "clamp(24px, 2.6vw, 32px)",
-                    fontWeight: 700,
-                    color: "#FFFFFF",
-                    letterSpacing: "-.02em",
-                    marginBottom: 10,
-                  }}
-                >
-                  Middle East Corridors
-                </h3>
-
-                {/* City Chips */}
-                <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 18 }}>
-                  {["Dubai", "Riyadh", "Abu Dhabi", "Doha"].map((city) => (
-                    <span
-                      key={city}
+                  {/* Flag & Tag Pill */}
+                  <div style={{ position: "absolute", top: 16, left: 16, right: 16, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <div
                       style={{
-                        fontFamily: "var(--mono)",
-                        fontSize: 11,
-                        letterSpacing: ".08em",
-                        textTransform: "uppercase",
-                        background: "rgba(255, 183, 3, 0.1)",
-                        color: "#FFC837",
-                        padding: "4px 12px",
-                        borderRadius: 6,
-                        border: "1px solid rgba(255, 183, 3, 0.2)",
-                        fontWeight: 600,
-                        display: "inline-flex",
+                        background: "rgba(0,0,0,0.65)",
+                        backdropFilter: "blur(8px)",
+                        padding: "6px 14px",
+                        borderRadius: 20,
+                        display: "flex",
                         alignItems: "center",
-                        gap: 5,
+                        gap: 8,
+                        border: "1px solid rgba(255,255,255,0.2)",
                       }}
                     >
-                      <MapPin size={11} color="#FFB703" />
-                      {city}
+                      <span style={{ fontSize: 16 }}>🇦🇪 🇸🇦</span>
+                      <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, color: "#FFB703", letterSpacing: ".08em" }}>
+                        GULF REGION
+                      </span>
+                    </div>
+
+                    <span style={{ fontFamily: "var(--mono)", fontSize: 10, fontWeight: 700, background: "#0099FF", color: "#FFF", padding: "4px 10px", borderRadius: 20, textTransform: "uppercase" }}>
+                      Active Drives
                     </span>
-                  ))}
+                  </div>
                 </div>
 
-                <p style={{ fontFamily: "var(--body)", fontSize: 14.5, color: "rgba(255, 255, 255, 0.72)", lineHeight: 1.7, marginBottom: 24 }}>
-                  Active employment drives across UAE and Saudi Arabia for skilled technicians, engineers, hospitality staff, and healthcare professionals powering major infrastructure projects.
-                </p>
+                {/* Card Body */}
+                <div style={{ padding: isMobile ? "24px 20px" : "28px 28px", display: "flex", flexDirection: "column", flex: 1 }}>
+                  <h3
+                    style={{
+                      fontFamily: "var(--serif)",
+                      fontSize: "clamp(24px, 2.5vw, 30px)",
+                      fontWeight: 700,
+                      color: "#FFFFFF",
+                      letterSpacing: "-.02em",
+                      marginBottom: 10,
+                    }}
+                  >
+                    Middle East Corridors
+                  </h3>
 
-                {/* Key Sectors */}
-                <div
-                  style={{
-                    background: "rgba(255, 255, 255, 0.04)",
-                    borderRadius: 12,
-                    padding: "16px",
-                    border: "1px solid rgba(255, 255, 255, 0.08)",
-                    marginBottom: 24,
-                  }}
-                >
-                  <span style={{ fontFamily: "var(--mono)", fontSize: 10, fontWeight: 700, textTransform: "uppercase", color: "rgba(255, 255, 255, 0.45)", letterSpacing: ".1em", display: "block", marginBottom: 10 }}>
-                    Target Recruitment Sectors:
-                  </span>
-                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                    {["Construction & Civil", "Hospitality & Tourism", "Healthcare & Clinic", "Logistics & Retail"].map((sec) => (
+                  {/* City Chips */}
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 16 }}>
+                    {["Dubai", "Riyadh", "Abu Dhabi", "Doha"].map((city) => (
                       <span
-                        key={sec}
+                        key={city}
                         style={{
-                          fontSize: 11.5,
-                          fontWeight: 600,
-                          background: "rgba(255, 255, 255, 0.08)",
-                          color: "#FFF",
+                          fontFamily: "var(--mono)",
+                          fontSize: 10.5,
+                          letterSpacing: ".08em",
+                          textTransform: "uppercase",
+                          background: "rgba(255, 183, 3, 0.12)",
+                          color: "#FFC837",
                           padding: "4px 10px",
                           borderRadius: 6,
-                          border: "1px solid rgba(255, 255, 255, 0.12)",
+                          border: "1px solid rgba(255, 183, 3, 0.22)",
+                          fontWeight: 600,
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 4,
                         }}
                       >
-                        {sec}
+                        <MapPin size={10} color="#FFB703" />
+                        {city}
                       </span>
                     ))}
                   </div>
-                </div>
 
-                {/* Perks Checklist */}
-                <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
-                  {[
-                    "100% Tax-Free Monthly Salary",
-                    "Employer-provided Accommodation & Transport",
-                    "Annual Paid Return Flight Allowance",
-                  ].map((perk) => (
-                    <div key={perk} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13.5, fontWeight: 500, color: "rgba(255, 255, 255, 0.88)" }}>
-                      <CheckCircle2 size={16} color="#FFB703" />
-                      <span>{perk}</span>
-                    </div>
-                  ))}
-                </div>
+                  <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "rgba(255, 255, 255, 0.72)", lineHeight: 1.7, marginBottom: 20 }}>
+                    Active employment drives across UAE & Saudi Arabia for skilled technicians, civil engineers, hospitality specialists, and retail workforce.
+                  </p>
 
-                {/* Card Action */}
-                <div style={{ marginTop: "auto" }}>
-                  <Link href="/contact" style={{ textDecoration: "none" }}>
-                    <button
-                      className="btn-primary"
-                      style={{
-                        width: "100%",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: 8,
-                        background: "linear-gradient(135deg, #FFB703 0%, #E09F00 100%)",
-                        color: "#0D1B2A",
-                        border: "none",
-                        fontWeight: 700,
-                        padding: "14px 20px",
-                        fontSize: 14,
-                        borderRadius: 10,
-                      }}
-                    >
-                      Explore Gulf Placement Drives <ArrowUpRight size={15} />
-                    </button>
-                  </Link>
+                  {/* Perks Checklist */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 24 }}>
+                    {[
+                      "100% Tax-Free Monthly Salary",
+                      "Employer-provided Accommodation & Transport",
+                      "Annual Paid Return Flight Allowance",
+                    ].map((perk) => (
+                      <div key={perk} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 500, color: "rgba(255, 255, 255, 0.88)" }}>
+                        <CheckCircle2 size={15} color="#FFB703" />
+                        <span>{perk}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA */}
+                  <div style={{ marginTop: "auto" }}>
+                    <Link href="/contact" style={{ textDecoration: "none" }}>
+                      <button
+                        className="btn-primary"
+                        style={{
+                          width: "100%",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: 8,
+                          background: "linear-gradient(135deg, #FFB703 0%, #E09F00 100%)",
+                          color: "#0D1B2A",
+                          border: "none",
+                          fontWeight: 700,
+                          padding: "13px 18px",
+                          fontSize: 13.5,
+                          borderRadius: 10,
+                        }}
+                      >
+                        Explore Gulf Drives <ArrowUpRight size={15} />
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </AnimateIn>
 
-            {/* ── CARD 2: GERMANY / EUROPE ── */}
+            {/* ── CARD 2: GERMANY ── */}
             <AnimateIn animation="slideUp" delay={0.2}>
               <div
                 className="hover-lift"
                 style={{
-                  background: "linear-gradient(155deg, rgba(14, 42, 77, 0.9) 0%, rgba(7, 23, 44, 0.95) 100%)",
-                  border: "1px solid rgba(0, 153, 255, 0.3)",
+                  background: "linear-gradient(155deg, rgba(14, 42, 77, 0.95) 0%, rgba(7, 23, 44, 0.98) 100%)",
+                  border: "1px solid rgba(0, 153, 255, 0.35)",
                   borderRadius: 20,
-                  padding: isMobile ? "28px 22px" : "36px 32px",
+                  overflow: "hidden",
                   display: "flex",
                   flexDirection: "column",
                   height: "100%",
-                  boxShadow: "0 20px 48px rgba(0,0,0,0.4), 0 0 20px rgba(0,153,255,0.08)",
-                  position: "relative",
-                  overflow: "hidden",
+                  boxShadow: "0 20px 48px rgba(0,0,0,0.4)",
                 }}
               >
-                {/* Visual Header Graphic */}
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+                {/* Visual Cover Picture Header */}
+                <div style={{ height: 180, position: "relative", overflow: "hidden" }}>
+                  <Image
+                    src="/images/work-abroad-germany.png"
+                    alt="German International Exchange Program — Healthcare & Nursing"
+                    fill
+                    style={{ objectFit: "cover", objectPosition: "center 20%" }}
+                    sizes="(max-width: 900px) 100vw, 50vw"
+                  />
                   <div
                     style={{
-                      background: "rgba(0, 153, 255, 0.14)",
-                      border: "1px solid rgba(0, 153, 255, 0.35)",
-                      borderRadius: 30,
-                      padding: "6px 14px",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 8,
+                      position: "absolute",
+                      inset: 0,
+                      background: "linear-gradient(to top, rgba(7, 23, 44, 1) 0%, rgba(7, 23, 44, 0.3) 100%)",
                     }}
-                  >
-                    <span style={{ fontSize: 16 }}>🇩🇪 🇪🇺</span>
-                    <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, color: "#66C2FF", letterSpacing: ".08em" }}>
-                      GERMANY & EUROPE
-                    </span>
-                  </div>
+                  />
 
-                  <span
-                    style={{
-                      fontFamily: "var(--mono)",
-                      fontSize: 10,
-                      fontWeight: 700,
-                      background: "#06A95D",
-                      color: "#FFF",
-                      padding: "4px 10px",
-                      borderRadius: 20,
-                      textTransform: "uppercase",
-                      letterSpacing: ".08em",
-                    }}
-                  >
-                    EU Blue Card Route
-                  </span>
-                </div>
-
-                {/* Card Title & Cities */}
-                <h3
-                  style={{
-                    fontFamily: "var(--serif)",
-                    fontSize: "clamp(24px, 2.6vw, 32px)",
-                    fontWeight: 700,
-                    color: "#FFFFFF",
-                    letterSpacing: "-.02em",
-                    marginBottom: 10,
-                  }}
-                >
-                  Europe — Germany Pathway
-                </h3>
-
-                {/* City Chips */}
-                <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 18 }}>
-                  {["Berlin", "Munich", "Frankfurt", "Hamburg"].map((city) => (
-                    <span
-                      key={city}
+                  {/* Flag & Tag Pill */}
+                  <div style={{ position: "absolute", top: 16, left: 16, right: 16, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <div
                       style={{
-                        fontFamily: "var(--mono)",
-                        fontSize: 11,
-                        letterSpacing: ".08em",
-                        textTransform: "uppercase",
-                        background: "rgba(0, 153, 255, 0.12)",
-                        color: "#66C2FF",
-                        padding: "4px 12px",
-                        borderRadius: 6,
-                        border: "1px solid rgba(0, 153, 255, 0.22)",
-                        fontWeight: 600,
-                        display: "inline-flex",
+                        background: "rgba(0,0,0,0.65)",
+                        backdropFilter: "blur(8px)",
+                        padding: "6px 14px",
+                        borderRadius: 20,
+                        display: "flex",
                         alignItems: "center",
-                        gap: 5,
+                        gap: 8,
+                        border: "1px solid rgba(255,255,255,0.2)",
                       }}
                     >
-                      <MapPin size={11} color="#0099FF" />
-                      {city}
+                      <span style={{ fontSize: 16 }}>🇩🇪 🇪🇺</span>
+                      <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, color: "#66C2FF", letterSpacing: ".08em" }}>
+                        GERMANY & EU
+                      </span>
+                    </div>
+
+                    <span style={{ fontFamily: "var(--mono)", fontSize: 10, fontWeight: 700, background: "#06A95D", color: "#FFF", padding: "4px 10px", borderRadius: 20, textTransform: "uppercase" }}>
+                      EU Blue Card Route
                     </span>
-                  ))}
+                  </div>
                 </div>
 
-                <p style={{ fontFamily: "var(--body)", fontSize: 14.5, color: "rgba(255, 255, 255, 0.72)", lineHeight: 1.7, marginBottom: 24 }}>
-                  German International Exchange Program — intensive German language instruction (B1/B2), official nursing qualification recognition, and direct placement into European hospitals.
-                </p>
+                {/* Card Body */}
+                <div style={{ padding: isMobile ? "24px 20px" : "28px 28px", display: "flex", flexDirection: "column", flex: 1 }}>
+                  <h3
+                    style={{
+                      fontFamily: "var(--serif)",
+                      fontSize: "clamp(24px, 2.5vw, 30px)",
+                      fontWeight: 700,
+                      color: "#FFFFFF",
+                      letterSpacing: "-.02em",
+                      marginBottom: 10,
+                    }}
+                  >
+                    Europe — Germany Pathway
+                  </h3>
 
-                {/* Key Sectors */}
-                <div
-                  style={{
-                    background: "rgba(255, 255, 255, 0.04)",
-                    borderRadius: 12,
-                    padding: "16px",
-                    border: "1px solid rgba(255, 255, 255, 0.08)",
-                    marginBottom: 24,
-                  }}
-                >
-                  <span style={{ fontFamily: "var(--mono)", fontSize: 10, fontWeight: 700, textTransform: "uppercase", color: "rgba(255, 255, 255, 0.45)", letterSpacing: ".1em", display: "block", marginBottom: 10 }}>
-                    Target Healthcare Pathways:
-                  </span>
-                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                    {["Clinical Nursing", "Geriatric Care", "Medical Tech", "Hospital Operations"].map((sec) => (
+                  {/* City Chips */}
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 16 }}>
+                    {["Berlin", "Munich", "Frankfurt", "Hamburg"].map((city) => (
                       <span
-                        key={sec}
+                        key={city}
                         style={{
-                          fontSize: 11.5,
-                          fontWeight: 600,
-                          background: "rgba(255, 255, 255, 0.08)",
-                          color: "#FFF",
+                          fontFamily: "var(--mono)",
+                          fontSize: 10.5,
+                          letterSpacing: ".08em",
+                          textTransform: "uppercase",
+                          background: "rgba(0, 153, 255, 0.12)",
+                          color: "#66C2FF",
                           padding: "4px 10px",
                           borderRadius: 6,
-                          border: "1px solid rgba(255, 255, 255, 0.12)",
+                          border: "1px solid rgba(0, 153, 255, 0.22)",
+                          fontWeight: 600,
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 4,
                         }}
                       >
-                        {sec}
+                        <MapPin size={10} color="#0099FF" />
+                        {city}
                       </span>
                     ))}
                   </div>
-                </div>
 
-                {/* Perks Checklist */}
-                <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
-                  {[
-                    "Paid German Language Academy (B1/B2 Prep)",
-                    "Official License Recognition & Bridging",
-                    "Path to Permanent European Residency",
-                  ].map((perk) => (
-                    <div key={perk} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13.5, fontWeight: 500, color: "rgba(255, 255, 255, 0.88)" }}>
-                      <CheckCircle2 size={16} color="#0099FF" />
-                      <span>{perk}</span>
-                    </div>
-                  ))}
-                </div>
+                  <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "rgba(255, 255, 255, 0.72)", lineHeight: 1.7, marginBottom: 20 }}>
+                    German International Exchange Program — intensive German language instruction (B1/B2), official nursing qualification recognition, and hospital placement.
+                  </p>
 
-                {/* Card Action */}
-                <div style={{ marginTop: "auto" }}>
-                  <Link href="/contact" style={{ textDecoration: "none" }}>
-                    <button
-                      className="btn-primary"
-                      style={{
-                        width: "100%",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: 8,
-                        background: "linear-gradient(135deg, #0099FF 0%, #0077CC 100%)",
-                        color: "#FFFFFF",
-                        border: "none",
-                        fontWeight: 700,
-                        padding: "14px 20px",
-                        fontSize: 14,
-                        borderRadius: 10,
-                      }}
-                    >
-                      Apply for German Pathway <ArrowUpRight size={15} />
-                    </button>
-                  </Link>
+                  {/* Perks Checklist */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 24 }}>
+                    {[
+                      "Paid German Language Academy (B1/B2 Prep)",
+                      "Official License Recognition & Bridging",
+                      "Path to Permanent European Residency",
+                    ].map((perk) => (
+                      <div key={perk} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 500, color: "rgba(255, 255, 255, 0.88)" }}>
+                        <CheckCircle2 size={15} color="#0099FF" />
+                        <span>{perk}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA */}
+                  <div style={{ marginTop: "auto" }}>
+                    <Link href="/contact" style={{ textDecoration: "none" }}>
+                      <button
+                        className="btn-primary"
+                        style={{
+                          width: "100%",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: 8,
+                          background: "linear-gradient(135deg, #0099FF 0%, #0077CC 100%)",
+                          color: "#FFFFFF",
+                          border: "none",
+                          fontWeight: 700,
+                          padding: "13px 18px",
+                          fontSize: 13.5,
+                          borderRadius: 10,
+                        }}
+                      >
+                        Apply for German Pathway <ArrowUpRight size={15} />
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </AnimateIn>
@@ -553,16 +550,18 @@ export default function WorkAbroadPage() {
         </div>
       </section>
 
-      {/* ── 3. German Healthcare Program Highlight Panel ── */}
+      {/* ── 3. German Healthcare Program Highlight Panel with Picture Card ── */}
       <section style={{ background: "#0D1B2A", padding: isMobile ? "64px 6%" : "96px 5%", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+        <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
-            <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: 48, alignItems: "center" }}>
-              <div style={{ flex: 1 }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.1fr 0.9fr", gap: 48, alignItems: "center" }}>
+              
+              {/* Left Column: Program Text */}
+              <div>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
                   <HeartPulse size={20} color="#FFB703" />
                   <p style={{ fontFamily: "var(--mono)", fontSize: 10.5, letterSpacing: ".15em", color: "#FFB703", textTransform: "uppercase", fontWeight: 600 }}>
-                    // Global Healthcare Mobility
+                    // Global Healthcare Pathways
                   </p>
                 </div>
                 <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(26px,3.5vw,42px)", color: "#FFFFFF", marginBottom: 20, letterSpacing: "-.03em", lineHeight: 1.15 }}>
@@ -580,42 +579,102 @@ export default function WorkAbroadPage() {
                 </div>
               </div>
 
-              {/* Right Side Program Spec Card */}
-              <div
-                style={{
-                  width: isMobile ? "100%" : 340,
-                  flexShrink: 0,
-                  background: "rgba(255,255,255,.04)",
-                  borderRadius: 16,
-                  padding: "32px 28px",
-                  border: "1px solid rgba(255,255,255,.1)",
-                  boxShadow: "0 16px 40px rgba(0,0,0,0.3)",
-                }}
-              >
-                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              {/* Right Column: Picture & Feature Spec Card */}
+              <div style={{ position: "relative" }}>
+                <div
+                  style={{
+                    position: "relative",
+                    borderRadius: 16,
+                    overflow: "hidden",
+                    height: 260,
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    marginBottom: 16,
+                    boxShadow: "0 16px 40px rgba(0,0,0,0.4)",
+                  }}
+                >
+                  <Image
+                    src="/images/work-abroad-germany.png"
+                    alt="German International Healthcare Exchange Nursing Program"
+                    fill
+                    style={{ objectFit: "cover", objectPosition: "center 30%" }}
+                    sizes="(max-width: 900px) 100vw, 40vw"
+                  />
+                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(13,27,42,0.9) 0%, transparent 60%)" }} />
+                  <div style={{ position: "absolute", bottom: 14, left: 18 }}>
+                    <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: "#66C2FF", letterSpacing: ".1em", textTransform: "uppercase", fontWeight: 700 }}>
+                      🇩🇪 German Healthcare Academy Cohort
+                    </span>
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    background: "rgba(255,255,255,.05)",
+                    borderRadius: 14,
+                    padding: "20px 22px",
+                    border: "1px solid rgba(255,255,255,.12)",
+                    display: "grid",
+                    gridTemplateColumns: "repeat(2, 1fr)",
+                    gap: 14,
+                  }}
+                >
                   {[
-                    { icon: "🇩🇪", label: "Destination", value: "Germany (EU Member)" },
-                    { icon: "🏥", label: "Sector", value: "Clinical & Geriatric Nursing" },
-                    { icon: "🗣️", label: "Language Prep", value: "German B1/B2 Certification" },
-                    { icon: "📜", label: "Licensing", value: "Official German Recognition" },
-                    { icon: "🛂", label: "Visa Route", value: "EU Blue Card / Work Visa" },
+                    { label: "Destination", val: "Germany (EU)" },
+                    { label: "Language", val: "German B1/B2" },
+                    { label: "Licensing", val: "Official Nursing Recognition" },
+                    { label: "Visa Route", val: "EU Blue Card" },
                   ].map((item) => (
-                    <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                      <div style={{ fontSize: 24, width: 38, textAlign: "center" }}>{item.icon}</div>
-                      <div>
-                        <div style={{ fontFamily: "var(--mono)", fontSize: 9.5, letterSpacing: ".12em", color: "rgba(255,255,255,.4)", textTransform: "uppercase" }}>{item.label}</div>
-                        <div style={{ fontFamily: "var(--sans)", fontSize: 13.5, fontWeight: 600, color: "rgba(255,255,255,.9)", marginTop: 2 }}>{item.value}</div>
-                      </div>
+                    <div key={item.label}>
+                      <div style={{ fontFamily: "var(--mono)", fontSize: 9.5, color: "rgba(255,255,255,0.4)", textTransform: "uppercase" }}>{item.label}</div>
+                      <div style={{ fontFamily: "var(--sans)", fontSize: 12.5, fontWeight: 700, color: "#FFF", marginTop: 2 }}>{item.val}</div>
                     </div>
                   ))}
                 </div>
               </div>
+
             </div>
           </AnimateIn>
         </div>
       </section>
 
-      {/* ── 4. 6-Step Placement Process Timeline ── */}
+      {/* ── 4. Candidate Recruitment Drives Photo Spotlight ── */}
+      <section style={{ padding: isMobile ? "64px 6%" : "88px 5%", background: "var(--bg-card)", borderBottom: "1px solid var(--border)" }}>
+        <div style={{ maxWidth: 1180, margin: "0 auto" }}>
+          <AnimateIn animation="slideUp">
+            <div style={{ textAlign: "center", marginBottom: 44 }}>
+              <p style={{ fontFamily: "var(--mono)", fontSize: 10.5, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 10, fontWeight: 600 }}>
+                // On-Ground Global Operations
+              </p>
+              <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(26px,3.8vw,42px)", color: "var(--text)", letterSpacing: "-.03em", marginBottom: 12 }}>
+                Real candidates. Real global placements.
+              </h2>
+              <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", maxWidth: 580, margin: "0 auto" }}>
+                Glimpses from VSI's international recruitment drives, language academy cohorts, and employer onboarding sessions.
+              </p>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 20 }}>
+              {[
+                { img: "/images/placements-drive.png", title: "Recruitment Drive", sub: "International employer interviews & credential verification" },
+                { img: "/images/students-campus.png", title: "German Language Academy", sub: "Intensive B1/B2 language instruction & cultural prep" },
+                { img: "/images/award-ceremony.png", title: "Flight Briefing & Felicitation", sub: "Pre-departure ceremony for placed healthcare candidates" },
+              ].map((card) => (
+                <div key={card.title} style={{ background: "var(--bg)", border: "1px solid var(--border)", borderRadius: 14, overflow: "hidden" }}>
+                  <div style={{ height: 180, position: "relative" }}>
+                    <Image src={card.img} alt={card.title} fill style={{ objectFit: "cover" }} sizes="(max-width: 900px) 100vw, 33vw" />
+                  </div>
+                  <div style={{ padding: "16px 18px" }}>
+                    <h4 style={{ fontFamily: "var(--serif)", fontSize: 16, fontWeight: 700, color: "var(--text)", margin: "0 0 4px 0" }}>{card.title}</h4>
+                    <p style={{ fontFamily: "var(--body)", fontSize: 12, color: "var(--text-muted)", margin: 0, lineHeight: 1.5 }}>{card.sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </AnimateIn>
+        </div>
+      </section>
+
+      {/* ── 5. 6-Step Placement Process Timeline ── */}
       <section style={{ padding: isMobile ? "64px 6%" : "96px 5%", background: "var(--bg)" }}>
         <div style={{ maxWidth: 880, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
@@ -687,7 +746,7 @@ export default function WorkAbroadPage() {
         </div>
       </section>
 
-      {/* ── 5. Final CTA ── */}
+      {/* ── 6. Final CTA ── */}
       <section style={{ padding: isMobile ? "64px 6%" : "80px 5%", textAlign: "center", background: "var(--bg-muted)", borderTop: "1px solid var(--border)" }}>
         <AnimateIn animation="slideUp">
           <div
