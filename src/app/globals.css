@@ -341,13 +341,30 @@ img{display:block;max-width:100%;}
 /* ── Nav Links ── */
 .nav-link {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--text-muted);
   font-family: var(--sans);
   font-weight: 600;
   font-size: 13px;
-  letter-spacing: .04em;
+  letter-spacing: .03em;
   transition: color .2s;
   cursor: pointer;
+}
+/* Leading icon: muted alongside the label, pops to accent on hover/active.
+   aria-hidden in markup, so the text label stays the accessible name. */
+.nav-ico {
+  flex-shrink: 0;
+  color: var(--text-muted);
+  opacity: .7;
+  transition: color .2s, opacity .2s, transform .2s var(--ease-spring);
+}
+.nav-link:hover .nav-ico,
+.nav-link.active .nav-ico {
+  color: var(--accent);
+  opacity: 1;
+  transform: translateY(-1px);
 }
 .nav-link::after {
   content: '';
@@ -1188,3 +1205,15 @@ textarea:focus-visible {
   .shimmer-text { animation: none !important; }
   .wa-pulse { animation: none !important; }
 }
+
+@keyframes vsiFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+

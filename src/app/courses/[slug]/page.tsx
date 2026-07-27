@@ -14,6 +14,8 @@ import Image from "next/image";
 import { getProgram, ALL_PROGRAMS, EMPLOYERS } from "@/data/content";
 import { programThumb, EMPLOYER_LOGOS, LOGO_INVERT_SET } from "@/data/assets";
 import { useLang } from "@/context/LangContext";
+import { ToolCard } from "@/components/ToolCard";
+
 
 // Image that fills its container and falls back to a soft gradient placeholder
 // when the file is missing (diploma/vocational art to be added later).
@@ -307,20 +309,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
           >
             {course.software.map((s, i) => (
               <AnimateIn key={s} animation="slideUp" delay={i * 0.04}>
-                <div
-                  style={{
-                    background: "var(--bg-card)",
-                    border: "1px solid var(--border)",
-                    borderRadius: 4,
-                    padding: "16px 14px",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 10,
-                  }}
-                >
-                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--accent)", flexShrink: 0 }} />
-                  <span style={{ fontFamily: "var(--sans)", fontWeight: 600, fontSize: 13, color: "var(--text)" }}>{s}</span>
-                </div>
+                <ToolCard toolName={s} />
               </AnimateIn>
             ))}
           </div>

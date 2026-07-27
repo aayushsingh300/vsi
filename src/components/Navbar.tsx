@@ -3,7 +3,19 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { X, Menu } from "lucide-react";
+import {
+  X,
+  Menu,
+  GraduationCap,
+  Briefcase,
+  Handshake,
+  BookOpen,
+  Building2,
+  Plane,
+  Sprout,
+  Info,
+  type LucideIcon,
+} from "lucide-react";
 import { COURSES_CERT } from "@/data/content";
 import { VSI_LOGO, VSI_LOGO_RATIO } from "@/data/assets";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
@@ -33,15 +45,15 @@ function useScrolled(threshold = 20) {
   return scrolled;
 }
 
-const NAV_LINKS = [
-  { href: "/courses", key: "navCourses" },
-  { href: "/services", key: "navServices" },
-  { href: "/placements", key: "navRecruiters" },
-  { href: "/resources", key: "navResources" },
-  { href: "/centers", key: "navInfrastructure" },
-  { href: "/work-abroad", key: "navWorkAbroad" },
-  { href: "/csr", key: "navCSR" },
-  { href: "/about", key: "navAbout" },
+const NAV_LINKS: { href: string; key: string; Icon: LucideIcon }[] = [
+  { href: "/courses", key: "navCourses", Icon: GraduationCap },
+  { href: "/services", key: "navServices", Icon: Briefcase },
+  { href: "/placements", key: "navRecruiters", Icon: Handshake },
+  { href: "/resources", key: "navResources", Icon: BookOpen },
+  { href: "/centers", key: "navInfrastructure", Icon: Building2 },
+  { href: "/work-abroad", key: "navWorkAbroad", Icon: Plane },
+  { href: "/csr", key: "navCSR", Icon: Sprout },
+  { href: "/about", key: "navAbout", Icon: Info },
 ];
 
 interface NavbarProps {
@@ -86,9 +98,12 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
           // background instead — visually near-identical, no scroll repaint.
           background: isMobile
             ? (scrolled ? "rgba(var(--bg-rgb),.98)" : "rgba(var(--bg-rgb),.96)")
-            : (scrolled ? "rgba(var(--bg-rgb),.95)" : "rgba(var(--bg-rgb),.86)"),
-          backdropFilter: isMobile ? "none" : (scrolled ? "blur(12px)" : "blur(8px)"),
-          WebkitBackdropFilter: isMobile ? "none" : (scrolled ? "blur(12px)" : "blur(8px)"),
+            : (scrolled ? "rgba(var(--bg-rgb),.80)" : "rgba(var(--bg-rgb),.66)"),
+          // Frosted glass on desktop: blur + saturate lifts the colour of
+          // whatever scrolls under it. Mobile keeps the near-solid, blur-free
+          // path (iOS Safari repaints a sticky backdrop-filter every frame).
+          backdropFilter: isMobile ? "none" : (scrolled ? "blur(18px) saturate(1.7)" : "blur(14px) saturate(1.5)"),
+          WebkitBackdropFilter: isMobile ? "none" : (scrolled ? "blur(18px) saturate(1.7)" : "blur(14px) saturate(1.5)"),
           borderBottom: scrolled ? "1px solid rgba(var(--accent-rgb),.14)" : "1px solid rgba(var(--accent-rgb),.08)",
           padding: "0 5%",
           display: "flex",
@@ -96,7 +111,12 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
           justifyContent: "space-between",
           height: scrolled ? 58 : 68,
           transition: "height .3s var(--ease-expo), background .3s ease, border-color .3s ease",
-          boxShadow: scrolled ? "0 4px 24px rgba(13,27,42,.07)" : "none",
+          // inset top line = the light-catching top edge of frosted glass.
+          boxShadow: isMobile
+            ? (scrolled ? "0 4px 24px rgba(13,27,42,.07)" : "none")
+            : (scrolled
+                ? "0 4px 24px rgba(13,27,42,.07), inset 0 1px 0 rgba(255,255,255,.45)"
+                : "inset 0 1px 0 rgba(255,255,255,.30)"),
         }}
       >
         {/* Scroll progress bar — self-contained, updates via transform only */}
@@ -118,9 +138,10 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
         </Link>
 
         {!isMobile && (
-          <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
+          <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
             {NAV_LINKS.map((n) => (
               <Link key={n.href} href={n.href} className="nav-link">
+                <n.Icon size={15} strokeWidth={2} className="nav-ico" aria-hidden="true" focusable="false" />
                 {t(n.key)}
               </Link>
             ))}
@@ -259,6 +280,9 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
                   href={n.href}
                   onClick={() => setMenuOpen(false)}
                   style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 14,
                     fontFamily: "var(--serif)",
                     fontSize: 22,
                     fontWeight: 700,
@@ -268,6 +292,7 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
                     letterSpacing: "-.01em",
                   }}
                 >
+                  <n.Icon size={20} strokeWidth={1.75} aria-hidden="true" focusable="false" style={{ color: "var(--accent)", flexShrink: 0 }} />
                   {t(n.key)}
                 </Link>
               ))}

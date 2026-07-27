@@ -23,6 +23,8 @@ import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useLang } from "@/context/LangContext";
+import { ToolCard } from "@/components/ToolCard";
+
 
 // Fills a card's image area. Falls back to a grey placeholder (with an
 // optional glyph) when the image file is missing — drop files in /public/images later.
@@ -109,11 +111,7 @@ function CategoryCard({ c }: { c: CourseCategory }) {
         <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6, flex: 1 }}>{c.desc}</p>
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap", paddingTop: 4 }}>
           {c.tools.slice(0, 5).map((tool) => (
-            <span key={tool} style={{
-              fontFamily: "var(--mono)", fontSize: 9.5, letterSpacing: ".04em",
-              background: "rgba(var(--accent-rgb),.07)", color: "var(--accent)", padding: "3px 8px", borderRadius: 3,
-              border: "1px solid rgba(var(--accent-rgb),.14)",
-            }}>{tool}</span>
+            <ToolCard key={tool} toolName={tool} compact />
           ))}
           {c.tools.length > 5 && (
             <span style={{ fontFamily: "var(--mono)", fontSize: 9.5, color: "var(--text-muted)", padding: "3px 4px" }}>+{c.tools.length - 5}</span>

@@ -9,6 +9,8 @@ import { COURSES_CERT, DATA_SCIENCE_COURSES, DESIGN_STUDIO_COURSES } from "@/dat
 import { COURSE_THUMBS } from "@/data/assets";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useLang } from "@/context/LangContext";
+import { ToolCard } from "@/components/ToolCard";
+
 
 export default function Courses() {
   const [tab, setTab] = useState(0);
@@ -302,21 +304,7 @@ export default function Courses() {
                 </p>
                 <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: "auto" }}>
                   {c.tools.slice(0, 4).map((tool) => (
-                    <span
-                      key={tool}
-                      style={{
-                        fontFamily: "var(--mono)",
-                        fontSize: 9,
-                        letterSpacing: ".06em",
-                        background: "rgba(var(--accent-rgb),.06)",
-                        border: "1px solid rgba(var(--accent-rgb),.12)",
-                        color: "var(--text-muted)",
-                        padding: "3px 8px",
-                        borderRadius: 3,
-                      }}
-                    >
-                      {tool}
-                    </span>
+                    <ToolCard key={tool} toolName={tool} compact />
                   ))}
                   {c.tools.length > 4 && (
                     <span style={{ fontFamily: "var(--mono)", fontSize: 9, color: "var(--text-muted)", padding: "3px 0" }}>
@@ -386,21 +374,7 @@ export default function Courses() {
                 </p>
                 <div style={{ display: "flex", gap: 5, flexWrap: "wrap", marginTop: "auto" }}>
                   {c.tools.slice(0, 3).map((tool) => (
-                    <span
-                      key={tool}
-                      style={{
-                        fontFamily: "var(--mono)",
-                        fontSize: 8.5,
-                        letterSpacing: ".05em",
-                        background: "rgba(var(--accent-rgb),.06)",
-                        border: "1px solid rgba(var(--accent-rgb),.12)",
-                        color: "var(--text-muted)",
-                        padding: "2px 6px",
-                        borderRadius: 2,
-                      }}
-                    >
-                      {tool}
-                    </span>
+                    <ToolCard key={tool} toolName={tool} compact />
                   ))}
                   {c.tools.length > 3 && (
                     <span style={{ fontFamily: "var(--mono)", fontSize: 8.5, color: "var(--text-muted)", padding: "2px 0" }}>
