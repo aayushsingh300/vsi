@@ -256,63 +256,68 @@ export default function Courses() {
         >
           {DATA_SCIENCE_COURSES.map((c, i) => (
             <AnimateIn key={c.slug} animation="slideUp" delay={i * 0.06}>
-              <div
-                className="course-row"
-                style={{
-                  background: "var(--bg-card)",
-                  border: "1px solid var(--border-card)",
-                  borderRadius: 10,
-                  padding: "28px 24px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 12,
-                  height: "100%",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                  <div
-                    style={{
-                      width: 48,
-                      height: 48,
-                      borderRadius: 10,
-                      background: "rgba(var(--accent-rgb),.08)",
-                      border: "1px solid rgba(var(--accent-rgb),.15)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
-                  >
-                    <Icon name={c.icon} size={20} color="var(--accent)" />
-                  </div>
-                  <div>
-                    <h3
-                      style={{
-                        fontFamily: "var(--serif)",
-                        fontWeight: 700,
-                        fontSize: 18,
-                        color: "var(--text)",
-                        letterSpacing: "-.02em",
-                      }}
-                    >
-                      {c.name}
-                    </h3>
-                  </div>
-                </div>
-                <p style={{ fontFamily: "var(--body)", fontSize: 13.5, color: "var(--text-muted)", lineHeight: 1.65 }}>
-                  {c.desc}
-                </p>
-                <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: "auto" }}>
-                  {c.tools.slice(0, 4).map((tool) => (
-                    <ToolCard key={tool} toolName={tool} compact />
-                  ))}
-                  {c.tools.length > 4 && (
-                    <span style={{ fontFamily: "var(--mono)", fontSize: 9, color: "var(--text-muted)", padding: "3px 0" }}>
-                      +{c.tools.length - 4} more
+              <Link href={`/courses/${c.slug}`} style={{ textDecoration: "none", display: "block", height: "100%" }}>
+                <div
+                  className="course-row hover-lift"
+                  style={{
+                    background: "var(--bg-card)",
+                    border: "1px solid var(--border-card)",
+                    borderRadius: 10,
+                    padding: "28px 24px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 12,
+                    height: "100%",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                      <div
+                        style={{
+                          width: 44,
+                          height: 44,
+                          borderRadius: 10,
+                          background: "rgba(var(--accent-rgb),.08)",
+                          border: "1px solid rgba(var(--accent-rgb),.15)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Icon name={c.icon} size={20} color="var(--accent)" />
+                      </div>
+                      <h3
+                        style={{
+                          fontFamily: "var(--serif)",
+                          fontWeight: 700,
+                          fontSize: 18,
+                          color: "var(--text)",
+                          letterSpacing: "-.02em",
+                        }}
+                      >
+                        {c.name}
+                      </h3>
+                    </div>
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--sans)", fontWeight: 700, fontSize: 11, letterSpacing: ".06em", textTransform: "uppercase", color: "var(--accent)" }}>
+                      View <ArrowRight size={12} className="course-arrow" />
                     </span>
-                  )}
+                  </div>
+                  <p style={{ fontFamily: "var(--body)", fontSize: 13.5, color: "var(--text-muted)", lineHeight: 1.65 }}>
+                    {c.desc}
+                  </p>
+                  <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: "auto" }}>
+                    {c.tools.slice(0, 4).map((tool) => (
+                      <ToolCard key={tool} toolName={tool} compact />
+                    ))}
+                    {c.tools.length > 4 && (
+                      <span style={{ fontFamily: "var(--mono)", fontSize: 9, color: "var(--text-muted)", padding: "3px 0" }}>
+                        +{c.tools.length - 4} more
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </div>
+              </Link>
             </AnimateIn>
           ))}
         </div>
@@ -329,59 +334,66 @@ export default function Courses() {
         >
           {DESIGN_STUDIO_COURSES.map((c, i) => (
             <AnimateIn key={c.slug} animation="scaleIn" delay={i * 0.06}>
-              <div
-                className="course-row"
-                style={{
-                  background: "var(--bg-card)",
-                  border: "1px solid var(--border-card)",
-                  borderRadius: 10,
-                  padding: "28px 22px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 12,
-                  height: "100%",
-                }}
-              >
+              <Link href={`/courses/${c.slug}`} style={{ textDecoration: "none", display: "block", height: "100%" }}>
                 <div
+                  className="course-row hover-lift"
                   style={{
-                    width: 52,
-                    height: 52,
-                    borderRadius: 12,
-                    background: "rgba(var(--accent-rgb),.08)",
-                    border: "1px solid rgba(var(--accent-rgb),.15)",
+                    background: "var(--bg-card)",
+                    border: "1px solid var(--border-card)",
+                    borderRadius: 10,
+                    padding: "28px 22px",
                     display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
+                    flexDirection: "column",
+                    gap: 12,
+                    height: "100%",
                   }}
                 >
-                  <Icon name={c.icon} size={20} color="var(--accent)" />
-                </div>
-                <h3
-                  style={{
-                    fontFamily: "var(--serif)",
-                    fontWeight: 700,
-                    fontSize: 17,
-                    color: "var(--text)",
-                    letterSpacing: "-.015em",
-                  }}
-                >
-                  {c.name}
-                </h3>
-                <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6, flex: 1 }}>
-                  {c.desc}
-                </p>
-                <div style={{ display: "flex", gap: 5, flexWrap: "wrap", marginTop: "auto" }}>
-                  {c.tools.slice(0, 3).map((tool) => (
-                    <ToolCard key={tool} toolName={tool} compact />
-                  ))}
-                  {c.tools.length > 3 && (
-                    <span style={{ fontFamily: "var(--mono)", fontSize: 8.5, color: "var(--text-muted)", padding: "2px 0" }}>
-                      +{c.tools.length - 3}
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <div
+                      style={{
+                        width: 44,
+                        height: 44,
+                        borderRadius: 12,
+                        background: "rgba(var(--accent-rgb),.08)",
+                        border: "1px solid rgba(var(--accent-rgb),.15)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                      }}
+                    >
+                      <Icon name={c.icon} size={20} color="var(--accent)" />
+                    </div>
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--sans)", fontWeight: 700, fontSize: 11, letterSpacing: ".06em", textTransform: "uppercase", color: "var(--accent)" }}>
+                      View <ArrowRight size={12} className="course-arrow" />
                     </span>
-                  )}
+                  </div>
+                  <h3
+                    style={{
+                      fontFamily: "var(--serif)",
+                      fontWeight: 700,
+                      fontSize: 17,
+                      color: "var(--text)",
+                      letterSpacing: "-.015em",
+                    }}
+                  >
+                    {c.name}
+                  </h3>
+                  <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6, flex: 1 }}>
+                    {c.desc}
+                  </p>
+                  <div style={{ display: "flex", gap: 5, flexWrap: "wrap", marginTop: "auto" }}>
+                    {c.tools.slice(0, 3).map((tool) => (
+                      <ToolCard key={tool} toolName={tool} compact />
+                    ))}
+                    {c.tools.length > 3 && (
+                      <span style={{ fontFamily: "var(--mono)", fontSize: 8.5, color: "var(--text-muted)", padding: "2px 0" }}>
+                        +{c.tools.length - 3}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </div>
+              </Link>
             </AnimateIn>
           ))}
         </div>

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import {
   X,
   Menu,
@@ -62,6 +63,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
   const [formHeight, setFormHeight] = useState(0);
@@ -146,12 +148,15 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
         {!isMobile && (
           <div style={{ display: "flex", gap: "clamp(20px, 2vw, 40px)", alignItems: "center" }}>
             <div style={{ display: "flex", gap: "clamp(12px, 1.3vw, 24px)", alignItems: "center" }}>
-              {NAV_LINKS.map((n) => (
-                <Link key={n.href} href={n.href} className="nav-link">
-                  <n.Icon size={15} strokeWidth={2} className="nav-ico" aria-hidden="true" focusable="false" />
-                  {t(n.key)}
-                </Link>
-              ))}
+              {NAV_LINKS.map((n) => {
+                const isActive = n.href === "/" ? pathname === "/" : pathname.startsWith(n.href);
+                return (
+                  <Link key={n.href} href={n.href} className={`nav-link${isActive ? " active" : ""}`}>
+                    <n.Icon size={15} strokeWidth={2} className="nav-ico" aria-hidden="true" focusable="false" />
+                    {t(n.key)}
+                  </Link>
+                );
+              })}
             </div>
 
             <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
@@ -284,28 +289,31 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
             </div>
 
             <div style={{ padding: "20px 24px", display: "flex", flexDirection: "column", gap: 4, flex: 1, overflowY: "auto" }}>
-              {NAV_LINKS.map((n) => (
-                <Link
-                  key={n.href}
-                  href={n.href}
-                  onClick={() => setMenuOpen(false)}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 14,
-                    fontFamily: "var(--serif)",
-                    fontSize: 22,
-                    fontWeight: 700,
-                    color: "var(--text)",
-                    padding: "10px 0",
-                    textDecoration: "none",
-                    letterSpacing: "-.01em",
-                  }}
-                >
-                  <n.Icon size={20} strokeWidth={1.75} aria-hidden="true" focusable="false" style={{ color: "var(--accent)", flexShrink: 0 }} />
-                  {t(n.key)}
-                </Link>
-              ))}
+              {NAV_LINKS.map((n) => {
+                const isActive = n.href === "/" ? pathname === "/" : pathname.startsWith(n.href);
+                return (
+                  <Link
+                    key={n.href}
+                    href={n.href}
+                    onClick={() => setMenuOpen(false)}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 14,
+                      fontFamily: "var(--serif)",
+                      fontSize: 22,
+                      fontWeight: 700,
+                      color: isActive ? "var(--accent)" : "var(--text)",
+                      padding: "10px 0",
+                      textDecoration: "none",
+                      letterSpacing: "-.01em",
+                    }}
+                  >
+                    <n.Icon size={20} strokeWidth={1.75} aria-hidden="true" focusable="false" style={{ color: isActive ? "var(--accent)" : "var(--text-muted)", flexShrink: 0 }} />
+                    {t(n.key)}
+                  </Link>
+                );
+              })}
 
               <div style={{ marginTop: 24, paddingTop: 20, borderTop: "1px solid var(--border)" }}>
                 <p

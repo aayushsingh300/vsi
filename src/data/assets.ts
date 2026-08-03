@@ -30,9 +30,30 @@ export const VOC_THUMBS: Record<string, string> = {
   "voc-electronics": "/images/voc-electronics.png",
 };
 
-// Resolve a thumbnail for any program slug (cert / diploma / vocational).
+export const CATEGORY_THUMBS: Record<string, string> = {
+  "data-analytics": "/images/thumb-data-analytics.png",
+  "business-analytics": "/images/thumb-business-analytics.png",
+  "ai-ml": "/images/thumb-ai-ml.png",
+  "digital-marketing": "/images/thumb-digital-marketing.png",
+  "graphics-design": "/images/thumb-graphics-design.png",
+  "multimedia": "/images/thumb-multimedia.png",
+  "animation": "/images/thumb-animation.png",
+  "interior-design": "/images/thumb-interior-design.png",
+  "photography": "/images/thumb-photography.png",
+  "fashion-design": "/images/thumb-fashion-design.png",
+  "boutique-management": "/images/thumb-boutique-management.png",
+  "dca": "/images/thumb-dca.png",
+  "tally": "/images/thumb-tally.png",
+  "adca": "/images/thumb-adca.png",
+  "programming": "/images/thumb-programming.png",
+  "web-development": "/images/thumb-web-development.png",
+  "plc-automation": "/images/thumb-plc-automation.png",
+  "scada-systems": "/images/thumb-scada-systems.png",
+};
+
+// Resolve a thumbnail for any program slug (cert / diploma / vocational / category).
 export function programThumb(slug: string): string | undefined {
-  return COURSE_THUMBS[slug] ?? DIPLOMA_THUMBS[slug] ?? VOC_THUMBS[slug];
+  return COURSE_THUMBS[slug] ?? DIPLOMA_THUMBS[slug] ?? VOC_THUMBS[slug] ?? CATEGORY_THUMBS[slug];
 }
 
 // Employer logos — local, size-optimised files in /public/logos.

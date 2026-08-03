@@ -11,12 +11,14 @@ import {
   COURSES_VOC,
   CAD_DIPLOMAS,
   COMPUTER_APP_COURSES,
-  DATA_SCIENCE_COURSES,
-  DESIGN_STUDIO_COURSES,
+  COURSES_DATA_SCIENCE,
+  COURSES_DESIGN,
+  COURSES_COMP_APP,
+  COURSES_AUTOMATION,
   AUTOMATION_COURSES,
-  COMPUTER_APPLICATION_SHORT,
   POLYTECHNIC_COLLEGES,
   ITI_COLLEGES,
+  type CourseCert,
   type CourseDip,
   type CourseCategory,
   type College,
@@ -72,8 +74,8 @@ function SectionHead({ index, title, sub, isMobile }: { index: string; title: st
   );
 }
 
-// Detailed diploma card (links to a course detail page).
-function DiplomaCard({ c, isMobile, viewLabel }: { c: CourseDip; isMobile: boolean; viewLabel: string }) {
+// Detailed diploma / certificate card (links to a course detail page).
+function DiplomaCard({ c, isMobile, viewLabel }: { c: CourseCert | CourseDip; isMobile: boolean; viewLabel: string }) {
   return (
     <Link href={`/courses/${c.slug}`} style={{ textDecoration: "none", display: "block", height: "100%" }}>
       <article className="hover-lift" style={{
@@ -161,11 +163,11 @@ export default function CoursesPage() {
 
   const cadCount = COURSES_CERT.length + CAD_DIPLOMAS.length;
   const filters = [
-    { id: "all", key: "tabAll", n: cadCount + COMPUTER_APP_COURSES.length + COMPUTER_APPLICATION_SHORT.length + DATA_SCIENCE_COURSES.length + DESIGN_STUDIO_COURSES.length + COURSES_VOC.length },
+    { id: "all", key: "tabAll", n: cadCount + COMPUTER_APP_COURSES.length + COURSES_COMP_APP.length + COURSES_DATA_SCIENCE.length + COURSES_DESIGN.length + COURSES_VOC.length },
     { id: "cad", key: "tabCAD", n: cadCount },
-    { id: "compapp", key: "tabCompApp", n: COMPUTER_APP_COURSES.length + COMPUTER_APPLICATION_SHORT.length },
-    { id: "data", key: "tabDataBA", n: DATA_SCIENCE_COURSES.length },
-    { id: "design", key: "tabDesign", n: DESIGN_STUDIO_COURSES.length },
+    { id: "compapp", key: "tabCompApp", n: COMPUTER_APP_COURSES.length + COURSES_COMP_APP.length },
+    { id: "data", key: "tabDataBA", n: COURSES_DATA_SCIENCE.length },
+    { id: "design", key: "tabDesign", n: COURSES_DESIGN.length },
     { id: "voc", key: "tabVoc", n: COURSES_VOC.length },
   ];
 
@@ -337,10 +339,10 @@ export default function CoursesPage() {
             <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
               Short-Term Computer Courses
             </p>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(5,1fr)", gap: isMobile ? 14 : 18, marginBottom: 40 }}>
-              {COMPUTER_APPLICATION_SHORT.map((c, i) => (
-                <AnimateIn key={c.slug} animation="scaleIn" delay={i * 0.04}>
-                  <CategoryCard c={c} />
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? 16 : 20, marginBottom: 40 }}>
+              {COURSES_COMP_APP.map((c, i) => (
+                <AnimateIn key={c.slug} animation="slideUp" delay={i * 0.05}>
+                  <DiplomaCard c={c} isMobile={isMobile} viewLabel={t("viewProgram")} />
                 </AnimateIn>
               ))}
             </div>
@@ -364,10 +366,10 @@ export default function CoursesPage() {
         <section style={{ padding: isMobile ? "56px 6%" : "72px 5%" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <SectionHead index="Section 03" title={t("tabDataBA")} sub="Analytics, AI/ML & digital marketing · industry tool stacks" isMobile={isMobile} />
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(4,1fr)", gap: isMobile ? 14 : 18 }}>
-              {DATA_SCIENCE_COURSES.map((c, i) => (
-                <AnimateIn key={c.slug} animation="scaleIn" delay={i * 0.04}>
-                  <CategoryCard c={c} />
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: isMobile ? 16 : 22 }}>
+              {COURSES_DATA_SCIENCE.map((c, i) => (
+                <AnimateIn key={c.slug} animation="slideUp" delay={i * 0.05}>
+                  <DiplomaCard c={c} isMobile={isMobile} viewLabel={t("viewProgram")} />
                 </AnimateIn>
               ))}
             </div>
@@ -380,10 +382,10 @@ export default function CoursesPage() {
         <section className="dot-bg" style={{ padding: isMobile ? "56px 6%" : "72px 5%", background: filter === "all" ? "var(--bg-muted)" : "transparent" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <SectionHead index="Section 04" title={t("tabDesign")} sub="Graphics, multimedia, animation, interior & fashion design" isMobile={isMobile} />
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(3,1fr)", gap: isMobile ? 14 : 18 }}>
-              {DESIGN_STUDIO_COURSES.map((c, i) => (
-                <AnimateIn key={c.slug} animation="scaleIn" delay={i * 0.04}>
-                  <CategoryCard c={c} />
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? 16 : 20 }}>
+              {COURSES_DESIGN.map((c, i) => (
+                <AnimateIn key={c.slug} animation="slideUp" delay={i * 0.05}>
+                  <DiplomaCard c={c} isMobile={isMobile} viewLabel={t("viewProgram")} />
                 </AnimateIn>
               ))}
             </div>
