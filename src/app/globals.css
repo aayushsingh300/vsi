@@ -496,14 +496,17 @@ img{display:block;max-width:100%;}
 /* ── WhatsApp Pulse ── */
 .wa-pulse { animation: waPulse 2.6s ease-in-out infinite; }
 
-/* ── Hover Lift ── */
+/* ── Hover Lift ──
+   A short, damped rise reads as physical. Larger travel plus a spring
+   overshoot is what makes a card feel like a template rather than a surface. */
 .hover-lift {
-  transition: transform .32s var(--ease-spring), box-shadow .32s ease, border-color .28s ease;
+  transition: transform .3s var(--ease-expo), box-shadow .3s ease, border-color .28s ease;
   cursor: pointer;
 }
 .hover-lift:hover {
-  transform: translateY(-7px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
 }
 
 /* ── Course Row ── */
@@ -523,77 +526,45 @@ img{display:block;max-width:100%;}
   transition: transform .22s var(--ease-spring);
 }
 
-/* ── Employer logos (grid tiles + ticker) ── */
+/* ── Employer logos (grid tiles + ticker) ──
+   Brand logos render in their own colours at rest — no grayscale-until-hover.
+   Hover only adds a small lift so the tile still feels interactive. */
 .employer-tile img,
 .logo-mono {
-  filter: grayscale(1);
-  opacity: .55;
-  transition: filter .25s ease, opacity .25s ease;
+  filter: none;
+  opacity: 1;
+  transition: transform .25s var(--ease-spring);
 }
 .employer-tile:hover img,
 .logo-mono:hover {
-  filter: grayscale(0);
-  opacity: 1;
+  transform: scale(1.04);
 }
 /* White-fill logos (e.g. Modenik SVG) — invert so they're visible on parchment */
 .employer-tile.logo-invert img,
 .logo-mono.logo-invert {
-  filter: grayscale(1) invert(1);
-  opacity: .55;
-}
-.employer-tile.logo-invert:hover img,
-.logo-mono.logo-invert:hover {
   filter: invert(1);
-  opacity: 1;
 }
 @media (prefers-color-scheme: dark) {
-  /* Dark wordmarks would disappear on charcoal — show them as light
-     monochrome silhouettes, then reveal full colour on hover. */
+  /* Colour logos stay colour on dark surfaces. Dark wordmarks would vanish on
+     charcoal, so each logo sits on a light plate that preserves its palette. */
   :root:not([data-theme="light"]) .employer-tile img,
   :root:not([data-theme="light"]) .logo-mono {
-    filter: grayscale(1) brightness(0) invert(1);
-    opacity: .72;
-  }
-  :root:not([data-theme="light"]) .employer-tile:hover img,
-  :root:not([data-theme="light"]) .logo-mono:hover {
     filter: none;
     opacity: 1;
   }
-  /* White-fill logos on dark — already white so just grayscale */
+  :root:not([data-theme="light"]) .employer-tile,
+  :root:not([data-theme="light"]) .logo-mono {
+    background: rgba(248,247,244,.92);
+    border-radius: var(--r-sm);
+  }
+  :root:not([data-theme="light"]) .logo-mono {
+    padding: 6px 10px;
+  }
+  /* White-fill logos read correctly against the light plate once inverted */
   :root:not([data-theme="light"]) .employer-tile.logo-invert img,
   :root:not([data-theme="light"]) .logo-mono.logo-invert {
-    filter: grayscale(1);
-    opacity: .72;
+    filter: invert(1);
   }
-  :root:not([data-theme="light"]) .employer-tile.logo-invert:hover img,
-  :root:not([data-theme="light"]) .logo-mono.logo-invert:hover {
-    filter: none;
-    opacity: 1;
-  }
-}
-
-/* ── Card Glow Effect ── */
-.card-glow {
-  position: relative;
-  overflow: hidden;
-  transition: transform .32s var(--ease-spring), box-shadow .32s ease;
-}
-.card-glow::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: linear-gradient(135deg, var(--accent), var(--accent-orange), transparent);
-  opacity: 0;
-  transition: opacity .3s ease;
-  z-index: -1;
-}
-.card-glow:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-glow);
-}
-.card-glow:hover::before {
-  opacity: .6;
 }
 
 /* ── Stat Card ── */
@@ -638,22 +609,6 @@ img{display:block;max-width:100%;}
 }
 .award-row:hover::before {
   transform: scaleY(1);
-}
-
-/* ── Shimmer Text ── */
-.shimmer-text {
-  background: linear-gradient(
-    90deg,
-    var(--accent) 0%,
-    var(--accent-orange) 30%,
-    var(--accent) 60%,
-    var(--accent-orange) 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 3.5s linear infinite;
 }
 
 /* ── Ticker ── */
@@ -992,27 +947,33 @@ textarea:focus-visible {
   transition: box-shadow .28s ease, transform .28s var(--ease-spring);
 }
 .card-elevated:hover {
-  box-shadow: var(--shadow-glow);
-  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+  transform: translateY(-3px);
 }
 
-/* ── Icon Box ── */
+/* ── Icon Box ──
+   A quiet tinted plate. It frames the icon without competing with the
+   heading beneath it, so the card's reading order stays title-first. */
 .icon-box {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--r-md);
-  background: rgba(0,153,255,.08);
-  border: 1px solid rgba(0,153,255,.16);
+  background: rgba(var(--accent-rgb),.07);
+  border: 1px solid rgba(var(--accent-rgb),.14);
+  color: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: background .22s ease, box-shadow .22s ease, border-color .22s ease;
+  transition: background .22s ease, border-color .22s ease;
 }
-.icon-box:hover, .card-elevated:hover .icon-box {
-  background: rgba(0,153,255,.14);
-  border-color: rgba(255,123,0,.24);
-  box-shadow: 0 0 12px var(--accent-glow);
+.icon-box:hover,
+.card-elevated:hover .icon-box,
+.hover-lift:hover .icon-box,
+.course-row:hover .icon-box {
+  background: rgba(var(--accent-rgb),.12);
+  border-color: rgba(var(--accent-rgb),.26);
 }
 
 /* ── Timeline ── */
@@ -1150,14 +1111,6 @@ textarea:focus-visible {
   contain: layout;
 }
 
-/* ── Gradient text ── */
-.grad-text {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-orange) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 /* ── Inner hero (legacy compat) ── */
 .inner-hero {
   padding: clamp(56px, 9vw, 96px) 6%;
@@ -1202,7 +1155,6 @@ textarea:focus-visible {
   }
   .ticker-inner { animation-duration: 120s !important; }
   .ambient-orb { animation: none !important; }
-  .shimmer-text { animation: none !important; }
   .wa-pulse { animation: none !important; }
 }
 

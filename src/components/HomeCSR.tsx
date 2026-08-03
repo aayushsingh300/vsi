@@ -23,7 +23,7 @@ export default function HomeCSR() {
             <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", borderRadius: 999, background: "rgba(var(--accent-rgb),.1)", border: "1px solid rgba(var(--accent-rgb),.2)", marginBottom: 18 }}>
               <ShieldCheck size={14} color="var(--accent)" />
               <span style={{ fontFamily: "var(--mono)", fontSize: 10.5, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 600 }}>
-                CSR · Section 135 Compliant
+                CSR · Venture Sewa Foundation
               </span>
             </div>
 
@@ -33,7 +33,7 @@ export default function HomeCSR() {
             </h2>
 
             <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", lineHeight: 1.75, maxWidth: 560, marginBottom: 28 }}>
-              Companies partner with VSI to meet their Section 135 CSR obligations through audited, high-impact skill development — training rural youth, women and underserved talent for real jobs. We handle delivery, documentation and compliance end-to-end.
+              Companies partner with Venture Sewa Foundation — the body under which we carry out all CSR activities — to meet their Companies Act, 2013 Section 8 obligations through audited, high-impact skill development. We handle delivery, documentation and compliance end-to-end.
             </p>
 
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>

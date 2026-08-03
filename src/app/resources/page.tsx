@@ -6,6 +6,7 @@ import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
+import Icon from "@/components/Icon";
 import { NEWS, AWARDS, RESOURCE_TABS } from "@/data/content";
 import { useLang } from "@/context/LangContext";
 import useIsMobile from "@/hooks/useIsMobile";
@@ -206,7 +207,7 @@ export default function ResourcesPage() {
                 onClick={() => setActiveTab(tab.key)}
                 className={`segment-btn${activeTab === tab.key ? " active" : ""}`}
               >
-                <span style={{ marginRight: 6 }}>{tab.icon}</span> {tab.label}
+                <Icon name={tab.icon} size={14} /> {tab.label}
               </button>
             ))}
           </div>

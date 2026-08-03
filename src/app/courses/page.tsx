@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AnimateIn from "@/components/AnimateIn";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import {
   COURSES_CERT,
@@ -14,8 +14,12 @@ import {
   DATA_SCIENCE_COURSES,
   DESIGN_STUDIO_COURSES,
   AUTOMATION_COURSES,
+  COMPUTER_APPLICATION_SHORT,
+  POLYTECHNIC_COLLEGES,
+  ITI_COLLEGES,
   type CourseDip,
   type CourseCategory,
+  type College,
 } from "@/data/content";
 import { COURSE_THUMBS, programThumb } from "@/data/assets";
 import Navbar from "@/components/Navbar";
@@ -24,6 +28,7 @@ import FloatingWA from "@/components/FloatingWA";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useLang } from "@/context/LangContext";
 import { ToolCard } from "@/components/ToolCard";
+import Icon from "@/components/Icon";
 
 
 // Fills a card's image area. Falls back to a grey placeholder (with an
@@ -42,7 +47,7 @@ function ProgramThumb({ slug, alt, glyph }: { slug: string; alt: string; glyph?:
         justifyContent: "center",
       }}
     >
-      {glyph && <span style={{ fontSize: 34, opacity: 0.5 }}>{glyph}</span>}
+      {glyph && <Icon name={glyph} size={30} color="var(--text-faint)" />}
       {src && !errored && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
@@ -76,7 +81,7 @@ function DiplomaCard({ c, isMobile, viewLabel }: { c: CourseDip; isMobile: boole
         overflow: "hidden", display: "flex", flexDirection: "column", height: "100%",
       }}>
         <div style={{ position: "relative", aspectRatio: "16/9" }}>
-          <ProgramThumb slug={c.slug} alt={c.name} glyph="🎓" />
+          <ProgramThumb slug={c.slug} alt={c.name} glyph="education" />
           <span style={{ position: "absolute", top: 12, left: 12, background: "var(--accent)", color: "var(--white)", fontFamily: "var(--sans)", fontWeight: 700, fontSize: 9.5, letterSpacing: ".12em", padding: "4px 9px", borderRadius: 2, textTransform: "uppercase" }}>{c.tag}</span>
         </div>
         <div style={{ padding: isMobile ? "18px 18px 20px" : "20px 20px 22px", display: "flex", flexDirection: "column", flex: 1 }}>
@@ -106,7 +111,7 @@ function CategoryCard({ c }: { c: CourseCategory }) {
         background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 8,
         padding: "24px 22px", display: "flex", flexDirection: "column", gap: 12, height: "100%",
       }}>
-        <div style={{ fontSize: 30 }}>{c.icon}</div>
+        <div className="icon-box" style={{ marginBottom: 2 }}><Icon name={c.icon} size={20} color="var(--accent)" /></div>
         <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 19, color: "var(--text)", letterSpacing: "-.02em" }}>{c.name}</h3>
         <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6, flex: 1 }}>{c.desc}</p>
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap", paddingTop: 4 }}>
@@ -122,6 +127,32 @@ function CategoryCard({ c }: { c: CourseCategory }) {
   );
 }
 
+// Campus card for the Polytechnic / ITI directory.
+function CollegeCard({ c }: { c: College }) {
+  return (
+    <article style={{
+      background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 8,
+      padding: "22px 20px", display: "flex", flexDirection: "column", gap: 8, height: "100%",
+    }}>
+      <span style={{
+        fontFamily: "var(--mono)", fontSize: 9, letterSpacing: ".14em", textTransform: "uppercase",
+        color: "var(--accent)", fontWeight: 500,
+      }}>{c.type}</span>
+      <h4 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 17, color: "var(--text)", letterSpacing: "-.015em", lineHeight: 1.3 }}>
+        {c.name}
+      </h4>
+      {c.aka && (
+        <p style={{ fontFamily: "var(--body)", fontSize: 12, color: "var(--text-muted)", fontStyle: "italic", lineHeight: 1.5 }}>
+          Also referred to as {c.aka}
+        </p>
+      )}
+      <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--mono)", fontSize: 10.5, color: "var(--text-muted)", letterSpacing: ".06em", marginTop: "auto", paddingTop: 6 }}>
+        <MapPin size={11} strokeWidth={1.8} /> {c.district} district, {c.state}
+      </span>
+    </article>
+  );
+}
+
 export default function CoursesPage() {
   const [formOpen, setFormOpen] = useState(false);
   const [filter, setFilter] = useState("all");
@@ -130,9 +161,9 @@ export default function CoursesPage() {
 
   const cadCount = COURSES_CERT.length + CAD_DIPLOMAS.length;
   const filters = [
-    { id: "all", key: "tabAll", n: cadCount + COMPUTER_APP_COURSES.length + DATA_SCIENCE_COURSES.length + DESIGN_STUDIO_COURSES.length + COURSES_VOC.length },
+    { id: "all", key: "tabAll", n: cadCount + COMPUTER_APP_COURSES.length + COMPUTER_APPLICATION_SHORT.length + DATA_SCIENCE_COURSES.length + DESIGN_STUDIO_COURSES.length + COURSES_VOC.length },
     { id: "cad", key: "tabCAD", n: cadCount },
-    { id: "compapp", key: "tabCompApp", n: COMPUTER_APP_COURSES.length },
+    { id: "compapp", key: "tabCompApp", n: COMPUTER_APP_COURSES.length + COMPUTER_APPLICATION_SHORT.length },
     { id: "data", key: "tabDataBA", n: DATA_SCIENCE_COURSES.length },
     { id: "design", key: "tabDesign", n: DESIGN_STUDIO_COURSES.length },
     { id: "voc", key: "tabVoc", n: COURSES_VOC.length },
@@ -238,14 +269,14 @@ export default function CoursesPage() {
                   fontFamily: "var(--sans)", fontSize: 12, fontWeight: 600, color: "var(--text)",
                   background: "var(--bg-card)", border: "1px solid var(--border-card)", padding: "6px 12px", borderRadius: 6,
                 }}>
-                  <span>{a.icon}</span> {a.name}
+                  <Icon name={a.icon} size={14} color="var(--accent)" /> {a.name}
                 </span>
               ))}
             </div>
 
             {/* CAD-based diplomas */}
             <div style={{ marginTop: 40 }}>
-              <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 18 }}>AICTE Polytechnic Diplomas</p>
+              <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 18 }}>Polytechnic / ITI Diplomas</p>
               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? 16 : 20 }}>
                 {CAD_DIPLOMAS.map((c, i) => (
                   <AnimateIn key={c.slug} animation="slideUp" delay={i * 0.05}>
@@ -258,11 +289,65 @@ export default function CoursesPage() {
         </section>
       )}
 
+      {/* Polytechnic / ITI campuses — dedicated directory */}
+      {show("cad") && (
+        <section style={{ padding: isMobile ? "56px 6%" : "72px 5%", background: "var(--bg-muted)", borderTop: "1px solid var(--border)" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <AnimateIn animation="slideUp">
+              <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 10 }}>Polytechnic / ITI</p>
+              <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? "clamp(22px,6.5vw,30px)" : "clamp(24px,3vw,40px)", color: "var(--text)" }}>
+                Our campuses.
+              </h2>
+              <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "var(--text-muted)", marginTop: 6, marginBottom: 32, maxWidth: 640, lineHeight: 1.7 }}>
+                We operate three Government Polytechnic colleges in Uttar Pradesh and two ITI colleges in Jharkhand.
+              </p>
+            </AnimateIn>
+
+            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
+              Government Polytechnic Colleges · Uttar Pradesh
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? 14 : 18, marginBottom: 36 }}>
+              {POLYTECHNIC_COLLEGES.map((c, i) => (
+                <AnimateIn key={c.name} animation="slideUp" delay={i * 0.05}>
+                  <CollegeCard c={c} />
+                </AnimateIn>
+              ))}
+            </div>
+
+            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
+              ITI Colleges · Jharkhand
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? 14 : 18 }}>
+              {ITI_COLLEGES.map((c, i) => (
+                <AnimateIn key={c.name} animation="slideUp" delay={i * 0.05}>
+                  <CollegeCard c={c} />
+                </AnimateIn>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Computer Application */}
       {show("compapp") && (
         <section className="dot-bg" style={{ padding: isMobile ? "56px 6%" : "72px 5%", background: filter === "all" ? "var(--bg-muted)" : "transparent" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <SectionHead index="Section 02" title={t("tabCompApp")} sub="Software, IT & computing diplomas · 3-year AICTE-recognized" isMobile={isMobile} />
+            <SectionHead index="Section 02" title={t("tabCompApp")} sub="Short-term computer courses & 3-year AICTE-recognized diplomas" isMobile={isMobile} />
+
+            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
+              Short-Term Computer Courses
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(5,1fr)", gap: isMobile ? 14 : 18, marginBottom: 40 }}>
+              {COMPUTER_APPLICATION_SHORT.map((c, i) => (
+                <AnimateIn key={c.slug} animation="scaleIn" delay={i * 0.04}>
+                  <CategoryCard c={c} />
+                </AnimateIn>
+              ))}
+            </div>
+
+            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
+              Polytechnic Diplomas
+            </p>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? 16 : 20 }}>
               {COMPUTER_APP_COURSES.map((c, i) => (
                 <AnimateIn key={c.slug} animation="slideUp" delay={i * 0.05}>

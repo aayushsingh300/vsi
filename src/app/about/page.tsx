@@ -6,9 +6,97 @@ import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
-import { MILESTONES, FACULTY, STATS, CONTACT_CHANNELS, ACCREDITATIONS } from "@/data/content";
+import { MILESTONES, LEADERSHIP, FACULTY, STATS, CONTACT_CHANNELS, ACCREDITATIONS } from "@/data/content";
 import { useInView, useCountUp } from "@/hooks/useAnimations";
 import { useLang } from "@/context/LangContext";
+import Icon from "@/components/Icon";
+
+type Person = { name: string; role: string; cred: string; accent: string };
+
+function PersonCard({ p }: { p: Person }) {
+  return (
+    <div
+      style={{
+        background: "rgba(255,255,255,.04)",
+        border: "1px solid rgba(255,255,255,.07)",
+        borderRadius: "var(--r-lg)",
+        padding: "var(--sp-7) var(--sp-6)",
+        height: "100%",
+        transition: "background .24s ease, border-color .24s ease, transform .28s var(--ease-spring)",
+        cursor: "default",
+      }}
+      onMouseEnter={(e) => {
+        const el = e.currentTarget as HTMLDivElement;
+        el.style.background = "rgba(255,255,255,.07)";
+        el.style.borderColor = "rgba(var(--accent-rgb),.25)";
+        el.style.transform = "translateY(-4px)";
+      }}
+      onMouseLeave={(e) => {
+        const el = e.currentTarget as HTMLDivElement;
+        el.style.background = "rgba(255,255,255,.04)";
+        el.style.borderColor = "rgba(255,255,255,.07)";
+        el.style.transform = "translateY(0)";
+      }}
+    >
+      <div
+        style={{
+          width: 52,
+          height: 52,
+          borderRadius: "50%",
+          background: `linear-gradient(135deg, ${p.accent} 0%, var(--accent) 100%)`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontFamily: "var(--serif)",
+          fontWeight: 700,
+          fontSize: 18,
+          color: "var(--text-inv)",
+          marginBottom: "var(--sp-4)",
+          boxShadow: "0 4px 16px rgba(0,0,0,.25)",
+        }}
+      >
+        {p.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+      </div>
+
+      <h3
+        style={{
+          fontFamily: "var(--serif)",
+          fontWeight: 700,
+          fontSize: "var(--text-lg)",
+          color: "var(--text-inv)",
+          marginBottom: "var(--sp-1)",
+          letterSpacing: "-.02em",
+        }}
+      >
+        {p.name}
+      </h3>
+      <p
+        style={{
+          fontFamily: "var(--sans)",
+          fontWeight: 600,
+          fontSize: "var(--text-xs)",
+          letterSpacing: ".08em",
+          color: "rgba(var(--accent-rgb),.7)",
+          textTransform: "uppercase",
+          marginBottom: "var(--sp-3)",
+        }}
+      >
+        {p.role}
+      </p>
+      <p
+        style={{
+          fontFamily: "var(--body)",
+          fontWeight: 300,
+          fontSize: "var(--text-sm)",
+          color: "rgba(248,247,244,.35)",
+          lineHeight: "var(--lh-normal)",
+        }}
+      >
+        {p.cred}
+      </p>
+    </div>
+  );
+}
 
 function StatBox({ val, sfx, lbl, go }: { val: number; sfx: string; lbl: string; go: boolean }) {
   const count = useCountUp(val, val > 1000 ? 2200 : 1600, go);
@@ -357,6 +445,58 @@ export default function AboutPage() {
             </h2>
           </AnimateIn>
 
+          {/* Leadership */}
+          <AnimateIn animation="slideUp">
+            <p
+              style={{
+                fontFamily: "var(--sans)",
+                fontWeight: 700,
+                fontSize: "var(--text-xs)",
+                letterSpacing: ".18em",
+                textTransform: "uppercase",
+                color: "rgba(var(--accent-rgb),.75)",
+                paddingBottom: "var(--sp-3)",
+                marginBottom: "var(--sp-6)",
+                borderBottom: "1px solid rgba(255,255,255,.08)",
+              }}
+            >
+              Leadership
+            </p>
+          </AnimateIn>
+          <div
+            data-stack="1"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4,1fr)",
+              gap: "var(--sp-4)",
+              marginBottom: "var(--sp-16)",
+            }}
+          >
+            {LEADERSHIP.map((p, i) => (
+              <AnimateIn key={p.name} animation="scaleIn" delay={i * 0.07}>
+                <PersonCard p={p} />
+              </AnimateIn>
+            ))}
+          </div>
+
+          {/* Faculty */}
+          <AnimateIn animation="slideUp">
+            <p
+              style={{
+                fontFamily: "var(--sans)",
+                fontWeight: 700,
+                fontSize: "var(--text-xs)",
+                letterSpacing: ".18em",
+                textTransform: "uppercase",
+                color: "rgba(var(--accent-rgb),.75)",
+                paddingBottom: "var(--sp-3)",
+                marginBottom: "var(--sp-6)",
+                borderBottom: "1px solid rgba(255,255,255,.08)",
+              }}
+            >
+              Faculty
+            </p>
+          </AnimateIn>
           <div
             data-stack="1"
             style={{
@@ -366,87 +506,8 @@ export default function AboutPage() {
             }}
           >
             {FACULTY.map((f, i) => (
-              <AnimateIn key={i} animation="scaleIn" delay={i * 0.07}>
-                <div
-                  style={{
-                    background: "rgba(255,255,255,.04)",
-                    border: "1px solid rgba(255,255,255,.07)",
-                    borderRadius: "var(--r-lg)",
-                    padding: "var(--sp-7) var(--sp-6)",
-                    transition: "background .24s ease, border-color .24s ease, transform .28s var(--ease-spring)",
-                    cursor: "default",
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLDivElement;
-                    el.style.background = "rgba(255,255,255,.07)";
-                    el.style.borderColor = "rgba(var(--accent-rgb),.25)";
-                    el.style.transform = "translateY(-4px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLDivElement;
-                    el.style.background = "rgba(255,255,255,.04)";
-                    el.style.borderColor = "rgba(255,255,255,.07)";
-                    el.style.transform = "translateY(0)";
-                  }}
-                >
-                  {/* Avatar */}
-                  <div
-                    style={{
-                      width: 52,
-                      height: 52,
-                      borderRadius: "50%",
-                      background: `linear-gradient(135deg, ${f.accent} 0%, var(--accent) 100%)`,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontFamily: "var(--serif)",
-                      fontWeight: 700,
-                      fontSize: 18,
-                      color: "var(--text-inv)",
-                      marginBottom: "var(--sp-4)",
-                      boxShadow: "0 4px 16px rgba(0,0,0,.25)",
-                    }}
-                  >
-                    {f.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
-                  </div>
-
-                  <h3
-                    style={{
-                      fontFamily: "var(--serif)",
-                      fontWeight: 700,
-                      fontSize: "var(--text-lg)",
-                      color: "var(--text-inv)",
-                      marginBottom: "var(--sp-1)",
-                      letterSpacing: "-.02em",
-                    }}
-                  >
-                    {f.name}
-                  </h3>
-                  <p
-                    style={{
-                      fontFamily: "var(--sans)",
-                      fontWeight: 600,
-                      fontSize: "var(--text-xs)",
-                      letterSpacing: ".08em",
-                      color: "rgba(var(--accent-rgb),.7)",
-                      textTransform: "uppercase",
-                      marginBottom: "var(--sp-3)",
-                    }}
-                  >
-                    {f.role}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "var(--body)",
-                      fontWeight: 300,
-                      fontSize: "var(--text-sm)",
-                      color: "rgba(248,247,244,.35)",
-                      lineHeight: "var(--lh-normal)",
-                    }}
-                  >
-                    {f.cred}
-                  </p>
-                </div>
+              <AnimateIn key={f.name} animation="scaleIn" delay={i * 0.07}>
+                <PersonCard p={f} />
               </AnimateIn>
             ))}
           </div>
@@ -467,7 +528,7 @@ export default function AboutPage() {
                   background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 10,
                   padding: "28px 24px", display: "flex", flexDirection: "column", gap: 14, height: "100%",
                 }}>
-                  <div style={{ fontSize: 28 }}>{ch.icon}</div>
+                  <div className="icon-box"><Icon name={ch.icon} size={19} color="var(--accent)" /></div>
                   <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 17, color: "var(--text)", letterSpacing: "-.015em" }}>{ch.dept}</h3>
                   <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                     <a href={`tel:${ch.phone}`} style={{ fontFamily: "var(--mono)", fontSize: 12, color: "var(--accent)", textDecoration: "none" }}>{ch.phone}</a>

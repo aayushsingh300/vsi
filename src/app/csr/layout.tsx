@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
-const title = "CSR & Social Impact";
+const title = "CSR — Venture Sewa Foundation";
 const description =
-  "Venture Skill India's CSR initiatives — free and subsidized skill-training camps bringing employable skills to underserved communities across Jharkhand.";
+  "Venture Sewa Foundation — the body under which Venture Skill India carries out all CSR activities. Free and subsidized skill-training camps bringing employable skills to underserved communities across Jharkhand.";
 
 export const metadata: Metadata = {
-  title: "CSR & Social Impact",
+  title: "CSR — Venture Sewa Foundation",
   description,
   alternates: { canonical: "/csr" },
   openGraph: { title, description, url: "/csr" },

@@ -7,7 +7,8 @@ import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
-import { INFRA_TABS, TRAINING_INSTITUTIONS, SMART_CITY_BLOCKS, CENTERS } from "@/data/content";
+import Link from "next/link";
+import { INFRA_TABS, TRAINING_INSTITUTIONS, SMART_CITY_BLOCKS, CENTERS, POLYTECHNIC_COLLEGES, ITI_COLLEGES } from "@/data/content";
 import { useLang } from "@/context/LangContext";
 import useIsMobile from "@/hooks/useIsMobile";
 
@@ -15,7 +16,7 @@ const BLOCK_ICONS = [Building, GraduationCap, Landmark, Home];
 
 export default function CentersPage() {
   const [formOpen, setFormOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("central");
+  const [activeTab, setActiveTab] = useState("institution");
   const { t } = useLang();
   const isMobile = useIsMobile(900);
 
@@ -92,11 +93,48 @@ export default function CentersPage() {
                   )}
                   {tab.key === "central" && (
                     <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 20 }}>
-                      <span style={{
-                        fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".08em", textTransform: "uppercase",
-                        background: "rgba(var(--gold-rgb),.1)", color: "var(--accent-gold)", padding: "6px 12px", borderRadius: 4,
-                        border: "1px solid rgba(var(--gold-rgb),.18)", fontWeight: 500,
-                      }}>DDU-GKY Programs</span>
+                      {["DDU-GKY Programs", "DDU-KK Mega Skill Centres"].map((item) => (
+                        <span key={item} style={{
+                          fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".08em", textTransform: "uppercase",
+                          background: "rgba(var(--gold-rgb),.1)", color: "var(--accent-gold)", padding: "6px 12px", borderRadius: 4,
+                          border: "1px solid rgba(var(--gold-rgb),.18)", fontWeight: 500,
+                        }}>{item}</span>
+                      ))}
+                    </div>
+                  )}
+                  {tab.key === "institution" && (
+                    <div style={{ marginTop: 20, display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: 12 }}>
+                      {[
+                        { name: "Hi-Tech Academy", desc: "Advanced technical skilling academy." },
+                        { name: "CAD Centres", desc: "Architecture, civil, mechanical, electrical and GIS CAD labs." },
+                        { name: "VIFT — Venture Institute of Fashion Technology", desc: "All fashion and interior programmes." },
+                        { name: "PPP-Mode Polytechnic Colleges", desc: `${POLYTECHNIC_COLLEGES.length} Government Polytechnics in Uttar Pradesh.` },
+                        { name: "ITI Institutions", desc: `${ITI_COLLEGES.length} Industrial Training Institutes in Jharkhand.` },
+                      ].map((item) => (
+                        <Link
+                          key={item.name}
+                          href="/services"
+                          style={{
+                            textDecoration: "none",
+                            background: "var(--bg)", border: "1px solid var(--border)", borderRadius: 8,
+                            padding: "16px 18px", display: "flex", flexDirection: "column", gap: 4,
+                            transition: "border-color .2s ease, transform .2s ease",
+                          }}
+                          onMouseEnter={(e) => {
+                            const el = e.currentTarget as HTMLAnchorElement;
+                            el.style.borderColor = "rgba(var(--accent-rgb),.4)";
+                            el.style.transform = "translateY(-2px)";
+                          }}
+                          onMouseLeave={(e) => {
+                            const el = e.currentTarget as HTMLAnchorElement;
+                            el.style.borderColor = "var(--border)";
+                            el.style.transform = "translateY(0)";
+                          }}
+                        >
+                          <span style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 15, color: "var(--text)", letterSpacing: "-.01em" }}>{item.name}</span>
+                          <span style={{ fontFamily: "var(--body)", fontSize: 12.5, color: "var(--text-muted)", lineHeight: 1.55 }}>{item.desc}</span>
+                        </Link>
+                      ))}
                     </div>
                   )}
                 </div>
@@ -130,7 +168,7 @@ export default function CentersPage() {
                     {inst.count && <span style={{ fontFamily: "var(--mono)", fontSize: 12, color: "var(--accent)", marginLeft: 8 }}>×{inst.count}</span>}
                   </h3>
                   <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>{inst.desc}</p>
-                  <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text-muted)", letterSpacing: ".08em" }}>📍 {inst.state}</span>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--mono)", fontSize: 10, color: "var(--text-muted)", letterSpacing: ".08em" }}><MapPin size={11} strokeWidth={1.8} /> {inst.state}</span>
                 </div>
               </AnimateIn>
             ))}
@@ -148,8 +186,34 @@ export default function CentersPage() {
             <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(24px,3.5vw,44px)", color: "var(--text-inv)", marginBottom: 14, letterSpacing: "-.03em" }}>
               Ranchi Smart City (Dhurwa)
             </h2>
-            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "rgba(248,247,244,.45)", lineHeight: 1.75, maxWidth: 640, marginBottom: 48 }}>
+            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "rgba(248,247,244,.45)", lineHeight: 1.75, maxWidth: 640, marginBottom: 40 }}>
               A high-tech hub spanning 4 distinct operational blocks — from executive offices and F&B zones to smart classrooms and residential housing.
+            </p>
+          </AnimateIn>
+
+          {/* Campus walkthrough video */}
+          <AnimateIn animation="scaleIn">
+            <div style={{
+              position: "relative", borderRadius: 12, overflow: "hidden", marginBottom: 48,
+              border: "1px solid rgba(255,255,255,.1)", background: "rgba(255,255,255,.03)",
+              aspectRatio: "16/9",
+            }}>
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                poster="/images/hero-cad-lab.png"
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              >
+                <source src="/videos/smart-city-dhurwa-walkthrough.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p style={{
+              fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase",
+              color: "rgba(248,247,244,.35)", marginTop: -34, marginBottom: 48,
+            }}>
+              Campus Walkthrough · Venture Institute Park, Dhurwa
             </p>
           </AnimateIn>
 
@@ -204,15 +268,25 @@ export default function CentersPage() {
                 flexWrap: "wrap",
               }}>
                 <div style={{ flex: 1 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8, flexWrap: "wrap" }}>
                     <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 22, color: "var(--text)", letterSpacing: "-.02em" }}>
                       {c.city}, {c.state}
                     </h3>
+                    {c.kind && (
+                      <span style={{
+                        fontFamily: "var(--mono)", fontSize: 9.5, letterSpacing: ".1em", textTransform: "uppercase",
+                        background: "rgba(var(--accent-rgb),.08)", color: "var(--accent)",
+                        border: "1px solid rgba(var(--accent-rgb),.18)", padding: "4px 9px", borderRadius: 3, fontWeight: 500,
+                      }}>{c.kind}</span>
+                    )}
                     {c.flagship && <span style={{ background: "var(--ink)", color: "var(--text-inv)", fontFamily: "var(--sans)", fontWeight: 700, fontSize: 9, letterSpacing: ".1em", padding: "3px 8px", borderRadius: 1, textTransform: "uppercase" }}>Flagship</span>}
                   </div>
                   <div style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: 14 }}>
                     <MapPin size={14} color="rgba(var(--ink-rgb),.3)" style={{ marginTop: 3, flexShrink: 0 }} />
                     <span style={{ fontFamily: "var(--body)", fontSize: 14, color: "rgba(var(--ink-rgb),.45)", lineHeight: 1.5 }}>{c.addr}</span>
+                  </div>
+                  <div style={{ fontFamily: "var(--mono)", fontSize: 9.5, letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),.3)", marginBottom: 8 }}>
+                    Trades Taught
                   </div>
                   <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                     {c.labs.map(lab => (

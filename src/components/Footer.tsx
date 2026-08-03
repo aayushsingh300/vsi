@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
-import { COURSES_CERT } from "@/data/content";
+import { COURSES_CERT, FOOTER_ACCREDITATIONS } from "@/data/content";
 import { VSI_LOGO, VSI_LOGO_RATIO } from "@/data/assets";
 import { useLang } from "@/context/LangContext";
 
@@ -149,7 +149,7 @@ export default function Footer() {
               maxWidth: 340,
             }}
           >
-            Eastern India&apos;s most government-backed skill institution. 23 years. 20,000+ placed. NASSCOM · NSDC · AICTE · Autodesk Certified.
+            Eastern India&apos;s most government-backed skill institution. 25 years. 45,000+ placed. NASSCOM · NSDC · AICTE · Autodesk Certified.
           </p>
           <div style={{ display: "flex", gap: 8 }}>
             {SocialLinks.map((s) => (
@@ -294,7 +294,7 @@ export default function Footer() {
           <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 16 }}>
             <MapPin size={14} color="rgba(var(--accent-rgb),.6)" style={{ marginTop: 3, flexShrink: 0 }} />
             <span style={{ fontSize: 13, color: "rgba(248,247,244,.45)", lineHeight: 1.6, fontFamily: "var(--body)" }}>
-              601, Panchwati Plaza,<br />Kutchery Road,<br />Ranchi 834001, JH
+              601, 6th Floor, Panchwati Plaza,<br />Kutchery Road,<br />Ranchi 834001, Jharkhand
             </span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
@@ -384,7 +384,7 @@ export default function Footer() {
         }}
       >
         <div style={{ display: "flex", gap: 18, flexWrap: "wrap", alignItems: "center" }}>
-          {["NASSCOM", "NSDC", "AICTE", "Autodesk Certified", "JSDM", "Skill India"].map((c) => (
+          {FOOTER_ACCREDITATIONS.map((c) => (
             <span
               key={c}
               style={{

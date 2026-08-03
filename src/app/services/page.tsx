@@ -1,18 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, Zap, Building2, Globe, Landmark } from "lucide-react";
+import { ChevronDown, Zap, Building2, Globe, Landmark, GraduationCap, FileSpreadsheet, MapPin } from "lucide-react";
 import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
-import { EMPLOYMENT_SECTORS, EMERGING_TECH, GOVT_MANDATES, SERVICES_PPP } from "@/data/content";
+import {
+  EMPLOYMENT_SECTORS,
+  EMERGING_TECH,
+  GOVT_MANDATES,
+  SERVICES_PPP,
+  SERVICES_VERTICALS,
+  POLYTECHNIC_COLLEGES,
+  ITI_COLLEGES,
+} from "@/data/content";
 import { useLang } from "@/context/LangContext";
 import useIsMobile from "@/hooks/useIsMobile";
+import Icon from "@/components/Icon";
 
 export default function ServicesPage() {
   const [formOpen, setFormOpen] = useState(false);
   const [openAccordion, setOpenAccordion] = useState<number | null>(0);
+  const [openDirectory, setOpenDirectory] = useState<string | null>("ppp");
   const { t } = useLang();
   const isMobile = useIsMobile(900);
 
@@ -27,6 +37,119 @@ export default function ServicesPage() {
           <h1>{t("servicesTitle1")}<br /><em>{t("servicesTitle2")}</em></h1>
           <p className="lead">{t("servicesHeroDesc")}</p>
         </AnimateIn>
+      </section>
+
+      {/* Six delivery verticals */}
+      <section style={{ padding: isMobile ? "56px 6%" : "80px 5%", background: "var(--bg-muted)", borderBottom: "1px solid var(--border)" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <AnimateIn animation="slideUp">
+            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 12, fontWeight: 500 }}>
+              // What We Deliver
+            </p>
+            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(22px,3vw,36px)", color: "var(--text)", marginBottom: 32, letterSpacing: "-.03em" }}>
+              Six delivery verticals.
+            </h2>
+          </AnimateIn>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 16 }}>
+            {SERVICES_VERTICALS.map((v, i) => (
+              <AnimateIn key={v.name} animation="slideUp" delay={i * 0.05}>
+                <div className="course-row" style={{
+                  background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 10,
+                  padding: "26px 22px", display: "flex", flexDirection: "column", gap: 10, height: "100%",
+                }}>
+                  <div className="icon-box"><Icon name={v.icon} size={19} color="var(--accent)" /></div>
+                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 17, color: "var(--text)", letterSpacing: "-.02em" }}>{v.name}</h3>
+                  <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>{v.desc}</p>
+                </div>
+              </AnimateIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Training Directory — PPP polytechnics & ITI colleges */}
+      <section style={{ padding: isMobile ? "56px 6%" : "80px 5%", borderBottom: "1px solid var(--border)" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <AnimateIn animation="slideUp">
+            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
+              <div style={{
+                width: 40, height: 40, borderRadius: 10,
+                background: "linear-gradient(135deg, rgba(var(--accent-rgb),.15), rgba(var(--gold-rgb),.1))",
+                border: "1px solid rgba(var(--accent-rgb),.2)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <GraduationCap size={18} color="var(--accent)" />
+              </div>
+              <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", fontWeight: 500 }}>
+                // Training Directory
+              </p>
+            </div>
+            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(22px,3vw,36px)", color: "var(--text)", marginBottom: 12, letterSpacing: "-.03em" }}>
+              PPP-mode partnerships.
+            </h2>
+            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", lineHeight: 1.75, maxWidth: 620, marginBottom: 28 }}>
+              Expand a partnership to see the individual colleges we run under it.
+            </p>
+          </AnimateIn>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {[
+              { key: "ppp", label: "PPP-Mode Polytechnic Colleges", sub: `${POLYTECHNIC_COLLEGES.length} Government Polytechnics · Uttar Pradesh`, list: POLYTECHNIC_COLLEGES },
+              { key: "iti", label: "ITI Colleges", sub: `${ITI_COLLEGES.length} Industrial Training Institutes · Jharkhand`, list: ITI_COLLEGES },
+            ].map((group) => (
+              <AnimateIn key={group.key} animation="slideUp">
+                <div style={{
+                  border: "1px solid var(--border-card)", borderRadius: 8, overflow: "hidden",
+                  background: openDirectory === group.key ? "rgba(var(--accent-rgb),.03)" : "var(--bg-card)",
+                  transition: "background .25s ease",
+                }}>
+                  <button
+                    onClick={() => setOpenDirectory(openDirectory === group.key ? null : group.key)}
+                    aria-expanded={openDirectory === group.key}
+                    style={{
+                      width: "100%", padding: "20px 24px", display: "flex", alignItems: "center", justifyContent: "space-between",
+                      background: "transparent", border: "none", cursor: "pointer", textAlign: "left", gap: 16,
+                    }}
+                  >
+                    <div>
+                      <div style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 17, color: "var(--text)", letterSpacing: "-.015em" }}>{group.label}</div>
+                      <div style={{ fontFamily: "var(--mono)", fontSize: 10.5, color: "var(--text-muted)", letterSpacing: ".05em", marginTop: 4 }}>{group.sub}</div>
+                    </div>
+                    <ChevronDown
+                      size={16}
+                      color="var(--text-muted)"
+                      style={{
+                        transform: openDirectory === group.key ? "rotate(180deg)" : "rotate(0)",
+                        transition: "transform .25s ease",
+                        flexShrink: 0,
+                      }}
+                    />
+                  </button>
+                  {openDirectory === group.key && (
+                    <div style={{ padding: "0 24px 22px", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 12 }}>
+                      {group.list.map((col) => (
+                        <div key={col.name} style={{
+                          background: "var(--bg)", border: "1px solid var(--border)", borderRadius: 8,
+                          padding: "16px 16px", display: "flex", flexDirection: "column", gap: 6,
+                        }}>
+                          <h4 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 14.5, color: "var(--text)", lineHeight: 1.35, letterSpacing: "-.01em" }}>{col.name}</h4>
+                          {col.aka && (
+                            <span style={{ fontFamily: "var(--body)", fontSize: 11.5, color: "var(--text-muted)", fontStyle: "italic", lineHeight: 1.5 }}>
+                              Also referred to as {col.aka}
+                            </span>
+                          )}
+                          <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--mono)", fontSize: 10, color: "var(--text-muted)", letterSpacing: ".06em", marginTop: 2 }}>
+                            <MapPin size={10} strokeWidth={1.8} /> {col.district} district, {col.state}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </AnimateIn>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Skill Initiatives */}
@@ -67,7 +190,7 @@ export default function ServicesPage() {
                   background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 10,
                   padding: "28px 24px", display: "flex", flexDirection: "column", gap: 12, height: "100%",
                 }}>
-                  <div style={{ fontSize: 28 }}>{sector.icon}</div>
+                  <div className="icon-box"><Icon name={sector.icon} size={19} color="var(--accent)" /></div>
                   <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 18, color: "var(--text)", letterSpacing: "-.02em" }}>{sector.name}</h3>
                   <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>{sector.desc}</p>
                 </div>
@@ -100,7 +223,7 @@ export default function ServicesPage() {
                   padding: "28px 24px", display: "flex", flexDirection: "column", gap: 12, height: "100%",
                   transition: "box-shadow .3s ease",
                 }}>
-                  <div style={{ fontSize: 32 }}>{tech.icon}</div>
+                  <div className="icon-box"><Icon name={tech.icon} size={19} color="var(--accent-green)" /></div>
                   <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 18, color: "var(--text)", letterSpacing: "-.02em" }}>{tech.name}</h3>
                   <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>{tech.desc}</p>
                 </div>
@@ -136,7 +259,7 @@ export default function ServicesPage() {
                   padding: "28px 24px", display: "flex", flexDirection: "column", gap: 12, height: "100%",
                   transition: "box-shadow .3s ease",
                 }}>
-                  <div style={{ fontSize: 32 }}>{item.icon}</div>
+                  <div className="icon-box"><Icon name={item.icon} size={19} color="var(--accent)" /></div>
                   <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 18, color: "var(--text)", letterSpacing: "-.02em" }}>{item.name}</h3>
                   <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>{item.desc}</p>
                 </div>
@@ -194,11 +317,23 @@ export default function ServicesPage() {
                     />
                   </button>
                   <div style={{
-                    maxHeight: openAccordion === i ? 120 : 0, overflow: "hidden",
+                    maxHeight: openAccordion === i ? 220 : 0, overflow: "hidden",
                     transition: "max-height .3s ease",
                   }}>
                     <div style={{ padding: "0 24px 20px" }}>
                       <p style={{ fontFamily: "var(--body)", fontSize: 13.5, color: "var(--text-muted)", lineHeight: 1.65 }}>{mandate.desc}</p>
+                      {"sheet" in mandate && mandate.sheet && (
+                        <div style={{
+                          marginTop: 14, padding: "12px 14px", borderRadius: 6,
+                          background: "rgba(var(--accent-rgb),.06)", border: "1px dashed rgba(var(--accent-rgb),.25)",
+                          display: "flex", alignItems: "center", gap: 10,
+                        }}>
+                          <FileSpreadsheet size={15} color="var(--accent)" style={{ flexShrink: 0 }} />
+                          <span style={{ fontFamily: "var(--mono)", fontSize: 11.5, color: "var(--text-muted)", letterSpacing: ".03em" }}>
+                            {mandate.sheet}
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

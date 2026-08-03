@@ -7,7 +7,7 @@ import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
-import { COURSES_CERT, CENTERS } from "@/data/content";
+import { COUNSELING_COURSE_OPTIONS, CENTERS } from "@/data/content";
 import { useLang } from "@/context/LangContext";
 
 export default function ContactPage() {
@@ -188,11 +188,9 @@ export default function ContactPage() {
                     style={{ marginBottom: "var(--sp-3)" }}
                   >
                     <option value="">Select course interest...</option>
-                    {COURSES_CERT.map((c) => (
-                      <option key={c.slug} value={c.slug}>{c.name}</option>
+                    {COUNSELING_COURSE_OPTIONS.map((o) => (
+                      <option key={o.value} value={o.value}>{t(o.key)}</option>
                     ))}
-                    <option value="diploma">Polytechnic Diploma</option>
-                    <option value="vocational">Vocational Programs</option>
                   </select>
 
                   <label htmlFor="contact-centre" className="sr-only">Preferred centre</label>

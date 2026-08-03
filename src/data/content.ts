@@ -53,7 +53,7 @@ export const COURSES_CERT: CourseCert[] = [
     thumb: "civil",
     desc: "Structural drafting, site planning, surveying — the full civil engineering software stack.",
     longDesc: "Revolutionize how you approach civil engineering projects. 240 hours covering 2D and 3D modeling, structural analysis and design visualization across the most-used civil CAD toolchain in India.",
-    software: ["AutoCAD", "STAAD.Pro", "Civil 3D", "Revit Architecture", "Primavera", "MSP", "Photoshop"],
+    software: ["AutoCAD", "STAAD.Pro", "Civil 3D", "Revit Architecture", "Primavera", "MSP", "Photoshop", "Pre-DCR", "Estimation"],
     modules: [
       { t: "Module 1 · AutoCAD & Drafting", d: "2D civil drafting, site plans, contour drawings, dimensioning and printing standards." },
       { t: "Module 2 · Revit + BIM 360", d: "Structural BIM, multi-discipline coordination, families and clash detection workflows." },
@@ -316,7 +316,7 @@ export const COURSES_VOC: CourseVoc[] = [
   {
     slug: "voc-it",
     name: "Information Technology",
-    hrs: "6 mo", icon: "💻", tag: "NSDC",
+    hrs: "6 mo", icon: "computer", tag: "NSDC",
     desc: "Job-ready IT skills — computing, office tools, web basics and support.",
     longDesc: "A short, NSDC-aligned vocational programme that gets you job-ready in months, not years. Practical IT skills — computer operations, office productivity, internet and basic web — mapped to entry-level roles in offices and IT-enabled services.",
     software: ["MS Office", "Internet & Email", "Web Basics", "Typing", "Data Entry"],
@@ -333,7 +333,7 @@ export const COURSES_VOC: CourseVoc[] = [
   {
     slug: "voc-apparel",
     name: "Apparels & Textiles",
-    hrs: "6 mo", icon: "🧵", tag: "NSDC",
+    hrs: "6 mo", icon: "textiles", tag: "NSDC",
     desc: "Stitching, garment construction and quality — skills the apparel sector hires for.",
     longDesc: "An NSDC-aligned vocational programme in apparel manufacturing. Learn machine operation, garment construction and quality checks on industry equipment, mapped to the roles apparel exporters and manufacturers hire for every month.",
     software: ["Sewing Machines", "Pattern Basics", "Garment Construction", "Quality Check"],
@@ -350,7 +350,7 @@ export const COURSES_VOC: CourseVoc[] = [
   {
     slug: "voc-healthcare",
     name: "Healthcare Services",
-    hrs: "6 mo", icon: "🏥", tag: "NSDC",
+    hrs: "6 mo", icon: "healthcare", tag: "NSDC",
     desc: "Patient care, hospital support and assistant skills for a growing sector.",
     longDesc: "An NSDC-aligned vocational programme for India's fast-growing healthcare sector. Practical training in patient care support, hospital procedures and basic clinical assistance — preparing you for general duty assistant and support roles.",
     software: ["Patient Care", "Hospital Procedures", "First Aid", "Hygiene & Safety"],
@@ -367,7 +367,7 @@ export const COURSES_VOC: CourseVoc[] = [
   {
     slug: "voc-retail",
     name: "Retail Management",
-    hrs: "4 mo", icon: "🛍", tag: "NSDC",
+    hrs: "4 mo", icon: "retail", tag: "NSDC",
     desc: "Sales, customer service and store operations for modern retail.",
     longDesc: "A short NSDC-aligned vocational programme for India's expanding organised retail sector. Learn customer handling, sales, billing and store operations — the practical skills that get you hired as a sales associate or store assistant.",
     software: ["Customer Service", "Billing / POS", "Inventory Basics", "Sales Skills"],
@@ -384,7 +384,7 @@ export const COURSES_VOC: CourseVoc[] = [
   {
     slug: "voc-telecom",
     name: "Telecom Services",
-    hrs: "6 mo", icon: "📡", tag: "NSDC",
+    hrs: "6 mo", icon: "telecom", tag: "NSDC",
     desc: "Installation, handset repair and field support for the telecom sector.",
     longDesc: "An NSDC-aligned vocational programme covering the practical side of telecom — device handling, installation and field support. Designed to map directly to technician and field-support roles with telecom operators and service partners.",
     software: ["Handset Repair", "Installation", "Network Basics", "Field Support"],
@@ -401,7 +401,7 @@ export const COURSES_VOC: CourseVoc[] = [
   {
     slug: "voc-automotive",
     name: "Automotive",
-    hrs: "6 mo", icon: "🚗", tag: "NSDC",
+    hrs: "6 mo", icon: "automotive", tag: "NSDC",
     desc: "Vehicle service, repair and workshop skills for the automotive trade.",
     longDesc: "An NSDC-aligned vocational programme in automotive servicing. Learn engine, electrical and general service procedures on real vehicles — preparing you for service technician roles in workshops, dealerships and the growing EV ecosystem.",
     software: ["Engine Service", "Auto Electrical", "Diagnostics", "Workshop Tools"],
@@ -418,7 +418,7 @@ export const COURSES_VOC: CourseVoc[] = [
   {
     slug: "voc-electronics",
     name: "Electronics",
-    hrs: "6 mo", icon: "🔌", tag: "NSDC",
+    hrs: "6 mo", icon: "electronics", tag: "NSDC",
     desc: "Component assembly, soldering and appliance repair skills.",
     longDesc: "An NSDC-aligned vocational programme in electronics. Build practical skills in component identification, soldering, assembly and appliance repair — mapped to technician and assembly roles in electronics manufacturing and service.",
     software: ["Soldering", "PCB Assembly", "Component Testing", "Appliance Repair"],
@@ -475,26 +475,36 @@ export type CourseCategory = {
 };
 
 export const DATA_SCIENCE_COURSES: CourseCategory[] = [
-  { slug: "data-analytics", name: "Data Analytics", icon: "📊", desc: "Turn raw data into business insights with Excel, SQL and visualization tools.", tools: ["MS-Excel", "Advanced Excel", "SQL", "Power BI", "Tableau"] },
-  { slug: "business-analytics", name: "Business Analytics", icon: "📈", desc: "Drive strategic decisions with data-driven analysis and agile methodologies.", tools: ["Power BI", "Tableau", "SQL", "Python", "Agile Methodologies"] },
-  { slug: "ai-ml", name: "AI & Machine Learning", icon: "🤖", desc: "Build intelligent systems with machine learning, generative AI and Python.", tools: ["Python", "Generative AI Tools", "SQL", "Power BI", "Tableau"] },
-  { slug: "digital-marketing", name: "Digital Marketing", icon: "📱", desc: "Master digital campaigns, SEO, social media marketing and analytics.", tools: ["Generative AI Tools", "Power BI", "MS-Excel", "Advanced Excel", "Agile Methodologies"] },
+  { slug: "data-analytics", name: "Data Analytics", icon: "analytics", desc: "Turn raw data into business insights with Excel, SQL and visualization tools.", tools: ["MS-Excel", "Advanced Excel", "SQL", "Power BI", "Tableau"] },
+  { slug: "business-analytics", name: "Business Analytics", icon: "dashboard", desc: "Drive strategic decisions with data-driven analysis and agile methodologies.", tools: ["Power BI", "Tableau", "SQL", "Python", "Agile Methodologies"] },
+  { slug: "ai-ml", name: "AI & Machine Learning", icon: "ai", desc: "Build intelligent systems with machine learning, generative AI and Python.", tools: ["Python", "Generative AI Tools", "SQL", "Power BI", "Tableau"] },
+  { slug: "digital-marketing", name: "Digital Marketing", icon: "marketing", desc: "Master digital campaigns, SEO, social media marketing and analytics.", tools: ["Generative AI Tools", "Power BI", "MS-Excel", "Advanced Excel", "Agile Methodologies"] },
 ];
 
 export const DESIGN_STUDIO_COURSES: CourseCategory[] = [
-  { slug: "graphics-design", name: "Graphics Design", icon: "🎨", desc: "Create stunning visual content for print and digital media.", tools: ["Photoshop", "Illustrator", "InDesign", "CorelDRAW"] },
-  { slug: "multimedia", name: "Multimedia", icon: "🎬", desc: "Combine text, graphics, audio and video into interactive experiences.", tools: ["Photoshop", "Premiere Pro", "After Effects", "Animate CC"] },
-  { slug: "animation", name: "Animation", icon: "✨", desc: "2D & 3D animation — from concept art to fully rendered sequences.", tools: ["Photoshop", "Premiere Pro", "After Effects", "Sound FX", "Animate CC", "ToonBoom", "3D MAX", "Maya", "CorelDRAW", "Illustrator", "InDesign", "Blender"] },
-  { slug: "interior-design", name: "Interior Design", icon: "🏠", desc: "Design functional, aesthetic interior spaces with modern tools.", tools: ["3D MAX", "SketchUp", "V-Ray", "AutoCAD", "Photoshop"] },
-  { slug: "photography", name: "Photography", icon: "📷", desc: "Master camera technique, lighting, composition and post-production.", tools: ["Photoshop", "Premiere Pro", "After Effects"] },
-  { slug: "fashion-design", name: "Fashion Design", icon: "👗", desc: "From sketch to runway — digital fashion illustration and pattern making.", tools: ["CorelDRAW", "Photoshop", "Illustrator", "InDesign"] },
+  { slug: "graphics-design", name: "Graphics Design", icon: "graphics", desc: "Create stunning visual content for print and digital media.", tools: ["Photoshop", "Illustrator", "InDesign", "CorelDRAW"] },
+  { slug: "multimedia", name: "Multimedia", icon: "multimedia", desc: "Combine text, graphics, audio and video into interactive experiences.", tools: ["Photoshop", "Premiere Pro", "After Effects", "Animate CC", "CorelDRAW", "Illustrator"] },
+  { slug: "animation", name: "Animation", icon: "animation", desc: "2D & 3D animation — from concept art to fully rendered sequences.", tools: ["Photoshop", "Premiere Pro", "After Effects", "Sound FX", "Animate CC", "ToonBoom", "3D MAX", "Maya", "CorelDRAW", "Illustrator", "InDesign", "Blender"] },
+  { slug: "interior-design", name: "Interior Design", icon: "interior", desc: "Design functional, aesthetic interior spaces with modern tools.", tools: ["3D MAX", "SketchUp", "V-Ray", "AutoCAD", "Photoshop"] },
+  { slug: "photography", name: "Photography", icon: "photography", desc: "Master camera technique, lighting, composition and post-production.", tools: ["Photoshop", "Premiere Pro", "After Effects"] },
+  { slug: "fashion-design", name: "Fashion Design", icon: "fashion", desc: "From sketch to runway — digital fashion illustration and pattern making.", tools: ["CorelDRAW", "Photoshop", "Illustrator", "InDesign"] },
+  { slug: "boutique-management", name: "Boutique Management", icon: "boutique", desc: "Running a boutique — merchandising, styling and fashion retail operations.", tools: ["Merchandising", "Styling", "Retail Operations"] },
+];
+
+// Computer Application short-term courses (Sana Ma'am's input).
+export const COMPUTER_APPLICATION_SHORT: CourseCategory[] = [
+  { slug: "dca", name: "DCA", icon: "desktop", desc: "Diploma in Computer Applications — core office productivity skills.", tools: ["Word", "Excel", "PowerPoint", "Access"] },
+  { slug: "tally", name: "Tally", icon: "accounting", desc: "Computerised accounting with Tally Prime and GST compliance.", tools: ["Tally Prime", "GST"] },
+  { slug: "adca", name: "ADCA", icon: "storage", desc: "Advanced Diploma in Computer Applications — office to design tools.", tools: ["MS Office", "Tally Prime", "Photoshop", "Typing"] },
+  { slug: "programming", name: "Programming Languages", icon: "code", desc: "Foundation to advanced programming across the core languages.", tools: ["C", "C++", "Java", "Python"] },
+  { slug: "web-development", name: "Web Development", icon: "web", desc: "Full-stack web development — front-end to server and database.", tools: ["HTML", "CSS", "JavaScript", "Bootstrap", "React", "Node.js", "MySQL", "PHP/Java"] },
 ];
 
 // Automation specializations sit under the CAD umbrella (already delivered in
 // depth inside the Electrical CAD certificate).
 export const AUTOMATION_COURSES: CourseCategory[] = [
-  { slug: "plc-automation", name: "PLC Programming", icon: "🔧", desc: "Ladder logic, I/O configuration and industrial control system programming.", tools: ["Rockwell", "Siemens", "Ladder Logic", "HMI"] },
-  { slug: "scada-systems", name: "SCADA Systems", icon: "🖥️", desc: "Supervisory control, real-time data acquisition and remote device visualization.", tools: ["SCADA", "AC/DC Drives", "Alarm Management"] },
+  { slug: "plc-automation", name: "PLC Programming", icon: "plc", desc: "Ladder logic, I/O configuration and industrial control system programming.", tools: ["Rockwell", "Siemens", "Ladder Logic", "HMI"] },
+  { slug: "scada-systems", name: "SCADA Systems", icon: "scada", desc: "Supervisory control, real-time data acquisition and remote device visualization.", tools: ["SCADA", "AC/DC Drives", "Alarm Management"] },
 ];
 
 // ── New 5-category course taxonomy (from HR restructuring blueprint) ──────────
@@ -508,28 +518,51 @@ export const COMPUTER_APP_COURSES: CourseDip[] = COURSES_DIP.filter(
 );
 
 // ════════════════════════════════════════════════════════════════════
+//  Polytechnic / ITI College Directory
+// ════════════════════════════════════════════════════════════════════
+
+export type College = {
+  name: string;
+  aka?: string;
+  district: string;
+  state: string;
+  type: "Polytechnic" | "ITI";
+};
+
+export const POLYTECHNIC_COLLEGES: College[] = [
+  { name: "Government Polytechnic College, Sardhana", district: "Meerut", state: "Uttar Pradesh", type: "Polytechnic" },
+  { name: "Government Polytechnic College, Ghugulpur", aka: "Government Polytechnic College, Balrampur", district: "Balrampur", state: "Uttar Pradesh", type: "Polytechnic" },
+  { name: "Government Girls Polytechnic College, Atrauli", district: "Aligarh", state: "Uttar Pradesh", type: "Polytechnic" },
+];
+
+export const ITI_COLLEGES: College[] = [
+  { name: "ITI College, Basantrai", district: "Godda", state: "Jharkhand", type: "ITI" },
+  { name: "ITI College, Saraikela", district: "Kharsawan", state: "Jharkhand", type: "ITI" },
+];
+
+// ════════════════════════════════════════════════════════════════════
 //  Services Page Data
 // ════════════════════════════════════════════════════════════════════
 
 export const EMPLOYMENT_SECTORS = [
-  { name: "IT / ITeS", icon: "💻", desc: "Software development, IT support, BPO and tech-enabled services." },
-  { name: "Apparel & Textiles", icon: "🧵", desc: "Garment manufacturing, quality, and fashion CAD roles." },
-  { name: "Logistics & E-Commerce", icon: "📦", desc: "Warehousing, fulfilment, supply-chain and last-mile delivery." },
-  { name: "Automotive", icon: "🚗", desc: "Vehicle manufacturing, servicing, EV assembly and maintenance." },
-  { name: "Healthcare", icon: "🏥", desc: "Hospital support, nursing assistance and patient care." },
+  { name: "IT / ITeS", icon: "computer", desc: "Software development, IT support, BPO and tech-enabled services." },
+  { name: "Apparel & Textiles", icon: "textiles", desc: "Garment manufacturing, quality, and fashion CAD roles." },
+  { name: "Logistics & E-Commerce", icon: "logistics", desc: "Warehousing, fulfilment, supply-chain and last-mile delivery." },
+  { name: "Automotive", icon: "automotive", desc: "Vehicle manufacturing, servicing, EV assembly and maintenance." },
+  { name: "Healthcare", icon: "healthcare", desc: "Hospital support, nursing assistance and patient care." },
 ];
 
 export const EMERGING_TECH = [
-  { name: "Drone Technology", icon: "🛩️", desc: "Unmanned aerial vehicle operation, maintenance and surveying applications." },
-  { name: "Industrial Automation", icon: "⚙️", desc: "PLC, SCADA, robotics and smart manufacturing systems." },
-  { name: "Electric Vehicle (EV)", icon: "⚡", desc: "EV servicing, battery technology, charging infrastructure and assembly." },
+  { name: "Drone Technology", icon: "drone", desc: "Unmanned aerial vehicle operation, maintenance and surveying applications." },
+  { name: "Industrial Automation", icon: "automation", desc: "PLC, SCADA, robotics and smart manufacturing systems." },
+  { name: "Electric Vehicle (EV)", icon: "ev", desc: "EV servicing, battery technology, charging infrastructure and assembly." },
 ];
 
 // PPP & Workforce initiatives (Priyadarshan Sir's input)
 export const SERVICES_PPP = [
-  { name: "Transforming Public Education", icon: "🏛️", desc: "Operating PPP-model Polytechnic and ITI institutions — modernizing government technical education with industry-grade curriculum, labs and placement delivery." },
-  { name: "Workforce for Industries", icon: "🏭", desc: "Sourcing, training and supplying job-ready workforce directly to manufacturing, service and infrastructure-sector industries at scale." },
-  { name: "Empowering Government Schools", icon: "🏫", desc: "Establishing vocational skill labs across 400+ government schools — embedding employable, hands-on skills into mainstream school education." },
+  { name: "Transforming Public Education", icon: "government", desc: "Operating PPP-model Polytechnic and ITI institutions — modernizing government technical education with industry-grade curriculum, labs and placement delivery." },
+  { name: "Workforce for Industries", icon: "industry", desc: "Sourcing, training and supplying job-ready workforce directly to manufacturing, service and infrastructure-sector industries at scale." },
+  { name: "Empowering Government Schools", icon: "school", desc: "Establishing vocational skill labs across 400+ government schools — embedding employable, hands-on skills into mainstream school education." },
 ];
 
 export const GOVT_MANDATES = [
@@ -537,7 +570,17 @@ export const GOVT_MANDATES = [
   { name: "SJGKY Project", fullName: "Swarnajayanti Gram Swarozgar Yojana / State Skill Initiatives", desc: "State-level self-employment and skill-building initiatives for gram panchayat youth." },
   { name: "Birsa Scheme", fullName: "Jharkhand Skill Projects", desc: "Targeted tribal youth training and employment programmes across Jharkhand." },
   { name: "DDU-KK", fullName: "Deen Dayal Upadhyaya Kaushal Kendras", desc: "Multi-skill training centres under the National Skill Qualification Framework." },
-  { name: "Samagra Shiksha", fullName: "Samagra Shiksha School Project", desc: "Integrated school education programme with vocational and skill components." },
+  { name: "Samagra Shiksha", fullName: "Samagra Shiksha School Project", desc: "Integrated school education programme with vocational and skill components.", sheet: "District-wise school directory — sheet to be attached" },
+];
+
+// Services page — six delivery verticals (final restructuring input).
+export const SERVICES_VERTICALS = [
+  { name: "Institution", icon: "school", desc: "CAD Centres, Hi-Tech Academy and VIFT — Venture Institute of Fashion Technology." },
+  { name: "Education", icon: "education", desc: "PPP-mode Government Polytechnic colleges and ITI colleges." },
+  { name: "Skill Development Programs", icon: "automation", desc: "Large-scale skill training under central and state government mandates." },
+  { name: "School Initiatives / Projects", icon: "government", desc: "Vocational trainers and vocational labs across 400+ government schools." },
+  { name: "Venture Institute Park", icon: "campus", desc: "Flagship high-tech campus at Ranchi Smart City, Dhurwa." },
+  { name: "Infrastructure Management Service", icon: "lab", desc: "Lab supply and institutional infrastructure management." },
 ];
 
 // ════════════════════════════════════════════════════════════════════
@@ -545,8 +588,9 @@ export const GOVT_MANDATES = [
 // ════════════════════════════════════════════════════════════════════
 
 export const INFRA_TABS = [
-  { key: "central", label: "Central-Driven Initiatives", desc: "Dedicated exclusively to tracking and showcasing DDU-GKY Programs." },
-  { key: "skill", label: "Skill-Driven Initiatives", desc: "State-level operational delivery frameworks — UPSDM (Uttar Pradesh), JSDM (Jharkhand), BSDM (Bihar)." },
+  { key: "institution", label: "Institution", desc: "Hi-Tech Academy, CAD Centres, VIFT (Venture Institute of Fashion Technology), PPP-mode Polytechnic colleges and ITI institutions." },
+  { key: "central", label: "Central-Driven Initiatives", desc: "DDU-GKY programs and DDU-KK mega skill centres." },
+  { key: "skill", label: "State Skill-Driven Initiatives", desc: "State-level operational delivery frameworks — UPSDM (Uttar Pradesh), JSDM (Jharkhand), BSDM (Bihar)." },
 ];
 
 export const TRAINING_INSTITUTIONS: {
@@ -558,19 +602,19 @@ export const TRAINING_INSTITUTIONS: {
 }[] = [
   { type: "Mega Skill Centre", name: "Venture Mega Skill Centres", count: 6, state: "Jharkhand", desc: "Flagship multi-program skill hubs delivering CAD, IT, healthcare and vocational training at scale across Jharkhand." },
   { type: "Institute", name: "CAD Institute", count: null, state: "Multiple", desc: "Dedicated CAD training institutes spanning architecture, civil, mechanical and electrical engineering domains." },
-  { type: "Institute", name: "Fashion Institute", count: null, state: "Multiple", desc: "Fashion design and garment technology institutes — from pattern making to digital fashion CAD." },
+  { type: "Institute", name: "Venture Institute of Fashion and Interior", count: null, state: "Multiple", desc: "All fashion and interior programmes under VIFT — from pattern making to digital fashion CAD." },
   { type: "Institute", name: "Computer Institute", count: null, state: "Multiple", desc: "Computer application, IT and software skilling institutes for job-ready digital careers." },
   { type: "DDU-GKY", name: "DDU-GKY Centres", count: 5, state: "All-over India", desc: "Rural youth skill training and placement centres under Deen Dayal Upadhyaya Grameen Kaushalya Yojana." },
-  { type: "PPP", name: "Government Polytechnic Colleges", count: 3, state: "Uttar Pradesh", desc: "Public-Private Partnership model polytechnic colleges." },
-  { type: "Vocational", name: "Industrial Training Institutes (ITI)", count: null, state: "Multiple", desc: "Vocational frameworks across ITI colleges." },
-  { type: "HQ", name: "Corporate Head Office", count: null, state: "Jharkhand", desc: "Ranchi, Panchwati Plaza — executive and administrative hub." },
+  { type: "PPP", name: "Government Polytechnic Colleges", count: 3, state: "Uttar Pradesh", desc: "PPP-model polytechnics — Sardhana (Meerut), Ghugulpur (Balrampur) and Government Girls Polytechnic, Atrauli (Aligarh)." },
+  { type: "Vocational", name: "Industrial Training Institutes (ITI)", count: 2, state: "Jharkhand", desc: "ITI College Basantrai (Godda) and ITI College Saraikela (Kharsawan)." },
+  { type: "HQ", name: "Corporate Head Office", count: null, state: "Jharkhand", desc: "601, 6th Floor, Panchwati Plaza, Kutchery Road, Ranchi — executive and administrative hub." },
 ];
 
 export const SMART_CITY_BLOCKS = [
-  { block: 1, name: "Front Facade", desc: "Executive Office Space and modern Food & Beverage (F&B) / Canteen zones.", icon: "🏢" },
-  { block: 2, name: "Middle Wing", desc: "Modernized Nursing College.", icon: "🏥" },
-  { block: 3, name: "Rear Wing", desc: "Advanced Institutional Space, smart classrooms, and technical labs.", icon: "🔬" },
-  { block: 4, name: "Hostel Complex", desc: "On-campus residential housing space.", icon: "🏠" },
+  { block: 1, name: "Front Facade", desc: "Executive Office Space and modern Food & Beverage (F&B) / Canteen zones.", icon: "office" },
+  { block: 2, name: "Middle Wing", desc: "Modernized Nursing College.", icon: "nursing" },
+  { block: 3, name: "Rear Wing", desc: "Advanced Institutional Space, smart classrooms, and technical labs.", icon: "lab" },
+  { block: 4, name: "Hostel Complex", desc: "On-campus residential housing space.", icon: "hostel" },
 ];
 
 // ════════════════════════════════════════════════════════════════════
@@ -602,7 +646,7 @@ export const INTL_CORRIDORS = [
     image: "/images/work-abroad-germany.png",
     fallbackColor: "linear-gradient(135deg, #0A192F 0%, #172A45 60%, #003366 100%)",
     sectors: ["Geriatric & Clinical Nursing", "Hospital Patient Care", "Medical Technology", "Specialized Healthcare"],
-    perks: ["Paid German Language Prep (B1/B2)", "Recognized German Nursing License", "Permanent Residency Option"],
+    perks: ["Paid German Language Prep (A1, A2 → B1, B2)", "Recognized German Nursing License", "Permanent Residency Option"],
     statLabel: "Target Sector",
     statValue: "German Healthcare Network",
   },
@@ -610,18 +654,18 @@ export const INTL_CORRIDORS = [
 
 // Step-by-step workflow for the German healthcare deployment program.
 export const WORK_ABROAD_PROCESS = [
-  { step: 1, title: "Registration & Eligibility", desc: "Profile assessment, document screening and eligibility check for the healthcare pathway to Germany.", icon: "📝" },
-  { step: 2, title: "Language Training (German B1/B2)", desc: "Structured German language instruction up to B1/B2 proficiency — the mandatory benchmark for healthcare roles.", icon: "🗣️" },
-  { step: 3, title: "Cultural Integration Program", desc: "Orientation on German workplace culture, patient-care etiquette and day-to-day life to ensure a smooth transition.", icon: "🤝" },
-  { step: 4, title: "Professional Nursing Certification", desc: "Recognition of nursing qualifications and bridging modules aligned to German healthcare standards.", icon: "🩺" },
-  { step: 5, title: "Visa Processing & Documentation", desc: "End-to-end visa filing, credential attestation and documentation support handled by our mobility cell.", icon: "🛂" },
-  { step: 6, title: "Deployment to Germany", desc: "Confirmed placement with a partner healthcare employer, relocation support and on-ground onboarding.", icon: "✈️" },
+  { step: 1, title: "Registration & Eligibility", desc: "Profile assessment, document screening and eligibility check for the healthcare pathway to Germany.", icon: "registration" },
+  { step: 2, title: "Language Training (A1, A2 → B1, B2)", desc: "Structured German language instruction — starting at A1 and A2, then progressing to B1 and B2 completion, the mandatory benchmark for healthcare roles.", icon: "language" },
+  { step: 3, title: "Cultural Integration Program", desc: "Orientation on German workplace culture, patient-care etiquette and day-to-day life to ensure a smooth transition.", icon: "culture" },
+  { step: 4, title: "Professional Nursing Certification", desc: "Recognition of nursing qualifications and bridging modules aligned to German healthcare standards.", icon: "certification" },
+  { step: 5, title: "Visa Processing & Documentation", desc: "End-to-end visa filing, credential attestation and documentation support handled by our mobility cell.", icon: "visa" },
+  { step: 6, title: "Deployment to Germany", desc: "Confirmed placement with a partner healthcare employer, relocation support and on-ground onboarding.", icon: "deployment" },
 ];
 
 // Proof points for the homepage Work Abroad section.
 export const WORK_ABROAD_HIGHLIGHTS = [
   { value: "2", label: "Global Corridors", sub: "Germany (healthcare) + active Gulf drives" },
-  { value: "B1/B2", label: "German Language Training", sub: "Job-ready proficiency benchmark" },
+  { value: "A1→B2", label: "German Language Training", sub: "A1, A2 then B1, B2 completion" },
   { value: "6-Step", label: "Guided Pathway", sub: "Registration to on-ground deployment" },
   { value: "100%", label: "End-to-End Mobility", sub: "Visa, credentials & relocation support" },
 ];
@@ -633,7 +677,7 @@ export const WORK_ABROAD_HIGHLIGHTS = [
 export const CSR_IMPACT_STATS = [
   { value: "15,000+", label: "Youth Skilled", sub: "Across 4 eastern & northern states" },
   { value: "85%", label: "Placement Rate", sub: "Verified wage employment & job roles" },
-  { value: "100%", label: "Section 135 Compliant", sub: "Audited utilization & GST documentation" },
+  { value: "100%", label: "Section 8 Compliant", sub: "Audited utilization & GST documentation" },
   { value: "6+", label: "High-Growth Sectors", sub: "EV, Healthcare, Garments, IT & Civil" },
 ];
 
@@ -660,7 +704,7 @@ export const CSR_SECTION135_STEPS = [
   },
   {
     step: "05",
-    title: "Audited Section 135 Impact Report",
+    title: "Audited Section 8 Impact Report",
     desc: "Transparent utilization certificates, beneficiary tracking dashboards, and GST-compliant financial audit documentation.",
   },
 ];
@@ -706,7 +750,7 @@ export const CSR_PARTNERS = [
 
 export const CSR_ACTIVITIES = [
   {
-    title: "VSI Foundation Independent Skills Drive",
+    title: "Venture Sewa Foundation Independent Skills Drive",
     category: "Self-Funded Social Impact",
     location: "Godda & Santhal Pargana, Jharkhand",
     desc: "Our flagship self-funded initiative delivering fully subsidized computer literacy and CAD drafting programs to youth from remote tribal villages.",
@@ -821,18 +865,30 @@ export const CSR_TESTIMONIALS = [
 // ════════════════════════════════════════════════════════════════════
 
 export const CONTACT_CHANNELS = [
-  { dept: "Placement Cell", phone: "+91 9431103263", email: "PM@venturecad.co.in", icon: "💼" },
-  { dept: "HR Department", phone: "+91 9431103263", email: "HR@venturecad.co.in", icon: "👥" },
-  { dept: "Director & Executive Directors", phone: "+91 9431103263", email: "director@ventureskillindia.co.in", icon: "🏛️" },
+  { dept: "Placement Cell", person: "Shubham", phone: "+91 9431103263", email: "PM@venturecad.co.in", icon: "placement" },
+  { dept: "HR Department", person: "Aryan · HR Manager", phone: "+91 9431103263", email: "HR@venturecad.co.in", icon: "hr" },
+  { dept: "Director & Executive Directors", phone: "+91 9431103263", email: "director@ventureskillindia.co.in", icon: "director" },
 ];
 
 export const ACCREDITATIONS = [
-  { name: "NASSCOM", fullName: "National Association of Software and Service Companies" },
   { name: "NSDC", fullName: "National Skill Development Corporation" },
   { name: "Autodesk", fullName: "Autodesk Certification Hub" },
   { name: "AICTE", fullName: "All India Council for Technical Education" },
+  { name: "NASSCOM", fullName: "National Association of Software and Service Companies" },
   { name: "Skill India", fullName: "Skill India Mission" },
-  { name: "JSDM", fullName: "Jharkhand Skill Development Mission" },
+  { name: "ASDC", fullName: "Automotive Skills Development Council" },
+];
+
+// Sector Skill Council & state mission accreditations shown in the footer badge bar.
+export const FOOTER_ACCREDITATIONS = [
+  "NASSCOM",
+  "NSDC",
+  "AICTE",
+  "Autodesk Certified",
+  "ASDC",
+  "UPSDM",
+  "RJSD",
+  "Skill India",
 ];
 
 // ════════════════════════════════════════════════════════════════════
@@ -840,33 +896,74 @@ export const ACCREDITATIONS = [
 // ════════════════════════════════════════════════════════════════════
 
 export const RESOURCE_TABS = [
-  { key: "news", label: "News & Blogs", icon: "📰" },
-  { key: "ads", label: "Advertisements", icon: "📢" },
-  { key: "recognition", label: "Recognition", icon: "🏆" },
-  { key: "brochures", label: "Brochures", icon: "📄" },
+  { key: "news", label: "News & Blogs", icon: "news" },
+  { key: "ads", label: "Advertisements", icon: "ads" },
+  { key: "recognition", label: "Recognition", icon: "recognition" },
+  { key: "brochures", label: "Brochures", icon: "brochures" },
 ];
 
 export const STATS = [
-  { val: 23, sfx: "+", lbl: "Years" },
-  { val: 20000, sfx: "+", lbl: "Placed" },
-  { val: 5000, sfx: "+", lbl: "Annual Jobs" },
+  { val: 25, sfx: "+", lbl: "Years" },
+  { val: 45000, sfx: "+", lbl: "Placed" },
+  { val: 6000, sfx: "+", lbl: "Annual Jobs" },
   { val: 50, sfx: "+", lbl: "Centres" },
 ];
 
+// `img` points at a felicitation photo for each award. Drop matching files into
+// /public/images/awards/ — the card falls back to a placeholder until then.
 export const AWARDS = [
-  { t: "Skoch Award", s: "Excellence in Skill Development", y: "2019", by: "National" },
-  { t: "Best Placement Award", s: "By Union Minister Dharmendra Pradhan", y: "2019", by: "Govt. of India" },
-  { t: "Excellence Award", s: "Tribal Placement · Cabinet Min. Arjun Munda", y: "2022", by: "Cabinet Minister" },
+  {
+    t: "Skoch Award",
+    s: "Excellence in Skill Development",
+    y: "2019",
+    by: "National",
+    img: "/images/awards/skoch-award.jpg",
+    desc: "National recognition for sustained impact on India's skill development ecosystem.",
+  },
+  {
+    t: "Best Placement Award",
+    s: "By Union Minister Dharmendra Pradhan",
+    y: "2019",
+    by: "Govt. of India",
+    img: "/images/awards/best-placement-award.jpg",
+    desc: "Dharmendra Pradhan, Minister of Skill Development & Entrepreneurship, honours Venture Skill India.",
+  },
+  {
+    t: "Excellence Award",
+    s: "Tribal Placement · Cabinet Min. Arjun Munda",
+    y: "2022",
+    by: "Cabinet Minister",
+    img: "/images/awards/excellence-award.jpg",
+    desc: "Cabinet Minister Arjun Munda recognises Venture Skill India's contribution to tribal youth employment.",
+  },
 ];
 
-export const CENTERS = [
-  { city: "Ranchi", state: "Jharkhand", addr: "601, 6th Floor, Panchwati Plaza, Kutchery Road, Ranchi – 834001", flagship: true, labs: ["EV Training", "Drone Tech", "CAD Labs", "Fashion Studio"] },
-  { city: "Meerut", state: "Uttar Pradesh", addr: "Skill Centre, Meerut", labs: ["CAD Labs", "Electrical CAD", "Mechanical CAD"] },
-  { city: "Godda", state: "Jharkhand", addr: "Skill Centre, Godda", labs: ["DDU-GKY Centre", "Tribal Skill Programme", "Vocational Training"] },
+export const CENTERS: {
+  city: string;
+  state: string;
+  addr: string;
+  flagship?: boolean;
+  kind?: string;
+  labs: string[];
+}[] = [
+  { city: "Ranchi", state: "Jharkhand", addr: "601, 6th Floor, Panchwati Plaza, Kutchery Road, Ranchi – 834001", flagship: true, kind: "Corporate Head Office", labs: ["VIFT — Fashion & Interior", "EV Training", "Drone Tech", "CAD Labs"] },
+  { city: "Godda", state: "Jharkhand", addr: "Godda DDU-KK Mega Skill Centre", kind: "DDU-KK Mega Skill", labs: ["Vocational Training", "Computer Application", "Healthcare"] },
+  { city: "Kanke", state: "Jharkhand", addr: "Kanke DDU-KK Mega Skill Centre", kind: "DDU-KK Mega Skill", labs: ["Vocational Training", "Retail & Logistics", "Computer Application"] },
+  { city: "Bokaro", state: "Jharkhand", addr: "Bokaro Skill Centre", kind: "Skill Centre", labs: ["Vocational Training", "Computer Application"] },
+  { city: "Aligarh", state: "Uttar Pradesh", addr: "Aligarh DDU-GKY Skill Centre", kind: "DDU-GKY Skill Centre", labs: ["Apparel & Textiles", "Computer Application", "Retail"] },
+  { city: "Balrampur", state: "Uttar Pradesh", addr: "Balrampur DDU-GKY Skill Centre", kind: "DDU-GKY Skill Centre", labs: ["Apparel & Textiles", "Computer Application", "Retail"] },
+  { city: "Meerut", state: "Uttar Pradesh", addr: "Meerut DDU-GKY Skill Centre", kind: "DDU-GKY Skill Centre", labs: ["CAD Labs", "Electrical CAD", "Mechanical CAD"] },
+];
+
+// Leadership board — kept separate from teaching faculty.
+export const LEADERSHIP = [
+  { name: "Rajeev Singh", role: "Managing Director & CEO", cred: "25 years in Skill Development · Industry Veteran", accent: "#1A1A1A" },
+  { name: "Priyadarshan Singh", role: "Executive Director", cred: "Public Education Transformation · PPP Polytechnic & ITI", accent: "#1A3A5A" },
+  { name: "Pinki Singh", role: "Director", cred: "Institutional Governance · Programme Oversight", accent: "#4A2838" },
+  { name: "Basant Singh", role: "Chief Operating Officer", cred: "Operations · Placement & Delivery", accent: "#2D4A3F" },
 ];
 
 export const FACULTY = [
-  { name: "Rajeev Kumar Singh", role: "Director & CEO", cred: "23 years in Skill Development · Industry Veteran", accent: "#1A1A1A" },
   { name: "Isha Kumari", role: "Academic Head", cred: "Curriculum Design · Industry-Aligned Programs", accent: "#4A3728" },
   { name: "Nausad Ahmed", role: "HOD · Electrical & Electronics", cred: "Industrial Automation Specialist · 15+ yrs experience", accent: "#2D4A3F" },
   { name: "Amzad Khan", role: "HOD · Fashion Design", cred: "Garment Technology · Pattern Making Expert", accent: "#4A2838" },
@@ -889,14 +986,24 @@ export const TESTIMONIALS = [
   { q: "EV training gave me a skill almost nobody else had. That's exactly what got me the job at Tata Motors when they were hiring for their EV division.", name: "Amit Kumar", course: "Mechanical CAD · 2022 Batch", placed: "TATA Motors, Pune", from: "Godda, Jharkhand" },
 ];
 
-export const EMPLOYERS = ["TATA Motors", "TATA Electronics", "Foxconn", "Wistron", "Amazon", "Flipkart", "Blinkit", "Zepto", "Jupiter Hospitals", "HM Hospitals", "S.P. Apparels", "Modenik Lifestyle", "L&T", "Wipro", "Infosys", "Cognizant", "TCS", "HCL"];
+export const EMPLOYERS = ["TATA Motors", "TATA Electronics", "Foxconn", "Wistron", "Reliance", "Yazaki", "Amazon", "Flipkart", "Blinkit", "Zepto", "Apna Mart", "Jupiter Hospitals", "HM Hospitals", "AIG Hospitals", "NU MED Super Speciality Hospitals", "2050 Healthcare", "S.P. Apparels", "Modenik Lifestyle", "Orient Craft", "Ayuda", "L&T", "Wipro", "Infosys", "Cognizant", "TCS", "HCL"];
 
 // Sector-specific grouping for the recruiter page
 export const RECRUITER_SECTORS = [
-  { sector: "Automotive & Manufacturing", companies: ["TATA Motors", "TATA Electronics", "Foxconn", "Wistron"] },
-  { sector: "Logistics & E-Commerce", companies: ["Amazon", "Flipkart", "Blinkit", "Zepto"] },
-  { sector: "Healthcare Ecosystems", companies: ["Jupiter Hospitals", "HM Hospitals"] },
-  { sector: "Apparel & Textiles", companies: ["S.P. Apparels", "Modenik Lifestyle"] },
+  { sector: "Automotive & Manufacturing", companies: ["TATA Motors", "TATA Electronics", "Foxconn", "Wistron", "Reliance", "Yazaki"] },
+  { sector: "Logistics & E-Commerce", companies: ["Amazon", "Flipkart", "Blinkit", "Zepto", "Apna Mart"] },
+  { sector: "Healthcare Ecosystems", companies: ["Jupiter Hospitals", "HM Hospitals", "AIG Hospitals", "NU MED Super Speciality Hospitals", "2050 Healthcare"] },
+  { sector: "Apparel & Textiles", companies: ["S.P. Apparels", "Modenik Lifestyle", "Orient Craft", "Ayuda"] },
+];
+
+// Counselling enquiry dropdown — deliberately limited to the five course
+// headers used in the site header, with CAD collapsed to a single option.
+export const COUNSELING_COURSE_OPTIONS = [
+  { value: "cad", key: "tabCAD" },
+  { value: "computer-application", key: "tabCompApp" },
+  { value: "data-science", key: "tabDataBA" },
+  { value: "design", key: "tabDesign" },
+  { value: "vocational", key: "tabVoc" },
 ];
 
 export const NAV_ITEMS = [
@@ -912,20 +1019,21 @@ export const NAV_ITEMS = [
 export const CREDS = ["NASSCOM", "NSDC Aligned", "AICTE Recognized", "Autodesk Certified", "Skill India Partner"];
 
 export const MILESTONES = [
-  { y: "2001", t: "Foundation", d: "Venture Skill India founded in Ranchi with a single CAD lab and a vision: world-class skill training in Eastern India." },
-  { y: "2010", t: "AICTE Recognition", d: "Polytechnic diploma programs receive AICTE recognition, expanding our reach into formal technical education." },
+  { y: "2001", t: "Foundation", d: "Venture Skill India — previously known as Venture Technologies — founded in Ranchi with a single CAD lab and a vision: world-class skill training in Eastern India." },
+  { y: "2015", t: "NSDC Partnership", d: "VSI becomes an NSDC partner — the first organisation in Jharkhand to do so." },
   { y: "2017", t: "Mega Skill Centre", d: "Venture Mega Skill Centre inaugurated in Ranchi — the flagship multi-program facility." },
   { y: "2019", t: "National Recognition", d: "Skoch Award and Best Placement Award (by Union Min. Dharmendra Pradhan) — twin recognitions in one year." },
   { y: "2022", t: "Tribal Impact", d: "Excellence Award by Cabinet Min. Arjun Munda for outstanding tribal student placement record." },
+  { y: "2023", t: "AICTE Recognition", d: "Polytechnic diploma programs receive AICTE recognition, expanding our reach into formal technical education." },
   { y: "2023", t: "EV + Drone Era", d: "EV Training Centre inaugurated by JSDM; Drone Lab visited by CM Hemant Soren. Future-tech infrastructure." },
-  { y: "2024", t: "50+ Centres", d: "National footprint reaches 50 centres across Jharkhand, UP, and beyond. 15,000+ students empowered." },
+  { y: "2024", t: "50+ Centres", d: "National footprint reaches 50 centres across Jharkhand, UP, and beyond." },
 ];
 
 // i18n translations
 export const TRANSLATIONS: Record<string, Record<string, string>> = {
   en: {
     // Hero
-    heroTag: "23 years · India's Career Transformation Partner",
+    heroTag: "25 years · India's Career Transformation Partner",
     heroTitle1: "Bridging the Skill Gap,",
     heroTitle2: "Empowering",
     heroTitle3: "Careers.",
@@ -993,15 +1101,15 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     coursesEyebrow: "All Programs",
     coursesTitle1: "Pick the path that",
     coursesTitle2: "builds your career.",
-    coursesHeroDesc: "Government-recognized certificate, diploma, and vocational programs. Real curriculum. Real placement support. 20,000+ students already placed.",
+    coursesHeroDesc: "Government-recognized certificate, diploma, and vocational programs. Real curriculum. Real placement support. 45,000+ students already placed.",
     aboutEyebrow: "Our Story",
-    aboutTitle1: "23 Years of Building",
+    aboutTitle1: "25 Years of Building",
     aboutTitle2: "India's Workforce.",
     aboutHeroDesc: "Bridging the skill gap through employability, professional upskilling, and career-readiness. That's been the mission since 2001.",
     placementsEyebrow: "Placements & Recruiters",
-    placementsTitle1: "20,000+ placed.",
+    placementsTitle1: "45,000+ placed.",
     placementsTitle2: "Verifiable outcomes.",
-    placementsHeroDesc: "4,000–5,000 jobs secured per year. Median CTC of ₹3.0–₹4.0 LPA. 20,000+ students deployed across formal workforce sectors.",
+    placementsHeroDesc: "6,000+ jobs secured per year. Median CTC of ₹3.0–₹4.0 LPA. 45,000+ students deployed across formal workforce sectors.",
     newsEyebrow: "Latest Updates",
     newsTitle1: "News &",
     newsTitle2: "Recognition.",
@@ -1029,7 +1137,7 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     csrEyebrow: "Corporate Social Responsibility",
     csrTitle1: "Skilling with",
     csrTitle2: "social purpose.",
-    csrHeroDesc: "Section 135-compliant CSR through corporate alliances, self-funded VSI Foundation programs, and community skilling across rural and tribal India.",
+    csrHeroDesc: "Section 8-compliant CSR through corporate alliances, self-funded Venture Sewa Foundation programs, and community skilling across rural and tribal India.",
     // Courses page sections
     certSectionTitle: "Certificate Courses",
     certSectionSub: "Industry-aligned · 200–320 hours · Certificate of completion",
@@ -1066,7 +1174,7 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     dRelatedTitle: "Related programmes",
   },
   hi: {
-    heroTag: "23 साल · भारत का करियर ट्रांसफ़ॉर्मेशन पार्टनर",
+    heroTag: "25 साल · भारत का करियर ट्रांसफ़ॉर्मेशन पार्टनर",
     heroTitle1: "कौशल की खाई पाटना,",
     heroTitle2: "करियर को",
     heroTitle3: "सशक्त बनाना।",
@@ -1128,15 +1236,15 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     coursesEyebrow: "सभी कार्यक्रम",
     coursesTitle1: "वह रास्ता चुनें जो",
     coursesTitle2: "आपका करियर बनाए।",
-    coursesHeroDesc: "सरकारी-मान्यता प्राप्त सर्टिफिकेट, डिप्लोमा और व्यावसायिक कार्यक्रम। असली पाठ्यक्रम। असली प्लेसमेंट सहायता। 20,000+ छात्र प्लेस्ड।",
+    coursesHeroDesc: "सरकारी-मान्यता प्राप्त सर्टिफिकेट, डिप्लोमा और व्यावसायिक कार्यक्रम। असली पाठ्यक्रम। असली प्लेसमेंट सहायता। 45,000+ छात्र प्लेस्ड।",
     aboutEyebrow: "हमारी कहानी",
-    aboutTitle1: "23 साल से बना रहे हैं",
+    aboutTitle1: "25 साल से बना रहे हैं",
     aboutTitle2: "भारत का कार्यबल।",
     aboutHeroDesc: "रोज़गार योग्यता, पेशेवर कौशल उन्नयन और करियर-तत्परता के माध्यम से कौशल अंतर को पाटना। 2001 से यही मिशन है।",
     placementsEyebrow: "प्लेसमेंट और रिक्रूटर्स",
-    placementsTitle1: "20,000+ प्लेस्ड।",
+    placementsTitle1: "45,000+ प्लेस्ड।",
     placementsTitle2: "सत्यापनयोग्य परिणाम।",
-    placementsHeroDesc: "हर साल 4,000-5,000 नौकरियां। औसत CTC ₹3.0-₹4.0 LPA। 20,000+ छात्र औपचारिक कार्यबल में तैनात।",
+    placementsHeroDesc: "हर साल 6,000+ नौकरियां। औसत CTC ₹3.0-₹4.0 LPA। 45,000+ छात्र औपचारिक कार्यबल में तैनात।",
     newsEyebrow: "ताज़ा अपडेट",
     newsTitle1: "समाचार और",
     newsTitle2: "मान्यता।",
@@ -1163,7 +1271,7 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     csrEyebrow: "कॉर्पोरेट सामाजिक उत्तरदायित्व",
     csrTitle1: "सामाजिक उद्देश्य के साथ",
     csrTitle2: "कौशल निर्माण।",
-    csrHeroDesc: "धारा 135-अनुरूप CSR — कॉर्पोरेट गठबंधन, स्व-वित्तपोषित VSI फाउंडेशन कार्यक्रम और ग्रामीण व आदिवासी भारत में सामुदायिक कौशल।",
+    csrHeroDesc: "धारा 8-अनुरूप CSR — कॉर्पोरेट गठबंधन, स्व-वित्तपोषित वेंचर सेवा फाउंडेशन कार्यक्रम और ग्रामीण व आदिवासी भारत में सामुदायिक कौशल।",
     // Courses page sections
     certSectionTitle: "सर्टिफिकेट कोर्स",
     certSectionSub: "इंडस्ट्री-अलाइंड · 200–320 घंटे · कोर्स पूरा होने का प्रमाणपत्र",

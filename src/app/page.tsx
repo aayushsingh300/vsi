@@ -25,9 +25,9 @@ export default function Home() {
       <Hero />
       <Stats />
       <Courses />
+      <EmployerTicker />
       <Labs />
       <Awards />
-      <EmployerTicker />
       <Testimonials />
       <HomeWorkAbroad />
       <CTA />

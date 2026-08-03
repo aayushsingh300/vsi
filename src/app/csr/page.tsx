@@ -132,9 +132,21 @@ export default function CSRPage() {
               <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", borderRadius: 999, background: "rgba(var(--accent-rgb), .1)", border: "1px solid rgba(var(--accent-rgb), .2)", marginBottom: 20 }}>
                 <ShieldCheck size={14} color="var(--accent)" />
                 <span style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 600 }}>
-                  Section 135 · Companies Act, 2013 Compliant
+                  Companies Act, 2013 · Section 8 Compliant
                 </span>
               </div>
+
+              <p style={{
+                fontFamily: "var(--sans)",
+                fontWeight: 700,
+                fontSize: "clamp(13px, 1.4vw, 15px)",
+                letterSpacing: ".16em",
+                textTransform: "uppercase",
+                color: "var(--accent-orange)",
+                marginBottom: 12,
+              }}>
+                Venture Sewa Foundation
+              </p>
 
               <h1 style={{
                 fontFamily: "var(--serif)",
@@ -157,7 +169,7 @@ export default function CSRPage() {
                 marginBottom: 32,
                 maxWidth: 580
               }}>
-                We channel corporate CSR investments into Section 135-compliant, high-impact skill development — equipping rural youth, women, and underserved talent with verifiable, job-ready credentials.
+                Venture Sewa Foundation is the body under which we carry out all our CSR activities. We channel corporate CSR investments into Section 8-compliant, high-impact skill development — equipping rural youth, women, and underserved talent with verifiable, job-ready credentials.
               </p>
 
               <div style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
@@ -301,7 +313,7 @@ export default function CSRPage() {
         </div>
       </section>
 
-      {/* ── Section 135 Strategic Compliance Pipeline ── */}
+      {/* ── Section 8 Strategic Compliance Pipeline ── */}
       <section id="compliance-section" style={{ padding: isMobile ? "64px 6%" : "96px 5%", background: "var(--bg)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
@@ -321,7 +333,7 @@ export default function CSRPage() {
               marginBottom: 16,
               letterSpacing: "-.03em"
             }}>
-              Section 135 Compliance Pipeline.
+              Section 8 Compliance Pipeline.
             </h2>
             <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", lineHeight: 1.7, maxWidth: 640, marginBottom: 48 }}>
               Every CSR initiative deployed with Venture Skill follows a transparent 5-step execution blueprint — ensuring audit-ready reporting, GST alignment, and measurable social ROI.
@@ -460,14 +472,14 @@ export default function CSRPage() {
         </div>
       </section>
 
-      {/* ── VSI Foundation Independent Footprint ── */}
+      {/* ── Venture Sewa Foundation Independent Footprint ── */}
       <section style={{ padding: isMobile ? "64px 6%" : "96px 5%", background: "var(--bg)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
               <Sparkles size={18} color="var(--accent-orange)" />
               <span style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: ".15em", color: "var(--accent-orange)", textTransform: "uppercase", fontWeight: 600 }}>
-                VSI Foundation Initiatives
+                Venture Sewa Foundation Initiatives
               </span>
             </div>
 
@@ -483,7 +495,7 @@ export default function CSRPage() {
               Self-funded social commitment.
             </h2>
             <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", lineHeight: 1.7, maxWidth: 640, marginBottom: 48 }}>
-              Beyond corporate partnerships, the VSI Foundation invests directly into self-funded rural training camps, women&apos;s cohorts, and scholarship drives.
+              Beyond corporate partnerships, Venture Sewa Foundation invests directly into self-funded rural training camps, women&apos;s cohorts, and scholarship drives.
             </p>
           </AnimateIn>
 
@@ -759,7 +771,7 @@ export default function CSRPage() {
               Deploy your CSR budget effectively.
             </h2>
             <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", lineHeight: 1.7, marginBottom: 32 }}>
-              Let&apos;s structure a custom, Section 135-compliant skill development program aligned with your corporate ESG objectives.
+              Let&apos;s structure a custom, Section 8-compliant skill development program aligned with your corporate ESG objectives.
             </p>
             <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
               <button
@@ -885,7 +897,7 @@ export default function CSRPage() {
                   </h3>
                 </div>
                 <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", marginBottom: 24 }}>
-                  Fill in your details to receive a customized Section 135 skill deployment project plan.
+                  Fill in your details to receive a customized Section 8 skill deployment project plan.
                 </p>
 
                 <form onSubmit={handleFormSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>

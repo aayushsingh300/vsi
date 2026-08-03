@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: `%s · ${SITE_NAME}`,
   },
   description:
-    "23 years. 11,000+ placed. Government-recognized skill institution with EV labs, drone labs, and Autodesk-authorized CAD workstations. NSDC · AICTE · Autodesk Authorized. Certificate, Diploma & Vocational programs in Ranchi, Jharkhand.",
+    "25 years. 45,000+ placed. Government-recognized skill institution with EV labs, drone labs, and Autodesk-authorized CAD workstations. NSDC · AICTE · Autodesk Authorized. Certificate, Diploma & Vocational programs in Ranchi, Jharkhand.",
   keywords: [
     "Venture Skill India",
     "CAD training Ranchi",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: "Venture Skill India — Where Eastern India's Workforce Is Built",
     description:
-      "23 years. 11,000+ placed. Government-recognized skill institution with EV labs, drone labs, and Autodesk-authorized CAD workstations in Ranchi, Jharkhand.",
+      "25 years. 45,000+ placed. Government-recognized skill institution with EV labs, drone labs, and Autodesk-authorized CAD workstations in Ranchi, Jharkhand.",
     images: [
       {
         url: OG_IMAGE,
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Venture Skill India — Where Eastern India's Workforce Is Built",
     description:
-      "23 years. 11,000+ placed. Government-recognized skill institution in Ranchi, Jharkhand. NSDC · AICTE · Autodesk Authorized.",
+      "25 years. 45,000+ placed. Government-recognized skill institution in Ranchi, Jharkhand. NSDC · AICTE · Autodesk Authorized.",
     images: [OG_IMAGE],
   },
   robots: {

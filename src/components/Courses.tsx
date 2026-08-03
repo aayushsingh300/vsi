@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 import AnimateIn from "@/components/AnimateIn";
+import Icon from "@/components/Icon";
 import { COURSES_CERT, DATA_SCIENCE_COURSES, DESIGN_STUDIO_COURSES } from "@/data/content";
 import { COURSE_THUMBS } from "@/data/assets";
 import useIsMobile from "@/hooks/useIsMobile";
@@ -279,11 +280,10 @@ export default function Courses() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      fontSize: 24,
                       flexShrink: 0,
                     }}
                   >
-                    {c.icon}
+                    <Icon name={c.icon} size={20} color="var(--accent)" />
                   </div>
                   <div>
                     <h3
@@ -352,11 +352,10 @@ export default function Courses() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: 26,
                     flexShrink: 0,
                   }}
                 >
-                  {c.icon}
+                  <Icon name={c.icon} size={20} color="var(--accent)" />
                 </div>
                 <h3
                   style={{

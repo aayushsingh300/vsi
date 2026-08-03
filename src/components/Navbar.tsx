@@ -16,7 +16,7 @@ import {
   Info,
   type LucideIcon,
 } from "lucide-react";
-import { COURSES_CERT } from "@/data/content";
+import { COUNSELING_COURSE_OPTIONS } from "@/data/content";
 import { VSI_LOGO, VSI_LOGO_RATIO } from "@/data/assets";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import useIsMobile from "@/hooks/useIsMobile";
@@ -436,8 +436,8 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
             }}
           >
             <option>{t("selectCourse")}</option>
-            {COURSES_CERT.map((c) => (
-              <option key={c.slug}>{c.name}</option>
+            {COUNSELING_COURSE_OPTIONS.map((o) => (
+              <option key={o.value}>{t(o.key)}</option>
             ))}
           </select>
           <button

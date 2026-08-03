@@ -3,20 +3,21 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Globe, Mail, Phone, Briefcase } from "lucide-react";
+import { ArrowUpRight, Globe, Mail, Phone, Briefcase, UserRound, X, CheckCircle2 } from "lucide-react";
 import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
-import { TESTIMONIALS, RECRUITER_SECTORS, CONTACT_CHANNELS } from "@/data/content";
+import { TESTIMONIALS, RECRUITER_SECTORS, CONTACT_CHANNELS, COUNSELING_COURSE_OPTIONS } from "@/data/content";
 import { EMPLOYER_LOGOS, LOGO_INVERT_SET } from "@/data/assets";
 import { useInView, useCountUp } from "@/hooks/useAnimations";
 import { useLang } from "@/context/LangContext";
 import useIsMobile from "@/hooks/useIsMobile";
+import Icon from "@/components/Icon";
 
 const PLACEMENT_STATS = [
-  { val: 20000, sfx: "+", lbl: "Total Students Placed" },
-  { val: 5000, sfx: "+", lbl: "Annual Jobs Secured" },
+  { val: 45000, sfx: "+", lbl: "Total Students Placed" },
+  { val: 6000, sfx: "+", lbl: "Annual Jobs Secured" },
   { val: 3, sfx: ".5L", lbl: "Median CTC (LPA)" },
   { val: 50, sfx: "+", lbl: "Hiring Partners" },
 ];
@@ -32,8 +33,204 @@ function PlacementStat({ val, sfx, lbl, go }: { val: number; sfx: string; lbl: s
   );
 }
 
+// Two separate recruiter enquiry routes:
+//   post-a-job  → Placement Cell (Shubham)
+//   apply       → HR Department screening (Aryan)
+type JobModalKind = "post" | "apply";
+
+const JOB_MODALS: Record<JobModalKind, {
+  title: string;
+  intro: string;
+  desk: string;
+  person: string;
+  email: string;
+  submitLabel: string;
+  successTitle: string;
+  successBody: string;
+}> = {
+  post: {
+    title: "Post a Job Opening",
+    intro: "Share your hiring requirement and our Placement Cell will match pre-screened candidates from our latest batches.",
+    desk: "Placement Cell",
+    person: "Shubham",
+    email: "PM@venturecad.co.in",
+    submitLabel: "Send to Placement Cell",
+    successTitle: "Requirement received.",
+    successBody: "Our Placement Cell will get in touch to confirm the role details and share matching batch profiles.",
+  },
+  apply: {
+    title: "Apply for Jobs",
+    intro: "Submit your details for HR screening. Shortlisted candidates are called for the next hiring drive.",
+    desk: "HR Department",
+    person: "Aryan · HR Manager",
+    email: "HR@venturecad.co.in",
+    submitLabel: "Submit for HR Screening",
+    successTitle: "Application received.",
+    successBody: "Our HR Department will screen your profile and reach out about upcoming openings that fit.",
+  },
+};
+
+function JobModal({ kind, onClose }: { kind: JobModalKind; onClose: () => void }) {
+  const [submitted, setSubmitted] = useState(false);
+  const { t } = useLang();
+  const cfg = JOB_MODALS[kind];
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={cfg.title}
+      style={{
+        position: "fixed", inset: 0, zIndex: 9999,
+        background: "rgba(1,1,1,.75)", backdropFilter: "blur(10px)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        padding: 20,
+      }}
+      onClick={onClose}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          position: "relative", maxWidth: 540, width: "100%",
+          background: "var(--bg-card)", borderRadius: 16,
+          padding: 32, border: "1px solid var(--border-strong)",
+          boxShadow: "var(--shadow-lg)", maxHeight: "90vh", overflowY: "auto",
+        }}
+      >
+        <button
+          onClick={onClose}
+          aria-label="Close"
+          style={{
+            position: "absolute", top: 20, right: 20,
+            background: "transparent", border: "none", color: "var(--text-muted)", cursor: "pointer",
+          }}
+        >
+          <X size={20} />
+        </button>
+
+        {submitted ? (
+          <div style={{ textAlign: "center", padding: "30px 10px" }}>
+            <div style={{
+              width: 56, height: 56, borderRadius: "50%",
+              background: "rgba(var(--wa-rgb), .15)", color: "var(--wa-green)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              margin: "0 auto 16px",
+            }}>
+              <CheckCircle2 size={32} />
+            </div>
+            <h3 style={{ fontFamily: "var(--serif)", fontSize: 22, fontWeight: 700, color: "var(--text)", marginBottom: 8 }}>
+              {cfg.successTitle}
+            </h3>
+            <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "var(--text-muted)", lineHeight: 1.6 }}>
+              {cfg.successBody}
+            </p>
+          </div>
+        ) : (
+          <>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+              {kind === "post" ? <Briefcase size={20} color="var(--accent)" /> : <UserRound size={20} color="var(--accent)" />}
+              <h3 style={{ fontFamily: "var(--serif)", fontSize: 22, fontWeight: 700, color: "var(--text)" }}>
+                {cfg.title}
+              </h3>
+            </div>
+            <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", marginBottom: 16, lineHeight: 1.6 }}>
+              {cfg.intro}
+            </p>
+
+            {/* Routing note — makes the destination desk explicit */}
+            <div style={{
+              display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap",
+              padding: "10px 14px", borderRadius: 8, marginBottom: 22,
+              background: "rgba(var(--accent-rgb),.06)", border: "1px solid rgba(var(--accent-rgb),.18)",
+            }}>
+              <span style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".1em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 500 }}>
+                Goes to {cfg.desk}
+              </span>
+              <span style={{ fontFamily: "var(--body)", fontSize: 12.5, color: "var(--text-muted)" }}>
+                {cfg.person}
+              </span>
+              <a href={`mailto:${cfg.email}`} style={{ fontFamily: "var(--mono)", fontSize: 12, color: "var(--accent)", marginLeft: "auto" }}>
+                {cfg.email}
+              </a>
+            </div>
+
+            <form
+              onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+              style={{ display: "flex", flexDirection: "column", gap: 14 }}
+            >
+              <div>
+                <label style={{ fontFamily: "var(--sans)", fontSize: 12, fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
+                  {kind === "post" ? "Company Name *" : "Full Name *"}
+                </label>
+                <input required type="text" className="input-field" placeholder={kind === "post" ? "e.g. Acme Manufacturing" : "Your name"} />
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <div>
+                  <label style={{ fontFamily: "var(--sans)", fontSize: 12, fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
+                    {kind === "post" ? "Contact Person *" : "Phone Number *"}
+                  </label>
+                  <input required type={kind === "post" ? "text" : "tel"} className="input-field" placeholder={kind === "post" ? "Your name" : "+91 98765 43210"} />
+                </div>
+                <div>
+                  <label style={{ fontFamily: "var(--sans)", fontSize: 12, fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
+                    Email *
+                  </label>
+                  <input required type="email" className="input-field" placeholder={kind === "post" ? "hr@company.com" : "you@email.com"} />
+                </div>
+              </div>
+
+              {kind === "post" ? (
+                <>
+                  <div>
+                    <label style={{ fontFamily: "var(--sans)", fontSize: 12, fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
+                      Role / Trade Required
+                    </label>
+                    <input type="text" className="input-field" placeholder="e.g. CAD Draftsman, Sewing Machine Operator" />
+                  </div>
+                  <div>
+                    <label style={{ fontFamily: "var(--sans)", fontSize: 12, fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
+                      Number of Openings
+                    </label>
+                    <input type="text" className="input-field" placeholder="e.g. 25" />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <label style={{ fontFamily: "var(--sans)", fontSize: 12, fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
+                      Course Completed
+                    </label>
+                    <select className="input-field" style={{ cursor: "pointer" }} defaultValue="">
+                      <option value="" disabled>Select your programme</option>
+                      {COUNSELING_COURSE_OPTIONS.map((o) => (
+                        <option key={o.value} value={o.value}>{t(o.key)}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label style={{ fontFamily: "var(--sans)", fontSize: 12, fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
+                      Preferred Job Location
+                    </label>
+                    <input type="text" className="input-field" placeholder="e.g. Ranchi, Pune, anywhere in India" />
+                  </div>
+                </>
+              )}
+
+              <button type="submit" className="btn-primary" style={{ marginTop: 8, padding: 14 }}>
+                {cfg.submitLabel}
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function PlacementsPage() {
   const [formOpen, setFormOpen] = useState(false);
+  const [jobModal, setJobModal] = useState<JobModalKind | null>(null);
   const [testIdx, setTestIdx] = useState(0);
   const [sRef, sVis] = useInView();
   const { t: tr } = useLang();
@@ -205,7 +402,7 @@ export default function PlacementsPage() {
             </p>
           </AnimateIn>
 
-          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 16 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: 16 }}>
             {CONTACT_CHANNELS.slice(0, 2).map((ch, i) => (
               <AnimateIn key={ch.dept} animation="slideUp" delay={i * 0.08}>
                 <div className="hover-lift" style={{
@@ -219,9 +416,12 @@ export default function PlacementsPage() {
                     border: "1px solid rgba(var(--accent-rgb),.2)",
                     display: "flex", alignItems: "center", justifyContent: "center",
                   }}>
-                    <span style={{ fontSize: 22 }}>{ch.icon}</span>
+                    <Icon name={ch.icon} size={20} color="var(--accent)" />
                   </div>
                   <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 19, color: "var(--text)", letterSpacing: "-.02em" }}>{ch.dept}</h3>
+                  {ch.person && (
+                    <div style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", marginTop: -6 }}>{ch.person}</div>
+                  )}
                   <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 2 }}>
                     <a href={`mailto:${ch.email}`} style={{ display: "flex", alignItems: "center", gap: 8, fontFamily: "var(--mono)", fontSize: 13, color: "var(--accent)", textDecoration: "none" }}>
                       <Mail size={14} /> {ch.email}
@@ -234,34 +434,47 @@ export default function PlacementsPage() {
               </AnimateIn>
             ))}
 
-            {/* Job opportunities CTA card */}
-            <AnimateIn animation="slideUp" delay={0.16}>
-              <Link href="/contact" style={{ textDecoration: "none", display: "block", height: "100%" }}>
-                <div className="hover-lift" style={{
-                  background: "linear-gradient(145deg, var(--ink) 0%, #0d1b2a 100%)", borderRadius: 12,
-                  padding: "30px 26px", display: "flex", flexDirection: "column", gap: 14, height: "100%",
-                  border: "1px solid rgba(var(--accent-rgb),.15)", transition: "box-shadow .3s ease",
-                }}>
-                  <div style={{
-                    width: 44, height: 44, borderRadius: 10,
-                    background: "rgba(var(--gold-rgb),.12)", border: "1px solid rgba(var(--gold-rgb),.2)",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                  }}>
-                    <Briefcase size={20} color="rgba(var(--gold-rgb),.9)" />
-                  </div>
-                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 19, color: "var(--text-inv)", letterSpacing: "-.02em" }}>Post a Job Opening</h3>
-                  <p style={{ fontFamily: "var(--body)", fontSize: 13.5, color: "rgba(248,247,244,.5)", lineHeight: 1.65, flex: 1 }}>
-                    Share your requirement and we&apos;ll match pre-screened, job-ready candidates from our latest batches.
-                  </p>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "var(--sans)", fontWeight: 700, fontSize: 12, letterSpacing: ".06em", textTransform: "uppercase", color: "rgba(var(--gold-rgb),.9)" }}>
-                    Get Started <ArrowUpRight size={14} />
-                  </span>
-                </div>
-              </Link>
-            </AnimateIn>
+            {/* Recruiter & candidate entry points — each routes to its own desk */}
+            {([
+              { kind: "post" as const, title: "Post a Job Opening", desc: "Share your requirement and our Placement Cell will match pre-screened, job-ready candidates from our latest batches.", icon: Briefcase, desk: "Placement Cell" },
+              { kind: "apply" as const, title: "Apply for Jobs", desc: "Submit your profile for HR screening and get called for upcoming hiring drives with our partner employers.", icon: UserRound, desk: "HR Department" },
+            ]).map((card, i) => {
+              const Icon = card.icon;
+              return (
+                <AnimateIn key={card.kind} animation="slideUp" delay={0.16 + i * 0.06}>
+                  <button
+                    onClick={() => setJobModal(card.kind)}
+                    className="hover-lift"
+                    style={{
+                      background: "linear-gradient(145deg, var(--ink) 0%, #0d1b2a 100%)", borderRadius: 12,
+                      padding: "30px 26px", display: "flex", flexDirection: "column", gap: 14, height: "100%",
+                      border: "1px solid rgba(var(--accent-rgb),.15)", transition: "box-shadow .3s ease",
+                      textAlign: "left", cursor: "pointer", width: "100%", font: "inherit",
+                    }}
+                  >
+                    <div style={{
+                      width: 44, height: 44, borderRadius: 10,
+                      background: "rgba(var(--gold-rgb),.12)", border: "1px solid rgba(var(--gold-rgb),.2)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                    }}>
+                      <Icon size={20} color="rgba(var(--gold-rgb),.9)" />
+                    </div>
+                    <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 19, color: "var(--text-inv)", letterSpacing: "-.02em" }}>{card.title}</h3>
+                    <p style={{ fontFamily: "var(--body)", fontSize: 13.5, color: "rgba(248,247,244,.5)", lineHeight: 1.65, flex: 1 }}>
+                      {card.desc}
+                    </p>
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "var(--sans)", fontWeight: 700, fontSize: 12, letterSpacing: ".06em", textTransform: "uppercase", color: "rgba(var(--gold-rgb),.9)" }}>
+                      Get Started <ArrowUpRight size={14} />
+                    </span>
+                  </button>
+                </AnimateIn>
+              );
+            })}
           </div>
         </div>
       </section>
+
+      {jobModal && <JobModal kind={jobModal} onClose={() => setJobModal(null)} />}
 
       <Footer />
       <FloatingWA />

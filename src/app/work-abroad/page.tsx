@@ -21,6 +21,7 @@ import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
+import Icon from "@/components/Icon";
 import { WORK_ABROAD_PROCESS } from "@/data/content";
 import { useLang } from "@/context/LangContext";
 import useIsMobile from "@/hooks/useIsMobile";
@@ -501,13 +502,13 @@ export default function WorkAbroadPage() {
                   </div>
 
                   <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "rgba(255, 255, 255, 0.72)", lineHeight: 1.7, marginBottom: 20 }}>
-                    German International Exchange Program — intensive German language instruction (B1/B2), official nursing qualification recognition, and hospital placement.
+                    German International Exchange Program — intensive German language instruction from A1 and A2 through to B1 and B2 completion, official nursing qualification recognition, and hospital placement.
                   </p>
 
                   {/* Perks Checklist */}
                   <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 24 }}>
                     {[
-                      "Paid German Language Academy (B1/B2 Prep)",
+                      "Paid German Language Academy (A1, A2 → B1, B2)",
                       "Official License Recognition & Bridging",
                       "Path to Permanent European Residency",
                     ].map((perk) => (
@@ -568,7 +569,7 @@ export default function WorkAbroadPage() {
                   German International Exchange Program
                 </h2>
                 <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "rgba(255,255,255,.7)", lineHeight: 1.8, marginBottom: 28 }}>
-                  An official institutional framework connecting qualified Indian healthcare and nursing professionals directly with German hospitals. We provide end-to-end support including German language academy (B1/B2 level), qualification recognition (Defizitbescheid & Anerkennung), visa clearance, and relocation integration.
+                  An official institutional framework connecting qualified Indian healthcare and nursing professionals directly with German hospitals. We provide end-to-end support including German language academy (A1, A2 then B1, B2 completion), qualification recognition (Defizitbescheid & Anerkennung), visa clearance, and relocation integration.
                 </p>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   <Link href="/contact" style={{ textDecoration: "none" }}>
@@ -620,7 +621,7 @@ export default function WorkAbroadPage() {
                 >
                   {[
                     { label: "Destination", val: "Germany (EU)" },
-                    { label: "Language", val: "German B1/B2" },
+                    { label: "Language", val: "German A1 → B2" },
                     { label: "Licensing", val: "Official Nursing Recognition" },
                     { label: "Visa Route", val: "EU Blue Card" },
                   ].map((item) => (
@@ -656,7 +657,7 @@ export default function WorkAbroadPage() {
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 20 }}>
               {[
                 { img: "/images/placements-drive.png", title: "Recruitment Drive", sub: "International employer interviews & credential verification" },
-                { img: "/images/students-campus.png", title: "German Language Academy", sub: "Intensive B1/B2 language instruction & cultural prep" },
+                { img: "/images/students-campus.png", title: "German Language Academy", sub: "A1, A2 then B1, B2 completion & cultural prep" },
                 { img: "/images/award-ceremony.png", title: "Flight Briefing & Felicitation", sub: "Pre-departure ceremony for placed healthcare candidates" },
               ].map((card) => (
                 <div key={card.title} style={{ background: "var(--bg)", border: "1px solid var(--border)", borderRadius: 14, overflow: "hidden" }}>
@@ -723,7 +724,7 @@ export default function WorkAbroadPage() {
                       boxShadow: "0 4px 16px rgba(0,153,255,.12)",
                     }}
                   >
-                    <span style={{ fontSize: isMobile ? 20 : 24 }}>{step.icon}</span>
+                    <Icon name={step.icon} size={isMobile ? 19 : 22} color="var(--accent)" />
                   </div>
 
                   <div style={{ flex: 1, paddingTop: isMobile ? 2 : 6 }}>
