@@ -7,7 +7,7 @@ export interface ToolMeta {
   vendor?: string;
   brandColor: string;
   accentBg: string;
-  iconType: "autocad" | "staad" | "civil3d" | "revit" | "primavera" | "msp" | "photoshop" | "lumion" | "vray" | "max3d" | "sketchup" | "solidworks" | "ansys" | "creo" | "catia" | "inventor" | "tekla" | "plc" | "scada" | "arcgis" | "python" | "java" | "cpp" | "sql" | "excel" | "powerbi" | "tableau" | "illustrator" | "indesign" | "coreldraw" | "blender" | "premiere" | "aftereffects" | "linux" | "code" | "cad" | "engineering" | "generic";
+  iconType: "autocad" | "staad" | "civil3d" | "revit" | "primavera" | "msp" | "photoshop" | "illustrator" | "indesign" | "coreldraw" | "wilcom" | "marvelous" | "lumion" | "vray" | "max3d" | "sketchup" | "solidworks" | "ansys" | "creo" | "catia" | "inventor" | "tekla" | "plc" | "scada" | "arcgis" | "python" | "java" | "cpp" | "sql" | "excel" | "powerbi" | "tableau" | "blender" | "maya" | "premiere" | "aftereffects" | "figma" | "canva" | "tally" | "git" | "react" | "linux" | "code" | "cad" | "engineering" | "fashion" | "generic";
   description: string;
   skills: string[];
 }
@@ -605,6 +605,127 @@ export const SOFTWARE_DATABASE: Record<string, ToolMeta> = {
     description: "Core algorithms and memory structures (Arrays, Linked Lists, Trees, Graphs, Sorting) for optimal software efficiency.",
     skills: ["Algorithmic Time/Space Complexity", "Binary Trees & Search Algorithms", "Dynamic Programming Logic"],
   },
+  "Wilcom": {
+    name: "Wilcom Embroidery",
+    fullName: "Wilcom Embroidery Studio e4",
+    category: "Embroidery & Textile CAD",
+    vendor: "Wilcom International",
+    brandColor: "#E52320",
+    accentBg: "rgba(229, 35, 32, 0.1)",
+    iconType: "wilcom",
+    description: "Industry-standard digitizing software for embroidery design, lettering, stitch editing, and apparel decoration.",
+    skills: ["Embroidery Digitizing & Vectorization", "Stitch Density & Pull Compensation", "Logo & Monogram Embroidery Layouts"],
+  },
+  "Marvelous Designer": {
+    name: "Marvelous Designer",
+    fullName: "CLO Marvelous Designer",
+    category: "3D Garment & Pattern CAD",
+    vendor: "CLO Virtual Fashion",
+    brandColor: "#00B4D8",
+    accentBg: "rgba(0, 180, 216, 0.1)",
+    iconType: "marvelous",
+    description: "3D fashion design software for pattern drafting, virtual garment draping, texture fitting, and realistic fabric simulation.",
+    skills: ["3D Pattern Drafting & Seam Mating", "Virtual Fabric Draping & Fitting", "Garment Avatar Animation & Texturing"],
+  },
+  "Tally Prime": {
+    name: "Tally Prime",
+    fullName: "Tally Prime Gold Edition",
+    category: "Accounting & GST ERP",
+    vendor: "Tally Solutions",
+    brandColor: "#00A389",
+    accentBg: "rgba(0, 163, 137, 0.1)",
+    iconType: "tally",
+    description: "Leading enterprise accounting, inventory management, e-way bill generation, and statutory GST compliance software in India.",
+    skills: ["Voucher Entry & Ledger Management", "GST Return Filing & Reconciliation", "Payroll & Stock Inventory Controls"],
+  },
+  "Tally": {
+    name: "Tally Prime",
+    fullName: "Tally Prime",
+    category: "Accounting & GST ERP",
+    vendor: "Tally Solutions",
+    brandColor: "#00A389",
+    accentBg: "rgba(0, 163, 137, 0.1)",
+    iconType: "tally",
+    description: "Leading enterprise accounting, inventory management, e-way bill generation, and statutory GST compliance software in India.",
+    skills: ["Voucher Entry & Ledger Management", "GST Return Filing & Reconciliation", "Payroll & Stock Inventory Controls"],
+  },
+  "Figma": {
+    name: "Figma",
+    fullName: "Figma Design & Prototyping",
+    category: "UI/UX & Design Systems",
+    vendor: "Figma Inc.",
+    brandColor: "#F24E1E",
+    accentBg: "rgba(242, 78, 30, 0.1)",
+    iconType: "figma",
+    description: "Collaborative interface design tool for vector graphics, responsive layout wireframing, component design systems, and interactive prototypes.",
+    skills: ["UI Component Libraries & Auto Layout", "Interactive Prototype Flows", "Design Systems & Developer Handoff"],
+  },
+  "Figma Basics": {
+    name: "Figma",
+    fullName: "Figma UI/UX Design",
+    category: "UI/UX & Design Systems",
+    vendor: "Figma Inc.",
+    brandColor: "#F24E1E",
+    accentBg: "rgba(242, 78, 30, 0.1)",
+    iconType: "figma",
+    description: "Collaborative interface design tool for vector graphics, responsive layout wireframing, component design systems, and interactive prototypes.",
+    skills: ["UI Component Libraries & Auto Layout", "Interactive Prototype Flows", "Design Systems & Developer Handoff"],
+  },
+  "Canva": {
+    name: "Canva Pro",
+    fullName: "Canva Graphic Suite",
+    category: "Visual Content & Social Media",
+    vendor: "Canva",
+    brandColor: "#00C4CC",
+    accentBg: "rgba(0, 196, 204, 0.1)",
+    iconType: "canva",
+    description: "Visual design platform for rapid brand collateral, social media assets, marketing banners, and video presentations.",
+    skills: ["Brand Kit & Template Editing", "Social Media Content Strategy", "Marketing Banners & Video Reels"],
+  },
+  "Canva Pro": {
+    name: "Canva Pro",
+    fullName: "Canva Graphic Suite",
+    category: "Visual Content & Social Media",
+    vendor: "Canva",
+    brandColor: "#00C4CC",
+    accentBg: "rgba(0, 196, 204, 0.1)",
+    iconType: "canva",
+    description: "Visual design platform for rapid brand collateral, social media assets, marketing banners, and video presentations.",
+    skills: ["Brand Kit & Template Editing", "Social Media Content Strategy", "Marketing Banners & Video Reels"],
+  },
+  "Maya": {
+    name: "Maya 3D",
+    fullName: "Autodesk Maya 3D",
+    category: "3D Animation & VFX",
+    vendor: "Autodesk",
+    brandColor: "#0696D7",
+    accentBg: "rgba(6, 150, 215, 0.1)",
+    iconType: "maya",
+    description: "3D computer graphics software for character rigging, 3D animation, organic modeling, and cinematic VFX.",
+    skills: ["Character Skeleton Rigging", "Keyframe & Motion Capture Animation", "Polygon & Subd Surface Modeling"],
+  },
+  "React": {
+    name: "React.js",
+    fullName: "React Frontend Library",
+    category: "Web Development",
+    vendor: "Meta / OpenSource",
+    brandColor: "#61DAFB",
+    accentBg: "rgba(97, 218, 251, 0.1)",
+    iconType: "react",
+    description: "Declarative, component-based JavaScript library for building responsive single-page web applications.",
+    skills: ["Component State & Props Architecture", "Custom Hooks & Context API", "DOM Reconciliation & SPA Routing"],
+  },
+  "Git": {
+    name: "Git & GitHub",
+    fullName: "Git Version Control",
+    category: "DevOps & Source Control",
+    vendor: "Software Freedom Conservancy",
+    brandColor: "#F05032",
+    accentBg: "rgba(240, 80, 50, 0.1)",
+    iconType: "git",
+    description: "Distributed version control system for tracking source code changes and collaborating in development teams.",
+    skills: ["Branching & Merging Strategies", "Commit History & Pull Requests", "GitHub Collaboration & CI Triggers"],
+  },
 };
 
 // Fallback metadata generator for any unlisted tool or skill
@@ -624,6 +745,16 @@ export function getToolMeta(toolName: string): ToolMeta {
   }
 
   // Partial matches
+  if (lower.includes("wilcom")) return SOFTWARE_DATABASE["Wilcom"];
+  if (lower.includes("marvelous")) return SOFTWARE_DATABASE["Marvelous Designer"];
+  if (lower.includes("tally")) return SOFTWARE_DATABASE["Tally Prime"];
+  if (lower.includes("figma")) return SOFTWARE_DATABASE["Figma"];
+  if (lower.includes("canva")) return SOFTWARE_DATABASE["Canva"];
+  if (lower.includes("premiere")) return SOFTWARE_DATABASE["Premiere Pro"];
+  if (lower.includes("after effect")) return SOFTWARE_DATABASE["After Effects"];
+  if (lower.includes("maya")) return SOFTWARE_DATABASE["Maya"];
+  if (lower.includes("react")) return SOFTWARE_DATABASE["React"];
+  if (lower.includes("git")) return SOFTWARE_DATABASE["Git"];
   if (lower.includes("autocad")) return SOFTWARE_DATABASE["AutoCAD"];
   if (lower.includes("staad")) return SOFTWARE_DATABASE["STAAD.Pro"];
   if (lower.includes("civil 3d")) return SOFTWARE_DATABASE["Civil 3D"];
