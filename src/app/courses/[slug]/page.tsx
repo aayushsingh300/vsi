@@ -15,6 +15,7 @@ import { getProgram, ALL_PROGRAMS, EMPLOYERS } from "@/data/content";
 import { programThumb, EMPLOYER_LOGOS, LOGO_INVERT_SET } from "@/data/assets";
 import { useLang } from "@/context/LangContext";
 import { ToolCard } from "@/components/ToolCard";
+import MasteredTools from "@/components/MasteredTools";
 
 
 // Image that fills its container and falls back to a soft gradient placeholder
@@ -299,20 +300,9 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
             <p className="detail-eyebrow">{t("dToolsEyebrow")}</p>
             <h2 className="detail-h2">{t("dToolsTitle")}</h2>
           </AnimateIn>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(4,1fr)",
-              gap: 10,
-              marginTop: 28,
-            }}
-          >
-            {course.software.map((s, i) => (
-              <AnimateIn key={s} animation="slideUp" delay={i * 0.04}>
-                <ToolCard toolName={s} />
-              </AnimateIn>
-            ))}
-          </div>
+          <AnimateIn animation="fadeIn" delay={0.1}>
+            <MasteredTools tools={course.software} />
+          </AnimateIn>
         </div>
       </section>
 

@@ -11,7 +11,7 @@ interface ToolCardProps {
 }
 
 // Render authentic software brand badges and thumbnails
-function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["iconType"]; brandColor: string }) {
+export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["iconType"]; brandColor: string }) {
   switch (iconType) {
     case "photoshop":
       return (
@@ -421,22 +421,14 @@ export function ToolCard({ toolName, className = "", style = {}, compact = false
   if (compact) {
     return (
       <div
-        ref={cardRef}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onClick={() => setIsHovered(!isHovered)}
         style={{
-          position: "relative",
           display: "inline-flex",
           alignItems: "center",
           gap: 6,
-          background: isHovered ? meta.accentBg : "var(--bg-card)",
-          border: `1px solid ${isHovered ? meta.brandColor : "var(--border)"}`,
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-card)",
           borderRadius: 6,
           padding: "4px 9px",
-          cursor: "pointer",
-          transition: "all 0.2s ease",
-          boxShadow: isHovered ? "0 4px 12px rgba(0,0,0,0.06)" : "none",
           ...style,
         }}
         className={className}
@@ -449,60 +441,21 @@ export function ToolCard({ toolName, className = "", style = {}, compact = false
             fontFamily: "var(--sans)",
             fontSize: 11,
             fontWeight: 600,
-            color: isHovered ? "var(--text)" : "var(--text-muted)",
+            color: "var(--text-muted)",
           }}
         >
           {meta.name}
         </span>
-
-        {/* Floating Inspector Popover */}
-        {isHovered && (
-          <div
-            style={{
-              position: "absolute",
-              left: "50%",
-              transform: "translateX(-50%)",
-              ...(popoverPos === "top" ? { bottom: "100%", marginBottom: 8 } : { top: "100%", marginTop: 8 }),
-              zIndex: 9999,
-              width: 270,
-              background: "var(--bg-card)",
-              border: `1.5px solid ${meta.brandColor}60`,
-              borderRadius: 10,
-              padding: 14,
-              boxShadow: "0 14px 36px rgba(0,0,0,0.16)",
-              pointerEvents: "none",
-              animation: "vsiFadeIn 0.2s ease-out forwards",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-              <div style={{ width: 28, height: 28, flexShrink: 0 }}>
-                <ToolThumbnail iconType={meta.iconType} brandColor={meta.brandColor} />
-              </div>
-              <div>
-                <h4 style={{ fontFamily: "var(--serif)", fontSize: 13, fontWeight: 700, color: "var(--text)", margin: 0 }}>
-                  {meta.fullName}
-                </h4>
-                <span style={{ fontSize: 9.5, fontWeight: 600, color: meta.brandColor }}>
-                  {meta.vendor || meta.category}
-                </span>
-              </div>
-            </div>
-            <p style={{ fontFamily: "var(--body)", fontSize: 11, color: "var(--text-muted)", lineHeight: 1.45, margin: "0 0 8px 0" }}>
-              {meta.description}
-            </p>
-          </div>
-        )}
       </div>
     );
   }
 
-  // Full Card mode (used in "What you'll master" section across all course pages)
+  // Full Card mode
   return (
     <div
       ref={cardRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={() => setIsHovered(!isHovered)}
       style={{
         position: "relative",
         background: "var(--bg-card)",
@@ -512,12 +465,11 @@ export function ToolCard({ toolName, className = "", style = {}, compact = false
         display: "flex",
         alignItems: "center",
         gap: 12,
-        cursor: "pointer",
         transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
         transform: isHovered ? "translateY(-2px)" : "none",
         boxShadow: isHovered
-          ? `0 12px 28px -6px ${meta.brandColor}22, 0 4px 12px rgba(0,0,0,0.05)`
-          : "0 2px 6px rgba(0,0,0,0.02)",
+          ? `0 8px 20px -4px ${meta.brandColor}22, 0 2px 6px rgba(0,0,0,0.04)`
+          : "0 2px 4px rgba(0,0,0,0.02)",
         ...style,
       }}
       className={className}
@@ -569,124 +521,6 @@ export function ToolCard({ toolName, className = "", style = {}, compact = false
           {meta.vendor ? `${meta.vendor} • ${meta.category}` : meta.category}
         </span>
       </div>
-
-      {/* Subtle details trigger icon */}
-      <div
-        style={{
-          width: 16,
-          height: 16,
-          borderRadius: "50%",
-          background: isHovered ? meta.brandColor : "rgba(var(--accent-rgb),0.06)",
-          color: isHovered ? "#FFF" : "var(--text-faint)",
-          fontSize: 9.5,
-          fontWeight: 700,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexShrink: 0,
-          transition: "all 0.2s ease",
-        }}
-      >
-        i
-      </div>
-
-      {/* Refined Floating Tool Inspector Card */}
-      {isHovered && (
-        <div
-          style={{
-            position: "absolute",
-            left: "50%",
-            transform: "translateX(-50%)",
-            ...(popoverPos === "top" ? { bottom: "100%", marginBottom: 10 } : { top: "100%", marginTop: 10 }),
-            zIndex: 99999,
-            width: 300,
-            background: "var(--bg-card)",
-            border: `1.5px solid ${meta.brandColor}60`,
-            borderRadius: 14,
-            padding: "16px 18px",
-            boxShadow: `0 18px 44px rgba(0,0,0,0.16), 0 4px 16px rgba(0,0,0,0.06)`,
-            animation: "vsiFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-            pointerEvents: "auto",
-          }}
-        >
-          {/* Header */}
-          <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 10 }}>
-            <div style={{ width: 40, height: 40, flexShrink: 0 }}>
-              <ToolThumbnail iconType={meta.iconType} brandColor={meta.brandColor} />
-            </div>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 3 }}>
-                <span
-                  style={{
-                    fontSize: 9,
-                    fontWeight: 700,
-                    textTransform: "uppercase",
-                    letterSpacing: ".05em",
-                    background: meta.accentBg,
-                    color: meta.brandColor,
-                    padding: "2px 6px",
-                    borderRadius: 4,
-                  }}
-                >
-                  {meta.category}
-                </span>
-                {meta.vendor && (
-                  <span style={{ fontSize: 9.5, fontWeight: 600, color: "var(--text-muted)" }}>
-                    {meta.vendor}
-                  </span>
-                )}
-              </div>
-              <h3 style={{ fontFamily: "var(--serif)", fontSize: 15, fontWeight: 700, color: "var(--text)", margin: 0, lineHeight: 1.25 }}>
-                {meta.fullName}
-              </h3>
-            </div>
-          </div>
-
-          {/* Description */}
-          <p style={{ fontFamily: "var(--body)", fontSize: 12, color: "var(--text-muted)", lineHeight: 1.5, margin: "0 0 10px 0" }}>
-            {meta.description}
-          </p>
-
-          {/* Skills / Key Capabilities */}
-          {meta.skills && meta.skills.length > 0 && (
-            <div style={{ background: "var(--bg-muted)", borderRadius: 8, padding: "10px 12px", border: "1px solid var(--border)" }}>
-              <span style={{ fontFamily: "var(--mono)", fontSize: 9.5, fontWeight: 700, textTransform: "uppercase", color: "var(--text-muted)", letterSpacing: ".05em", display: "block", marginBottom: 6 }}>
-                Core Capabilities Taught:
-              </span>
-              <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-                {meta.skills.map((skill) => (
-                  <div key={skill} style={{ display: "flex", alignItems: "center", gap: 7, fontSize: 11, fontWeight: 500, color: "var(--text)" }}>
-                    <div
-                      style={{
-                        width: 13,
-                        height: 13,
-                        borderRadius: "50%",
-                        background: meta.brandColor,
-                        color: "#FFF",
-                        fontSize: 8.5,
-                        fontWeight: 800,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexShrink: 0,
-                      }}
-                    >
-                      ✓
-                    </div>
-                    <span>{skill}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Footer Endorsement */}
-          <div style={{ marginTop: 10, display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: 10, color: "var(--text-muted)" }}>
-            <span>VSI Industry Standard</span>
-            <span style={{ fontWeight: 700, color: meta.brandColor }}>100% Practical Training</span>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
