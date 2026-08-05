@@ -4,14 +4,14 @@ import { useState } from "react";
 import useIsMobile from "@/hooks/useIsMobile";
 import { getToolMeta } from "@/data/tools";
 import { ToolThumbnail } from "@/components/ToolCard";
-import { CheckCircle2, Sparkles, ShieldCheck } from "lucide-react";
+import { Sparkles, ShieldCheck } from "lucide-react";
 
 interface MasteredToolsProps {
   tools: string[];
 }
 
 export default function MasteredTools({ tools }: MasteredToolsProps) {
-  const isMobile = useIsMobile(768);
+  const isMobile = useIsMobile(850);
   const [activeIdx, setActiveIdx] = useState(0);
   const [animatingKey, setAnimatingKey] = useState(0);
 
@@ -27,12 +27,200 @@ export default function MasteredTools({ tools }: MasteredToolsProps) {
   const activeMeta = getToolMeta(activeToolName);
 
   return (
-    <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 24 }}>
-      {/* Tool Selection Grid */}
+    <div
+      style={{
+        marginTop: 28,
+        display: "grid",
+        gridTemplateColumns: isMobile ? "1fr" : "420px 1fr",
+        gap: isMobile ? 24 : 36,
+        alignItems: "start",
+      }}
+    >
+      {/* LEFT: Active Tool Inspector Stage (Sticky on Desktop) */}
+      <div
+        key={animatingKey}
+        style={{
+          position: isMobile ? "relative" : "sticky",
+          top: 100,
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-card)",
+          borderRadius: 16,
+          padding: isMobile ? "22px 20px" : "28px 30px",
+          boxShadow: "0 12px 36px -8px rgba(0,0,0,0.06)",
+          display: "flex",
+          flexDirection: "column",
+          gap: 20,
+          animation: "vsiFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+          overflow: "hidden",
+        }}
+      >
+        {/* Top Accent Line */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 3,
+            background: `linear-gradient(90deg, ${activeMeta.brandColor} 0%, var(--accent) 100%)`,
+          }}
+        />
+
+        {/* Header Section */}
+        <div style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+          <div
+            style={{
+              width: 52,
+              height: 52,
+              flexShrink: 0,
+              borderRadius: 12,
+              overflow: "hidden",
+              border: `1.5px solid ${activeMeta.brandColor}40`,
+              boxShadow: `0 4px 14px ${activeMeta.brandColor}25`,
+            }}
+          >
+            <ToolThumbnail iconType={activeMeta.iconType} brandColor={activeMeta.brandColor} />
+          </div>
+
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap", marginBottom: 4 }}>
+              <span
+                style={{
+                  fontFamily: "var(--mono)",
+                  fontSize: 10,
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: ".06em",
+                  background: activeMeta.accentBg,
+                  color: activeMeta.brandColor,
+                  padding: "2px 8px",
+                  borderRadius: 4,
+                }}
+              >
+                {activeMeta.category}
+              </span>
+              {activeMeta.vendor && (
+                <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--text-muted)" }}>
+                  • {activeMeta.vendor}
+                </span>
+              )}
+            </div>
+
+            <h3
+              style={{
+                fontFamily: "var(--serif)",
+                fontSize: 21,
+                fontWeight: 700,
+                color: "var(--text)",
+                letterSpacing: "-.02em",
+                margin: 0,
+                lineHeight: 1.2,
+              }}
+            >
+              {activeMeta.fullName}
+            </h3>
+          </div>
+        </div>
+
+        {/* Description */}
+        <p
+          style={{
+            fontFamily: "var(--body)",
+            fontWeight: 300,
+            fontSize: 14.5,
+            color: "var(--text-muted)",
+            lineHeight: 1.7,
+            margin: 0,
+          }}
+        >
+          {activeMeta.description}
+        </p>
+
+        {/* Core Capabilities List */}
+        {activeMeta.skills && activeMeta.skills.length > 0 && (
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            <div
+              style={{
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                fontWeight: 600,
+                textTransform: "uppercase",
+                letterSpacing: ".06em",
+                color: "var(--text-muted)",
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+              }}
+            >
+              <Sparkles size={13} color={activeMeta.brandColor} />
+              <span>Core Capabilities Taught</span>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              {activeMeta.skills.map((skill) => (
+                <div
+                  key={skill}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 10,
+                    background: "var(--surface)",
+                    padding: "10px 14px",
+                    borderRadius: 8,
+                    border: "1px solid var(--border)",
+                    fontFamily: "var(--sans)",
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: "var(--text)",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 6,
+                      height: 6,
+                      borderRadius: "50%",
+                      background: activeMeta.brandColor,
+                      flexShrink: 0,
+                    }}
+                  />
+                  <span>{skill}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Practical Training Footer Endorsement */}
+        <div
+          style={{
+            marginTop: 4,
+            padding: "10px 14px",
+            borderRadius: 10,
+            background: "rgba(var(--accent-rgb), 0.04)",
+            border: "1px dashed rgba(var(--accent-rgb), 0.18)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            fontSize: 12,
+            fontFamily: "var(--body)",
+            color: "var(--text-muted)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <ShieldCheck size={14} color="var(--accent)" />
+            <span>VSI Industry Standard</span>
+          </div>
+          <span style={{ fontFamily: "var(--mono)", fontWeight: 600, color: "var(--accent)" }}>
+            100% Practical Training
+          </span>
+        </div>
+      </div>
+
+      {/* RIGHT: Interactive Tool Cards Grid */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : `repeat(${Math.min(tools.length, 4)}, 1fr)`,
+          gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(2, 1fr)",
           gap: 12,
         }}
       >
@@ -47,20 +235,18 @@ export default function MasteredTools({ tools }: MasteredToolsProps) {
               style={{
                 width: "100%",
                 textAlign: "left",
-                background: isActive
-                  ? "var(--bg-card)"
-                  : "var(--bg-card)",
+                background: "var(--bg-card)",
                 border: isActive
-                  ? `1.5px solid ${meta.brandColor}`
+                  ? "1.5px solid var(--accent)"
                   : "1px solid var(--border-card)",
                 borderRadius: 12,
-                padding: isMobile ? "12px 12px" : "14px 16px",
+                padding: "14px 16px",
                 cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
                 gap: 12,
                 boxShadow: isActive
-                  ? `0 8px 20px -4px ${meta.brandColor}25, 0 2px 6px rgba(0,0,0,0.04)`
+                  ? "0 8px 24px -4px rgba(var(--accent-rgb), 0.18)"
                   : "0 2px 4px rgba(0,0,0,0.02)",
                 transition: "all 0.2s ease",
                 position: "relative",
@@ -76,7 +262,7 @@ export default function MasteredTools({ tools }: MasteredToolsProps) {
                     top: 0,
                     bottom: 0,
                     width: 4,
-                    background: meta.brandColor,
+                    background: "var(--accent)",
                   }}
                 />
               )}
@@ -102,7 +288,7 @@ export default function MasteredTools({ tools }: MasteredToolsProps) {
                   style={{
                     fontFamily: "var(--sans)",
                     fontWeight: 700,
-                    fontSize: isMobile ? 13 : 14,
+                    fontSize: 13.5,
                     color: "var(--text)",
                     display: "block",
                     whiteSpace: "nowrap",
@@ -117,7 +303,7 @@ export default function MasteredTools({ tools }: MasteredToolsProps) {
                   style={{
                     fontFamily: "var(--body)",
                     fontSize: 11,
-                    color: isActive ? meta.brandColor : "var(--text-muted)",
+                    color: isActive ? "var(--accent)" : "var(--text-muted)",
                     display: "block",
                     whiteSpace: "nowrap",
                     overflow: "hidden",
@@ -129,14 +315,14 @@ export default function MasteredTools({ tools }: MasteredToolsProps) {
                 </span>
               </div>
 
-              {/* Active Indicator Radio Dot */}
+              {/* Selection Radio Indicator */}
               <div
                 style={{
                   width: 14,
                   height: 14,
                   borderRadius: "50%",
                   border: isActive
-                    ? `4px solid ${meta.brandColor}`
+                    ? "4px solid var(--accent)"
                     : "1.5px solid var(--border)",
                   background: "transparent",
                   flexShrink: 0,
@@ -146,213 +332,6 @@ export default function MasteredTools({ tools }: MasteredToolsProps) {
             </button>
           );
         })}
-      </div>
-
-      {/* Grounded Tool Inspector Showcase Panel */}
-      <div
-        key={animatingKey}
-        style={{
-          background: "var(--bg-card)",
-          border: "1px solid var(--border-card)",
-          borderRadius: 16,
-          padding: isMobile ? "20px 18px" : "28px 32px",
-          position: "relative",
-          boxShadow: "0 12px 32px -8px rgba(0,0,0,0.06)",
-          display: "flex",
-          flexDirection: "column",
-          gap: 18,
-          animation: "vsiFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-          overflow: "hidden",
-        }}
-      >
-        {/* Top Accent Strip */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: 3,
-            background: `linear-gradient(90deg, ${activeMeta.brandColor} 0%, var(--accent) 100%)`,
-          }}
-        />
-
-        {/* Header Section */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: isMobile ? "flex-start" : "center",
-            justifyContent: "space-between",
-            flexDirection: isMobile ? "column" : "row",
-            gap: 16,
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <div style={{ width: 48, height: 48, flexShrink: 0, borderRadius: 10, overflow: "hidden" }}>
-              <ToolThumbnail iconType={activeMeta.iconType} brandColor={activeMeta.brandColor} />
-            </div>
-            <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginBottom: 4 }}>
-                <span
-                  style={{
-                    fontFamily: "var(--mono)",
-                    fontSize: 10,
-                    fontWeight: 700,
-                    textTransform: "uppercase",
-                    letterSpacing: ".06em",
-                    background: activeMeta.accentBg,
-                    color: activeMeta.brandColor,
-                    padding: "2px 8px",
-                    borderRadius: 4,
-                    border: `1px solid ${activeMeta.brandColor}30`,
-                  }}
-                >
-                  {activeMeta.category}
-                </span>
-                {activeMeta.vendor && (
-                  <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--text-muted)" }}>
-                    • {activeMeta.vendor}
-                  </span>
-                )}
-              </div>
-              <h3
-                style={{
-                  fontFamily: "var(--serif)",
-                  fontSize: isMobile ? 18 : 22,
-                  fontWeight: 700,
-                  color: "var(--text)",
-                  letterSpacing: "-.02em",
-                  margin: 0,
-                }}
-              >
-                {activeMeta.fullName}
-              </h3>
-            </div>
-          </div>
-
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "4px 12px",
-              background: "rgba(var(--accent-rgb), 0.06)",
-              border: "1px solid rgba(var(--accent-rgb), 0.16)",
-              borderRadius: 999,
-              color: "var(--accent)",
-              fontSize: 11,
-              fontFamily: "var(--mono)",
-              fontWeight: 500,
-            }}
-          >
-            <Sparkles size={13} />
-            <span>Mastery Tool</span>
-          </div>
-        </div>
-
-        {/* Description */}
-        <p
-          style={{
-            fontFamily: "var(--body)",
-            fontWeight: 300,
-            fontSize: isMobile ? 14 : 15,
-            color: "var(--text-muted)",
-            lineHeight: 1.7,
-            margin: 0,
-          }}
-        >
-          {activeMeta.description}
-        </p>
-
-        {/* Core Capabilities */}
-        {activeMeta.skills && activeMeta.skills.length > 0 && (
-          <div
-            style={{
-              background: "var(--bg-muted)",
-              borderRadius: 12,
-              padding: isMobile ? "14px 16px" : "18px 22px",
-              border: "1px solid var(--border)",
-            }}
-          >
-            <div
-              style={{
-                fontFamily: "var(--mono)",
-                fontSize: 11,
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: ".06em",
-                color: "var(--text-muted)",
-                marginBottom: 12,
-                display: "flex",
-                alignItems: "center",
-                gap: 6,
-              }}
-            >
-              <CheckCircle2 size={14} color={activeMeta.brandColor} />
-              <span>Core Skills & Workflows Taught</span>
-            </div>
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
-                gap: 12,
-              }}
-            >
-              {activeMeta.skills.map((skill) => (
-                <div
-                  key={skill}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "var(--bg-card)",
-                    padding: "8px 12px",
-                    borderRadius: 8,
-                    border: "1px solid var(--border-card)",
-                    fontFamily: "var(--sans)",
-                    fontSize: 12.5,
-                    fontWeight: 600,
-                    color: "var(--text)",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: 6,
-                      height: 6,
-                      borderRadius: "50%",
-                      background: activeMeta.brandColor,
-                      flexShrink: 0,
-                    }}
-                  />
-                  <span>{skill}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Practical Training Footer */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingTop: 8,
-            borderTop: "1px solid var(--border)",
-            fontSize: 12,
-            fontFamily: "var(--body)",
-            color: "var(--text-muted)",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <ShieldCheck size={14} color="var(--accent)" />
-            <span>VSI Industry Standard Curriculum</span>
-          </div>
-          <span style={{ fontFamily: "var(--mono)", fontWeight: 600, color: activeMeta.brandColor }}>
-            100% Practical Lab Training
-          </span>
-        </div>
       </div>
     </div>
   );
