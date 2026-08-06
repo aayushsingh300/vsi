@@ -1,0 +1,5 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="60" rx="4" fill="transparent"/>
+  <path d="M22 18L35 32V42H43V32L56 18H46L39 27L32 18H22Z" fill="#E31B23"/>
+  <text x="60" y="38" font-family="'Syne', 'Inter', sans-serif" font-weight="900" font-size="22" fill="#E31B23" letter-spacing="1">YAZAKI</text>
+</svg>

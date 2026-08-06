@@ -61,7 +61,9 @@ export function programThumb(slug: string): string | undefined {
 export const EMPLOYER_LOGOS: Record<string, string> = {
   "TATA Motors": "/logos/tata.png",
   "TATA Electronics": "/logos/tata.png",
-  // "Foxconn": no logo available — will show text fallback
+  "Foxconn": "/logos/foxconn.svg",
+  "Reliance": "/logos/reliance.svg",
+  "Yazaki": "/logos/yazaki.svg",
   "Wistron": "/logos/wistron.svg",
   "Amazon": "/logos/amazon.svg",
   "Flipkart": "/logos/flipkart.svg",

@@ -1,0 +1,7 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="60" rx="4" fill="transparent"/>
+  <path d="M22 18H36C40.4 18 44 20.2 44 24.5C44 27.5 42 29.8 39 30.6L45 42H37L31.5 31.5H29V42H22V18ZM29 26H35C36.8 26 38 25.5 38 24.2C38 23 36.8 22.5 35 22.5H29V26Z" fill="#0A3F7A"/>
+  <path d="M57 32.5C57 38.3 52.8 42.5 47 42.5C41.2 42.5 37 38.3 37 32.5C37 26.7 41.2 22.5 47 22.5C52.8 22.5 57 26.7 57 32.5ZM43.5 32.5C43.5 35.5 45 37.2 47 37.2C49 37.2 50.5 35.5 50.5 32.5C50.5 29.5 49 27.8 47 27.8C45 27.8 43.5 29.5 43.5 32.5Z" fill="#0A3F7A"/>
+  <text x="62" y="38" font-family="'Syne', 'Inter', sans-serif" font-weight="800" font-size="20" fill="#0A3F7A" letter-spacing="-0.5">Reliance</text>
+  <circle cx="165" cy="30" r="4" fill="#ED1C24"/>
+</svg>

@@ -66,38 +66,61 @@ export default function EmployerTicker() {
       {/* Ticker with gradient fade masks */}
       <div className="ticker-wrap" style={{ position: "relative" }}>
         <div className="ticker-inner">
-          {[...EMPLOYERS, ...EMPLOYERS].map((e, i) => (
-            <span
-              key={i}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 148,
-                height: 48,
-                padding: "0 28px",
-                flexShrink: 0,
-              }}
-            >
+          {[...EMPLOYERS, ...EMPLOYERS].map((e, i) => {
+            const logoPath = EMPLOYER_LOGOS[e];
+            return (
               <span
-                className={`logo-mono${LOGO_INVERT_SET.has(e) ? " logo-invert" : ""}`}
+                key={i}
                 style={{
-                  position: "relative",
-                  width: "100%",
-                  height: "100%",
-                  cursor: "default",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 148,
+                  height: 48,
+                  padding: "0 20px",
+                  flexShrink: 0,
                 }}
               >
-                <Image
-                  src={EMPLOYER_LOGOS[e]}
-                  alt={e}
-                  fill
-                  sizes="148px"
-                  style={{ objectFit: "contain" }}
-                />
+                {logoPath ? (
+                  <span
+                    className={`logo-mono${LOGO_INVERT_SET.has(e) ? " logo-invert" : ""}`}
+                    style={{
+                      position: "relative",
+                      width: "100%",
+                      height: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: "default",
+                    }}
+                  >
+                    <Image
+                      src={logoPath}
+                      alt={e}
+                      fill
+                      sizes="148px"
+                      style={{ objectFit: "contain" }}
+                    />
+                  </span>
+                ) : (
+                  <span
+                    style={{
+                      fontFamily: "var(--serif)",
+                      fontStyle: "italic",
+                      fontWeight: 700,
+                      fontSize: 14,
+                      color: "var(--text-muted)",
+                      letterSpacing: "-.01em",
+                      whiteSpace: "nowrap",
+                      opacity: 0.75,
+                    }}
+                  >
+                    {e}
+                  </span>
+                )}
               </span>
-            </span>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

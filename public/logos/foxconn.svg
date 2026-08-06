@@ -1,0 +1,6 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="60" rx="4" fill="transparent"/>
+  <text x="20" y="39" font-family="'Syne', 'Inter', sans-serif" font-weight="900" font-size="24" fill="#00529B" letter-spacing="-0.5">Foxconn</text>
+  <path d="M142 20L155 38H148L142 29L136 38H129L142 20Z" fill="#00529B"/>
+  <circle cx="168" cy="24" r="3" fill="#E31B23"/>
+</svg>
