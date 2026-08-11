@@ -74,7 +74,7 @@ export default function ContactPage() {
                   fontSize: "var(--text-2xl)",
                   color: "var(--text)",
                   marginBottom: "var(--sp-2)",
-                  letterSpacing: "-.03em",
+                  letterSpacing: "var(--tr-display)",
                 }}
               >
                 Get free counseling.
@@ -266,7 +266,7 @@ export default function ContactPage() {
                   fontSize: "var(--text-2xl)",
                   color: "var(--text)",
                   marginBottom: "var(--sp-2)",
-                  letterSpacing: "-.03em",
+                  letterSpacing: "var(--tr-display)",
                 }}
               >
                 Or reach us directly.
@@ -302,7 +302,7 @@ export default function ContactPage() {
               >
                 <WhatsAppIcon size={20} />
                 <div style={{ textAlign: "left" }}>
-                  <div style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-sm)", letterSpacing: ".04em" }}>
+                  <div style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-sm)", letterSpacing: "var(--tr-caps)" }}>
                     WhatsApp Us
                   </div>
                   <div style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", opacity: .8 }}>
@@ -335,7 +335,7 @@ export default function ContactPage() {
                           fontWeight: 700,
                           fontSize: "var(--text-xs)",
                           color: "var(--text-muted)",
-                          letterSpacing: ".1em",
+                          letterSpacing: "var(--tr-mono)",
                           textTransform: "uppercase",
                           marginBottom: "var(--sp-1)",
                         }}
@@ -397,7 +397,7 @@ export default function ContactPage() {
                     fontFamily: "var(--sans)",
                     fontWeight: 700,
                     fontSize: "var(--text-xs)",
-                    letterSpacing: ".14em",
+                    letterSpacing: "var(--tr-mono)",
                     textTransform: "uppercase",
                     color: "rgba(248,247,244,.3)",
                     marginBottom: "var(--sp-3)",
@@ -422,7 +422,7 @@ export default function ContactPage() {
                     fontWeight: 700,
                     fontSize: "var(--text-xs)",
                     color: "rgba(var(--gold-rgb),.85)",
-                    letterSpacing: ".06em",
+                    letterSpacing: "var(--tr-caps)",
                     textTransform: "uppercase",
                     cursor: "pointer",
                     display: "flex",
@@ -431,6 +431,7 @@ export default function ContactPage() {
                     background: "none",
                     border: "none",
                     padding: 0,
+                    minHeight: 28,
                     transition: "color .2s, gap .2s",
                   }}
                   onMouseEnter={(e) => {

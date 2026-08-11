@@ -7,6 +7,7 @@ import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
+import TabSwitch from "@/components/TabSwitch";
 import Link from "next/link";
 import { INFRA_TABS, TRAINING_INSTITUTIONS, SMART_CITY_BLOCKS, CENTERS, POLYTECHNIC_COLLEGES, ITI_COLLEGES } from "@/data/content";
 import { useLang } from "@/context/LangContext";
@@ -43,27 +44,22 @@ export default function CentersPage() {
       <section style={{ padding: isMobile ? "64px 6%" : "96px 5%" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
-            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 12, fontWeight: 500 }}>
-              // Initiative Blueprint
+            <p className="eyebrow-label eyebrow-label--slash" style={{ marginBottom: 12 }}>
+              Initiative Blueprint
             </p>
-            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(24px,3.5vw,44px)", color: "var(--text)", marginBottom: 32, letterSpacing: "-.03em" }}>
+            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(24px,3.5vw,44px)", color: "var(--text)", marginBottom: 32, letterSpacing: "var(--tr-display)" }}>
               Training delivery frameworks.
             </h2>
           </AnimateIn>
 
           {/* Tabs */}
-          <div className="segment" role="tablist" aria-label="Initiatives" style={{ marginBottom: 32 }}>
-            {INFRA_TABS.map((tab) => (
-              <button
-                key={tab.key}
-                role="tab"
-                aria-selected={activeTab === tab.key}
-                onClick={() => setActiveTab(tab.key)}
-                className={`segment-btn${activeTab === tab.key ? " active" : ""}`}
-              >
-                {tab.label}
-              </button>
-            ))}
+          <div style={{ marginBottom: 32 }}>
+            <TabSwitch
+              label="Initiatives"
+              value={activeTab}
+              onChange={setActiveTab}
+              options={INFRA_TABS.map((tab) => ({ id: tab.key, label: tab.label }))}
+            />
           </div>
 
           {/* Tab content */}
@@ -71,21 +67,21 @@ export default function CentersPage() {
             activeTab === tab.key ? (
               <AnimateIn key={tab.key} animation="slideUp">
                 <div style={{
-                  background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 10,
+                  background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: "var(--r-md)",
                   padding: "32px 28px",
                 }}>
-                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 22, color: "var(--text)", letterSpacing: "-.02em", marginBottom: 12 }}>
+                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)", marginBottom: 12 }}>
                     {tab.label}
                   </h3>
-                  <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "var(--text-muted)", lineHeight: 1.7 }}>
+                  <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", lineHeight: 1.7 }}>
                     {tab.desc}
                   </p>
                   {tab.key === "skill" && (
                     <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 20 }}>
                       {["UPSDM (Uttar Pradesh)", "JSDM (Jharkhand)", "BSDM (Bihar)"].map((state) => (
                         <span key={state} style={{
-                          fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".08em", textTransform: "uppercase",
-                          background: "rgba(var(--accent-rgb),.08)", color: "var(--accent)", padding: "6px 12px", borderRadius: 4,
+                          fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-caps)", textTransform: "uppercase",
+                          background: "rgba(var(--accent-rgb),.08)", color: "var(--accent)", padding: "6px 12px", borderRadius: "var(--r-sm)",
                           border: "1px solid rgba(var(--accent-rgb),.15)", fontWeight: 500,
                         }}>{state}</span>
                       ))}
@@ -95,8 +91,8 @@ export default function CentersPage() {
                     <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 20 }}>
                       {["DDU-GKY Programs", "DDU-KK Mega Skill Centres"].map((item) => (
                         <span key={item} style={{
-                          fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".08em", textTransform: "uppercase",
-                          background: "rgba(var(--gold-rgb),.1)", color: "var(--accent-gold)", padding: "6px 12px", borderRadius: 4,
+                          fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-caps)", textTransform: "uppercase",
+                          background: "rgba(var(--gold-rgb),.1)", color: "var(--accent-gold)", padding: "6px 12px", borderRadius: "var(--r-sm)",
                           border: "1px solid rgba(var(--gold-rgb),.18)", fontWeight: 500,
                         }}>{item}</span>
                       ))}
@@ -116,7 +112,7 @@ export default function CentersPage() {
                           href="/services"
                           style={{
                             textDecoration: "none",
-                            background: "var(--bg)", border: "1px solid var(--border)", borderRadius: 8,
+                            background: "var(--bg)", border: "1px solid var(--border)", borderRadius: "var(--r-md)",
                             padding: "16px 18px", display: "flex", flexDirection: "column", gap: 4,
                             transition: "border-color .2s ease, transform .2s ease",
                           }}
@@ -131,8 +127,8 @@ export default function CentersPage() {
                             el.style.transform = "translateY(0)";
                           }}
                         >
-                          <span style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 15, color: "var(--text)", letterSpacing: "-.01em" }}>{item.name}</span>
-                          <span style={{ fontFamily: "var(--body)", fontSize: 12.5, color: "var(--text-muted)", lineHeight: 1.55 }}>{item.desc}</span>
+                          <span style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-base)", color: "var(--text)", letterSpacing: "var(--tr-body)" }}>{item.name}</span>
+                          <span style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.55 }}>{item.desc}</span>
                         </Link>
                       ))}
                     </div>
@@ -148,27 +144,27 @@ export default function CentersPage() {
       <section style={{ padding: isMobile ? "0 6% 64px" : "0 5% 96px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
-            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "rgba(var(--ink-rgb),.3)", textTransform: "uppercase", marginBottom: 12, fontWeight: 500 }}>
-              // Training Institutions Directory
+            <p className="eyebrow-label eyebrow-label--slash" style={{ marginBottom: 12 }}>
+              Training Institutions Directory
             </p>
           </AnimateIn>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 16 }}>
             {TRAINING_INSTITUTIONS.map((inst, i) => (
               <AnimateIn key={inst.name} animation="slideUp" delay={i * 0.08}>
                 <div className="course-row" style={{
-                  background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 10,
+                  background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: "var(--r-md)",
                   padding: "28px 24px", display: "flex", flexDirection: "column", gap: 12, height: "100%",
                 }}>
                   <div style={{
-                    fontFamily: "var(--mono)", fontSize: 9, letterSpacing: ".14em", textTransform: "uppercase",
+                    fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase",
                     color: "var(--accent)", fontWeight: 500,
                   }}>{inst.type}</div>
-                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 18, color: "var(--text)", letterSpacing: "-.02em" }}>
+                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>
                     {inst.name}
-                    {inst.count && <span style={{ fontFamily: "var(--mono)", fontSize: 12, color: "var(--accent)", marginLeft: 8 }}>×{inst.count}</span>}
+                    {inst.count && <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-sm)", color: "var(--accent)", marginLeft: 8 }}>×{inst.count}</span>}
                   </h3>
-                  <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>{inst.desc}</p>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--mono)", fontSize: 10, color: "var(--text-muted)", letterSpacing: ".08em" }}><MapPin size={11} strokeWidth={1.8} /> {inst.state}</span>
+                  <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6 }}>{inst.desc}</p>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)", letterSpacing: "var(--tr-caps)" }}><MapPin size={11} strokeWidth={1.8} /> {inst.state}</span>
                 </div>
               </AnimateIn>
             ))}
@@ -180,13 +176,13 @@ export default function CentersPage() {
       <section style={{ background: "var(--ink)", padding: isMobile ? "64px 6%" : "96px 5%" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
-            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "rgba(var(--gold-rgb),.5)", textTransform: "uppercase", marginBottom: 12, fontWeight: 500 }}>
-              // Flagship Facility
+            <p className="eyebrow-label eyebrow-label--slash eyebrow-label--on-dark" style={{ marginBottom: 12 }}>
+              Flagship Facility
             </p>
-            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(24px,3.5vw,44px)", color: "var(--text-inv)", marginBottom: 14, letterSpacing: "-.03em" }}>
+            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(24px,3.5vw,44px)", color: "var(--text-inv)", marginBottom: 14, letterSpacing: "var(--tr-display)" }}>
               Ranchi Smart City (Dhurwa)
             </h2>
-            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "rgba(248,247,244,.45)", lineHeight: 1.75, maxWidth: 640, marginBottom: 40 }}>
+            <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "rgba(248,247,244,.45)", lineHeight: 1.75, maxWidth: 640, marginBottom: 40 }}>
               A high-tech hub spanning 4 distinct operational blocks — from executive offices and F&B zones to smart classrooms and residential housing.
             </p>
           </AnimateIn>
@@ -194,7 +190,7 @@ export default function CentersPage() {
           {/* Campus walkthrough video */}
           <AnimateIn animation="scaleIn">
             <div style={{
-              position: "relative", borderRadius: 12, overflow: "hidden", marginBottom: 48,
+              position: "relative", borderRadius: "var(--r-md)", overflow: "hidden", marginBottom: 48,
               border: "1px solid rgba(255,255,255,.1)", background: "rgba(255,255,255,.03)",
               aspectRatio: "16/9",
             }}>
@@ -210,7 +206,7 @@ export default function CentersPage() {
               </video>
             </div>
             <p style={{
-              fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase",
+              fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase",
               color: "rgba(248,247,244,.35)", marginTop: -34, marginBottom: 48,
             }}>
               Campus Walkthrough · Venture Institute Park, Dhurwa
@@ -223,25 +219,25 @@ export default function CentersPage() {
               return (
                 <AnimateIn key={block.block} animation="slideUp" delay={i * 0.08}>
                   <div className="hover-lift" style={{
-                    background: "rgba(255,255,255,.03)", border: "1px solid rgba(255,255,255,.08)", borderRadius: 10,
+                    background: "rgba(255,255,255,.03)", border: "1px solid rgba(255,255,255,.08)", borderRadius: "var(--r-md)",
                     padding: "28px 24px", display: "flex", gap: 16, alignItems: "flex-start",
                     transition: "background .25s ease, box-shadow .3s ease",
                   }}>
                     <div style={{
-                      width: 48, height: 48, borderRadius: 10, flexShrink: 0,
+                      width: 48, height: 48, borderRadius: "var(--r-md)", flexShrink: 0,
                       background: "rgba(var(--accent-rgb),.12)", border: "1px solid rgba(var(--accent-rgb),.2)",
                       display: "flex", alignItems: "center", justifyContent: "center",
                     }}>
                       <Icon size={20} color="var(--accent)" />
                     </div>
                     <div>
-                      <div style={{ fontFamily: "var(--mono)", fontSize: 9, letterSpacing: ".14em", color: "rgba(var(--gold-rgb),.5)", textTransform: "uppercase", marginBottom: 6 }}>
+                      <div style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", color: "rgba(var(--gold-rgb),.5)", textTransform: "uppercase", marginBottom: 6 }}>
                         Block {block.block} · {block.name}
                       </div>
-                      <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 18, color: "var(--text-inv)", letterSpacing: "-.02em", marginBottom: 6 }}>
+                      <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text-inv)", letterSpacing: "var(--tr-heading)", marginBottom: 6 }}>
                         {block.name}
                       </h3>
-                      <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "rgba(248,247,244,.4)", lineHeight: 1.6 }}>{block.desc}</p>
+                      <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "rgba(248,247,244,.4)", lineHeight: 1.6 }}>{block.desc}</p>
                     </div>
                   </div>
                 </AnimateIn>
@@ -255,8 +251,8 @@ export default function CentersPage() {
       <section style={{ padding: isMobile ? "64px 6%" : "96px 5%" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
-            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "rgba(var(--ink-rgb),.3)", textTransform: "uppercase", marginBottom: 12, fontWeight: 500 }}>
-              // Centre Locations
+            <p className="eyebrow-label eyebrow-label--slash" style={{ marginBottom: 12 }}>
+              Centre Locations
             </p>
           </AnimateIn>
           {CENTERS.map((c, i) => (
@@ -269,31 +265,31 @@ export default function CentersPage() {
               }}>
                 <div style={{ flex: 1 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8, flexWrap: "wrap" }}>
-                    <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 22, color: "var(--text)", letterSpacing: "-.02em" }}>
+                    <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>
                       {c.city}, {c.state}
                     </h3>
                     {c.kind && (
                       <span style={{
-                        fontFamily: "var(--mono)", fontSize: 9.5, letterSpacing: ".1em", textTransform: "uppercase",
+                        fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase",
                         background: "rgba(var(--accent-rgb),.08)", color: "var(--accent)",
-                        border: "1px solid rgba(var(--accent-rgb),.18)", padding: "4px 9px", borderRadius: 3, fontWeight: 500,
+                        border: "1px solid rgba(var(--accent-rgb),.18)", padding: "4px 9px", borderRadius: "var(--r-sm)", fontWeight: 500,
                       }}>{c.kind}</span>
                     )}
-                    {c.flagship && <span style={{ background: "var(--ink)", color: "var(--text-inv)", fontFamily: "var(--sans)", fontWeight: 700, fontSize: 9, letterSpacing: ".1em", padding: "3px 8px", borderRadius: 1, textTransform: "uppercase" }}>Flagship</span>}
+                    {c.flagship && <span style={{ background: "var(--ink)", color: "var(--text-inv)", fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", padding: "3px 8px", borderRadius: "var(--r-sm)", textTransform: "uppercase" }}>Flagship</span>}
                   </div>
                   <div style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: 14 }}>
                     <MapPin size={14} color="rgba(var(--ink-rgb),.3)" style={{ marginTop: 3, flexShrink: 0 }} />
-                    <span style={{ fontFamily: "var(--body)", fontSize: 14, color: "rgba(var(--ink-rgb),.45)", lineHeight: 1.5 }}>{c.addr}</span>
+                    <span style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "rgba(var(--ink-rgb),.45)", lineHeight: 1.5 }}>{c.addr}</span>
                   </div>
-                  <div style={{ fontFamily: "var(--mono)", fontSize: 9.5, letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),.3)", marginBottom: 8 }}>
+                  <div style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase", color: "rgba(var(--ink-rgb),.3)", marginBottom: 8 }}>
                     Trades Taught
                   </div>
                   <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                     {c.labs.map(lab => (
                       <span key={lab} style={{
                         background: "rgba(var(--ink-rgb),.04)", border: "1px solid rgba(var(--ink-rgb),.08)",
-                        borderRadius: 2, padding: "5px 10px",
-                        fontFamily: "var(--mono)", fontSize: 10, color: "rgba(var(--ink-rgb),.4)",
+                        borderRadius: "var(--r-sm)", padding: "5px 10px",
+                        fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "rgba(var(--ink-rgb),.4)",
                       }}>{lab}</span>
                     ))}
                   </div>

@@ -75,7 +75,7 @@ export default function Hero() {
               fontWeight: 700,
               fontSize: isMobile ? "clamp(34px,9vw,52px)" : "clamp(44px,5.5vw,84px)",
               lineHeight: 1.02,
-              letterSpacing: "-.038em",
+              letterSpacing: "var(--tr-display)",
               color: "var(--text)",
               marginBottom: 28,
             }}
@@ -94,7 +94,7 @@ export default function Hero() {
             style={{
               fontFamily: "var(--body)",
               fontWeight: 300,
-              fontSize: isMobile ? 15 : 17,
+              fontSize: isMobile ? "var(--text-base)" : "var(--text-md)",
               lineHeight: 1.82,
               color: "var(--text-muted)",
               maxWidth: 490,
@@ -155,9 +155,9 @@ export default function Hero() {
                 <span
                   style={{
                     fontFamily: "var(--mono)",
-                    fontSize: 10,
+                    fontSize: "var(--text-xs)",
                     color: "var(--text-muted)",
-                    letterSpacing: ".08em",
+                    letterSpacing: "var(--tr-caps)",
                     textTransform: "uppercase",
                   }}
                 >
@@ -187,7 +187,7 @@ export default function Hero() {
             onMouseEnter={() => setHover("ev")}
             onMouseLeave={() => setHover(null)}
             style={{
-              borderRadius: 8,
+              borderRadius: "var(--r-md)",
               overflow: "hidden",
               position: "relative",
               cursor: "pointer",
@@ -230,9 +230,9 @@ export default function Hero() {
               <span
                 style={{
                   fontFamily: "var(--mono)",
-                  fontSize: 10,
+                  fontSize: "var(--text-xs)",
                   color: "rgba(253,252,249,.75)",
-                  letterSpacing: ".14em",
+                  letterSpacing: "var(--tr-mono)",
                   textTransform: "uppercase",
                   fontWeight: 500,
                 }}
@@ -265,7 +265,7 @@ export default function Hero() {
               onMouseEnter={() => setHover("fashion")}
               onMouseLeave={() => setHover(null)}
               style={{
-                borderRadius: 8,
+                borderRadius: "var(--r-md)",
                 overflow: "hidden",
                 position: "relative",
                 cursor: "pointer",
@@ -298,9 +298,9 @@ export default function Hero() {
                   bottom: 12,
                   left: 14,
                   fontFamily: "var(--mono)",
-                  fontSize: 9,
+                  fontSize: "var(--text-xs)",
                   color: "rgba(253,252,249,.7)",
-                  letterSpacing: ".14em",
+                  letterSpacing: "var(--tr-mono)",
                   textTransform: "uppercase",
                   fontWeight: 500,
                 }}
@@ -312,7 +312,7 @@ export default function Hero() {
             {/* Stat tile */}
             <div
               style={{
-                borderRadius: 8,
+                borderRadius: "var(--r-md)",
                 background: "linear-gradient(145deg, var(--accent-green) 0%, #1a4a35 100%)",
                 color: "var(--white)",
                 padding: "22px 20px 20px",
@@ -353,8 +353,8 @@ export default function Hero() {
               <span
                 style={{
                   fontFamily: "var(--mono)",
-                  fontSize: 9,
-                  letterSpacing: ".18em",
+                  fontSize: "var(--text-xs)",
+                  letterSpacing: "var(--tr-mono)",
                   color: "rgba(255,255,255,.5)",
                   textTransform: "uppercase",
                   position: "relative",
@@ -370,7 +370,7 @@ export default function Hero() {
                     fontWeight: 700,
                     fontSize: "clamp(38px,5.5vw,68px)",
                     lineHeight: 1,
-                    letterSpacing: "-.03em",
+                    letterSpacing: "var(--tr-display)",
                     background: "linear-gradient(135deg, #fff 60%, rgba(var(--gold-rgb),.9) 100%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
@@ -383,7 +383,7 @@ export default function Hero() {
                   style={{
                     fontFamily: "var(--sans)",
                     fontWeight: 600,
-                    fontSize: 13,
+                    fontSize: "var(--text-sm)",
                     color: "rgba(255,255,255,.8)",
                     marginTop: 6,
                     lineHeight: 1.3,

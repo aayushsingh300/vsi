@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import AnimateIn from "@/components/AnimateIn";
+import OrgMark from "@/components/OrgMark";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useLang } from "@/context/LangContext";
 
@@ -20,6 +21,8 @@ const features = [
   "50+ Centres across Eastern India",
   "Autodesk-Authorized CAD Labs",
 ];
+
+const CRED_MARKS = ["NSDC", "AICTE", "Autodesk", "Skill India"];
 
 export default function Labs() {
   const { t } = useLang();
@@ -69,18 +72,13 @@ export default function Labs() {
       {/* Left text */}
       <div style={{ position: "relative", zIndex: 2 }}>
         <AnimateIn animation="fadeIn">
-          <div
-            style={{
-              fontFamily: "var(--mono)",
-              fontSize: 10,
-              color: "rgba(255,255,255,.25)",
-              letterSpacing: ".15em",
-              textTransform: "uppercase",
-              marginBottom: 24,
-            }}
+          {/* The shared eyebrow, on-dark variant. */}
+          <p
+            className="eyebrow-label eyebrow-label--slash eyebrow-label--on-dark"
+            style={{ marginBottom: 24 }}
           >
-            // {t("infrastructure")}
-          </div>
+            {t("infrastructure")}
+          </p>
         </AnimateIn>
 
         <AnimateIn animation="slideUp" delay={0.1}>
@@ -92,7 +90,7 @@ export default function Labs() {
               fontSize: isMobile ? "clamp(26px,7vw,36px)" : "clamp(32px,4vw,62px)",
               color: "var(--text-inv)",
               lineHeight: 1.08,
-              letterSpacing: "-.032em",
+              letterSpacing: "var(--tr-display)",
               marginBottom: 24,
             }}
           >
@@ -105,7 +103,7 @@ export default function Labs() {
             style={{
               fontFamily: "var(--body)",
               fontWeight: 300,
-              fontSize: isMobile ? 14.5 : 16,
+              fontSize: isMobile ? "var(--text-base)" : "var(--text-md)",
               color: "rgba(253,252,249,.46)",
               lineHeight: 1.84,
               marginBottom: 36,
@@ -123,7 +121,7 @@ export default function Labs() {
                 style={{
                   fontFamily: "var(--body)",
                   fontWeight: 400,
-                  fontSize: 15,
+                  fontSize: "var(--text-base)",
                   color: "rgba(253,252,249,.66)",
                 }}
               >
@@ -133,72 +131,47 @@ export default function Labs() {
           </AnimateIn>
         ))}
 
-        {/* Credential pills */}
+        {/* Credential marks — the bodies that recognise the labs, in their own
+            livery. Each sits on a light plate: this section runs on --bg-dark,
+            where a navy roundel or a black wordmark would simply disappear. */}
         <AnimateIn animation="fadeIn" delay={0.6}>
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 32 }}>
-            {["NSDC", "AICTE", "Autodesk", "Skill India"].map((c) => (
-              <span
-                key={c}
-                style={{
-                  fontFamily: "var(--mono)",
-                  fontSize: 10,
-                  letterSpacing: ".1em",
-                  color: "rgba(var(--gold-rgb),.6)",
-                  textTransform: "uppercase",
-                  padding: "5px 12px",
-                  border: "1px solid rgba(var(--gold-rgb),.18)",
-                  borderRadius: 999,
-                  background: "rgba(var(--gold-rgb),.05)",
-                }}
-              >
-                {c}
+          <div
+            style={{
+              display: "flex",
+              gap: 8,
+              flexWrap: "wrap",
+              alignItems: "center",
+              marginTop: 32,
+              "--org-h": isMobile ? "13px" : "15px",
+              "--plate-h": isMobile ? "32px" : "38px",
+            } as React.CSSProperties}
+          >
+            {CRED_MARKS.map((c) => (
+              <span key={c} title={c} className="cred-plate">
+                <OrgMark name={c} />
               </span>
             ))}
           </div>
         </AnimateIn>
 
-        {/* CTA — tour the centres */}
+        {/* CTA — tour the centres.
+            These were two hand-rolled buttons: their own fill, their own
+            radius (3px against the system's 6), their own weight and size,
+            and no uppercase — so the most prominent pair of actions on the
+            homepage matched nothing else on it. */}
         <AnimateIn animation="fadeIn" delay={0.7}>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 34 }}>
             <Link href="/centers" style={{ textDecoration: "none" }}>
               <button
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  fontFamily: "var(--sans)",
-                  fontWeight: 600,
-                  fontSize: 13.5,
-                  color: "var(--bg-dark)",
-                  background: "var(--accent-gold)",
-                  border: "none",
-                  borderRadius: 3,
-                  padding: "12px 22px",
-                  cursor: "pointer",
-                }}
+                className="btn-primary"
+                style={{ display: "inline-flex", alignItems: "center", gap: 8 }}
               >
-                <MapPin size={15} /> Explore Our Centres <ArrowUpRight size={15} />
+                <MapPin size={15} aria-hidden="true" /> Explore Our Centres{" "}
+                <ArrowUpRight size={15} aria-hidden="true" />
               </button>
             </Link>
             <Link href="/contact" style={{ textDecoration: "none" }}>
-              <button
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  fontFamily: "var(--sans)",
-                  fontWeight: 600,
-                  fontSize: 13.5,
-                  color: "rgba(253,252,249,.8)",
-                  background: "transparent",
-                  border: "1px solid rgba(255,255,255,.16)",
-                  borderRadius: 3,
-                  padding: "12px 22px",
-                  cursor: "pointer",
-                }}
-              >
-                Book a Lab Visit
-              </button>
+              <button className="btn-secondary-on-dark">Book a Lab Visit</button>
             </Link>
           </div>
         </AnimateIn>
@@ -221,11 +194,11 @@ export default function Labs() {
               className="img-hover"
               style={{
                 height: isMobile ? 130 : 190,
-                borderRadius: 6,
+                borderRadius: "var(--r-sm)",
                 overflow: "hidden",
                 position: "relative",
                 border: "1px solid rgba(255,255,255,.06)",
-                boxShadow: "0 8px 24px rgba(0,0,0,.3)",
+                boxShadow: "var(--shadow-md)",
               }}
             >
               <Image
@@ -249,9 +222,9 @@ export default function Labs() {
                   bottom: 10,
                   left: 12,
                   fontFamily: "var(--mono)",
-                  fontSize: 9,
+                  fontSize: "var(--text-xs)",
                   color: "rgba(255,255,255,.5)",
-                  letterSpacing: ".1em",
+                  letterSpacing: "var(--tr-mono)",
                   textTransform: "uppercase",
                 }}
               >

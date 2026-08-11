@@ -957,17 +957,18 @@ export type College = {
   district: string;
   state: string;
   type: "Polytechnic" | "ITI";
+  image: string;
 };
 
 export const POLYTECHNIC_COLLEGES: College[] = [
-  { name: "Government Polytechnic College, Sardhana", district: "Meerut", state: "Uttar Pradesh", type: "Polytechnic" },
-  { name: "Government Polytechnic College, Ghugulpur", aka: "Government Polytechnic College, Balrampur", district: "Balrampur", state: "Uttar Pradesh", type: "Polytechnic" },
-  { name: "Government Girls Polytechnic College, Atrauli", district: "Aligarh", state: "Uttar Pradesh", type: "Polytechnic" },
+  { name: "Government Polytechnic College, Sardhana", district: "Meerut", state: "Uttar Pradesh", type: "Polytechnic", image: "/centres/polytechnic-sardhana.png" },
+  { name: "Government Polytechnic College, Ghugulpur", aka: "Government Polytechnic College, Balrampur", district: "Balrampur", state: "Uttar Pradesh", type: "Polytechnic", image: "/centres/polytechnic-ghugulpur.png" },
+  { name: "Government Girls Polytechnic College, Atrauli", district: "Aligarh", state: "Uttar Pradesh", type: "Polytechnic", image: "/centres/polytechnic-atrauli.png" },
 ];
 
 export const ITI_COLLEGES: College[] = [
-  { name: "ITI College, Basantrai", district: "Godda", state: "Jharkhand", type: "ITI" },
-  { name: "ITI College, Saraikela", district: "Kharsawan", state: "Jharkhand", type: "ITI" },
+  { name: "ITI College, Basantrai", district: "Godda", state: "Jharkhand", type: "ITI", image: "/centres/iti-basantrai.png" },
+  { name: "ITI College, Saraikela", district: "Kharsawan", state: "Jharkhand", type: "ITI", image: "/centres/iti-saraikela.png" },
 ];
 
 // ════════════════════════════════════════════════════════════════════
@@ -1431,11 +1432,11 @@ export const TESTIMONIALS = [
   { q: "EV training gave me a skill almost nobody else had. That's exactly what got me the job at Tata Motors when they were hiring for their EV division.", name: "Amit Kumar", course: "Mechanical CAD · 2022 Batch", placed: "TATA Motors, Pune", from: "Godda, Jharkhand" },
 ];
 
-export const EMPLOYERS = ["TATA Motors", "TATA Electronics", "Foxconn", "Wistron", "Reliance", "Yazaki", "Amazon", "Flipkart", "Blinkit", "Zepto", "Apna Mart", "Jupiter Hospitals", "HM Hospitals", "AIG Hospitals", "NU MED Super Speciality Hospitals", "2050 Healthcare", "S.P. Apparels", "Modenik Lifestyle", "Orient Craft", "Ayuda", "L&T", "Wipro", "Infosys", "Cognizant", "TCS", "HCL"];
+export const EMPLOYERS = ["TATA Motors", "Foxconn", "Wistron", "Reliance", "Yazaki", "Amazon", "Flipkart", "Blinkit", "Zepto", "Apna Mart", "Jupiter Hospitals", "HM Hospitals", "AIG Hospitals", "NU MED Super Speciality Hospitals", "2050 Healthcare", "S.P. Apparels", "Modenik Lifestyle", "Orient Craft", "Ayuda", "L&T", "Wipro", "Infosys", "Cognizant", "TCS", "HCL"];
 
 // Sector-specific grouping for the recruiter page
 export const RECRUITER_SECTORS = [
-  { sector: "Automotive & Manufacturing", companies: ["TATA Motors", "TATA Electronics", "Foxconn", "Wistron", "Reliance", "Yazaki"] },
+  { sector: "Automotive & Manufacturing", companies: ["TATA Motors", "Foxconn", "Wistron", "Reliance", "Yazaki"] },
   { sector: "Logistics & E-Commerce", companies: ["Amazon", "Flipkart", "Blinkit", "Zepto", "Apna Mart"] },
   { sector: "Healthcare Ecosystems", companies: ["Jupiter Hospitals", "HM Hospitals", "AIG Hospitals", "NU MED Super Speciality Hospitals", "2050 Healthcare"] },
   { sector: "Apparel & Textiles", companies: ["S.P. Apparels", "Modenik Lifestyle", "Orient Craft", "Ayuda"] },

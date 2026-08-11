@@ -43,10 +43,10 @@ export default function ServicesPage() {
       <section style={{ padding: isMobile ? "56px 6%" : "80px 5%", background: "var(--bg-muted)", borderBottom: "1px solid var(--border)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
-            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 12, fontWeight: 500 }}>
-              // What We Deliver
+            <p className="eyebrow-label eyebrow-label--slash" style={{ marginBottom: 12 }}>
+              What We Deliver
             </p>
-            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(22px,3vw,36px)", color: "var(--text)", marginBottom: 32, letterSpacing: "-.03em" }}>
+            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(22px,3vw,36px)", color: "var(--text)", marginBottom: 32, letterSpacing: "var(--tr-display)" }}>
               Six delivery verticals.
             </h2>
           </AnimateIn>
@@ -54,12 +54,12 @@ export default function ServicesPage() {
             {SERVICES_VERTICALS.map((v, i) => (
               <AnimateIn key={v.name} animation="slideUp" delay={i * 0.05}>
                 <div className="course-row" style={{
-                  background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 10,
+                  background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: "var(--r-md)",
                   padding: "26px 22px", display: "flex", flexDirection: "column", gap: 10, height: "100%",
                 }}>
                   <div className="icon-box"><Icon name={v.icon} size={19} color="var(--accent)" /></div>
-                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 17, color: "var(--text)", letterSpacing: "-.02em" }}>{v.name}</h3>
-                  <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>{v.desc}</p>
+                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-md)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>{v.name}</h3>
+                  <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6 }}>{v.desc}</p>
                 </div>
               </AnimateIn>
             ))}
@@ -73,21 +73,21 @@ export default function ServicesPage() {
           <AnimateIn animation="slideUp">
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
               <div style={{
-                width: 40, height: 40, borderRadius: 10,
+                width: 40, height: 40, borderRadius: "var(--r-md)",
                 background: "linear-gradient(135deg, rgba(var(--accent-rgb),.15), rgba(var(--gold-rgb),.1))",
                 border: "1px solid rgba(var(--accent-rgb),.2)",
                 display: "flex", alignItems: "center", justifyContent: "center",
               }}>
                 <GraduationCap size={18} color="var(--accent)" />
               </div>
-              <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", fontWeight: 500 }}>
-                // Training Directory
+              <p className="eyebrow-label eyebrow-label--slash">
+                Training Directory
               </p>
             </div>
-            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(22px,3vw,36px)", color: "var(--text)", marginBottom: 12, letterSpacing: "-.03em" }}>
+            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(22px,3vw,36px)", color: "var(--text)", marginBottom: 12, letterSpacing: "var(--tr-display)" }}>
               PPP-mode partnerships.
             </h2>
-            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", lineHeight: 1.75, maxWidth: 620, marginBottom: 28 }}>
+            <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", lineHeight: 1.75, maxWidth: 620, marginBottom: 28 }}>
               Expand a partnership to see the individual colleges we run under it.
             </p>
           </AnimateIn>
@@ -99,7 +99,7 @@ export default function ServicesPage() {
             ].map((group) => (
               <AnimateIn key={group.key} animation="slideUp">
                 <div style={{
-                  border: "1px solid var(--border-card)", borderRadius: 8, overflow: "hidden",
+                  border: "1px solid var(--border-card)", borderRadius: "var(--r-md)", overflow: "hidden",
                   background: openDirectory === group.key ? "rgba(var(--accent-rgb),.03)" : "var(--bg-card)",
                   transition: "background .25s ease",
                 }}>
@@ -112,8 +112,8 @@ export default function ServicesPage() {
                     }}
                   >
                     <div>
-                      <div style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 17, color: "var(--text)", letterSpacing: "-.015em" }}>{group.label}</div>
-                      <div style={{ fontFamily: "var(--mono)", fontSize: 10.5, color: "var(--text-muted)", letterSpacing: ".05em", marginTop: 4 }}>{group.sub}</div>
+                      <div style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-md)", color: "var(--text)", letterSpacing: "var(--tr-body)" }}>{group.label}</div>
+                      <div style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)", letterSpacing: "var(--tr-caps)", marginTop: 4 }}>{group.sub}</div>
                     </div>
                     <ChevronDown
                       size={16}
@@ -129,18 +129,39 @@ export default function ServicesPage() {
                     <div style={{ padding: "0 24px 22px", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 12 }}>
                       {group.list.map((col) => (
                         <div key={col.name} style={{
-                          background: "var(--bg)", border: "1px solid var(--border)", borderRadius: 8,
-                          padding: "16px 16px", display: "flex", flexDirection: "column", gap: 6,
+                          background: "var(--bg)", border: "1px solid var(--border)", borderRadius: "var(--r-md)",
+                          overflow: "hidden", display: "flex", flexDirection: "column",
                         }}>
-                          <h4 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 14.5, color: "var(--text)", lineHeight: 1.35, letterSpacing: "-.01em" }}>{col.name}</h4>
-                          {col.aka && (
-                            <span style={{ fontFamily: "var(--body)", fontSize: 11.5, color: "var(--text-muted)", fontStyle: "italic", lineHeight: 1.5 }}>
-                              Also referred to as {col.aka}
+                          {/* Centre image */}
+                          <div style={{
+                            position: "relative", width: "100%", height: 140, overflow: "hidden",
+                          }}>
+                            <img
+                              src={col.image}
+                              alt={col.name}
+                              style={{
+                                width: "100%", height: "100%", objectFit: "cover",
+                                display: "block",
+                              }}
+                            />
+                            <div style={{
+                              position: "absolute", bottom: 0, left: 0, right: 0, height: "50%",
+                              background: "linear-gradient(to top, var(--bg) 0%, transparent 100%)",
+                              pointerEvents: "none",
+                            }} />
+                          </div>
+                          {/* Info */}
+                          <div style={{ padding: "12px 16px 16px", display: "flex", flexDirection: "column", gap: 6 }}>
+                            <h4 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-base)", color: "var(--text)", lineHeight: 1.35, letterSpacing: "var(--tr-body)" }}>{col.name}</h4>
+                            {col.aka && (
+                              <span style={{ fontFamily: "var(--body)", fontSize: "var(--text-xs)", color: "var(--text-muted)", fontStyle: "italic", lineHeight: 1.5 }}>
+                                Also referred to as {col.aka}
+                              </span>
+                            )}
+                            <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)", letterSpacing: "var(--tr-caps)", marginTop: 2 }}>
+                              <MapPin size={10} strokeWidth={1.8} /> {col.district} district, {col.state}
                             </span>
-                          )}
-                          <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--mono)", fontSize: 10, color: "var(--text-muted)", letterSpacing: ".06em", marginTop: 2 }}>
-                            <MapPin size={10} strokeWidth={1.8} /> {col.district} district, {col.state}
-                          </span>
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -158,41 +179,41 @@ export default function ServicesPage() {
           <AnimateIn animation="slideUp">
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
               <div style={{
-                width: 40, height: 40, borderRadius: 10,
+                width: 40, height: 40, borderRadius: "var(--r-md)",
                 background: "linear-gradient(135deg, rgba(var(--accent-rgb),.15), rgba(var(--gold-rgb),.1))",
                 border: "1px solid rgba(var(--accent-rgb),.2)",
                 display: "flex", alignItems: "center", justifyContent: "center",
               }}>
                 <Zap size={18} color="var(--accent)" />
               </div>
-              <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", fontWeight: 500 }}>
-                // Skill Initiatives
+              <p className="eyebrow-label eyebrow-label--slash">
+                Skill Initiatives
               </p>
             </div>
-            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(24px,3.5vw,44px)", color: "var(--text)", marginBottom: 16, letterSpacing: "-.03em" }}>
+            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(24px,3.5vw,44px)", color: "var(--text)", marginBottom: 16, letterSpacing: "var(--tr-display)" }}>
               Large-scale capacity building.
             </h2>
-            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", lineHeight: 1.75, maxWidth: 640, marginBottom: 48 }}>
+            <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", lineHeight: 1.75, maxWidth: 640, marginBottom: 48 }}>
               We deliver large-scale skill training programs under government mandates and institutional frameworks, building employability at the grassroots level across India.
             </p>
           </AnimateIn>
 
           {/* Employment Sectors Grid */}
           <AnimateIn animation="slideUp" delay={0.1}>
-            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "rgba(var(--ink-rgb),.3)", textTransform: "uppercase", marginBottom: 20, fontWeight: 500 }}>
-              // Employment-Wise Sectors
+            <p className="eyebrow-label eyebrow-label--slash" style={{ marginBottom: 20 }}>
+              Employment-Wise Sectors
             </p>
           </AnimateIn>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 16, marginBottom: 64 }}>
             {EMPLOYMENT_SECTORS.map((sector, i) => (
               <AnimateIn key={sector.name} animation="slideUp" delay={i * 0.06}>
                 <div className="course-row" style={{
-                  background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 10,
+                  background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: "var(--r-md)",
                   padding: "28px 24px", display: "flex", flexDirection: "column", gap: 12, height: "100%",
                 }}>
                   <div className="icon-box"><Icon name={sector.icon} size={19} color="var(--accent)" /></div>
-                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 18, color: "var(--text)", letterSpacing: "-.02em" }}>{sector.name}</h3>
-                  <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>{sector.desc}</p>
+                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>{sector.name}</h3>
+                  <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6 }}>{sector.desc}</p>
                 </div>
               </AnimateIn>
             ))}
@@ -202,15 +223,15 @@ export default function ServicesPage() {
           <AnimateIn animation="slideUp">
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
               <div style={{
-                width: 40, height: 40, borderRadius: 10,
+                width: 40, height: 40, borderRadius: "var(--r-md)",
                 background: "linear-gradient(135deg, rgba(var(--green-rgb),.15), rgba(var(--accent-rgb),.1))",
                 border: "1px solid rgba(var(--green-rgb),.2)",
                 display: "flex", alignItems: "center", justifyContent: "center",
               }}>
                 <Globe size={18} color="var(--accent-green)" />
               </div>
-              <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent-green)", textTransform: "uppercase", fontWeight: 500 }}>
-                // Emerging Technology Programs
+              <p className="eyebrow-label eyebrow-label--slash" style={{ color: "var(--accent-green)" }}>
+                Emerging Technology Programs
               </p>
             </div>
           </AnimateIn>
@@ -219,13 +240,13 @@ export default function ServicesPage() {
               <AnimateIn key={tech.name} animation="slideUp" delay={i * 0.06}>
                 <div className="hover-lift" style={{
                   background: "linear-gradient(145deg, var(--bg-card) 0%, rgba(var(--accent-rgb),.04) 100%)",
-                  border: "1px solid var(--border-card)", borderRadius: 10,
+                  border: "1px solid var(--border-card)", borderRadius: "var(--r-md)",
                   padding: "28px 24px", display: "flex", flexDirection: "column", gap: 12, height: "100%",
                   transition: "box-shadow .3s ease",
                 }}>
                   <div className="icon-box"><Icon name={tech.icon} size={19} color="var(--accent-green)" /></div>
-                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 18, color: "var(--text)", letterSpacing: "-.02em" }}>{tech.name}</h3>
-                  <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>{tech.desc}</p>
+                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>{tech.name}</h3>
+                  <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6 }}>{tech.desc}</p>
                 </div>
               </AnimateIn>
             ))}
@@ -235,18 +256,18 @@ export default function ServicesPage() {
           <AnimateIn animation="slideUp">
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
               <div style={{
-                width: 40, height: 40, borderRadius: 10,
+                width: 40, height: 40, borderRadius: "var(--r-md)",
                 background: "linear-gradient(135deg, rgba(var(--accent-rgb),.15), rgba(var(--gold-rgb),.1))",
                 border: "1px solid rgba(var(--accent-rgb),.2)",
                 display: "flex", alignItems: "center", justifyContent: "center",
               }}>
                 <Landmark size={18} color="var(--accent)" />
               </div>
-              <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", fontWeight: 500 }}>
-                // PPP & Workforce Solutions
+              <p className="eyebrow-label eyebrow-label--slash">
+                PPP & Workforce Solutions
               </p>
             </div>
-            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(22px,3vw,36px)", color: "var(--text)", marginBottom: 28, letterSpacing: "-.03em" }}>
+            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(22px,3vw,36px)", color: "var(--text)", marginBottom: 28, letterSpacing: "var(--tr-display)" }}>
               Public-private partnership at scale.
             </h2>
           </AnimateIn>
@@ -255,13 +276,13 @@ export default function ServicesPage() {
               <AnimateIn key={item.name} animation="slideUp" delay={i * 0.06}>
                 <div className="hover-lift" style={{
                   background: "linear-gradient(145deg, var(--bg-card) 0%, rgba(var(--gold-rgb),.04) 100%)",
-                  border: "1px solid var(--border-card)", borderRadius: 10,
+                  border: "1px solid var(--border-card)", borderRadius: "var(--r-md)",
                   padding: "28px 24px", display: "flex", flexDirection: "column", gap: 12, height: "100%",
                   transition: "box-shadow .3s ease",
                 }}>
                   <div className="icon-box"><Icon name={item.icon} size={19} color="var(--accent)" /></div>
-                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 18, color: "var(--text)", letterSpacing: "-.02em" }}>{item.name}</h3>
-                  <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>{item.desc}</p>
+                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>{item.name}</h3>
+                  <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6 }}>{item.desc}</p>
                 </div>
               </AnimateIn>
             ))}
@@ -271,18 +292,18 @@ export default function ServicesPage() {
           <AnimateIn animation="slideUp">
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
               <div style={{
-                width: 40, height: 40, borderRadius: 10,
+                width: 40, height: 40, borderRadius: "var(--r-md)",
                 background: "linear-gradient(135deg, rgba(var(--gold-rgb),.15), rgba(var(--accent-rgb),.08))",
                 border: "1px solid rgba(var(--gold-rgb),.2)",
                 display: "flex", alignItems: "center", justifyContent: "center",
               }}>
                 <Building2 size={18} color="var(--accent-gold)" />
               </div>
-              <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent-gold)", textTransform: "uppercase", fontWeight: 500 }}>
-                // Government Mandates & Projects
+              <p className="eyebrow-label eyebrow-label--slash" style={{ color: "var(--accent-gold)" }}>
+                Government Mandates & Projects
               </p>
             </div>
-            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(22px,3vw,36px)", color: "var(--text)", marginBottom: 28, letterSpacing: "-.03em" }}>
+            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(22px,3vw,36px)", color: "var(--text)", marginBottom: 28, letterSpacing: "var(--tr-display)" }}>
               Public sector delivery mandates.
             </h2>
           </AnimateIn>
@@ -291,7 +312,7 @@ export default function ServicesPage() {
             {GOVT_MANDATES.map((mandate, i) => (
               <AnimateIn key={mandate.name} animation="slideUp" delay={i * 0.05}>
                 <div style={{
-                  border: "1px solid var(--border-card)", borderRadius: 8, overflow: "hidden",
+                  border: "1px solid var(--border-card)", borderRadius: "var(--r-md)", overflow: "hidden",
                   background: openAccordion === i ? "rgba(var(--accent-rgb),.03)" : "var(--bg-card)",
                   transition: "background .25s ease",
                 }}>
@@ -303,8 +324,8 @@ export default function ServicesPage() {
                     }}
                   >
                     <div>
-                      <div style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 16, color: "var(--text)", letterSpacing: "-.015em" }}>{mandate.name}</div>
-                      <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text-muted)", letterSpacing: ".05em", marginTop: 3 }}>{mandate.fullName}</div>
+                      <div style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-md)", color: "var(--text)", letterSpacing: "var(--tr-body)" }}>{mandate.name}</div>
+                      <div style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)", letterSpacing: "var(--tr-caps)", marginTop: 3 }}>{mandate.fullName}</div>
                     </div>
                     <ChevronDown
                       size={16}
@@ -321,15 +342,15 @@ export default function ServicesPage() {
                     transition: "max-height .3s ease",
                   }}>
                     <div style={{ padding: "0 24px 20px" }}>
-                      <p style={{ fontFamily: "var(--body)", fontSize: 13.5, color: "var(--text-muted)", lineHeight: 1.65 }}>{mandate.desc}</p>
+                      <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.65 }}>{mandate.desc}</p>
                       {"sheet" in mandate && mandate.sheet && (
                         <div style={{
-                          marginTop: 14, padding: "12px 14px", borderRadius: 6,
-                          background: "rgba(var(--accent-rgb),.06)", border: "1px dashed rgba(var(--accent-rgb),.25)",
+                          marginTop: 14, padding: "12px 14px", borderRadius: "var(--r-sm)",
+                          background: "rgba(var(--accent-rgb),.06)", border: "1px solid rgba(var(--accent-rgb),.25)",
                           display: "flex", alignItems: "center", gap: 10,
                         }}>
                           <FileSpreadsheet size={15} color="var(--accent)" style={{ flexShrink: 0 }} />
-                          <span style={{ fontFamily: "var(--mono)", fontSize: 11.5, color: "var(--text-muted)", letterSpacing: ".03em" }}>
+                          <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)", letterSpacing: "var(--tr-caps)" }}>
                             {mandate.sheet}
                           </span>
                         </div>

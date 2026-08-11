@@ -34,8 +34,8 @@ export default function EmployerTicker() {
           style={{
             fontFamily: "var(--sans)",
             fontWeight: 600,
-            fontSize: 11,
-            letterSpacing: ".2em",
+            fontSize: "var(--text-xs)",
+            letterSpacing: "var(--tr-mono)",
             textTransform: "uppercase",
             color: "var(--text-faint)",
             display: "inline-flex",
@@ -108,9 +108,9 @@ export default function EmployerTicker() {
                       fontFamily: "var(--serif)",
                       fontStyle: "italic",
                       fontWeight: 700,
-                      fontSize: 14,
+                      fontSize: "var(--text-base)",
                       color: "var(--text-muted)",
-                      letterSpacing: "-.01em",
+                      letterSpacing: "var(--tr-body)",
                       whiteSpace: "nowrap",
                       opacity: 0.75,
                     }}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { getToolMeta, ToolMeta } from "../data/tools";
 
 interface ToolCardProps {
@@ -21,14 +21,14 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #001E36 0%, #000B14 100%)",
             border: "1px solid rgba(49, 168, 255, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             boxShadow: "inset 0 0 10px rgba(49, 168, 255, 0.2)",
           }}
         >
-          <span style={{ fontFamily: "var(--sans)", fontSize: 14, fontWeight: 900, color: "#31A8FF", letterSpacing: "-0.05em" }}>
+          <span style={{ fontFamily: "var(--sans)", fontSize: "var(--text-base)", fontWeight: 900, color: "#31A8FF", letterSpacing: "-0.05em" }}>
             Ps
           </span>
         </div>
@@ -42,14 +42,14 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #330000 0%, #1A0000 100%)",
             border: "1px solid rgba(255, 154, 0, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             boxShadow: "inset 0 0 10px rgba(255, 154, 0, 0.2)",
           }}
         >
-          <span style={{ fontFamily: "var(--sans)", fontSize: 14, fontWeight: 900, color: "#FF9A00", letterSpacing: "-0.05em" }}>
+          <span style={{ fontFamily: "var(--sans)", fontSize: "var(--text-base)", fontWeight: 900, color: "#FF9A00", letterSpacing: "-0.05em" }}>
             Ai
           </span>
         </div>
@@ -63,13 +63,13 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #33001A 0%, #1A000D 100%)",
             border: "1px solid rgba(255, 51, 102, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <span style={{ fontFamily: "var(--sans)", fontSize: 14, fontWeight: 900, color: "#FF3366", letterSpacing: "-0.05em" }}>
+          <span style={{ fontFamily: "var(--sans)", fontSize: "var(--text-base)", fontWeight: 900, color: "#FF3366", letterSpacing: "-0.05em" }}>
             Id
           </span>
         </div>
@@ -83,13 +83,13 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #000033 0%, #00001A 100%)",
             border: "1px solid rgba(153, 153, 255, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <span style={{ fontFamily: "var(--sans)", fontSize: 14, fontWeight: 900, color: "#9999FF", letterSpacing: "-0.05em" }}>
+          <span style={{ fontFamily: "var(--sans)", fontSize: "var(--text-base)", fontWeight: 900, color: "#9999FF", letterSpacing: "-0.05em" }}>
             Pr
           </span>
         </div>
@@ -103,13 +103,13 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #000033 0%, #1A0033 100%)",
             border: "1px solid rgba(153, 153, 255, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <span style={{ fontFamily: "var(--sans)", fontSize: 14, fontWeight: 900, color: "#D199FF", letterSpacing: "-0.05em" }}>
+          <span style={{ fontFamily: "var(--sans)", fontSize: "var(--text-base)", fontWeight: 900, color: "#D199FF", letterSpacing: "-0.05em" }}>
             Ae
           </span>
         </div>
@@ -123,7 +123,7 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #006633 0%, #00331A 100%)",
             border: "1px solid rgba(0, 200, 100, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -145,14 +145,14 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #330505 0%, #1A0000 100%)",
             border: "1px solid rgba(229, 35, 32, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             position: "relative",
           }}
         >
-          <span style={{ fontFamily: "var(--sans)", fontSize: 13, fontWeight: 900, color: "#E52320", letterSpacing: "-0.02em" }}>
+          <span style={{ fontFamily: "var(--sans)", fontSize: "var(--text-sm)", fontWeight: 900, color: "#E52320", letterSpacing: "var(--tr-heading)" }}>
             W
           </span>
           <div style={{ position: "absolute", bottom: 2, right: 3, width: 6, height: 6, borderRadius: "50%", background: "#FFD700" }} />
@@ -167,13 +167,13 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #002B36 0%, #00121A 100%)",
             border: "1px solid rgba(0, 180, 216, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <span style={{ fontFamily: "var(--sans)", fontSize: 13, fontWeight: 900, color: "#00B4D8", letterSpacing: "-0.04em" }}>
+          <span style={{ fontFamily: "var(--sans)", fontSize: "var(--text-sm)", fontWeight: 900, color: "#00B4D8", letterSpacing: "var(--tr-display)" }}>
             MD
           </span>
         </div>
@@ -187,13 +187,13 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #2B0505 0%, #140000 100%)",
             border: "1px solid rgba(229, 25, 55, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <span style={{ fontFamily: "var(--sans)", fontSize: 14, fontWeight: 900, color: "#E51937" }}>
+          <span style={{ fontFamily: "var(--sans)", fontSize: "var(--text-base)", fontWeight: 900, color: "#E51937" }}>
             A
           </span>
         </div>
@@ -207,13 +207,13 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #001A33 0%, #000B17 100%)",
             border: "1px solid rgba(0, 118, 214, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <span style={{ fontFamily: "var(--sans)", fontSize: 14, fontWeight: 900, color: "#0076D6" }}>
+          <span style={{ fontFamily: "var(--sans)", fontSize: "var(--text-base)", fontWeight: 900, color: "#0076D6" }}>
             R
           </span>
         </div>
@@ -227,7 +227,7 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #001A26 0%, #000D14 100%)",
             border: "1px solid rgba(0, 102, 153, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -247,13 +247,13 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #330000 0%, #170000 100%)",
             border: "1px solid rgba(230, 28, 36, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <span style={{ fontFamily: "var(--sans)", fontSize: 12, fontWeight: 900, color: "#E61C24" }}>
+          <span style={{ fontFamily: "var(--sans)", fontSize: "var(--text-sm)", fontWeight: 900, color: "#E61C24" }}>
             SW
           </span>
         </div>
@@ -267,7 +267,7 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #0F2027 0%, #203A43 100%)",
             border: "1px solid rgba(55, 118, 171, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -287,13 +287,13 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #002E27 0%, #001713 100%)",
             border: "1px solid rgba(0, 163, 137, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <span style={{ fontFamily: "var(--sans)", fontSize: 13, fontWeight: 900, color: "#00A389" }}>
+          <span style={{ fontFamily: "var(--sans)", fontSize: "var(--text-sm)", fontWeight: 900, color: "#00A389" }}>
             Tally
           </span>
         </div>
@@ -307,13 +307,13 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #002411 0%, #001208 100%)",
             border: "1px solid rgba(16, 124, 65, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <span style={{ fontFamily: "var(--sans)", fontSize: 14, fontWeight: 900, color: "#107C41" }}>
+          <span style={{ fontFamily: "var(--sans)", fontSize: "var(--text-base)", fontWeight: 900, color: "#107C41" }}>
             X
           </span>
         </div>
@@ -327,7 +327,7 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #2C120A 0%, #140804 100%)",
             border: "1px solid rgba(242, 78, 30, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -351,13 +351,13 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: "linear-gradient(135deg, #00282A 0%, #001214 100%)",
             border: "1px solid rgba(0, 196, 204, 0.4)",
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <span style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontSize: 15, fontWeight: 900, color: "#00C4CC" }}>
+          <span style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontSize: "var(--text-base)", fontWeight: 900, color: "#00C4CC" }}>
             C
           </span>
         </div>
@@ -371,7 +371,7 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
             height: "100%",
             background: `linear-gradient(135deg, ${brandColor}22 0%, ${brandColor}08 100%)`,
             border: `1px solid ${brandColor}40`,
-            borderRadius: 8,
+            borderRadius: "var(--r-sm)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -398,24 +398,10 @@ export function ToolThumbnail({ iconType, brandColor }: { iconType: ToolMeta["ic
 export function ToolCard({ toolName, className = "", style = {}, compact = false }: ToolCardProps) {
   const meta = getToolMeta(toolName);
   const [isHovered, setIsHovered] = useState(false);
-  const [popoverPos, setPopoverPos] = useState<"top" | "bottom">("top");
-  const cardRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseEnter = () => {
-    if (cardRef.current) {
-      const rect = cardRef.current.getBoundingClientRect();
-      if (rect.top < 220) {
-        setPopoverPos("bottom");
-      } else {
-        setPopoverPos("top");
-      }
-    }
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
+  // A `popoverPos` state and the getBoundingClientRect() that fed it were
+  // measured on every hover and never read — the popover they positioned no
+  // longer exists. Removed: it forced a synchronous layout per mouseenter.
 
   // Compact Pill mode (used inside course catalog card lists)
   if (compact) {
@@ -427,7 +413,7 @@ export function ToolCard({ toolName, className = "", style = {}, compact = false
           gap: 6,
           background: "var(--bg-card)",
           border: "1px solid var(--border-card)",
-          borderRadius: 6,
+          borderRadius: "var(--r-sm)",
           padding: "4px 9px",
           ...style,
         }}
@@ -439,7 +425,7 @@ export function ToolCard({ toolName, className = "", style = {}, compact = false
         <span
           style={{
             fontFamily: "var(--sans)",
-            fontSize: 11,
+            fontSize: "var(--text-xs)",
             fontWeight: 600,
             color: "var(--text-muted)",
           }}
@@ -453,23 +439,23 @@ export function ToolCard({ toolName, className = "", style = {}, compact = false
   // Full Card mode
   return (
     <div
-      ref={cardRef}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       style={{
         position: "relative",
         background: "var(--bg-card)",
         border: `1px solid ${isHovered ? meta.brandColor : "var(--border-card)"}`,
-        borderRadius: 12,
+        borderRadius: "var(--r-md)",
         padding: "12px 14px",
         display: "flex",
         alignItems: "center",
         gap: 12,
-        transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
-        transform: isHovered ? "translateY(-2px)" : "none",
-        boxShadow: isHovered
-          ? `0 8px 20px -4px ${meta.brandColor}22, 0 2px 6px rgba(0,0,0,0.04)`
-          : "0 2px 4px rgba(0,0,0,0.02)",
+        // Hover moves two things: the border colour and a 1px rise. It used
+        // to move five (border, transform, shadow, icon scale, label colour),
+        // which is what made these cards feel rubbery under the cursor.
+        transition: "border-color .2s ease, transform .2s ease, box-shadow .2s ease",
+        transform: isHovered ? "translateY(-1px)" : "none",
+        boxShadow: isHovered ? "var(--shadow-md)" : "var(--shadow-sm)",
         ...style,
       }}
       className={className}
@@ -480,10 +466,8 @@ export function ToolCard({ toolName, className = "", style = {}, compact = false
           width: 38,
           height: 38,
           flexShrink: 0,
-          borderRadius: 8,
+          borderRadius: "var(--r-sm)",
           overflow: "hidden",
-          transition: "transform 0.2s ease",
-          transform: isHovered ? "scale(1.05)" : "scale(1)",
         }}
       >
         <ToolThumbnail iconType={meta.iconType} brandColor={meta.brandColor} />
@@ -495,13 +479,13 @@ export function ToolCard({ toolName, className = "", style = {}, compact = false
           style={{
             fontFamily: "var(--sans)",
             fontWeight: 700,
-            fontSize: 13.5,
+            fontSize: "var(--text-sm)",
             color: "var(--text)",
             display: "block",
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
-            letterSpacing: "-0.01em",
+            letterSpacing: "var(--tr-body)",
           }}
         >
           {meta.name}
@@ -509,13 +493,12 @@ export function ToolCard({ toolName, className = "", style = {}, compact = false
         <span
           style={{
             fontFamily: "var(--body)",
-            fontSize: 11,
-            color: isHovered ? meta.brandColor : "var(--text-muted)",
+            fontSize: "var(--text-xs)",
+            color: "var(--text-muted)",
             display: "block",
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
-            transition: "color 0.2s ease",
           }}
         >
           {meta.vendor ? `${meta.vendor} • ${meta.category}` : meta.category}

@@ -62,6 +62,22 @@ interface NavbarProps {
   setFormOpen: (v: boolean | ((p: boolean) => boolean)) => void;
 }
 
+// One spec for the three fields in the slide-down enquiry bar. They were
+// three copies of the same 20 lines, and at 13px iOS Safari zoomed the page
+// on focus — a zoom the user cannot undo by pinching back.
+const navFieldStyle: React.CSSProperties = {
+  flex: 1,
+  minWidth: 0,
+  background: "rgba(255,255,255,.06)",
+  border: "1px solid rgba(255,255,255,.12)",
+  borderRadius: "var(--r-sm)",
+  padding: "11px 16px",
+  color: "var(--text-inv)",
+  fontFamily: "var(--sans)",
+  fontSize: "var(--text-md)",
+  outline: "none",
+};
+
 export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -70,12 +86,20 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
   const { lang, setLang, t } = useLang();
   const isMobile = useIsMobile(900);
   const scrolled = useScrolled();
+  const navH = scrolled ? 58 : 68;
 
   useEffect(() => {
     if (formRef.current) {
       setFormHeight(formRef.current.scrollHeight);
     }
   }, [formOpen]);
+
+  // Publish the live navbar height so secondary sticky bars can sit flush
+  // beneath it. /courses hardcoded `top: 57` against a 58px bar and leaked a
+  // 1px line of scrolling content through the seam.
+  useEffect(() => {
+    document.documentElement.style.setProperty("--nav-h", `${navH}px`);
+  }, [navH]);
 
   useEffect(() => {
     if (menuOpen) {
@@ -113,14 +137,16 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          height: scrolled ? 58 : 68,
+          height: navH,
           transition: "height .3s var(--ease-expo), background .3s ease, border-color .3s ease",
           // inset top line = the light-catching top edge of frosted glass.
+          // Both the hairline and the lift shadow are theme tokens: a white
+          // edge and a navy shadow only read on parchment.
           boxShadow: isMobile
-            ? (scrolled ? "0 4px 24px rgba(13,27,42,.07)" : "none")
+            ? (scrolled ? "var(--nav-shadow)" : "none")
             : (scrolled
-                ? "0 4px 24px rgba(13,27,42,.07), inset 0 1px 0 rgba(255,255,255,.45)"
-                : "inset 0 1px 0 rgba(255,255,255,.30)"),
+                ? "var(--nav-shadow), inset 0 1px 0 var(--nav-edge-strong)"
+                : "inset 0 1px 0 var(--nav-edge)"),
         }}
       >
         {/* Scroll progress bar — self-contained, updates via transform only */}
@@ -166,7 +192,7 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
               style={{
                 display: "inline-flex",
                 border: "1px solid var(--border-strong)",
-                borderRadius: 999,
+                borderRadius: "var(--r-pill)",
                 padding: 2,
                 background: "var(--bg-card)",
               }}
@@ -202,8 +228,11 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
             style={{
               background: "transparent",
               border: "1px solid var(--border-strong)",
-              borderRadius: 4,
-              padding: 8,
+              borderRadius: "var(--r-sm)",
+              // 44px square: the previous 34px target was below the minimum
+              // for a thumb, on the one control every mobile visitor needs.
+              width: 44,
+              height: 44,
               cursor: "pointer",
               color: "var(--text)",
               display: "flex",
@@ -211,7 +240,7 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
               justifyContent: "center",
             }}
           >
-            <Menu size={18} />
+            <Menu size={18} aria-hidden="true" />
           </button>
         )}
       </nav>
@@ -222,7 +251,10 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
           style={{
             position: "fixed",
             inset: 0,
-            zIndex: 200,
+            // Above the floating WhatsApp bubble (150). They were both 200,
+            // and because FloatingWA mounts later in every page tree it
+            // painted on top of the open menu.
+            zIndex: 300,
             pointerEvents: menuOpen ? "auto" : "none",
           }}
         >
@@ -265,8 +297,8 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
               <span
                 style={{
                   fontFamily: "var(--mono)",
-                  fontSize: 10,
-                  letterSpacing: ".15em",
+                  fontSize: "var(--text-xs)",
+                  letterSpacing: "var(--tr-mono)",
                   color: "var(--text-muted)",
                   textTransform: "uppercase",
                 }}
@@ -301,12 +333,15 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
                       alignItems: "center",
                       gap: 14,
                       fontFamily: "var(--serif)",
-                      fontSize: 22,
+                      fontSize: "var(--text-lg)",
                       fontWeight: 700,
-                      color: isActive ? "var(--accent)" : "var(--text)",
-                      padding: "10px 0",
+                      color: isActive ? "var(--accent-text)" : "var(--text)",
+                      // 44px minimum: at 10px padding these rows measured
+                      // 41px, and they are the only way to navigate on a phone.
+                      padding: "12px 0",
+                      minHeight: 44,
                       textDecoration: "none",
-                      letterSpacing: "-.01em",
+                      letterSpacing: "var(--tr-body)",
                     }}
                   >
                     <n.Icon size={20} strokeWidth={1.75} aria-hidden="true" focusable="false" style={{ color: isActive ? "var(--accent)" : "var(--text-muted)", flexShrink: 0 }} />
@@ -319,8 +354,8 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
                 <p
                   style={{
                     fontFamily: "var(--mono)",
-                    fontSize: 10,
-                    letterSpacing: ".15em",
+                    fontSize: "var(--text-xs)",
+                    letterSpacing: "var(--tr-mono)",
                     color: "var(--text-muted)",
                     textTransform: "uppercase",
                     marginBottom: 10,
@@ -336,16 +371,22 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
                     <button
                       key={l.code}
                       onClick={() => setLang(l.code)}
+                      aria-pressed={lang === l.code}
                       style={{
                         flex: 1,
-                        padding: "10px 14px",
+                        padding: "12px 14px",
                         fontFamily: "var(--sans)",
                         fontWeight: 700,
-                        fontSize: 13,
-                        background: lang === l.code ? "var(--bg-navy)" : "transparent",
-                        color: lang === l.code ? "var(--accent-gold)" : "var(--text)",
+                        fontSize: "var(--text-sm)",
+                        letterSpacing: "var(--tr-caps)",
+                        // Matches the desktop language pill exactly. This
+                        // used to be gold-on-navy — a third selected-state
+                        // treatment for the same control.
+                        background: lang === l.code ? "var(--btn-primary-bg)" : "transparent",
+                        color: lang === l.code ? "var(--btn-primary-fg)" : "var(--text)",
                         border: "1px solid var(--border-strong)",
-                        borderRadius: 3,
+                        borderColor: lang === l.code ? "transparent" : "var(--border-strong)",
+                        borderRadius: "var(--r-sm)",
                         cursor: "pointer",
                       }}
                     >
@@ -404,54 +445,30 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
         >
           <input
             placeholder={t("yourName")}
-            style={{
-              flex: 1,
-              background: "rgba(255,255,255,.06)",
-              border: "1px solid rgba(255,255,255,.12)",
-              borderRadius: 2,
-              padding: "11px 16px",
-              color: "var(--text-inv)",
-              fontFamily: "var(--sans)",
-              fontSize: 13,
-              outline: "none",
-            }}
+            aria-label={t("yourName")}
+            autoComplete="name"
+            style={navFieldStyle}
           />
           <input
             placeholder={t("phoneNumber")}
-            style={{
-              flex: 1,
-              background: "rgba(255,255,255,.06)",
-              border: "1px solid rgba(255,255,255,.12)",
-              borderRadius: 2,
-              padding: "11px 16px",
-              color: "var(--text-inv)",
-              fontFamily: "var(--sans)",
-              fontSize: 13,
-              outline: "none",
-            }}
+            aria-label={t("phoneNumber")}
+            type="tel"
+            autoComplete="tel"
+            style={navFieldStyle}
           />
           <select
-            style={{
-              flex: 1,
-              background: "rgba(255,255,255,.06)",
-              border: "1px solid rgba(255,255,255,.12)",
-              borderRadius: 2,
-              padding: "11px 16px",
-              color: "rgba(255,255,255,.55)",
-              fontFamily: "var(--sans)",
-              fontSize: 13,
-              outline: "none",
-            }}
+            aria-label={t("selectCourse")}
+            style={{ ...navFieldStyle, color: "rgba(255,255,255,.55)" }}
           >
             <option>{t("selectCourse")}</option>
             {COUNSELING_COURSE_OPTIONS.map((o) => (
               <option key={o.value}>{t(o.key)}</option>
             ))}
           </select>
-          <button
-            className="btn-primary"
-            style={{ background: "var(--accent-gold)", color: "var(--bg-dark)", whiteSpace: "nowrap" }}
-          >
+          {/* This used to override the class with a gold-mapped fill and
+              near-black label, so the callback button looked like a different
+              product from the Enquire button 40px above it. */}
+          <button className="btn-primary" style={{ whiteSpace: "nowrap" }}>
             {t("getCallback")}
           </button>
           {!isMobile && (

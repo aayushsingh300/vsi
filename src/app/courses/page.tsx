@@ -27,6 +27,7 @@ import { COURSE_THUMBS, programThumb } from "@/data/assets";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
+import TabSwitch from "@/components/TabSwitch";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useLang } from "@/context/LangContext";
 import { ToolCard } from "@/components/ToolCard";
@@ -67,9 +68,9 @@ function ProgramThumb({ slug, alt, glyph }: { slug: string; alt: string; glyph?:
 function SectionHead({ index, title, sub, isMobile }: { index: string; title: string; sub: string; isMobile: boolean }) {
   return (
     <div style={{ marginBottom: 28 }}>
-      <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 10 }}>{index}</p>
+      <p className="eyebrow-label" style={{ marginBottom: 10 }}>{index}</p>
       <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? "clamp(22px,6.5vw,30px)" : "clamp(24px,3vw,40px)", color: "var(--text)" }}>{title}</h2>
-      <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "var(--text-muted)", marginTop: 6, fontStyle: "italic" }}>{sub}</p>
+      <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", marginTop: 6, fontStyle: "italic" }}>{sub}</p>
     </div>
   );
 }
@@ -79,22 +80,22 @@ function DiplomaCard({ c, isMobile, viewLabel }: { c: CourseCert | CourseDip; is
   return (
     <Link href={`/courses/${c.slug}`} style={{ textDecoration: "none", display: "block", height: "100%" }}>
       <article className="hover-lift" style={{
-        background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 8,
+        background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--r-md)",
         overflow: "hidden", display: "flex", flexDirection: "column", height: "100%",
       }}>
         <div style={{ position: "relative", aspectRatio: "16/9" }}>
           <ProgramThumb slug={c.slug} alt={c.name} glyph="education" />
-          <span style={{ position: "absolute", top: 12, left: 12, background: "var(--accent)", color: "var(--white)", fontFamily: "var(--sans)", fontWeight: 700, fontSize: 9.5, letterSpacing: ".12em", padding: "4px 9px", borderRadius: 2, textTransform: "uppercase" }}>{c.tag}</span>
+          <span style={{ position: "absolute", top: 12, left: 12, background: "var(--accent)", color: "var(--white)", fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", padding: "4px 9px", borderRadius: "var(--r-sm)", textTransform: "uppercase" }}>{c.tag}</span>
         </div>
         <div style={{ padding: isMobile ? "18px 18px 20px" : "20px 20px 22px", display: "flex", flexDirection: "column", flex: 1 }}>
-          <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? 18 : 20, color: "var(--text)", letterSpacing: "-.02em", marginBottom: 8 }}>{c.name}</h3>
-          <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6, marginBottom: 16, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", flex: 1 }}>{c.desc}</p>
+          <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)", marginBottom: 8 }}>{c.name}</h3>
+          <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6, marginBottom: 16, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", flex: 1 }}>{c.desc}</p>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 14, borderTop: "1px solid var(--border)" }}>
             <div style={{ display: "flex", gap: 14, alignItems: "baseline" }}>
-              <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--text-muted)" }}>{c.hrs}</span>
-              <span style={{ fontFamily: "var(--mono)", fontSize: 13, color: "var(--text)", fontWeight: 500 }}>{c.fee}</span>
+              <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>{c.hrs}</span>
+              <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-sm)", color: "var(--text)", fontWeight: 500 }}>{c.fee}</span>
             </div>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "var(--sans)", fontWeight: 700, fontSize: 11, letterSpacing: ".06em", textTransform: "uppercase", color: "var(--accent)" }}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-xs)", letterSpacing: "var(--tr-caps)", textTransform: "uppercase", color: "var(--accent)" }}>
               {viewLabel} <ArrowRight size={13} className="course-arrow" />
             </span>
           </div>
@@ -110,18 +111,18 @@ function CategoryCard({ c }: { c: CourseCategory }) {
   return (
     <Link href="/contact" style={{ textDecoration: "none", display: "block", height: "100%" }}>
       <article className="hover-lift" style={{
-        background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 8,
+        background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--r-md)",
         padding: "24px 22px", display: "flex", flexDirection: "column", gap: 12, height: "100%",
       }}>
         <div className="icon-box" style={{ marginBottom: 2 }}><Icon name={c.icon} size={20} color="var(--accent)" /></div>
-        <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 19, color: "var(--text)", letterSpacing: "-.02em" }}>{c.name}</h3>
-        <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6, flex: 1 }}>{c.desc}</p>
+        <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>{c.name}</h3>
+        <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6, flex: 1 }}>{c.desc}</p>
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap", paddingTop: 4 }}>
           {c.tools.slice(0, 5).map((tool) => (
             <ToolCard key={tool} toolName={tool} compact />
           ))}
           {c.tools.length > 5 && (
-            <span style={{ fontFamily: "var(--mono)", fontSize: 9.5, color: "var(--text-muted)", padding: "3px 4px" }}>+{c.tools.length - 5}</span>
+            <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)", padding: "3px 4px" }}>+{c.tools.length - 5}</span>
           )}
         </div>
       </article>
@@ -133,22 +134,22 @@ function CategoryCard({ c }: { c: CourseCategory }) {
 function CollegeCard({ c }: { c: College }) {
   return (
     <article style={{
-      background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 8,
+      background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--r-md)",
       padding: "22px 20px", display: "flex", flexDirection: "column", gap: 8, height: "100%",
     }}>
       <span style={{
-        fontFamily: "var(--mono)", fontSize: 9, letterSpacing: ".14em", textTransform: "uppercase",
+        fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase",
         color: "var(--accent)", fontWeight: 500,
       }}>{c.type}</span>
-      <h4 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 17, color: "var(--text)", letterSpacing: "-.015em", lineHeight: 1.3 }}>
+      <h4 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-md)", color: "var(--text)", letterSpacing: "var(--tr-body)", lineHeight: 1.3 }}>
         {c.name}
       </h4>
       {c.aka && (
-        <p style={{ fontFamily: "var(--body)", fontSize: 12, color: "var(--text-muted)", fontStyle: "italic", lineHeight: 1.5 }}>
+        <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", fontStyle: "italic", lineHeight: 1.5 }}>
           Also referred to as {c.aka}
         </p>
       )}
-      <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--mono)", fontSize: 10.5, color: "var(--text-muted)", letterSpacing: ".06em", marginTop: "auto", paddingTop: 6 }}>
+      <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)", letterSpacing: "var(--tr-caps)", marginTop: "auto", paddingTop: 6 }}>
         <MapPin size={11} strokeWidth={1.8} /> {c.district} district, {c.state}
       </span>
     </article>
@@ -158,7 +159,7 @@ function CollegeCard({ c }: { c: College }) {
 export default function CoursesPage() {
   const [formOpen, setFormOpen] = useState(false);
   const [filter, setFilter] = useState("all");
-  const isMobile = useIsMobile(768);
+  const isMobile = useIsMobile(900);
   const { t } = useLang();
 
   const cadCount = COURSES_CERT.length + CAD_DIPLOMAS.length;
@@ -191,27 +192,23 @@ export default function CoursesPage() {
         background: "var(--bg)",
         padding: "16px 5%",
         borderBottom: "1px solid var(--border)",
-        position: "sticky", top: 57, zIndex: 50,
+        position: "sticky", top: "var(--nav-h)", zIndex: 50,
       }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-          <div className="segment" role="tablist" style={{ flexWrap: "wrap" }}>
-            {filters.map(f => (
-              <button
-                key={f.id}
-                onClick={() => setFilter(f.id)}
-                className={`segment-btn${filter === f.id ? " active" : ""}`}
-                role="tab"
-                aria-selected={filter === f.id}
-              >
-                {t(f.key)} <span className="seg-count">{f.n}</span>
-              </button>
-            ))}
-          </div>
+          {/* Six options: a segmented control on a pointer, a select on a
+              phone. `flexWrap: "wrap"` used to stack them into two rows
+              inside a pill-shaped container. */}
+          <TabSwitch
+            label="Filter courses"
+            value={filter}
+            onChange={setFilter}
+            options={filters.map((f) => ({ id: f.id, label: t(f.key), count: f.n }))}
+          />
           {!isMobile && (
             <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 8, marginLeft: "auto" }}>
-              <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--text-muted)" }}>{t("needHelp")}</span>
+              <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>{t("needHelp")}</span>
               <Link href="/contact" style={{ textDecoration: "none" }}>
-                <button className="btn-primary" style={{ padding: "8px 18px", fontSize: 11 }}>{t("freeCounseling")} →</button>
+                <button className="btn-primary btn-sm">{t("freeCounseling")} →</button>
               </Link>
             </div>
           )}
@@ -231,7 +228,7 @@ export default function CoursesPage() {
                     <article className="hover-lift" style={{
                       background: "var(--bg-card)",
                       border: "1px solid var(--border)",
-                      borderRadius: 8,
+                      borderRadius: "var(--r-md)",
                       overflow: "hidden",
                       display: "flex",
                       flexDirection: "column",
@@ -240,18 +237,18 @@ export default function CoursesPage() {
                       <div style={{ position: "relative", aspectRatio: "16/9", background: "var(--bg-muted)" }}>
                         <Image src={COURSE_THUMBS[c.slug]} alt={c.name} fill style={{ objectFit: "cover" }} sizes={isMobile ? "100vw" : "50vw"} />
                         {c.tag && (
-                          <span style={{ position: "absolute", top: 12, left: 12, background: "var(--accent)", color: "var(--white)", fontFamily: "var(--sans)", fontWeight: 700, fontSize: 9.5, letterSpacing: ".12em", padding: "4px 9px", borderRadius: 2, textTransform: "uppercase" }}>{c.tag}</span>
+                          <span style={{ position: "absolute", top: 12, left: 12, background: "var(--accent)", color: "var(--white)", fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", padding: "4px 9px", borderRadius: "var(--r-sm)", textTransform: "uppercase" }}>{c.tag}</span>
                         )}
                       </div>
                       <div style={{ padding: isMobile ? "18px 18px 20px" : "22px 22px 24px", display: "flex", flexDirection: "column", flex: 1 }}>
-                        <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? 19 : 22, color: "var(--text)", letterSpacing: "-.02em", marginBottom: 8 }}>{c.name}</h3>
-                        <p style={{ fontFamily: "var(--body)", fontSize: 13.5, color: "var(--text-muted)", lineHeight: 1.6, marginBottom: 16, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", flex: 1 }}>{c.desc}</p>
+                        <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)", marginBottom: 8 }}>{c.name}</h3>
+                        <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6, marginBottom: 16, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", flex: 1 }}>{c.desc}</p>
                         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 14, borderTop: "1px solid var(--border)" }}>
                           <div style={{ display: "flex", gap: 14, alignItems: "baseline" }}>
-                            <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--text-muted)" }}>{c.hrs}</span>
-                            <span style={{ fontFamily: "var(--mono)", fontSize: 13, color: "var(--text)", fontWeight: 500 }}>{c.fee}</span>
+                            <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>{c.hrs}</span>
+                            <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-sm)", color: "var(--text)", fontWeight: 500 }}>{c.fee}</span>
                           </div>
-                          <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "var(--sans)", fontWeight: 700, fontSize: 11, letterSpacing: ".06em", textTransform: "uppercase", color: "var(--accent)" }}>
+                          <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-xs)", letterSpacing: "var(--tr-caps)", textTransform: "uppercase", color: "var(--accent)" }}>
                             View <ArrowRight size={13} className="course-arrow" />
                           </span>
                         </div>
@@ -264,12 +261,12 @@ export default function CoursesPage() {
 
             {/* Automation specializations (delivered within Electrical CAD) */}
             <div style={{ marginTop: 32, display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
-              <span style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>Automation Specializations:</span>
+              <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase", color: "var(--text-muted)" }}>Automation Specializations:</span>
               {AUTOMATION_COURSES.map((a) => (
                 <span key={a.slug} style={{
                   display: "inline-flex", alignItems: "center", gap: 6,
-                  fontFamily: "var(--sans)", fontSize: 12, fontWeight: 600, color: "var(--text)",
-                  background: "var(--bg-card)", border: "1px solid var(--border-card)", padding: "6px 12px", borderRadius: 6,
+                  fontFamily: "var(--sans)", fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--text)",
+                  background: "var(--bg-card)", border: "1px solid var(--border-card)", padding: "6px 12px", borderRadius: "var(--r-sm)",
                 }}>
                   <Icon name={a.icon} size={14} color="var(--accent)" /> {a.name}
                 </span>
@@ -278,7 +275,7 @@ export default function CoursesPage() {
 
             {/* CAD-based diplomas */}
             <div style={{ marginTop: 40 }}>
-              <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 18 }}>Polytechnic / ITI Diplomas</p>
+              <p style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 18 }}>Polytechnic / ITI Diplomas</p>
               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? 16 : 20 }}>
                 {CAD_DIPLOMAS.map((c, i) => (
                   <AnimateIn key={c.slug} animation="slideUp" delay={i * 0.05}>
@@ -296,16 +293,16 @@ export default function CoursesPage() {
         <section style={{ padding: isMobile ? "56px 6%" : "72px 5%", background: "var(--bg-muted)", borderTop: "1px solid var(--border)" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <AnimateIn animation="slideUp">
-              <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 10 }}>Polytechnic / ITI</p>
+              <p className="eyebrow-label" style={{ marginBottom: 10 }}>Polytechnic / ITI</p>
               <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? "clamp(22px,6.5vw,30px)" : "clamp(24px,3vw,40px)", color: "var(--text)" }}>
                 Our campuses.
               </h2>
-              <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "var(--text-muted)", marginTop: 6, marginBottom: 32, maxWidth: 640, lineHeight: 1.7 }}>
+              <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", marginTop: 6, marginBottom: 32, maxWidth: 640, lineHeight: 1.7 }}>
                 We operate three Government Polytechnic colleges in Uttar Pradesh and two ITI colleges in Jharkhand.
               </p>
             </AnimateIn>
 
-            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
+            <p style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
               Government Polytechnic Colleges · Uttar Pradesh
             </p>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? 14 : 18, marginBottom: 36 }}>
@@ -316,7 +313,7 @@ export default function CoursesPage() {
               ))}
             </div>
 
-            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
+            <p style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
               ITI Colleges · Jharkhand
             </p>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? 14 : 18 }}>
@@ -336,7 +333,7 @@ export default function CoursesPage() {
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <SectionHead index="Section 02" title={t("tabCompApp")} sub="Short-term computer courses & 3-year AICTE-recognized diplomas" isMobile={isMobile} />
 
-            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
+            <p style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
               Short-Term Computer Courses
             </p>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? 16 : 20, marginBottom: 40 }}>
@@ -347,7 +344,7 @@ export default function CoursesPage() {
               ))}
             </div>
 
-            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
+            <p style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
               Polytechnic Diplomas
             </p>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? 16 : 20 }}>
@@ -403,17 +400,17 @@ export default function CoursesPage() {
                 <AnimateIn key={c.slug} animation="scaleIn" delay={i * 0.04}>
                   <Link href={`/courses/${c.slug}`} style={{ textDecoration: "none", display: "block", height: "100%" }}>
                     <article className="hover-lift" style={{
-                      background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 8,
+                      background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--r-md)",
                       overflow: "hidden", display: "flex", flexDirection: "column", height: "100%",
                     }}>
                       <div style={{ position: "relative", aspectRatio: "16/10" }}>
                         <ProgramThumb slug={c.slug} alt={c.name} glyph={c.icon} />
-                        <span style={{ position: "absolute", top: 10, left: 10, background: "rgba(13,27,42,.78)", color: "var(--accent-gold)", fontFamily: "var(--mono)", fontWeight: 500, fontSize: 9, letterSpacing: ".1em", padding: "3px 8px", borderRadius: 2, textTransform: "uppercase" }}>{c.hrs}</span>
+                        <span style={{ position: "absolute", top: 10, left: 10, background: "rgba(13,27,42,.78)", color: "var(--accent-gold)", fontFamily: "var(--mono)", fontWeight: 500, fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", padding: "3px 8px", borderRadius: "var(--r-sm)", textTransform: "uppercase" }}>{c.hrs}</span>
                       </div>
                       <div style={{ padding: "16px 16px 18px", display: "flex", flexDirection: "column", flex: 1 }}>
-                        <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 16, color: "var(--text)", letterSpacing: "-.01em", marginBottom: 6 }}>{c.name}</h3>
-                        <p style={{ fontFamily: "var(--body)", fontSize: 12.5, color: "var(--text-muted)", lineHeight: 1.55, marginBottom: 12, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", flex: 1 }}>{c.desc}</p>
-                        <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--sans)", fontWeight: 700, fontSize: 10.5, letterSpacing: ".06em", textTransform: "uppercase", color: "var(--accent)" }}>
+                        <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-md)", color: "var(--text)", letterSpacing: "var(--tr-body)", marginBottom: 6 }}>{c.name}</h3>
+                        <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.55, marginBottom: 12, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", flex: 1 }}>{c.desc}</p>
+                        <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-xs)", letterSpacing: "var(--tr-caps)", textTransform: "uppercase", color: "var(--accent)" }}>
                           {t("viewProgram")} <ArrowRight size={12} className="course-arrow" />
                         </span>
                       </div>
@@ -431,12 +428,12 @@ export default function CoursesPage() {
         <h2 style={{ fontFamily: "var(--serif)", fontWeight: 300, fontStyle: "italic", fontSize: isMobile ? "clamp(22px,6.5vw,32px)" : "clamp(24px,3vw,42px)", color: "var(--text-inv)", marginBottom: 14 }}>
           {t("notSure")}
         </h2>
-        <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "rgba(253,252,249,.5)", marginBottom: 28 }}>
+        <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "rgba(253,252,249,.5)", marginBottom: 28 }}>
           {t("counselingSub")}
         </p>
         <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
           <Link href="/contact" style={{ textDecoration: "none" }}>
-            <button className="btn-primary" style={{ background: "var(--accent-gold)", color: "var(--bg-dark)" }}>{t("freeCounseling")}</button>
+            <button className="btn-primary">{t("freeCounseling")}</button>
           </Link>
           <a href="https://wa.me/919431103263" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
             <button className="btn-wa wa-pulse"><WhatsAppIcon size={15} /> {t("whatsappShort")}</button>

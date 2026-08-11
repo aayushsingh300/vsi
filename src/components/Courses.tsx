@@ -11,6 +11,7 @@ import { COURSE_THUMBS } from "@/data/assets";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useLang } from "@/context/LangContext";
 import { ToolCard } from "@/components/ToolCard";
+import TabSwitch from "@/components/TabSwitch";
 
 
 export default function Courses() {
@@ -22,7 +23,7 @@ export default function Courses() {
     { key: "tabDiploma", n: DATA_SCIENCE_COURSES.length },
     { key: "tabVocational", n: DESIGN_STUDIO_COURSES.length },
   ];
-  const isMobile = useIsMobile(768);
+  const isMobile = useIsMobile(900);
 
   return (
     <section
@@ -46,19 +47,7 @@ export default function Courses() {
         }}
       >
         <AnimateIn animation="slideUp">
-          <p
-            style={{
-              fontFamily: "var(--mono)",
-              fontSize: 10,
-              letterSpacing: ".18em",
-              color: "var(--accent)",
-              textTransform: "uppercase",
-              marginBottom: 12,
-              fontWeight: 500,
-            }}
-          >
-            // Programs
-          </p>
+          <p className="eyebrow-label eyebrow-label--slash">Programs</p>
           <h2
             style={{
               fontFamily: "var(--serif)",
@@ -66,25 +55,22 @@ export default function Courses() {
               fontStyle: "italic",
               fontSize: isMobile ? "clamp(28px,7vw,36px)" : "clamp(28px,4vw,60px)",
               color: "var(--text)",
-              letterSpacing: "-.038em",
+              letterSpacing: "var(--tr-display)",
               lineHeight: 1.02,
             }}
           >
             {t("ourPrograms")}
           </h2>
         </AnimateIn>
-        <div className="segment" role="tablist" aria-label="Programs">
-          {tabs.map((tb, i) => (
-            <button
-              key={tb.key}
-              role="tab"
-              aria-selected={tab === i}
-              onClick={() => setTab(i)}
-              className={`segment-btn${tab === i ? " active" : ""}`}
-            >
-              {t(tb.key)} <span className="seg-count">{tb.n}</span>
-            </button>
-          ))}
+        {/* Three options, so the segment stays a segment — it just fills the
+            width on a phone instead of hugging its content off to one side. */}
+        <div style={{ width: isMobile ? "100%" : "auto" }}>
+          <TabSwitch
+            label="Programs"
+            value={String(tab)}
+            onChange={(id) => setTab(Number(id))}
+            options={tabs.map((tb, i) => ({ id: String(i), label: t(tb.key), count: tb.n }))}
+          />
         </div>
       </div>
 
@@ -107,7 +93,7 @@ export default function Courses() {
                   style={{
                     background: "var(--bg-card)",
                     border: "1px solid var(--border-card)",
-                    borderRadius: 10,
+                    borderRadius: "var(--r-md)",
                     overflow: "hidden",
                     display: "flex",
                     flexDirection: "column",
@@ -155,10 +141,10 @@ export default function Courses() {
                           color: "var(--white)",
                           fontFamily: "var(--sans)",
                           fontWeight: 700,
-                          fontSize: 9.5,
-                          letterSpacing: ".12em",
+                          fontSize: "var(--text-xs)",
+                          letterSpacing: "var(--tr-mono)",
                           padding: "4px 10px",
-                          borderRadius: 3,
+                          borderRadius: "var(--r-sm)",
                           textTransform: "uppercase",
                           display: "flex",
                           alignItems: "center",
@@ -183,9 +169,9 @@ export default function Courses() {
                       style={{
                         fontFamily: "var(--serif)",
                         fontWeight: 700,
-                        fontSize: isMobile ? 19 : 22,
+                        fontSize: "var(--text-lg)",
                         color: "var(--text)",
-                        letterSpacing: "-.022em",
+                        letterSpacing: "var(--tr-heading)",
                         marginBottom: 8,
                       }}
                     >
@@ -194,7 +180,7 @@ export default function Courses() {
                     <p
                       style={{
                         fontFamily: "var(--body)",
-                        fontSize: 13.5,
+                        fontSize: "var(--text-sm)",
                         color: "var(--text-muted)",
                         lineHeight: 1.65,
                         marginBottom: 18,
@@ -217,7 +203,7 @@ export default function Courses() {
                       }}
                     >
                       <div style={{ display: "flex", gap: 14, alignItems: "baseline" }}>
-                        <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--text-muted)" }}>
+                        <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>
                           {c.hrs}
                         </span>
                       </div>
@@ -228,8 +214,8 @@ export default function Courses() {
                           gap: 5,
                           fontFamily: "var(--sans)",
                           fontWeight: 700,
-                          fontSize: 11,
-                          letterSpacing: ".06em",
+                          fontSize: "var(--text-xs)",
+                          letterSpacing: "var(--tr-caps)",
                           textTransform: "uppercase",
                           color: "var(--accent)",
                         }}
@@ -262,7 +248,7 @@ export default function Courses() {
                   style={{
                     background: "var(--bg-card)",
                     border: "1px solid var(--border-card)",
-                    borderRadius: 10,
+                    borderRadius: "var(--r-md)",
                     padding: "28px 24px",
                     display: "flex",
                     flexDirection: "column",
@@ -276,7 +262,7 @@ export default function Courses() {
                         style={{
                           width: 44,
                           height: 44,
-                          borderRadius: 10,
+                          borderRadius: "var(--r-md)",
                           background: "rgba(var(--accent-rgb),.08)",
                           border: "1px solid rgba(var(--accent-rgb),.15)",
                           display: "flex",
@@ -291,19 +277,19 @@ export default function Courses() {
                         style={{
                           fontFamily: "var(--serif)",
                           fontWeight: 700,
-                          fontSize: 18,
+                          fontSize: "var(--text-lg)",
                           color: "var(--text)",
-                          letterSpacing: "-.02em",
+                          letterSpacing: "var(--tr-heading)",
                         }}
                       >
                         {c.name}
                       </h3>
                     </div>
-                    <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--sans)", fontWeight: 700, fontSize: 11, letterSpacing: ".06em", textTransform: "uppercase", color: "var(--accent)" }}>
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-xs)", letterSpacing: "var(--tr-caps)", textTransform: "uppercase", color: "var(--accent)" }}>
                       View <ArrowRight size={12} className="course-arrow" />
                     </span>
                   </div>
-                  <p style={{ fontFamily: "var(--body)", fontSize: 13.5, color: "var(--text-muted)", lineHeight: 1.65 }}>
+                  <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.65 }}>
                     {c.desc}
                   </p>
                   <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: "auto" }}>
@@ -311,7 +297,7 @@ export default function Courses() {
                       <ToolCard key={tool} toolName={tool} compact />
                     ))}
                     {c.tools.length > 4 && (
-                      <span style={{ fontFamily: "var(--mono)", fontSize: 9, color: "var(--text-muted)", padding: "3px 0" }}>
+                      <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)", padding: "3px 0" }}>
                         +{c.tools.length - 4} more
                       </span>
                     )}
@@ -340,7 +326,7 @@ export default function Courses() {
                   style={{
                     background: "var(--bg-card)",
                     border: "1px solid var(--border-card)",
-                    borderRadius: 10,
+                    borderRadius: "var(--r-md)",
                     padding: "28px 22px",
                     display: "flex",
                     flexDirection: "column",
@@ -353,7 +339,7 @@ export default function Courses() {
                       style={{
                         width: 44,
                         height: 44,
-                        borderRadius: 12,
+                        borderRadius: "var(--r-md)",
                         background: "rgba(var(--accent-rgb),.08)",
                         border: "1px solid rgba(var(--accent-rgb),.15)",
                         display: "flex",
@@ -364,7 +350,7 @@ export default function Courses() {
                     >
                       <Icon name={c.icon} size={20} color="var(--accent)" />
                     </div>
-                    <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--sans)", fontWeight: 700, fontSize: 11, letterSpacing: ".06em", textTransform: "uppercase", color: "var(--accent)" }}>
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-xs)", letterSpacing: "var(--tr-caps)", textTransform: "uppercase", color: "var(--accent)" }}>
                       View <ArrowRight size={12} className="course-arrow" />
                     </span>
                   </div>
@@ -372,14 +358,14 @@ export default function Courses() {
                     style={{
                       fontFamily: "var(--serif)",
                       fontWeight: 700,
-                      fontSize: 17,
+                      fontSize: "var(--text-md)",
                       color: "var(--text)",
-                      letterSpacing: "-.015em",
+                      letterSpacing: "var(--tr-body)",
                     }}
                   >
                     {c.name}
                   </h3>
-                  <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6, flex: 1 }}>
+                  <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6, flex: 1 }}>
                     {c.desc}
                   </p>
                   <div style={{ display: "flex", gap: 5, flexWrap: "wrap", marginTop: "auto" }}>
@@ -387,7 +373,7 @@ export default function Courses() {
                       <ToolCard key={tool} toolName={tool} compact />
                     ))}
                     {c.tools.length > 3 && (
-                      <span style={{ fontFamily: "var(--mono)", fontSize: 8.5, color: "var(--text-muted)", padding: "2px 0" }}>
+                      <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)", padding: "2px 0" }}>
                         +{c.tools.length - 3}
                       </span>
                     )}

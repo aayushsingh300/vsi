@@ -9,7 +9,7 @@ import { useLang } from "@/context/LangContext";
 
 export default function CTA() {
   const { t } = useLang();
-  const isMobile = useIsMobile(768);
+  const isMobile = useIsMobile(900);
 
   return (
     <section
@@ -57,8 +57,8 @@ export default function CTA() {
               gap: 10,
               marginBottom: 24,
               fontFamily: "var(--mono)",
-              fontSize: 10,
-              letterSpacing: ".16em",
+              fontSize: "var(--text-xs)",
+              letterSpacing: "var(--tr-mono)",
               color: "rgba(var(--accent-rgb),.6)",
               textTransform: "uppercase",
             }}
@@ -81,7 +81,7 @@ export default function CTA() {
               fontSize: isMobile ? "clamp(28px,7.5vw,38px)" : "clamp(32px,4.5vw,72px)",
               color: "var(--text-inv)",
               lineHeight: 1.06,
-              letterSpacing: "-.032em",
+              letterSpacing: "var(--tr-display)",
               marginBottom: 16,
             }}
           >
@@ -94,7 +94,7 @@ export default function CTA() {
             style={{
               fontFamily: "var(--body)",
               fontWeight: 300,
-              fontSize: 15,
+              fontSize: "var(--text-base)",
               color: "rgba(253,252,249,.42)",
               lineHeight: 1.7,
             }}
@@ -120,16 +120,15 @@ export default function CTA() {
             <button
               className="btn-primary"
               style={{
-                background: "linear-gradient(135deg, var(--accent), var(--accent-dark))",
-                color: "#fff",
+                // The fill, label colour and shadow now come from the class.
+                // A gradient here made this — the single most important CTA
+                // on the site — the one button that didn't match the rest.
                 textAlign: "center",
                 width: "100%",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 gap: 8,
-                fontSize: 13,
-                boxShadow: "0 8px 28px var(--accent-glow)",
               }}
             >
               {t("bookCounseling")} <ArrowUpRight size={14} />

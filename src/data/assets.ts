@@ -60,7 +60,6 @@ export function programThumb(slug: string): string | undefined {
 // Keys must match the names in EMPLOYERS (see content.ts).
 export const EMPLOYER_LOGOS: Record<string, string> = {
   "TATA Motors": "/logos/tata.png",
-  "TATA Electronics": "/logos/tata.png",
   "Foxconn": "/logos/foxconn.svg",
   "Reliance": "/logos/reliance.svg",
   "Yazaki": "/logos/yazaki.svg",
@@ -69,10 +68,16 @@ export const EMPLOYER_LOGOS: Record<string, string> = {
   "Flipkart": "/logos/flipkart.svg",
   "Blinkit": "/logos/blinkit.svg",
   "Zepto": "/logos/zepto.svg",
+  "Apna Mart": "/logos/apna-mart.svg",
   "Jupiter Hospitals": "/logos/jupiter-hospitals.png",
   "HM Hospitals": "/logos/hm-hospitals.png",
+  "AIG Hospitals": "/logos/aig-hospitals.png",
+  "NU MED Super Speciality Hospitals": "/logos/numed.png",
+  "2050 Healthcare": "/logos/2050-healthcare.png",
   "S.P. Apparels": "/logos/sp-apparels.jpg",
   "Modenik Lifestyle": "/logos/modenik.svg",
+  "Orient Craft": "/logos/orient-craft.png",
+  "Ayuda": "/logos/ayuda.png",
   "L&T": "/logos/lt.svg",
   "Wipro": "/logos/wipro.png",
   "Infosys": "/logos/infosys.webp",
@@ -86,4 +91,42 @@ export const VSI_LOGO = "/logos/vsi.svg";
 export const VSI_LOGO_RATIO = 1132 / 312; // width / height
 
 // Logos that use white fills — need CSS invert() to be visible on light parchment bg.
-export const LOGO_INVERT_SET = new Set(["Modenik Lifestyle"]);
+export const LOGO_INVERT_SET = new Set(["Modenik Lifestyle", "Apna Mart"]);
+
+// ════════════════════════════════════════════════════════════════════
+//  Accreditation & affiliation marks
+// ════════════════════════════════════════════════════════════════════
+
+/**
+ * `ratio` is the artwork's own width ÷ height, so a mark can be laid out from a
+ * single height without ever being squashed. `scale` then corrects for optical
+ * weight: NSDC stacks an emblem over a wordmark and a tagline, and AICTE and
+ * Skill India each carry two lines of type — set to the same height as the
+ * Autodesk wordmark, which is nothing but capital letters, they read far
+ * smaller than it does.
+ */
+export type OrgLogo = { src: string; ratio: number; scale: number };
+
+export const ORG_LOGOS: Record<string, OrgLogo> = {
+  NASSCOM: { src: "/logos/orgs/nasscom.svg", ratio: 1000 / 168, scale: 1 },
+  NSDC: { src: "/logos/orgs/nsdc.svg", ratio: 620.49 / 596.1, scale: 1.8 },
+  AICTE: { src: "/logos/orgs/aicte.png", ratio: 380 / 73, scale: 1.2 },
+  Autodesk: { src: "/logos/orgs/autodesk.svg", ratio: 100 / 11, scale: 0.8 },
+  "Skill India": { src: "/logos/orgs/skill-india.svg", ratio: 1229 / 341, scale: 1.25 },
+  ASDC: { src: "/logos/orgs/asdc.png", ratio: 164 / 64, scale: 1.45 },
+  UPSDM: { src: "/logos/orgs/upsdm.png", ratio: 1, scale: 1.8 },
+  RJSD: { src: "/logos/orgs/rjsd.png", ratio: 344 / 147, scale: 1.15 },
+};
+
+/**
+ * The credential labels in CREDS / FOOTER_ACCREDITATIONS carry qualifiers the
+ * artwork does not ("NSDC Aligned", "Autodesk Certified"), so match on the body
+ * name. Anything we hold no mark for returns undefined and stays as text at
+ * every call site.
+ */
+export function orgLogo(label: string): OrgLogo | undefined {
+  const key = Object.keys(ORG_LOGOS).find((k) =>
+    label.toLowerCase().startsWith(k.toLowerCase())
+  );
+  return key ? ORG_LOGOS[key] : undefined;
+}

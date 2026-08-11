@@ -24,6 +24,8 @@ import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
+import OrgMark from "@/components/OrgMark";
+import { orgLogo } from "@/data/assets";
 import {
   CSR_PARTNERS,
   CSR_ACTIVITIES,
@@ -129,9 +131,9 @@ export default function CSRPage() {
           }}>
             {/* Hero Left Content */}
             <AnimateIn animation="slideUp">
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", borderRadius: 999, background: "rgba(var(--accent-rgb), .1)", border: "1px solid rgba(var(--accent-rgb), .2)", marginBottom: 20 }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", borderRadius: "var(--r-pill)", background: "rgba(var(--accent-rgb), .1)", border: "1px solid rgba(var(--accent-rgb), .2)", marginBottom: 20 }}>
                 <ShieldCheck size={14} color="var(--accent)" />
-                <span style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 600 }}>
+                <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase", color: "var(--accent)", fontWeight: 600 }}>
                   Companies Act, 2013 · Section 8 Compliant
                 </span>
               </div>
@@ -140,7 +142,7 @@ export default function CSRPage() {
                 fontFamily: "var(--sans)",
                 fontWeight: 700,
                 fontSize: "clamp(13px, 1.4vw, 15px)",
-                letterSpacing: ".16em",
+                letterSpacing: "var(--tr-mono)",
                 textTransform: "uppercase",
                 color: "var(--accent-orange)",
                 marginBottom: 12,
@@ -154,7 +156,7 @@ export default function CSRPage() {
                 fontSize: "clamp(32px, 4.5vw, 56px)",
                 color: "var(--text)",
                 lineHeight: 1.12,
-                letterSpacing: "-.03em",
+                letterSpacing: "var(--tr-display)",
                 marginBottom: 20
               }}>
                 Empowering India&apos;s Workforce.<br />
@@ -195,7 +197,7 @@ export default function CSRPage() {
               <div style={{ position: "relative" }}>
                 <div style={{
                   position: "relative",
-                  borderRadius: 20,
+                  borderRadius: "var(--r-lg)",
                   overflow: "hidden",
                   boxShadow: "var(--shadow-lg)",
                   border: "1px solid var(--border-card)",
@@ -216,11 +218,11 @@ export default function CSRPage() {
                   <div style={{ position: "absolute", bottom: 20, left: 20, right: 20, color: "#fff" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
                       <MapPin size={13} color="var(--accent)" />
-                      <span style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: ".08em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>
+                      <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-caps)", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>
                         Santhal Pargana & Ranchi Hubs
                       </span>
                     </div>
-                    <div style={{ fontFamily: "var(--serif)", fontSize: 16, fontWeight: 700 }}>
+                    <div style={{ fontFamily: "var(--serif)", fontSize: "var(--text-md)", fontWeight: 700 }}>
                       Candid Skill Mobilization & Hands-on Lab
                     </div>
                   </div>
@@ -233,7 +235,7 @@ export default function CSRPage() {
                   right: isMobile ? 10 : -20,
                   background: "var(--bg-card)",
                   border: "1px solid var(--border-strong)",
-                  borderRadius: 14,
+                  borderRadius: "var(--r-lg)",
                   padding: "12px 18px",
                   boxShadow: "var(--shadow-md)",
                   display: "flex",
@@ -242,15 +244,15 @@ export default function CSRPage() {
                   backdropFilter: "blur(12px)"
                 }}>
                   <div style={{
-                    width: 40, height: 40, borderRadius: 10,
+                    width: 40, height: 40, borderRadius: "var(--r-md)",
                     background: "linear-gradient(135deg, rgba(var(--accent-rgb),.15), rgba(var(--wa-rgb),.15))",
                     display: "flex", alignItems: "center", justifyContent: "center"
                   }}>
                     <CheckCircle2 size={20} color="var(--accent)" />
                   </div>
                   <div>
-                    <div style={{ fontFamily: "var(--sans)", fontWeight: 800, fontSize: 18, color: "var(--text)" }}>15,000+</div>
-                    <div style={{ fontFamily: "var(--body)", fontSize: 11, color: "var(--text-muted)", fontWeight: 500 }}>Rural Trainees Skilled</div>
+                    <div style={{ fontFamily: "var(--sans)", fontWeight: 800, fontSize: "var(--text-lg)", color: "var(--text)" }}>15,000+</div>
+                    <div style={{ fontFamily: "var(--body)", fontSize: "var(--text-xs)", color: "var(--text-muted)", fontWeight: 500 }}>Rural Trainees Skilled</div>
                   </div>
                 </div>
 
@@ -261,7 +263,7 @@ export default function CSRPage() {
                   left: isMobile ? 10 : -20,
                   background: "var(--bg-card)",
                   border: "1px solid var(--border-strong)",
-                  borderRadius: 14,
+                  borderRadius: "var(--r-lg)",
                   padding: "12px 18px",
                   boxShadow: "var(--shadow-md)",
                   display: "flex",
@@ -270,8 +272,8 @@ export default function CSRPage() {
                 }}>
                   <Award size={20} color="var(--accent-orange)" />
                   <div>
-                    <div style={{ fontFamily: "var(--sans)", fontWeight: 800, fontSize: 16, color: "var(--text)" }}>85% Placement</div>
-                    <div style={{ fontFamily: "var(--body)", fontSize: 10, color: "var(--text-muted)" }}>Verified Corporate Hiring</div>
+                    <div style={{ fontFamily: "var(--sans)", fontWeight: 800, fontSize: "var(--text-md)", color: "var(--text)" }}>85% Placement</div>
+                    <div style={{ fontFamily: "var(--body)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>Verified Corporate Hiring</div>
                   </div>
                 </div>
               </div>
@@ -292,7 +294,7 @@ export default function CSRPage() {
               <AnimateIn key={stat.label} animation="slideUp" delay={i * 0.05}>
                 <div style={{
                   padding: "20px 22px",
-                  borderRadius: 12,
+                  borderRadius: "var(--r-md)",
                   background: "var(--surface)",
                   border: "1px solid var(--border)",
                   height: "100%"
@@ -300,10 +302,10 @@ export default function CSRPage() {
                   <div style={{ fontFamily: "var(--sans)", fontWeight: 800, fontSize: "clamp(24px, 2.5vw, 34px)", color: "var(--accent)", marginBottom: 4 }}>
                     {stat.value}
                   </div>
-                  <div style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: 14, color: "var(--text)", marginBottom: 2 }}>
+                  <div style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-base)", color: "var(--text)", marginBottom: 2 }}>
                     {stat.label}
                   </div>
-                  <div style={{ fontFamily: "var(--body)", fontSize: 11, color: "var(--text-muted)", lineHeight: 1.4 }}>
+                  <div style={{ fontFamily: "var(--body)", fontSize: "var(--text-xs)", color: "var(--text-muted)", lineHeight: 1.4 }}>
                     {stat.sub}
                   </div>
                 </div>
@@ -319,7 +321,7 @@ export default function CSRPage() {
           <AnimateIn animation="slideUp">
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
               <ShieldCheck size={18} color="var(--accent)" />
-              <span style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", fontWeight: 600 }}>
+              <span className="eyebrow-label">
                 Regulatory & Operational Compliance
               </span>
             </div>
@@ -331,11 +333,11 @@ export default function CSRPage() {
               fontSize: "clamp(26px, 3.5vw, 44px)",
               color: "var(--text)",
               marginBottom: 16,
-              letterSpacing: "-.03em"
+              letterSpacing: "var(--tr-display)"
             }}>
               Section 8 Compliance Pipeline.
             </h2>
-            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", lineHeight: 1.7, maxWidth: 640, marginBottom: 48 }}>
+            <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", lineHeight: 1.7, maxWidth: 640, marginBottom: 48 }}>
               Every CSR initiative deployed with Venture Skill follows a transparent 5-step execution blueprint — ensuring audit-ready reporting, GST alignment, and measurable social ROI.
             </p>
           </AnimateIn>
@@ -350,7 +352,7 @@ export default function CSRPage() {
                 <div style={{
                   background: "var(--bg-card)",
                   border: "1px solid var(--border-card)",
-                  borderRadius: 12,
+                  borderRadius: "var(--r-md)",
                   padding: "24px 20px",
                   height: "100%",
                   display: "flex",
@@ -360,16 +362,16 @@ export default function CSRPage() {
                   <div style={{
                     fontFamily: "var(--mono)",
                     fontWeight: 700,
-                    fontSize: 22,
+                    fontSize: "var(--text-lg)",
                     color: "rgba(var(--accent-rgb), .35)",
                     marginBottom: 12
                   }}>
                     {step.step}
                   </div>
-                  <h3 style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: 15, color: "var(--text)", marginBottom: 8, lineHeight: 1.3 }}>
+                  <h3 style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-base)", color: "var(--text)", marginBottom: 8, lineHeight: 1.3 }}>
                     {step.title}
                   </h3>
-                  <p style={{ fontFamily: "var(--body)", fontSize: 12, color: "var(--text-muted)", lineHeight: 1.6, flexGrow: 1 }}>
+                  <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6, flexGrow: 1 }}>
                     {step.desc}
                   </p>
                 </div>
@@ -385,7 +387,7 @@ export default function CSRPage() {
           <AnimateIn animation="slideUp">
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
               <HeartHandshake size={18} color="var(--accent)" />
-              <span style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", fontWeight: 600 }}>
+              <span className="eyebrow-label">
                 Corporate Alliances
               </span>
             </div>
@@ -397,11 +399,11 @@ export default function CSRPage() {
               fontSize: "clamp(26px, 3.5vw, 44px)",
               color: "var(--text)",
               marginBottom: 16,
-              letterSpacing: "-.03em"
+              letterSpacing: "var(--tr-display)"
             }}>
               Co-branded corporate impact projects.
             </h2>
-            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", lineHeight: 1.7, maxWidth: 640, marginBottom: 48 }}>
+            <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", lineHeight: 1.7, maxWidth: 640, marginBottom: 48 }}>
               Partnering with India&apos;s leading enterprises to deploy targeted skilling cohorts that address talent shortages while uplifting underserved communities.
             </p>
           </AnimateIn>
@@ -416,7 +418,7 @@ export default function CSRPage() {
                 <div className="hover-lift" style={{
                   background: "var(--bg-card)",
                   border: "1px solid var(--border-card)",
-                  borderRadius: 16,
+                  borderRadius: "var(--r-lg)",
                   overflow: "hidden",
                   display: "flex",
                   flexDirection: isMobile ? "column" : "row",
@@ -436,8 +438,8 @@ export default function CSRPage() {
                     <div style={{
                       position: "absolute", top: 12, left: 12,
                       background: "rgba(1,1,1,.75)", backdropFilter: "blur(6px)",
-                      color: "#fff", padding: "4px 10px", borderRadius: 6,
-                      fontFamily: "var(--mono)", fontSize: 10, textTransform: "uppercase"
+                      color: "#fff", padding: "4px 10px", borderRadius: "var(--r-sm)",
+                      fontFamily: "var(--mono)", fontSize: "var(--text-xs)", textTransform: "uppercase"
                     }}>
                       {p.metric}
                     </div>
@@ -446,21 +448,21 @@ export default function CSRPage() {
                   <div style={{ padding: "26px 24px", flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                     <div>
                       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                        <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--accent)", textTransform: "uppercase", fontWeight: 600 }}>
+                        <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--accent)", textTransform: "uppercase", fontWeight: 600 }}>
                           {p.sector}
                         </span>
                       </div>
-                      <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 20, color: "var(--text)", marginBottom: 8, letterSpacing: "-.02em" }}>
+                      <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", marginBottom: 8, letterSpacing: "var(--tr-heading)" }}>
                         {p.name}
                       </h3>
-                      <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.65, marginBottom: 16 }}>
+                      <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.65, marginBottom: 16 }}>
                         {p.desc}
                       </p>
                     </div>
 
-                    <div style={{ display: "flex", alignItems: "center", gap: 6, paddingTop: 14, borderTop: "1px dashed var(--border)" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 6, paddingTop: 14, borderTop: "1px solid var(--border)" }}>
                       <MapPin size={12} color="var(--text-muted)" />
-                      <span style={{ fontFamily: "var(--body)", fontSize: 11, color: "var(--text-muted)" }}>
+                      <span style={{ fontFamily: "var(--body)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>
                         {p.location}
                       </span>
                     </div>
@@ -478,7 +480,7 @@ export default function CSRPage() {
           <AnimateIn animation="slideUp">
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
               <Sparkles size={18} color="var(--accent-orange)" />
-              <span style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: ".15em", color: "var(--accent-orange)", textTransform: "uppercase", fontWeight: 600 }}>
+              <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", color: "var(--accent-orange)", textTransform: "uppercase", fontWeight: 600 }}>
                 Venture Sewa Foundation Initiatives
               </span>
             </div>
@@ -490,11 +492,11 @@ export default function CSRPage() {
               fontSize: "clamp(26px, 3.5vw, 44px)",
               color: "var(--text)",
               marginBottom: 16,
-              letterSpacing: "-.03em"
+              letterSpacing: "var(--tr-display)"
             }}>
               Self-funded social commitment.
             </h2>
-            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", lineHeight: 1.7, maxWidth: 640, marginBottom: 48 }}>
+            <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", lineHeight: 1.7, maxWidth: 640, marginBottom: 48 }}>
               Beyond corporate partnerships, Venture Sewa Foundation invests directly into self-funded rural training camps, women&apos;s cohorts, and scholarship drives.
             </p>
           </AnimateIn>
@@ -509,7 +511,7 @@ export default function CSRPage() {
                 <div style={{
                   background: "var(--bg-card)",
                   border: "1px solid var(--border-card)",
-                  borderRadius: 14,
+                  borderRadius: "var(--r-lg)",
                   overflow: "hidden",
                   height: "100%",
                   display: "flex",
@@ -525,27 +527,27 @@ export default function CSRPage() {
                     <div style={{
                       position: "absolute", bottom: 10, left: 10,
                       background: "rgba(1,1,1,.75)", backdropFilter: "blur(6px)",
-                      color: "#fff", padding: "4px 10px", borderRadius: 6,
-                      fontFamily: "var(--mono)", fontSize: 10
+                      color: "#fff", padding: "4px 10px", borderRadius: "var(--r-sm)",
+                      fontFamily: "var(--mono)", fontSize: "var(--text-xs)"
                     }}>
                       {act.metric}
                     </div>
                   </div>
                   <div style={{ padding: "22px 20px", flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                     <div>
-                      <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--accent-orange)", textTransform: "uppercase", fontWeight: 600, marginBottom: 6 }}>
+                      <div style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--accent-orange)", textTransform: "uppercase", fontWeight: 600, marginBottom: 6 }}>
                         {act.category}
                       </div>
-                      <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 18, color: "var(--text)", marginBottom: 8, lineHeight: 1.3 }}>
+                      <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", marginBottom: 8, lineHeight: 1.3 }}>
                         {act.title}
                       </h3>
-                      <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6, marginBottom: 14 }}>
+                      <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6, marginBottom: 14 }}>
                         {act.desc}
                       </p>
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 6, paddingTop: 12, borderTop: "1px solid var(--border)" }}>
                       <MapPin size={12} color="var(--text-muted)" />
-                      <span style={{ fontFamily: "var(--body)", fontSize: 11, color: "var(--text-muted)" }}>
+                      <span style={{ fontFamily: "var(--body)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>
                         {act.location}
                       </span>
                     </div>
@@ -563,7 +565,7 @@ export default function CSRPage() {
           <AnimateIn animation="slideUp">
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
               <Users size={18} color="var(--accent)" />
-              <span style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", fontWeight: 600 }}>
+              <span className="eyebrow-label">
                 On-The-Ground Photography
               </span>
             </div>
@@ -575,11 +577,11 @@ export default function CSRPage() {
               fontSize: "clamp(26px, 3.5vw, 44px)",
               color: "var(--text)",
               marginBottom: 16,
-              letterSpacing: "-.03em"
+              letterSpacing: "var(--tr-display)"
             }}>
               Authentic impact gallery.
             </h2>
-            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", lineHeight: 1.7, maxWidth: 640, marginBottom: 32 }}>
+            <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", lineHeight: 1.7, maxWidth: 640, marginBottom: 32 }}>
               Candid moments from training camps, practical lab sessions, and certificate convocation ceremonies across our footprint.
             </p>
 
@@ -610,7 +612,7 @@ export default function CSRPage() {
                   className="hover-lift img-hover"
                   style={{
                     position: "relative",
-                    borderRadius: 14,
+                    borderRadius: "var(--r-lg)",
                     overflow: "hidden",
                     border: "1px solid var(--border-card)",
                     aspectRatio: "4/3",
@@ -648,21 +650,21 @@ export default function CSRPage() {
                     <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
                       <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
                         <MapPin size={11} color="var(--accent)" />
-                        <span style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".08em", color: "rgba(255,255,255,.8)", textTransform: "uppercase" }}>
+                        <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-caps)", color: "rgba(255,255,255,.8)", textTransform: "uppercase" }}>
                           {g.location}
                         </span>
                       </div>
                       <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
                         <Calendar size={11} color="rgba(255,255,255,.6)" />
-                        <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: "rgba(255,255,255,.6)" }}>
+                        <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "rgba(255,255,255,.6)" }}>
                           {g.date}
                         </span>
                       </div>
                     </div>
-                    <div style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 16, marginBottom: 2 }}>
+                    <div style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-md)", marginBottom: 2 }}>
                       {g.title}
                     </div>
-                    <div style={{ fontFamily: "var(--body)", fontSize: 12, color: "rgba(255,255,255,.7)", lineHeight: 1.4 }}>
+                    <div style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "rgba(255,255,255,.7)", lineHeight: 1.4 }}>
                       {g.caption}
                     </div>
                   </div>
@@ -679,7 +681,7 @@ export default function CSRPage() {
           <AnimateIn animation="slideUp">
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
               <User size={18} color="var(--accent)" />
-              <span style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", fontWeight: 600 }}>
+              <span className="eyebrow-label">
                 Beneficiary Stories
               </span>
             </div>
@@ -691,11 +693,11 @@ export default function CSRPage() {
               fontSize: "clamp(26px, 3.5vw, 44px)",
               color: "var(--text)",
               marginBottom: 16,
-              letterSpacing: "-.03em"
+              letterSpacing: "var(--tr-display)"
             }}>
               Voices of transformed lives.
             </h2>
-            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", lineHeight: 1.7, maxWidth: 640, marginBottom: 48 }}>
+            <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", lineHeight: 1.7, maxWidth: 640, marginBottom: 48 }}>
               Real accounts from candidates whose livelihood trajectories were redefined through our CSR skill cohorts.
             </p>
           </AnimateIn>
@@ -710,14 +712,14 @@ export default function CSRPage() {
                 <div style={{
                   background: "var(--bg-card)",
                   border: "1px solid var(--border-card)",
-                  borderRadius: 16,
+                  borderRadius: "var(--r-lg)",
                   padding: "32px 28px",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
                   height: "100%"
                 }}>
-                  <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text)", lineHeight: 1.75, fontStyle: "italic", marginBottom: 24 }}>
+                  <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text)", lineHeight: 1.75, fontStyle: "italic", marginBottom: 24 }}>
                     &ldquo;{t.quote}&rdquo;
                   </p>
                   <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -726,9 +728,9 @@ export default function CSRPage() {
                       <img src={t.avatar} alt={t.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     </div>
                     <div>
-                      <div style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: 16, color: "var(--text)" }}>{t.name}</div>
-                      <div style={{ fontFamily: "var(--body)", fontSize: 12, color: "var(--accent)", fontWeight: 500 }}>{t.role}</div>
-                      <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text-muted)" }}>{t.location} • {t.batch}</div>
+                      <div style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-md)", color: "var(--text)" }}>{t.name}</div>
+                      <div style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--accent)", fontWeight: 500 }}>{t.role}</div>
+                      <div style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>{t.location} • {t.batch}</div>
                     </div>
                   </div>
                 </div>
@@ -742,7 +744,7 @@ export default function CSRPage() {
       <section style={{ padding: "64px 5%", background: "var(--surface)", borderTop: "1px solid var(--border)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto", textAlign: "center" }}>
           <AnimateIn animation="slideUp">
-            <p style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 24, fontWeight: 600 }}>
+            <p className="eyebrow-label" style={{ marginBottom: 24 }}>
               Recognized & Accredited Institutions
             </p>
           </AnimateIn>
@@ -750,12 +752,17 @@ export default function CSRPage() {
             {ACCREDITATIONS.map((acc, i) => (
               <AnimateIn key={acc.name} animation="scaleIn" delay={i * 0.05}>
                 <div style={{
-                  padding: "16px 24px", borderRadius: 10,
+                  padding: "16px 24px", borderRadius: "var(--r-md)",
                   background: "var(--bg-card)", border: "1px solid var(--border-card)",
-                  display: "flex", flexDirection: "column", alignItems: "center", gap: 4, minWidth: 140
-                }}>
-                  <span style={{ fontFamily: "var(--sans)", fontWeight: 800, fontSize: 15, color: "var(--text)" }}>{acc.name}</span>
-                  <span style={{ fontFamily: "var(--body)", fontSize: 10, color: "var(--text-muted)", textAlign: "center", lineHeight: 1.3 }}>{acc.fullName}</span>
+                  display: "flex", flexDirection: "column", alignItems: "center", gap: 8, minWidth: 160,
+                  "--org-h": "18px", "--plate-h": "42px", "--plate-px": "6px",
+                } as React.CSSProperties}>
+                  {orgLogo(acc.name) ? (
+                    <span className="cred-plate on-light"><OrgMark name={acc.name} /></span>
+                  ) : (
+                    <span style={{ display: "flex", alignItems: "center", height: 38, fontFamily: "var(--sans)", fontWeight: 800, fontSize: "var(--text-base)", color: "var(--text)" }}>{acc.name}</span>
+                  )}
+                  <span style={{ fontFamily: "var(--body)", fontSize: "var(--text-xs)", color: "var(--text-muted)", textAlign: "center", lineHeight: 1.3 }}>{acc.fullName}</span>
                 </div>
               </AnimateIn>
             ))}
@@ -767,10 +774,10 @@ export default function CSRPage() {
       <section style={{ padding: isMobile ? "64px 6%" : "96px 5%", textAlign: "center", background: "var(--bg)", borderTop: "1px solid var(--border)" }}>
         <AnimateIn animation="slideUp">
           <div style={{ maxWidth: 640, margin: "0 auto" }}>
-            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(26px, 3.5vw, 44px)", color: "var(--text)", letterSpacing: "-.03em", marginBottom: 16 }}>
+            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(26px, 3.5vw, 44px)", color: "var(--text)", letterSpacing: "var(--tr-display)", marginBottom: 16 }}>
               Deploy your CSR budget effectively.
             </h2>
-            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", lineHeight: 1.7, marginBottom: 32 }}>
+            <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", lineHeight: 1.7, marginBottom: 32 }}>
               Let&apos;s structure a custom, Section 8-compliant skill development program aligned with your corporate ESG objectives.
             </p>
             <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
@@ -801,7 +808,7 @@ export default function CSRPage() {
         }}>
           <div style={{
             position: "relative", maxWidth: 900, width: "100%",
-            background: "#0D1117", borderRadius: 16, overflow: "hidden",
+            background: "#0D1117", borderRadius: "var(--r-lg)", overflow: "hidden",
             border: "1px solid rgba(255,255,255,.15)"
           }}>
             <button
@@ -827,18 +834,18 @@ export default function CSRPage() {
 
             <div style={{ padding: 24, color: "#fff" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
-                <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--accent)", textTransform: "uppercase" }}>
+                <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--accent)", textTransform: "uppercase" }}>
                   {activeLightboxItem.location}
                 </span>
-                <span style={{ color: "rgba(255,255,255,.4)", fontSize: 11 }}>•</span>
-                <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "rgba(255,255,255,.6)" }}>
+                <span style={{ color: "rgba(255,255,255,.4)", fontSize: "var(--text-xs)" }}>•</span>
+                <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "rgba(255,255,255,.6)" }}>
                   {activeLightboxItem.date}
                 </span>
               </div>
-              <h3 style={{ fontFamily: "var(--serif)", fontSize: 22, fontWeight: 700, marginBottom: 6 }}>
+              <h3 style={{ fontFamily: "var(--serif)", fontSize: "var(--text-lg)", fontWeight: 700, marginBottom: 6 }}>
                 {activeLightboxItem.title}
               </h3>
-              <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "rgba(255,255,255,.7)", lineHeight: 1.6 }}>
+              <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "rgba(255,255,255,.7)", lineHeight: 1.6 }}>
                 {activeLightboxItem.caption}
               </p>
             </div>
@@ -856,7 +863,7 @@ export default function CSRPage() {
         }}>
           <div style={{
             position: "relative", maxWidth: 540, width: "100%",
-            background: "var(--bg-card)", borderRadius: 16,
+            background: "var(--bg-card)", borderRadius: "var(--r-lg)",
             padding: 32, border: "1px solid var(--border-strong)",
             boxShadow: "var(--shadow-lg)"
           }}>
@@ -881,10 +888,10 @@ export default function CSRPage() {
                 }}>
                   <CheckCircle2 size={32} />
                 </div>
-                <h3 style={{ fontFamily: "var(--serif)", fontSize: 22, fontWeight: 700, color: "var(--text)", marginBottom: 8 }}>
+                <h3 style={{ fontFamily: "var(--serif)", fontSize: "var(--text-lg)", fontWeight: 700, color: "var(--text)", marginBottom: 8 }}>
                   Proposal Request Submitted!
                 </h3>
-                <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "var(--text-muted)", lineHeight: 1.6 }}>
+                <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", lineHeight: 1.6 }}>
                   Our Corporate CSR Partnerships Cell will review your requirements and reach out within 24 hours with a customized proposal.
                 </p>
               </div>
@@ -892,17 +899,17 @@ export default function CSRPage() {
               <>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
                   <Building2 size={20} color="var(--accent)" />
-                  <h3 style={{ fontFamily: "var(--serif)", fontSize: 22, fontWeight: 700, color: "var(--text)" }}>
+                  <h3 style={{ fontFamily: "var(--serif)", fontSize: "var(--text-lg)", fontWeight: 700, color: "var(--text)" }}>
                     Request CSR Proposal
                   </h3>
                 </div>
-                <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", marginBottom: 24 }}>
+                <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", marginBottom: 24 }}>
                   Fill in your details to receive a customized Section 8 skill deployment project plan.
                 </p>
 
                 <form onSubmit={handleFormSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                   <div>
-                    <label style={{ fontFamily: "var(--sans)", fontSize: 12, fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
+                    <label style={{ fontFamily: "var(--sans)", fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
                       Company / Foundation Name *
                     </label>
                     <input
@@ -917,7 +924,7 @@ export default function CSRPage() {
 
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                     <div>
-                      <label style={{ fontFamily: "var(--sans)", fontSize: 12, fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
+                      <label style={{ fontFamily: "var(--sans)", fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
                         Contact Person *
                       </label>
                       <input
@@ -930,7 +937,7 @@ export default function CSRPage() {
                       />
                     </div>
                     <div>
-                      <label style={{ fontFamily: "var(--sans)", fontSize: 12, fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
+                      <label style={{ fontFamily: "var(--sans)", fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
                         Phone Number *
                       </label>
                       <input
@@ -945,7 +952,7 @@ export default function CSRPage() {
                   </div>
 
                   <div>
-                    <label style={{ fontFamily: "var(--sans)", fontSize: 12, fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
+                    <label style={{ fontFamily: "var(--sans)", fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
                       Work Email *
                     </label>
                     <input
@@ -960,7 +967,7 @@ export default function CSRPage() {
 
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                     <div>
-                      <label style={{ fontFamily: "var(--sans)", fontSize: 12, fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
+                      <label style={{ fontFamily: "var(--sans)", fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
                         Sector Focus
                       </label>
                       <select
@@ -977,7 +984,7 @@ export default function CSRPage() {
                       </select>
                     </div>
                     <div>
-                      <label style={{ fontFamily: "var(--sans)", fontSize: 12, fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
+                      <label style={{ fontFamily: "var(--sans)", fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 4 }}>
                         Budget Range
                       </label>
                       <select

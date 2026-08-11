@@ -50,7 +50,7 @@ function StatItem({
           fontWeight: 700,
           fontSize: isMobile ? "clamp(32px,9vw,44px)" : "clamp(44px,5vw,80px)",
           lineHeight: 1,
-          letterSpacing: "-.04em",
+          letterSpacing: "var(--tr-display)",
           color: go ? "var(--accent-orange)" : "var(--text)",
           transition: "color .4s ease",
         }}
@@ -63,8 +63,8 @@ function StatItem({
         style={{
           fontFamily: "var(--sans)",
           fontWeight: 600,
-          fontSize: 11,
-          letterSpacing: ".16em",
+          fontSize: "var(--text-xs)",
+          letterSpacing: "var(--tr-mono)",
           textTransform: "uppercase",
           color: "var(--text-muted)",
           marginTop: 10,

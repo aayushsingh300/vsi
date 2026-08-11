@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import Stats from "@/components/Stats";
+import HeroVideo from "@/components/HeroVideo";
 import Courses from "@/components/Courses";
 import Labs from "@/components/Labs";
 import Awards from "@/components/Awards";
@@ -22,8 +21,7 @@ export default function Home() {
     <div style={{ minHeight: "100vh", background: "var(--bg)" }}>
       <MagneticCursor />
       <Navbar formOpen={formOpen} setFormOpen={setFormOpen} />
-      <Hero />
-      <Stats />
+      <HeroVideo />
       <Courses />
       <EmployerTicker />
       <Labs />

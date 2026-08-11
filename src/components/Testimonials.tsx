@@ -70,8 +70,8 @@ export default function Testimonials() {
             <span
               style={{
                 fontFamily: "var(--mono)",
-                fontSize: 10,
-                letterSpacing: ".18em",
+                fontSize: "var(--text-xs)",
+                letterSpacing: "var(--tr-mono)",
                 color: "rgba(255,255,255,.28)",
                 textTransform: "uppercase",
               }}
@@ -105,9 +105,13 @@ export default function Testimonials() {
                 fontStyle: "italic",
                 fontSize: "clamp(22px,2.8vw,36px)",
                 lineHeight: 1.52,
+                letterSpacing: "var(--tr-display)",
                 color: "var(--text-inv)",
                 marginBottom: 40,
-                minHeight: 130,
+                // Reserved in line-heights, not pixels. A flat 130px held four
+                // lines of the smallest quote at desktop size but only two at
+                // 360px, so the block below it jumped on every rotation.
+                minHeight: "4.6em",
               }}
             >
               {t.q}
@@ -127,7 +131,7 @@ export default function Testimonials() {
                   justifyContent: "center",
                   fontFamily: "var(--serif)",
                   fontWeight: 700,
-                  fontSize: 17,
+                  fontSize: "var(--text-md)",
                   color: "var(--white)",
                   boxShadow: "0 4px 16px var(--accent-glow)",
                 }}
@@ -140,9 +144,9 @@ export default function Testimonials() {
                   style={{
                     fontFamily: "var(--sans)",
                     fontWeight: 700,
-                    fontSize: 14,
+                    fontSize: "var(--text-base)",
                     color: "var(--text-inv)",
-                    letterSpacing: ".04em",
+                    letterSpacing: "var(--tr-caps)",
                     textTransform: "uppercase",
                     marginBottom: 4,
                   }}
@@ -153,7 +157,7 @@ export default function Testimonials() {
                   style={{
                     fontFamily: "var(--body)",
                     fontWeight: 300,
-                    fontSize: 12.5,
+                    fontSize: "var(--text-sm)",
                     color: "rgba(248,247,244,.42)",
                   }}
                 >

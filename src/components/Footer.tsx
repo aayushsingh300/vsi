@@ -4,7 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
 import { COURSES_CERT, FOOTER_ACCREDITATIONS } from "@/data/content";
-import { VSI_LOGO, VSI_LOGO_RATIO } from "@/data/assets";
+import { VSI_LOGO, VSI_LOGO_RATIO, orgLogo } from "@/data/assets";
+import OrgMark from "@/components/OrgMark";
 import { useLang } from "@/context/LangContext";
 
 const SocialLinks = [
@@ -126,8 +127,8 @@ export default function Footer() {
             <div
               style={{
                 fontFamily: "var(--mono)",
-                fontSize: 10,
-                letterSpacing: ".14em",
+                fontSize: "var(--text-xs)",
+                letterSpacing: "var(--tr-mono)",
                 background: "linear-gradient(90deg, rgba(var(--accent-rgb),.7), rgba(var(--gold-rgb),.7))",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -142,7 +143,7 @@ export default function Footer() {
           <p
             style={{
               fontFamily: "var(--body)",
-              fontSize: 14,
+              fontSize: "var(--text-base)",
               lineHeight: 1.74,
               color: "rgba(248,247,244,.38)",
               marginBottom: 24,
@@ -160,7 +161,7 @@ export default function Footer() {
                 style={{
                   width: 36,
                   height: 36,
-                  borderRadius: 6,
+                  borderRadius: "var(--r-sm)",
                   border: "1px solid rgba(248,247,244,.1)",
                   display: "flex",
                   alignItems: "center",
@@ -196,8 +197,8 @@ export default function Footer() {
             style={{
               fontFamily: "var(--sans)",
               fontWeight: 700,
-              fontSize: 11,
-              letterSpacing: ".18em",
+              fontSize: "var(--text-xs)",
+              letterSpacing: "var(--tr-mono)",
               textTransform: "uppercase",
               color: "rgba(248,247,244,.25)",
               marginBottom: 20,
@@ -214,7 +215,7 @@ export default function Footer() {
                 alignItems: "center",
                 gap: 4,
                 fontFamily: "var(--body)",
-                fontSize: 14,
+                fontSize: "var(--text-base)",
                 color: "rgba(248,247,244,.45)",
                 marginBottom: 11,
                 transition: "color .18s ease, gap .18s ease",
@@ -241,8 +242,8 @@ export default function Footer() {
             style={{
               fontFamily: "var(--sans)",
               fontWeight: 700,
-              fontSize: 11,
-              letterSpacing: ".18em",
+              fontSize: "var(--text-xs)",
+              letterSpacing: "var(--tr-mono)",
               textTransform: "uppercase",
               color: "rgba(248,247,244,.25)",
               marginBottom: 20,
@@ -259,7 +260,7 @@ export default function Footer() {
                 alignItems: "center",
                 gap: 6,
                 fontFamily: "var(--body)",
-                fontSize: 14,
+                fontSize: "var(--text-base)",
                 color: "rgba(248,247,244,.45)",
                 marginBottom: 11,
                 transition: "color .18s ease",
@@ -282,8 +283,8 @@ export default function Footer() {
             style={{
               fontFamily: "var(--sans)",
               fontWeight: 700,
-              fontSize: 11,
-              letterSpacing: ".18em",
+              fontSize: "var(--text-xs)",
+              letterSpacing: "var(--tr-mono)",
               textTransform: "uppercase",
               color: "rgba(248,247,244,.25)",
               marginBottom: 20,
@@ -293,7 +294,7 @@ export default function Footer() {
           </h4>
           <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 16 }}>
             <MapPin size={14} color="rgba(var(--accent-rgb),.6)" style={{ marginTop: 3, flexShrink: 0 }} />
-            <span style={{ fontSize: 13, color: "rgba(248,247,244,.45)", lineHeight: 1.6, fontFamily: "var(--body)" }}>
+            <span style={{ fontSize: "var(--text-sm)", color: "rgba(248,247,244,.45)", lineHeight: 1.6, fontFamily: "var(--body)" }}>
               601, 6th Floor, Panchwati Plaza,<br />Kutchery Road,<br />Ranchi 834001, Jharkhand
             </span>
           </div>
@@ -302,7 +303,7 @@ export default function Footer() {
             <a
               href="tel:+919431103263"
               style={{
-                fontSize: 13,
+                fontSize: "var(--text-sm)",
                 color: "rgba(248,247,244,.55)",
                 fontFamily: "var(--mono)",
                 transition: "color .18s",
@@ -318,7 +319,7 @@ export default function Footer() {
             <a
               href="mailto:info@ventureskillindia.co.in"
               style={{
-                fontSize: 13,
+                fontSize: "var(--text-sm)",
                 color: "rgba(248,247,244,.55)",
                 fontFamily: "var(--body)",
                 transition: "color .18s",
@@ -340,12 +341,12 @@ export default function Footer() {
                 padding: "10px 16px",
                 background: "rgba(var(--accent-rgb),.12)",
                 border: "1px solid rgba(var(--accent-rgb),.22)",
-                borderRadius: 6,
+                borderRadius: "var(--r-sm)",
                 fontFamily: "var(--sans)",
                 fontWeight: 700,
-                fontSize: 12,
+                fontSize: "var(--text-sm)",
                 color: "rgba(var(--accent-rgb),.85)",
-                letterSpacing: ".06em",
+                letterSpacing: "var(--tr-caps)",
                 textTransform: "uppercase",
                 transition: "all .22s ease",
               }}
@@ -383,27 +384,52 @@ export default function Footer() {
           zIndex: 2,
         }}
       >
-        <div style={{ display: "flex", gap: 18, flexWrap: "wrap", alignItems: "center" }}>
-          {FOOTER_ACCREDITATIONS.map((c) => (
-            <span
-              key={c}
-              style={{
-                fontFamily: "var(--mono)",
-                fontSize: 10,
-                fontWeight: 500,
-                letterSpacing: ".12em",
-                color: "rgba(248,247,244,.18)",
-                textTransform: "uppercase",
-              }}
-            >
-              {c}
-            </span>
-          ))}
+        {/* Accreditations. The five bodies we hold artwork for show their marks;
+            the sector councils and state missions we don't (ASDC, UPSDM, RJSD)
+            stay as the wordmark this row has always used. Plates sit at 75%
+            opacity so the strip reads as a footnote, not a second logo wall. */}
+        <div
+          style={{
+            display: "flex",
+            gap: 10,
+            flexWrap: "wrap",
+            alignItems: "center",
+            "--org-h": "10px",
+            "--plate-h": "28px",
+            "--plate-px": "9px",
+          } as React.CSSProperties}
+        >
+          {FOOTER_ACCREDITATIONS.map((c) =>
+            orgLogo(c) ? (
+              <span
+                key={c}
+                title={c}
+                className="cred-plate footer-cred"
+                style={{ borderRadius: 5 }}
+              >
+                <OrgMark name={c} />
+              </span>
+            ) : (
+              <span
+                key={c}
+                style={{
+                  fontFamily: "var(--mono)",
+                  fontSize: "var(--text-xs)",
+                  fontWeight: 500,
+                  letterSpacing: "var(--tr-mono)",
+                  color: "rgba(248,247,244,.18)",
+                  textTransform: "uppercase",
+                }}
+              >
+                {c}
+              </span>
+            )
+          )}
         </div>
         <div
           style={{
             fontFamily: "var(--mono)",
-            fontSize: 11,
+            fontSize: "var(--text-xs)",
             color: "rgba(248,247,244,.16)",
           }}
         >

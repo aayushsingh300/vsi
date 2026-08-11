@@ -17,15 +17,20 @@ export default function FloatingWA() {
       aria-label="Chat on WhatsApp"
       style={{
         position: "fixed",
-        bottom: 28,
-        right: 28,
-        zIndex: 200,
+        // Clears the iOS home indicator and the Android gesture bar, which
+        // otherwise sit under the button's lower third.
+        bottom: "calc(20px + env(safe-area-inset-bottom))",
+        right: "max(16px, env(safe-area-inset-right))",
+        // Below the mobile nav panel (300). Both were 200, and since this
+        // component mounts after <Navbar> in every page tree, it won the tie
+        // and floated on top of the open menu.
+        zIndex: 150,
         textDecoration: "none",
         display: "flex",
         alignItems: "center",
         gap: 10,
         background: "var(--wa-green)",
-        borderRadius: 999,
+        borderRadius: "var(--r-pill)",
         padding: "14px 18px",
         maxWidth: hovered ? 200 : 52,
         height: 52,
@@ -39,12 +44,13 @@ export default function FloatingWA() {
     >
       <WhatsAppIcon size={22} color="#fff" style={{ flexShrink: 0 }} />
       <span
+        aria-hidden="true"
         style={{
-          fontFamily: "'Syne', sans-serif",
+          fontFamily: "var(--sans)",
           fontWeight: 700,
-          fontSize: 13,
+          fontSize: "var(--text-sm)",
           color: "var(--white)",
-          letterSpacing: ".05em",
+          letterSpacing: "var(--tr-caps)",
           opacity: hovered ? 1 : 0,
           transition: "opacity .25s ease",
         }}

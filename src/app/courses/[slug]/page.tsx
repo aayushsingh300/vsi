@@ -30,7 +30,7 @@ function HeroImage({ slug, alt, isCard }: { slug: string; alt: string; isCard?: 
         inset: 0,
         background:
           "linear-gradient(135deg, rgba(var(--accent-rgb),.22) 0%, rgba(13,27,42,.6) 100%)",
-        borderRadius: isCard ? 0 : undefined,
+        borderRadius: isCard ? "var(--r-sm)" : undefined,
       }}
     >
       {src && !errored && (
@@ -140,11 +140,11 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                   gap: 8,
                   marginBottom: 22,
                   fontFamily: "var(--mono)",
-                  fontSize: 11,
+                  fontSize: "var(--text-xs)",
                   color: "rgba(253,252,249,.4)",
                 }}
               >
-                <Link href="/courses" style={{ color: "inherit", textDecoration: "none" }}>
+                <Link href="/courses" className="tap-target" style={{ color: "inherit", textDecoration: "none" }}>
                   {t("navCourses")}
                 </Link>
                 <ChevronRight size={12} />
@@ -159,10 +159,10 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                       color: "rgba(253,252,249,.7)",
                       fontFamily: "var(--mono)",
                       fontWeight: 500,
-                      fontSize: 10,
-                      letterSpacing: ".12em",
+                      fontSize: "var(--text-xs)",
+                      letterSpacing: "var(--tr-mono)",
                       padding: "5px 11px",
-                      borderRadius: 2,
+                      borderRadius: "var(--r-sm)",
                       textTransform: "uppercase",
                     }}
                   >
@@ -175,10 +175,10 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                         color: "var(--accent-gold)",
                         fontFamily: "var(--mono)",
                         fontWeight: 500,
-                        fontSize: 10,
-                        letterSpacing: ".12em",
+                        fontSize: "var(--text-xs)",
+                        letterSpacing: "var(--tr-mono)",
                         padding: "5px 11px",
-                        borderRadius: 2,
+                        borderRadius: "var(--r-sm)",
                         textTransform: "uppercase",
                       }}
                     >
@@ -194,7 +194,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                     color: "var(--text-inv)",
                     lineHeight: 1.08,
                     marginBottom: 18,
-                    letterSpacing: "-.03em",
+                    letterSpacing: "var(--tr-display)",
                   }}
                 >
                   {course.name}
@@ -202,7 +202,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                 <p
                   style={{
                     fontFamily: "var(--body)",
-                    fontSize: isMobile ? 15 : 16.5,
+                    fontSize: isMobile ? "var(--text-base)" : "var(--text-md)",
                     lineHeight: 1.7,
                     color: "rgba(253,252,249,.62)",
                     marginBottom: 28,
@@ -212,14 +212,19 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                   {course.longDesc}
                 </p>
 
-                {/* Stat row */}
+                {/* Stat row.
+                    Three rigid columns inside a 520px box left ~110px each on
+                    a 360px screen, so "₹18,000" and "COURSE FEE" both wrapped
+                    mid-word. Wrapping the row lets the third stat drop to its
+                    own line rather than crushing all three. */}
                 <div
                   style={{
                     display: "flex",
+                    flexWrap: "wrap",
                     gap: 0,
                     marginBottom: 30,
                     border: "1px solid rgba(253,252,249,.1)",
-                    borderRadius: 6,
+                    borderRadius: "var(--r-sm)",
                     overflow: "hidden",
                     maxWidth: 520,
                     background: "rgba(13,27,42,.4)",
@@ -231,18 +236,20 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                     <div
                       key={i}
                       style={{
-                        flex: 1,
-                        padding: isMobile ? "14px 12px" : "16px 18px",
+                        flex: "1 1 128px",
+                        padding: isMobile ? "14px 14px" : "16px 18px",
                         borderRight: i < 2 ? "1px solid rgba(253,252,249,.1)" : "none",
+                        borderTop: "1px solid rgba(253,252,249,.1)",
+                        marginTop: -1,
                       }}
                     >
                       <div
                         style={{
                           fontFamily: "var(--serif)",
                           fontWeight: 700,
-                          fontSize: isMobile ? 18 : 22,
+                          fontSize: "var(--text-lg)",
                           color: "var(--text-inv)",
-                          letterSpacing: "-.02em",
+                          letterSpacing: "var(--tr-heading)",
                         }}
                       >
                         {s.v}
@@ -250,9 +257,9 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                       <div
                         style={{
                           fontFamily: "var(--mono)",
-                          fontSize: 9,
+                          fontSize: "var(--text-xs)",
                           color: "rgba(253,252,249,.42)",
-                          letterSpacing: ".1em",
+                          letterSpacing: "var(--tr-mono)",
                           textTransform: "uppercase",
                           marginTop: 4,
                         }}
@@ -270,7 +277,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                     rel="noopener noreferrer"
                     style={{ textDecoration: "none" }}
                   >
-                    <button className="btn-primary" style={{ background: "var(--accent-gold)", color: "var(--bg-dark)" }}>
+                    <button className="btn-primary">
                       {t("applyNow")}
                     </button>
                   </a>
@@ -320,7 +327,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
               gap: 1,
               background: "var(--border)",
               marginTop: 32,
-              borderRadius: 8,
+              borderRadius: "var(--r-md)",
               overflow: "hidden",
             }}
           >
@@ -332,22 +339,22 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                       width: 36,
                       height: 36,
                       background: "rgba(var(--accent-rgb),.1)",
-                      borderRadius: 3,
+                      borderRadius: "var(--r-sm)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       flexShrink: 0,
                       fontFamily: "var(--mono)",
                       fontWeight: 500,
-                      fontSize: 14,
+                      fontSize: "var(--text-base)",
                       color: "var(--accent)",
                     }}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </div>
                   <div>
-                    <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 16, color: "var(--text)", marginBottom: 5 }}>{m.t}</h3>
-                    <p style={{ fontFamily: "var(--body)", fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>{m.d}</p>
+                    <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-md)", color: "var(--text)", marginBottom: 5 }}>{m.t}</h3>
+                    <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6 }}>{m.d}</p>
                   </div>
                 </div>
               </AnimateIn>
@@ -374,7 +381,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
               {course.features.map((f) => (
                 <div key={f} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
                   <CheckCircle2 size={18} color="var(--accent-green)" style={{ flexShrink: 0, marginTop: 2 }} />
-                  <span style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text)" }}>{f}</span>
+                  <span style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text)" }}>{f}</span>
                 </div>
               ))}
             </div>
@@ -383,7 +390,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
           <AnimateIn animation="slideUp" delay={0.1}>
             <p className="detail-eyebrow">{t("dWhoEyebrow")}</p>
             <h2 className="detail-h2" style={{ fontStyle: "italic", marginBottom: 22 }}>{t("dWhoTitle")}</h2>
-            <p style={{ fontFamily: "var(--body)", fontSize: 16, lineHeight: 1.8, color: "var(--text-muted)" }}>{course.audience}</p>
+            <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-md)", lineHeight: 1.8, color: "var(--text-muted)" }}>{course.audience}</p>
           </AnimateIn>
         </div>
       </section>
@@ -415,7 +422,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
             >
               {t("dOutcomesTitle")}
             </h2>
-            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "rgba(253,252,249,.5)", lineHeight: 1.75, marginBottom: 24 }}>
+            <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "rgba(253,252,249,.5)", lineHeight: 1.75, marginBottom: 24 }}>
               {t("dOutcomesDesc")}
             </p>
             <div style={{ display: "grid", gap: 0 }}>
@@ -433,8 +440,8 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                     borderBottom: "1px solid rgba(253,252,249,.08)",
                   }}
                 >
-                  <span style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontSize: 17, color: "var(--text-inv)" }}>{r.r}</span>
-                  <span style={{ fontFamily: "var(--mono)", fontSize: 13, color: "rgba(253,252,249,.55)" }}>{r.s} p.a.</span>
+                  <span style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontSize: "var(--text-md)", color: "var(--text-inv)" }}>{r.r}</span>
+                  <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-sm)", color: "rgba(253,252,249,.55)" }}>{r.s} p.a.</span>
                 </div>
               ))}
             </div>
@@ -449,7 +456,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                   style={{
                     background: EMPLOYER_LOGOS[e] ? "#fff" : "rgba(253,252,249,.04)",
                     border: "1px solid rgba(253,252,249,.08)",
-                    borderRadius: 4,
+                    borderRadius: "var(--r-sm)",
                     padding: EMPLOYER_LOGOS[e] ? "18px 14px" : "20px 8px",
                     display: "flex",
                     alignItems: "center",
@@ -462,7 +469,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                       <Image src={EMPLOYER_LOGOS[e]} alt={e} fill sizes="160px" style={{ objectFit: "contain" }} />
                     </span>
                   ) : (
-                    <span style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 700, fontSize: isMobile ? 13 : 15, color: "rgba(253,252,249,.65)" }}>{e}</span>
+                    <span style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 700, fontSize: isMobile ? "var(--text-sm)" : "var(--text-base)", color: "rgba(253,252,249,.65)" }}>{e}</span>
                   )}
                 </div>
               ))}
@@ -487,7 +494,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
             >
               {t("dCtaTitle")}
             </h2>
-            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", marginBottom: 26 }}>{t("counselingSub")}</p>
+            <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", marginBottom: 26 }}>{t("counselingSub")}</p>
             <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
               <Link href="/contact" style={{ textDecoration: "none" }}>
                 <button className="btn-primary">{t("freeCounseling")}</button>
@@ -516,16 +523,16 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: 16 }}>
               {related.map((c) => (
                 <Link key={c.slug} href={`/courses/${c.slug}`} style={{ textDecoration: "none" }}>
-                  <div className="hover-lift" style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 6, overflow: "hidden" }}>
+                  <div className="hover-lift" style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--r-sm)", overflow: "hidden" }}>
                     <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 10" }}>
                       <HeroImage slug={c.slug} alt={c.name} />
                     </div>
                     <div style={{ padding: 18 }}>
-                      <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 18, color: "var(--text)", marginBottom: 6 }}>{c.name}</h3>
+                      <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", marginBottom: 6 }}>{c.name}</h3>
                       <p
                         style={{
                           fontFamily: "var(--body)",
-                          fontSize: 13,
+                          fontSize: "var(--text-sm)",
                           color: "var(--text-muted)",
                           lineHeight: 1.55,
                           marginBottom: 12,
@@ -538,7 +545,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                         {c.longDesc}
                       </p>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                        <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--text-muted)" }}>{c.fee ? `${c.hrs} · ${c.fee}` : c.hrs}</span>
+                        <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>{c.fee ? `${c.hrs} · ${c.fee}` : c.hrs}</span>
                         <ArrowRight size={16} color="var(--accent)" />
                       </div>
                     </div>

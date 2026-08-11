@@ -21,36 +21,36 @@ export default function HomeWorkAbroad() {
         }}>
           {/* Left — pitch to candidates */}
           <AnimateIn animation="slideUp">
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", borderRadius: 999, background: "rgba(var(--accent-rgb),.1)", border: "1px solid rgba(var(--accent-rgb),.2)", marginBottom: 18 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", borderRadius: "var(--r-pill)", background: "rgba(var(--accent-rgb),.1)", border: "1px solid rgba(var(--accent-rgb),.2)", marginBottom: 18 }}>
               <Globe size={14} color="var(--accent)" />
-              <span style={{ fontFamily: "var(--mono)", fontSize: 10.5, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 600 }}>
+              <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase", color: "var(--accent)", fontWeight: 600 }}>
                 Global Placements · Germany 🇩🇪 & Gulf 🇦🇪 🇸🇦
               </span>
             </div>
 
-            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? "clamp(26px,7vw,34px)" : "clamp(30px,3.6vw,48px)", color: "var(--text)", lineHeight: 1.12, letterSpacing: "-.03em", marginBottom: 18 }}>
+            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? "clamp(26px,7vw,34px)" : "clamp(30px,3.6vw,48px)", color: "var(--text)", lineHeight: 1.12, letterSpacing: "var(--tr-display)", marginBottom: 18 }}>
               Take your skills global —<br />
               <em style={{ fontStyle: "italic", color: "var(--accent)", fontWeight: 400 }}>work abroad with confidence.</em>
             </h2>
 
-            <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", lineHeight: 1.75, maxWidth: 560, marginBottom: 24 }}>
+            <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", lineHeight: 1.75, maxWidth: 560, marginBottom: 24 }}>
               VSI deploys qualified talent into international healthcare and high-demand sectors — from our German International Exchange Program for nurses to active employment drives across the Gulf. We handle language training, credential recognition, visa processing and relocation end-to-end.
             </p>
 
             {/* Quick Corridor Chips */}
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 28 }}>
-              <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 8, padding: "8px 14px", display: "flex", alignItems: "center", gap: 8 }}>
-                <span style={{ fontSize: 16 }}>🇩🇪</span>
+              <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: "var(--r-md)", padding: "8px 14px", display: "flex", alignItems: "center", gap: 8 }}>
+                <span style={{ fontSize: "var(--text-md)" }}>🇩🇪</span>
                 <div>
-                  <div style={{ fontFamily: "var(--sans)", fontSize: 12, fontWeight: 700, color: "var(--text)" }}>Germany Corridor</div>
-                  <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text-muted)" }}>Berlin · Munich · Frankfurt</div>
+                  <div style={{ fontFamily: "var(--sans)", fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text)" }}>Germany Corridor</div>
+                  <div style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>Berlin · Munich · Frankfurt</div>
                 </div>
               </div>
-              <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 8, padding: "8px 14px", display: "flex", alignItems: "center", gap: 8 }}>
-                <span style={{ fontSize: 16 }}>🇦🇪 🇸🇦</span>
+              <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: "var(--r-md)", padding: "8px 14px", display: "flex", alignItems: "center", gap: 8 }}>
+                <span style={{ fontSize: "var(--text-md)" }}>🇦🇪 🇸🇦</span>
                 <div>
-                  <div style={{ fontFamily: "var(--sans)", fontSize: 12, fontWeight: 700, color: "var(--text)" }}>Gulf Corridor</div>
-                  <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text-muted)" }}>Dubai · Riyadh · Abu Dhabi</div>
+                  <div style={{ fontFamily: "var(--sans)", fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text)" }}>Gulf Corridor</div>
+                  <div style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>Dubai · Riyadh · Abu Dhabi</div>
                 </div>
               </div>
             </div>
@@ -74,13 +74,13 @@ export default function HomeWorkAbroad() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: isMobile ? 12 : 16 }}>
               {WORK_ABROAD_HIGHLIGHTS.map((s) => (
                 <div key={s.label} style={{
-                  background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 12,
+                  background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: "var(--r-md)",
                   padding: isMobile ? "22px 20px" : "26px 24px", display: "flex", flexDirection: "column", gap: 6,
                   boxShadow: "0 4px 16px rgba(0,0,0,0.02)",
                 }}>
-                  <div style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? 26 : 32, color: "var(--accent)", letterSpacing: "-.03em" }}>{s.value}</div>
-                  <div style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: 13, color: "var(--text)", letterSpacing: "-.01em" }}>{s.label}</div>
-                  <div style={{ fontFamily: "var(--body)", fontSize: 11.5, color: "var(--text-muted)", lineHeight: 1.5 }}>{s.sub}</div>
+                  <div style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? "var(--text-xl)" : "var(--text-2xl)", color: "var(--accent)", letterSpacing: "var(--tr-display)" }}>{s.value}</div>
+                  <div style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-sm)", color: "var(--text)", letterSpacing: "var(--tr-body)" }}>{s.label}</div>
+                  <div style={{ fontFamily: "var(--body)", fontSize: "var(--text-xs)", color: "var(--text-muted)", lineHeight: 1.5 }}>{s.sub}</div>
                 </div>
               ))}
             </div>

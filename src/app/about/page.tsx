@@ -7,6 +7,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
 import { MILESTONES, LEADERSHIP, FACULTY, STATS, CONTACT_CHANNELS, ACCREDITATIONS } from "@/data/content";
+import OrgMark from "@/components/OrgMark";
+import { orgLogo } from "@/data/assets";
 import { useInView, useCountUp } from "@/hooks/useAnimations";
 import { useLang } from "@/context/LangContext";
 import Icon from "@/components/Icon";
@@ -49,7 +51,7 @@ function PersonCard({ p }: { p: Person }) {
           justifyContent: "center",
           fontFamily: "var(--serif)",
           fontWeight: 700,
-          fontSize: 18,
+          fontSize: "var(--text-lg)",
           color: "var(--text-inv)",
           marginBottom: "var(--sp-4)",
           boxShadow: "0 4px 16px rgba(0,0,0,.25)",
@@ -65,7 +67,7 @@ function PersonCard({ p }: { p: Person }) {
           fontSize: "var(--text-lg)",
           color: "var(--text-inv)",
           marginBottom: "var(--sp-1)",
-          letterSpacing: "-.02em",
+          letterSpacing: "var(--tr-heading)",
         }}
       >
         {p.name}
@@ -75,7 +77,7 @@ function PersonCard({ p }: { p: Person }) {
           fontFamily: "var(--sans)",
           fontWeight: 600,
           fontSize: "var(--text-xs)",
-          letterSpacing: ".08em",
+          letterSpacing: "var(--tr-caps)",
           color: "rgba(var(--accent-rgb),.7)",
           textTransform: "uppercase",
           marginBottom: "var(--sp-3)",
@@ -109,7 +111,7 @@ function StatBox({ val, sfx, lbl, go }: { val: number; sfx: string; lbl: string;
           fontWeight: 700,
           fontSize: "var(--text-4xl)",
           color: go ? "var(--accent-gold)" : "var(--text-inv)",
-          letterSpacing: "-.04em",
+          letterSpacing: "var(--tr-display)",
           transition: "color .5s ease",
         }}
       >
@@ -120,7 +122,7 @@ function StatBox({ val, sfx, lbl, go }: { val: number; sfx: string; lbl: string;
           fontFamily: "var(--sans)",
           fontWeight: 600,
           fontSize: "var(--text-xs)",
-          letterSpacing: ".16em",
+          letterSpacing: "var(--tr-mono)",
           textTransform: "uppercase",
           color: "rgba(248,247,244,.38)",
           marginTop: "var(--sp-2)",
@@ -195,7 +197,7 @@ export default function AboutPage() {
                     color: "var(--text)",
                     lineHeight: "var(--lh-tight)",
                     marginBottom: "var(--sp-4)",
-                    letterSpacing: "-.03em",
+                    letterSpacing: "var(--tr-display)",
                   }}
                 >
                   {item.heading}
@@ -288,7 +290,7 @@ export default function AboutPage() {
             fontFamily: "var(--mono)",
             fontSize: "var(--text-xs)",
             color: "rgba(248,247,244,.5)",
-            letterSpacing: ".12em",
+            letterSpacing: "var(--tr-mono)",
             textTransform: "uppercase",
           }}
         >
@@ -300,7 +302,7 @@ export default function AboutPage() {
       <section className="section-pad" style={{ background: "var(--bg)" }}>
         <div style={{ maxWidth: 760, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
-            <p className="eyebrow-label" style={{ marginBottom: "var(--sp-3)" }}>// Journey</p>
+            <p className="eyebrow-label eyebrow-label--slash" style={{ marginBottom: "var(--sp-3)" }}>Journey</p>
             <h2
               style={{
                 fontFamily: "var(--serif)",
@@ -309,7 +311,7 @@ export default function AboutPage() {
                 fontSize: "var(--text-3xl)",
                 color: "var(--text)",
                 marginBottom: "var(--sp-12)",
-                letterSpacing: "-.03em",
+                letterSpacing: "var(--tr-display)",
                 lineHeight: "var(--lh-tight)",
               }}
             >
@@ -335,7 +337,7 @@ export default function AboutPage() {
                   style={{
                     width: 44,
                     height: 44,
-                    borderRadius: 8,
+                    borderRadius: "var(--r-md)",
                     background: "rgba(var(--accent-rgb),.08)",
                     border: "1px solid rgba(var(--accent-rgb),.16)",
                     display: "flex",
@@ -344,7 +346,7 @@ export default function AboutPage() {
                     flexShrink: 0,
                     fontFamily: "var(--mono)",
                     fontWeight: 500,
-                    fontSize: 14,
+                    fontSize: "var(--text-base)",
                     color: "var(--accent)",
                   }}
                 >
@@ -358,7 +360,7 @@ export default function AboutPage() {
                         fontWeight: 700,
                         fontSize: "var(--text-lg)",
                         color: "var(--text)",
-                        letterSpacing: "-.018em",
+                        letterSpacing: "var(--tr-body)",
                       }}
                     >
                       {m.t}
@@ -369,7 +371,7 @@ export default function AboutPage() {
                         fontSize: "var(--text-xs)",
                         color: "var(--accent)",
                         fontWeight: 500,
-                        letterSpacing: ".06em",
+                        letterSpacing: "var(--tr-caps)",
                         flexShrink: 0,
                       }}
                     >
@@ -421,13 +423,10 @@ export default function AboutPage() {
         <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative" }}>
           <AnimateIn animation="slideUp">
             <p
-              className="eyebrow-label"
-              style={{
-                color: "rgba(248,247,244,.25)",
-                marginBottom: "var(--sp-3)",
-              }}
+              className="eyebrow-label eyebrow-label--slash eyebrow-label--on-dark"
+              style={{ marginBottom: "var(--sp-3)" }}
             >
-              // People
+              People
             </p>
             <h2
               style={{
@@ -437,7 +436,7 @@ export default function AboutPage() {
                 fontSize: "var(--text-3xl)",
                 color: "var(--text-inv)",
                 marginBottom: "var(--sp-12)",
-                letterSpacing: "-.03em",
+                letterSpacing: "var(--tr-display)",
                 lineHeight: "var(--lh-tight)",
               }}
             >
@@ -452,7 +451,7 @@ export default function AboutPage() {
                 fontFamily: "var(--sans)",
                 fontWeight: 700,
                 fontSize: "var(--text-xs)",
-                letterSpacing: ".18em",
+                letterSpacing: "var(--tr-mono)",
                 textTransform: "uppercase",
                 color: "rgba(var(--accent-rgb),.75)",
                 paddingBottom: "var(--sp-3)",
@@ -464,7 +463,10 @@ export default function AboutPage() {
             </p>
           </AnimateIn>
           <div
-            data-stack="1"
+            /* Person cards, not content blocks — one per row on a phone
+               makes each portrait absurdly large and pushes the section to
+               four screens. Two up reads as a directory. */
+            data-stack="2"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(4,1fr)",
@@ -486,7 +488,7 @@ export default function AboutPage() {
                 fontFamily: "var(--sans)",
                 fontWeight: 700,
                 fontSize: "var(--text-xs)",
-                letterSpacing: ".18em",
+                letterSpacing: "var(--tr-mono)",
                 textTransform: "uppercase",
                 color: "rgba(var(--accent-rgb),.75)",
                 paddingBottom: "var(--sp-3)",
@@ -498,7 +500,7 @@ export default function AboutPage() {
             </p>
           </AnimateIn>
           <div
-            data-stack="1"
+            data-stack="2"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3,1fr)",
@@ -518,21 +520,21 @@ export default function AboutPage() {
       <section style={{ padding: "96px 5%", borderTop: "1px solid var(--border)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
-            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 12, fontWeight: 500 }}>// Key Contact Channels</p>
-            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(24px,3.5vw,44px)", color: "var(--text)", marginBottom: 40, letterSpacing: "-.03em" }}>Get in touch directly.</h2>
+            <p className="eyebrow-label eyebrow-label--slash" style={{ marginBottom: 12 }}>Key Contact Channels</p>
+            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(24px,3.5vw,44px)", color: "var(--text)", marginBottom: 40, letterSpacing: "var(--tr-display)" }}>Get in touch directly.</h2>
           </AnimateIn>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 }}>
             {CONTACT_CHANNELS.map((ch, i) => (
               <AnimateIn key={ch.dept} animation="slideUp" delay={i * 0.08}>
                 <div className="course-row" style={{
-                  background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 10,
+                  background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: "var(--r-md)",
                   padding: "28px 24px", display: "flex", flexDirection: "column", gap: 14, height: "100%",
                 }}>
                   <div className="icon-box"><Icon name={ch.icon} size={19} color="var(--accent)" /></div>
-                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: 17, color: "var(--text)", letterSpacing: "-.015em" }}>{ch.dept}</h3>
+                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-md)", color: "var(--text)", letterSpacing: "var(--tr-body)" }}>{ch.dept}</h3>
                   <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                    <a href={`tel:${ch.phone}`} style={{ fontFamily: "var(--mono)", fontSize: 12, color: "var(--accent)", textDecoration: "none" }}>{ch.phone}</a>
-                    <a href={`mailto:${ch.email}`} style={{ fontFamily: "var(--body)", fontSize: 12, color: "var(--text-muted)", textDecoration: "none" }}>{ch.email}</a>
+                    <a href={`tel:${ch.phone}`} className="tap-target" style={{ fontFamily: "var(--mono)", fontSize: "var(--text-sm)", color: "var(--accent-text)", textDecoration: "none" }}>{ch.phone}</a>
+                    <a href={`mailto:${ch.email}`} className="tap-target" style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", textDecoration: "none" }}>{ch.email}</a>
                   </div>
                 </div>
               </AnimateIn>
@@ -545,19 +547,27 @@ export default function AboutPage() {
       <section style={{ padding: "64px 5%", background: "var(--bg)", borderTop: "1px solid var(--border)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
           <AnimateIn animation="slideUp">
-            <p style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 24, fontWeight: 500 }}>Certifications, Affiliations & Accreditations</p>
+            <p className="eyebrow-label" style={{ marginBottom: 24 }}>Certifications, Affiliations & Accreditations</p>
           </AnimateIn>
           <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap" }}>
             {ACCREDITATIONS.map((acc, i) => (
               <AnimateIn key={acc.name} animation="scaleIn" delay={i * 0.06}>
                 <div style={{
-                  padding: "16px 24px", borderRadius: 8,
+                  padding: "16px 24px", borderRadius: "var(--r-md)",
                   background: "var(--bg-card)", border: "1px solid var(--border-card)",
-                  display: "flex", flexDirection: "column", alignItems: "center", gap: 4,
-                  minWidth: 120,
-                }}>
-                  <span style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: 14, color: "var(--text)", letterSpacing: ".04em" }}>{acc.name}</span>
-                  <span style={{ fontFamily: "var(--body)", fontSize: 10, color: "var(--text-muted)", textAlign: "center", lineHeight: 1.3 }}>{acc.fullName}</span>
+                  display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
+                  minWidth: 150,
+                  "--org-h": "18px", "--plate-h": "42px", "--plate-px": "6px",
+                } as React.CSSProperties}>
+                  {/* The mark where we hold one; the abbreviation is the
+                      fallback, not a caption under it — the full name below
+                      already says who this is. */}
+                  {orgLogo(acc.name) ? (
+                    <span className="cred-plate on-light"><OrgMark name={acc.name} /></span>
+                  ) : (
+                    <span style={{ display: "flex", alignItems: "center", height: 38, fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-base)", color: "var(--text)", letterSpacing: "var(--tr-caps)" }}>{acc.name}</span>
+                  )}
+                  <span style={{ fontFamily: "var(--body)", fontSize: "var(--text-xs)", color: "var(--text-muted)", textAlign: "center", lineHeight: 1.3 }}>{acc.fullName}</span>
                 </div>
               </AnimateIn>
             ))}

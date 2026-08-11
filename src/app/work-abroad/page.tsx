@@ -60,7 +60,7 @@ export default function WorkAbroadPage() {
                   alignItems: "center",
                   gap: 8,
                   padding: "6px 16px",
-                  borderRadius: 999,
+                  borderRadius: "var(--r-pill)",
                   background: "rgba(var(--accent-rgb),.09)",
                   border: "1px solid rgba(var(--accent-rgb),.2)",
                   marginBottom: 20,
@@ -70,8 +70,8 @@ export default function WorkAbroadPage() {
                 <span
                   style={{
                     fontFamily: "var(--mono)",
-                    fontSize: 10.5,
-                    letterSpacing: ".14em",
+                    fontSize: "var(--text-xs)",
+                    letterSpacing: "var(--tr-mono)",
                     textTransform: "uppercase",
                     color: "var(--accent)",
                     fontWeight: 600,
@@ -81,7 +81,7 @@ export default function WorkAbroadPage() {
                 </span>
               </div>
 
-              <h1 style={{ fontSize: "clamp(32px, 4vw, 54px)", lineHeight: 1.12, letterSpacing: "-.03em", marginBottom: 20 }}>
+              <h1 style={{ fontSize: "clamp(32px, 4vw, 54px)", lineHeight: 1.12, letterSpacing: "var(--tr-display)", marginBottom: 20 }}>
                 {t("workAbroadTitle1")}
                 <br />
                 <em style={{ fontStyle: "italic", color: "var(--accent)", fontWeight: 400 }}>
@@ -89,7 +89,7 @@ export default function WorkAbroadPage() {
                 </em>
               </h1>
 
-              <p className="lead" style={{ maxWidth: 560, marginBottom: 32, fontSize: 16, lineHeight: 1.7 }}>
+              <p className="lead" style={{ maxWidth: 560, marginBottom: 32, fontSize: "var(--text-md)", lineHeight: 1.7 }}>
                 {t("workAbroadHeroDesc")}
               </p>
 
@@ -119,17 +119,17 @@ export default function WorkAbroadPage() {
                     style={{
                       background: "var(--bg-card)",
                       border: "1px solid var(--border-card)",
-                      borderRadius: 10,
+                      borderRadius: "var(--r-md)",
                       padding: "12px 14px",
                       display: "flex",
                       flexDirection: "column",
                       gap: 2,
                     }}
                   >
-                    <span style={{ fontFamily: "var(--serif)", fontSize: 20, fontWeight: 700, color: "var(--accent)" }}>
+                    <span style={{ fontFamily: "var(--serif)", fontSize: "var(--text-lg)", fontWeight: 700, color: "var(--accent)" }}>
                       {stat.val}
                     </span>
-                    <span style={{ fontFamily: "var(--sans)", fontSize: 11.5, fontWeight: 600, color: "var(--text)" }}>
+                    <span style={{ fontFamily: "var(--sans)", fontSize: "var(--text-xs)", fontWeight: 600, color: "var(--text)" }}>
                       {stat.label}
                     </span>
                   </div>
@@ -142,7 +142,7 @@ export default function WorkAbroadPage() {
               <div
                 style={{
                   position: "relative",
-                  borderRadius: 20,
+                  borderRadius: "var(--r-lg)",
                   overflow: "hidden",
                   boxShadow: "0 20px 48px rgba(0,0,0,0.12)",
                   height: isMobile ? 280 : 420,
@@ -172,7 +172,7 @@ export default function WorkAbroadPage() {
                       background: "rgba(255,255,255,0.15)",
                       backdropFilter: "blur(10px)",
                       border: "1px solid rgba(255,255,255,0.25)",
-                      borderRadius: 12,
+                      borderRadius: "var(--r-md)",
                       padding: "14px 18px",
                       color: "#FFF",
                       display: "flex",
@@ -184,10 +184,10 @@ export default function WorkAbroadPage() {
                       <Globe size={20} color="#FFF" />
                     </div>
                     <div>
-                      <div style={{ fontFamily: "var(--sans)", fontSize: 13, fontWeight: 700 }}>
+                      <div style={{ fontFamily: "var(--sans)", fontSize: "var(--text-sm)", fontWeight: 700 }}>
                         VSI Global Candidate Cell
                       </div>
-                      <div style={{ fontFamily: "var(--mono)", fontSize: 10.5, color: "rgba(255,255,255,0.8)" }}>
+                      <div style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "rgba(255,255,255,0.8)" }}>
                         Pre-departure briefing & document attestation
                       </div>
                     </div>
@@ -211,18 +211,9 @@ export default function WorkAbroadPage() {
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-              <Globe size={18} color="#0099FF" />
-              <p
-                style={{
-                  fontFamily: "var(--mono)",
-                  fontSize: 11,
-                  letterSpacing: ".16em",
-                  color: "#0099FF",
-                  textTransform: "uppercase",
-                  fontWeight: 600,
-                }}
-              >
-                // Active Deployment Corridors
+              <Globe size={18} color="var(--accent)" />
+              <p className="eyebrow-label eyebrow-label--slash" style={{ marginBottom: 0 }}>
+                Active Deployment Corridors
               </p>
             </div>
             <h2
@@ -233,7 +224,7 @@ export default function WorkAbroadPage() {
                 fontSize: "clamp(28px, 4vw, 48px)",
                 color: "#FFFFFF",
                 marginBottom: 16,
-                letterSpacing: "-.03em",
+                letterSpacing: "var(--tr-display)",
               }}
             >
               Where we deploy talent globally.
@@ -241,7 +232,7 @@ export default function WorkAbroadPage() {
             <p
               style={{
                 fontFamily: "var(--body)",
-                fontSize: 16,
+                fontSize: "var(--text-md)",
                 color: "rgba(255, 255, 255, 0.68)",
                 lineHeight: 1.75,
                 maxWidth: 660,
@@ -262,7 +253,7 @@ export default function WorkAbroadPage() {
                 style={{
                   background: "linear-gradient(155deg, rgba(20, 36, 62, 0.95) 0%, rgba(11, 22, 38, 0.98) 100%)",
                   border: "1px solid rgba(255, 183, 3, 0.3)",
-                  borderRadius: 20,
+                  borderRadius: "var(--r-lg)",
                   overflow: "hidden",
                   display: "flex",
                   flexDirection: "column",
@@ -294,20 +285,20 @@ export default function WorkAbroadPage() {
                         background: "rgba(0,0,0,0.65)",
                         backdropFilter: "blur(8px)",
                         padding: "6px 14px",
-                        borderRadius: 20,
+                        borderRadius: "var(--r-lg)",
                         display: "flex",
                         alignItems: "center",
                         gap: 8,
                         border: "1px solid rgba(255,255,255,0.2)",
                       }}
                     >
-                      <span style={{ fontSize: 16 }}>🇦🇪 🇸🇦</span>
-                      <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, color: "#FFB703", letterSpacing: ".08em" }}>
+                      <span style={{ fontSize: "var(--text-md)" }}>🇦🇪 🇸🇦</span>
+                      <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", fontWeight: 700, color: "#FFB703", letterSpacing: "var(--tr-caps)" }}>
                         GULF REGION
                       </span>
                     </div>
 
-                    <span style={{ fontFamily: "var(--mono)", fontSize: 10, fontWeight: 700, background: "#0099FF", color: "#FFF", padding: "4px 10px", borderRadius: 20, textTransform: "uppercase" }}>
+                    <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", fontWeight: 700, background: "var(--btn-primary-bg)", color: "var(--btn-primary-fg)", padding: "4px 10px", borderRadius: "var(--r-lg)", textTransform: "uppercase" }}>
                       Active Drives
                     </span>
                   </div>
@@ -321,7 +312,7 @@ export default function WorkAbroadPage() {
                       fontSize: "clamp(24px, 2.5vw, 30px)",
                       fontWeight: 700,
                       color: "#FFFFFF",
-                      letterSpacing: "-.02em",
+                      letterSpacing: "var(--tr-heading)",
                       marginBottom: 10,
                     }}
                   >
@@ -335,13 +326,13 @@ export default function WorkAbroadPage() {
                         key={city}
                         style={{
                           fontFamily: "var(--mono)",
-                          fontSize: 10.5,
-                          letterSpacing: ".08em",
+                          fontSize: "var(--text-xs)",
+                          letterSpacing: "var(--tr-caps)",
                           textTransform: "uppercase",
                           background: "rgba(255, 183, 3, 0.12)",
                           color: "#FFC837",
                           padding: "4px 10px",
-                          borderRadius: 6,
+                          borderRadius: "var(--r-sm)",
                           border: "1px solid rgba(255, 183, 3, 0.22)",
                           fontWeight: 600,
                           display: "inline-flex",
@@ -355,7 +346,7 @@ export default function WorkAbroadPage() {
                     ))}
                   </div>
 
-                  <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "rgba(255, 255, 255, 0.72)", lineHeight: 1.7, marginBottom: 20 }}>
+                  <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "rgba(255, 255, 255, 0.72)", lineHeight: 1.7, marginBottom: 20 }}>
                     Active employment drives across UAE & Saudi Arabia for skilled technicians, civil engineers, hospitality specialists, and retail workforce.
                   </p>
 
@@ -366,7 +357,7 @@ export default function WorkAbroadPage() {
                       "Employer-provided Accommodation & Transport",
                       "Annual Paid Return Flight Allowance",
                     ].map((perk) => (
-                      <div key={perk} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 500, color: "rgba(255, 255, 255, 0.88)" }}>
+                      <div key={perk} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "var(--text-sm)", fontWeight: 500, color: "rgba(255, 255, 255, 0.88)" }}>
                         <CheckCircle2 size={15} color="#FFB703" />
                         <span>{perk}</span>
                       </div>
@@ -376,6 +367,11 @@ export default function WorkAbroadPage() {
                   {/* CTA */}
                   <div style={{ marginTop: "auto" }}>
                     <Link href="/contact" style={{ textDecoration: "none" }}>
+                      {/* Was an amber gradient with near-black text — the
+                          `background: linear-gradient(...)` is why this one
+                          computed a transparent backgroundColor and read as
+                          a different component from every other CTA. Two
+                          sibling cards, two different primary buttons. */}
                       <button
                         className="btn-primary"
                         style={{
@@ -384,13 +380,6 @@ export default function WorkAbroadPage() {
                           alignItems: "center",
                           justifyContent: "center",
                           gap: 8,
-                          background: "linear-gradient(135deg, #FFB703 0%, #E09F00 100%)",
-                          color: "#0D1B2A",
-                          border: "none",
-                          fontWeight: 700,
-                          padding: "13px 18px",
-                          fontSize: 13.5,
-                          borderRadius: 10,
                         }}
                       >
                         Explore Gulf Drives <ArrowUpRight size={15} />
@@ -408,7 +397,7 @@ export default function WorkAbroadPage() {
                 style={{
                   background: "linear-gradient(155deg, rgba(14, 42, 77, 0.95) 0%, rgba(7, 23, 44, 0.98) 100%)",
                   border: "1px solid rgba(0, 153, 255, 0.35)",
-                  borderRadius: 20,
+                  borderRadius: "var(--r-lg)",
                   overflow: "hidden",
                   display: "flex",
                   flexDirection: "column",
@@ -440,20 +429,20 @@ export default function WorkAbroadPage() {
                         background: "rgba(0,0,0,0.65)",
                         backdropFilter: "blur(8px)",
                         padding: "6px 14px",
-                        borderRadius: 20,
+                        borderRadius: "var(--r-lg)",
                         display: "flex",
                         alignItems: "center",
                         gap: 8,
                         border: "1px solid rgba(255,255,255,0.2)",
                       }}
                     >
-                      <span style={{ fontSize: 16 }}>🇩🇪 🇪🇺</span>
-                      <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, color: "#66C2FF", letterSpacing: ".08em" }}>
+                      <span style={{ fontSize: "var(--text-md)" }}>🇩🇪 🇪🇺</span>
+                      <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", fontWeight: 700, color: "#66C2FF", letterSpacing: "var(--tr-caps)" }}>
                         GERMANY & EU
                       </span>
                     </div>
 
-                    <span style={{ fontFamily: "var(--mono)", fontSize: 10, fontWeight: 700, background: "#06A95D", color: "#FFF", padding: "4px 10px", borderRadius: 20, textTransform: "uppercase" }}>
+                    <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", fontWeight: 700, background: "#06A95D", color: "#FFF", padding: "4px 10px", borderRadius: "var(--r-lg)", textTransform: "uppercase" }}>
                       EU Blue Card Route
                     </span>
                   </div>
@@ -467,7 +456,7 @@ export default function WorkAbroadPage() {
                       fontSize: "clamp(24px, 2.5vw, 30px)",
                       fontWeight: 700,
                       color: "#FFFFFF",
-                      letterSpacing: "-.02em",
+                      letterSpacing: "var(--tr-heading)",
                       marginBottom: 10,
                     }}
                   >
@@ -481,13 +470,13 @@ export default function WorkAbroadPage() {
                         key={city}
                         style={{
                           fontFamily: "var(--mono)",
-                          fontSize: 10.5,
-                          letterSpacing: ".08em",
+                          fontSize: "var(--text-xs)",
+                          letterSpacing: "var(--tr-caps)",
                           textTransform: "uppercase",
                           background: "rgba(0, 153, 255, 0.12)",
                           color: "#66C2FF",
                           padding: "4px 10px",
-                          borderRadius: 6,
+                          borderRadius: "var(--r-sm)",
                           border: "1px solid rgba(0, 153, 255, 0.22)",
                           fontWeight: 600,
                           display: "inline-flex",
@@ -495,13 +484,13 @@ export default function WorkAbroadPage() {
                           gap: 4,
                         }}
                       >
-                        <MapPin size={10} color="#0099FF" />
+                        <MapPin size={10} color="var(--accent)" />
                         {city}
                       </span>
                     ))}
                   </div>
 
-                  <p style={{ fontFamily: "var(--body)", fontSize: 14, color: "rgba(255, 255, 255, 0.72)", lineHeight: 1.7, marginBottom: 20 }}>
+                  <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "rgba(255, 255, 255, 0.72)", lineHeight: 1.7, marginBottom: 20 }}>
                     German International Exchange Program — intensive German language instruction from A1 and A2 through to B1 and B2 completion, official nursing qualification recognition, and hospital placement.
                   </p>
 
@@ -512,8 +501,8 @@ export default function WorkAbroadPage() {
                       "Official License Recognition & Bridging",
                       "Path to Permanent European Residency",
                     ].map((perk) => (
-                      <div key={perk} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 500, color: "rgba(255, 255, 255, 0.88)" }}>
-                        <CheckCircle2 size={15} color="#0099FF" />
+                      <div key={perk} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "var(--text-sm)", fontWeight: 500, color: "rgba(255, 255, 255, 0.88)" }}>
+                        <CheckCircle2 size={15} color="var(--accent)" />
                         <span>{perk}</span>
                       </div>
                     ))}
@@ -530,13 +519,6 @@ export default function WorkAbroadPage() {
                           alignItems: "center",
                           justifyContent: "center",
                           gap: 8,
-                          background: "linear-gradient(135deg, #0099FF 0%, #0077CC 100%)",
-                          color: "#FFFFFF",
-                          border: "none",
-                          fontWeight: 700,
-                          padding: "13px 18px",
-                          fontSize: 13.5,
-                          borderRadius: 10,
                         }}
                       >
                         Apply for German Pathway <ArrowUpRight size={15} />
@@ -561,19 +543,19 @@ export default function WorkAbroadPage() {
               <div>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
                   <HeartPulse size={20} color="#FFB703" />
-                  <p style={{ fontFamily: "var(--mono)", fontSize: 10.5, letterSpacing: ".15em", color: "#FFB703", textTransform: "uppercase", fontWeight: 600 }}>
-                    // Global Healthcare Pathways
+                  <p className="eyebrow-label eyebrow-label--slash eyebrow-label--on-dark">
+                    Global Healthcare Pathways
                   </p>
                 </div>
-                <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(26px,3.5vw,42px)", color: "#FFFFFF", marginBottom: 20, letterSpacing: "-.03em", lineHeight: 1.15 }}>
+                <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(26px,3.5vw,42px)", color: "#FFFFFF", marginBottom: 20, letterSpacing: "var(--tr-display)", lineHeight: 1.15 }}>
                   German International Exchange Program
                 </h2>
-                <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "rgba(255,255,255,.7)", lineHeight: 1.8, marginBottom: 28 }}>
+                <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "rgba(255,255,255,.7)", lineHeight: 1.8, marginBottom: 28 }}>
                   An official institutional framework connecting qualified Indian healthcare and nursing professionals directly with German hospitals. We provide end-to-end support including German language academy (A1, A2 then B1, B2 completion), qualification recognition (Defizitbescheid & Anerkennung), visa clearance, and relocation integration.
                 </p>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   <Link href="/contact" style={{ textDecoration: "none" }}>
-                    <button className="btn-primary" style={{ display: "flex", alignItems: "center", gap: 8, background: "#0099FF" }}>
+                    <button className="btn-primary" style={{ display: "flex", alignItems: "center", gap: 8 }}>
                       Apply for German Pathway <ArrowUpRight size={14} />
                     </button>
                   </Link>
@@ -585,7 +567,7 @@ export default function WorkAbroadPage() {
                 <div
                   style={{
                     position: "relative",
-                    borderRadius: 16,
+                    borderRadius: "var(--r-lg)",
                     overflow: "hidden",
                     height: 260,
                     border: "1px solid rgba(255,255,255,0.15)",
@@ -602,7 +584,7 @@ export default function WorkAbroadPage() {
                   />
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(13,27,42,0.9) 0%, transparent 60%)" }} />
                   <div style={{ position: "absolute", bottom: 14, left: 18 }}>
-                    <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: "#66C2FF", letterSpacing: ".1em", textTransform: "uppercase", fontWeight: 700 }}>
+                    <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "#66C2FF", letterSpacing: "var(--tr-mono)", textTransform: "uppercase", fontWeight: 700 }}>
                       🇩🇪 German Healthcare Academy Cohort
                     </span>
                   </div>
@@ -611,7 +593,7 @@ export default function WorkAbroadPage() {
                 <div
                   style={{
                     background: "rgba(255,255,255,.05)",
-                    borderRadius: 14,
+                    borderRadius: "var(--r-lg)",
                     padding: "20px 22px",
                     border: "1px solid rgba(255,255,255,.12)",
                     display: "grid",
@@ -626,8 +608,8 @@ export default function WorkAbroadPage() {
                     { label: "Visa Route", val: "EU Blue Card" },
                   ].map((item) => (
                     <div key={item.label}>
-                      <div style={{ fontFamily: "var(--mono)", fontSize: 9.5, color: "rgba(255,255,255,0.4)", textTransform: "uppercase" }}>{item.label}</div>
-                      <div style={{ fontFamily: "var(--sans)", fontSize: 12.5, fontWeight: 700, color: "#FFF", marginTop: 2 }}>{item.val}</div>
+                      <div style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "rgba(255,255,255,0.4)", textTransform: "uppercase" }}>{item.label}</div>
+                      <div style={{ fontFamily: "var(--sans)", fontSize: "var(--text-sm)", fontWeight: 700, color: "#FFF", marginTop: 2 }}>{item.val}</div>
                     </div>
                   ))}
                 </div>
@@ -643,13 +625,13 @@ export default function WorkAbroadPage() {
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
             <div style={{ textAlign: "center", marginBottom: 44 }}>
-              <p style={{ fontFamily: "var(--mono)", fontSize: 10.5, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 10, fontWeight: 600 }}>
-                // On-Ground Global Operations
+              <p className="eyebrow-label eyebrow-label--slash" style={{ marginBottom: 10 }}>
+                On-Ground Global Operations
               </p>
-              <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(26px,3.8vw,42px)", color: "var(--text)", letterSpacing: "-.03em", marginBottom: 12 }}>
+              <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(26px,3.8vw,42px)", color: "var(--text)", letterSpacing: "var(--tr-display)", marginBottom: 12 }}>
                 Real candidates. Real global placements.
               </h2>
-              <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--text-muted)", maxWidth: 580, margin: "0 auto" }}>
+              <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", maxWidth: 580, margin: "0 auto" }}>
                 Glimpses from VSI's international recruitment drives, language academy cohorts, and employer onboarding sessions.
               </p>
             </div>
@@ -660,13 +642,13 @@ export default function WorkAbroadPage() {
                 { img: "/images/students-campus.png", title: "German Language Academy", sub: "A1, A2 then B1, B2 completion & cultural prep" },
                 { img: "/images/award-ceremony.png", title: "Flight Briefing & Felicitation", sub: "Pre-departure ceremony for placed healthcare candidates" },
               ].map((card) => (
-                <div key={card.title} style={{ background: "var(--bg)", border: "1px solid var(--border)", borderRadius: 14, overflow: "hidden" }}>
+                <div key={card.title} style={{ background: "var(--bg)", border: "1px solid var(--border)", borderRadius: "var(--r-lg)", overflow: "hidden" }}>
                   <div style={{ height: 180, position: "relative" }}>
                     <Image src={card.img} alt={card.title} fill style={{ objectFit: "cover" }} sizes="(max-width: 900px) 100vw, 33vw" />
                   </div>
                   <div style={{ padding: "16px 18px" }}>
-                    <h4 style={{ fontFamily: "var(--serif)", fontSize: 16, fontWeight: 700, color: "var(--text)", margin: "0 0 4px 0" }}>{card.title}</h4>
-                    <p style={{ fontFamily: "var(--body)", fontSize: 12, color: "var(--text-muted)", margin: 0, lineHeight: 1.5 }}>{card.sub}</p>
+                    <h4 style={{ fontFamily: "var(--serif)", fontSize: "var(--text-md)", fontWeight: 700, color: "var(--text)", margin: "0 0 4px 0" }}>{card.title}</h4>
+                    <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", margin: 0, lineHeight: 1.5 }}>{card.sub}</p>
                   </div>
                 </div>
               ))}
@@ -680,13 +662,13 @@ export default function WorkAbroadPage() {
         <div style={{ maxWidth: 880, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
             <div style={{ textAlign: "center", marginBottom: 56 }}>
-              <p style={{ fontFamily: "var(--mono)", fontSize: 10.5, letterSpacing: ".15em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 10, fontWeight: 600 }}>
-                // Guided Candidate Journey
+              <p className="eyebrow-label eyebrow-label--slash" style={{ marginBottom: 10 }}>
+                Guided Candidate Journey
               </p>
-              <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(26px,3.8vw,42px)", color: "var(--text)", letterSpacing: "-.03em", marginBottom: 14 }}>
+              <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(26px,3.8vw,42px)", color: "var(--text)", letterSpacing: "var(--tr-display)", marginBottom: 14 }}>
                 Your 6-step pathway to work abroad.
               </h2>
-              <p style={{ fontFamily: "var(--body)", fontSize: 15.5, color: "var(--text-muted)", lineHeight: 1.75, maxWidth: 620, margin: "0 auto" }}>
+              <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", lineHeight: 1.75, maxWidth: 620, margin: "0 auto" }}>
                 A transparent, step-by-step pathway from registration to international flight boarding — handled end-to-end by VSI Mobility Cell.
               </p>
             </div>
@@ -729,14 +711,14 @@ export default function WorkAbroadPage() {
 
                   <div style={{ flex: 1, paddingTop: isMobile ? 2 : 6 }}>
                     <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 6, flexWrap: "wrap" }}>
-                      <span style={{ fontFamily: "var(--mono)", fontSize: 10, fontWeight: 700, letterSpacing: ".12em", color: "var(--accent)", background: "rgba(var(--accent-rgb),.09)", padding: "3px 8px", borderRadius: 4 }}>
+                      <span style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", fontWeight: 700, letterSpacing: "var(--tr-mono)", color: "var(--accent)", background: "rgba(var(--accent-rgb),.09)", padding: "3px 8px", borderRadius: "var(--r-sm)" }}>
                         STEP {String(step.step).padStart(2, "0")}
                       </span>
-                      <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? 17 : 20, color: "var(--text)", letterSpacing: "-.02em" }}>
+                      <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: isMobile ? "var(--text-md)" : "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>
                         {step.title}
                       </h3>
                     </div>
-                    <p style={{ fontFamily: "var(--body)", fontSize: 14.5, color: "var(--text-muted)", lineHeight: 1.7 }}>
+                    <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", lineHeight: 1.7 }}>
                       {step.desc}
                     </p>
                   </div>
@@ -766,10 +748,10 @@ export default function WorkAbroadPage() {
           >
             <Plane size={26} color="var(--accent)" />
           </div>
-          <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(26px,3.8vw,42px)", color: "var(--text)", letterSpacing: "-.03em", marginBottom: 16 }}>
+          <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(26px,3.8vw,42px)", color: "var(--text)", letterSpacing: "var(--tr-display)", marginBottom: 16 }}>
             Ready to explore global opportunities?
           </h2>
-          <p style={{ fontFamily: "var(--body)", fontSize: 15.5, color: "var(--text-muted)", lineHeight: 1.7, maxWidth: 540, margin: "0 auto 28px" }}>
+          <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", lineHeight: 1.7, maxWidth: 540, margin: "0 auto 28px" }}>
             Connect with our international placement cell to learn about upcoming Gulf deployment drives, German language academy cohorts, and candidate eligibility.
           </p>
           <Link href="/contact" style={{ textDecoration: "none" }}>
