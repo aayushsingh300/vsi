@@ -408,6 +408,9 @@ img{display:block;max-width:100%;}
   font-weight: 600;
   font-size: var(--text-sm);
   letter-spacing: var(--tr-body);
+  /* "Work Abroad" is the only two-word item, and left to wrap it broke the
+     row onto two lines and pushed the underline off its label. */
+  white-space: nowrap;
   transition: color .2s;
   cursor: pointer;
 }
@@ -425,13 +428,38 @@ img{display:block;max-width:100%;}
   opacity: 1;
   transform: translateY(-1px);
 }
-/* Between 900 (where the drawer hands over to the full nav) and 1080 the
-   eight-link row plus the actions cluster needs ~933px of a 900px window —
-   its gaps and padding are already pinned at their clamp minimums, so the
-   row pushed the page 33px wide at every route. The leading icons are
-   decorative and aria-hidden; dropping them frees ~170px and the row fits
-   from the moment it appears. */
-@media (max-width: 1080px) {
+/* ── Navbar link row ──
+   Three zones — logo, links, actions — and the links are centred on the
+   VIEWPORT rather than on the gap between their neighbours. The two flanks
+   differ by ~90px (a 123px logo against a 212px actions cluster), so a
+   flex-distributed row lands visibly right of centre; only taking the row out
+   of flow puts it on the page's true midline.
+   Out of flow it can also collide, so the centring is gated on there being
+   room for it: below 1200 the row sits back in flow and the bar reads as the
+   familiar left/right split. */
+.nav-center {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.2vw, 24px);
+}
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+@media (min-width: 1200px) {
+  .nav-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+/* The leading icons are decorative and aria-hidden, and they cost ~190px —
+   more than the clearance the centred row has left at 1440, where nine links
+   ran to within 27px of the actions cluster. They come back only where that
+   clearance is comfortable. */
+@media (max-width: 1519px) {
   .nav-ico { display: none; }
 }
 .nav-link::after {
@@ -638,6 +666,238 @@ img{display:block;max-width:100%;}
   transition: transform .22s var(--ease-spring);
 }
 
+/* ═══ India map orb (centres page) ═══
+   A dark glass sphere holding a dotted India, with the centres pinned proud
+   of the map surface. See components/IndiaOrb for the geometry; everything
+   here is the material — glass, light, and the pins.
+
+   The section it anchors was a single column of address rows against an empty
+   right half. The orb takes that half and gives the list something to point
+   at: hovering either side lights the other. */
+.orb-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.orb {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  /* Shallow enough that a 15° tilt reads as rotation, not as a wide-angle
+     lens swinging the far edge away. */
+  perspective: 900px;
+  background:
+    radial-gradient(circle at 32% 24%, rgba(var(--accent-rgb), .22) 0%, transparent 48%),
+    radial-gradient(circle at 50% 50%, #14263E 0%, #060B12 76%);
+  box-shadow:
+    inset 0 0 70px rgba(0, 0, 0, .55),
+    inset 0 1px 0 rgba(255, 255, 255, .12),
+    0 0 0 1px rgba(var(--accent-rgb), .20),
+    0 24px 60px rgba(1, 1, 1, .28),
+    0 0 90px rgba(var(--accent-rgb), .16);
+  /* Vertical swipes must still scroll the page on a phone. */
+  touch-action: pan-y;
+}
+.orb-stage {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.orb-map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.orb-grid {
+  fill: none;
+  stroke: rgba(var(--accent-rgb), .16);
+  stroke-width: .35;
+}
+.orb-dots path { stroke: none; }
+.orb-dots--lit { fill: rgba(var(--accent-rgb), .92); }
+.orb-dots--mid { fill: rgba(var(--accent-rgb), .62); }
+.orb-dots--dim { fill: rgba(var(--accent-rgb), .34); }
+
+/* Pins ride 34px in front of the map plane — the parallax between the two is
+   what the tilt is for. */
+.orb-pins {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(34px);
+  transform-style: preserve-3d;
+}
+.orb-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.orb-pin__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  /* Momentum Orange against a blue map: the one pairing on the brand palette
+     that cannot be mistaken for the map it sits on. */
+  background: var(--accent-orange);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, .8),
+    0 0 14px rgba(var(--momentum-orange-rgb), .9);
+  transition: transform .22s var(--ease-spring);
+}
+.orb-pin__ring {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--momentum-orange-rgb), .6);
+  opacity: 0;
+  transform: scale(.4);
+  transition: opacity .28s ease, transform .28s var(--ease-spring);
+}
+/* A fanned cluster still overlaps a little; the one being pointed at comes
+   to the front so its ring is never drawn under a neighbour. */
+.orb-pin:hover,
+.orb-pin:focus-visible,
+.orb-pin.is-active { z-index: 2; }
+.orb-pin:hover .orb-pin__ring,
+.orb-pin:focus-visible .orb-pin__ring,
+.orb-pin.is-active .orb-pin__ring {
+  opacity: 1;
+  transform: scale(1);
+}
+.orb-pin.is-active .orb-pin__dot { transform: scale(1.5); }
+.orb-pin.is-flagship .orb-pin__dot { width: 11px; height: 11px; }
+.orb-pin.is-flagship::before {
+  content: '';
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--momentum-orange-rgb), .5);
+  animation: orbPing 2.6s ease-out infinite;
+}
+@keyframes orbPing {
+  0%   { transform: scale(.35); opacity: .9; }
+  70%  { transform: scale(1.5); opacity: 0; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Fixed to the sphere, not to the map: a highlight that rotated with the
+   contents would read as a decal stuck on the glass. */
+.orb-gloss {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 40% at 30% 16%, rgba(255, 255, 255, .16) 0%, transparent 70%),
+    radial-gradient(ellipse 90% 60% at 50% 118%, rgba(0, 0, 0, .45) 0%, transparent 60%);
+}
+.orb-readout {
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 16px;
+  border-radius: var(--r-pill);
+  background: rgba(6, 11, 18, .72);
+  border: 1px solid rgba(255, 255, 255, .12);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  white-space: nowrap;
+  pointer-events: none;
+  transition: border-color .25s ease;
+}
+.orb-readout.is-on { border-color: rgba(var(--momentum-orange-rgb), .45); }
+.orb-readout__city {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  letter-spacing: var(--tr-caps);
+  text-transform: uppercase;
+  color: #FFF;
+}
+.orb-readout__state,
+.orb-readout__hint {
+  font-family: var(--mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .45);
+}
+/* "Hover" is a lie on a phone. */
+.orb-readout__hint--touch { display: none; }
+@media (hover: none) {
+  .orb-readout__hint--pointer { display: none; }
+  .orb-readout__hint--touch { display: inline; }
+}
+.orb-caption {
+  font-family: var(--mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--text-faint);
+  text-align: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .orb-pin.is-flagship::before { animation: none; opacity: .5; transform: scale(1); }
+}
+
+/* ── Logo wall ──
+   Self-contained tiles with real gaps, not cells punched out of a plate by
+   1px gutters. The plate version could only look finished when a sector's
+   count divided exactly into the column count; every other row ended in a
+   grey hole. Here an unfilled slot is simply absent.
+
+   `auto-fill` at a 180px floor lands on five columns inside the 1100px
+   column — one row per sector for this data, which is the composition the
+   grouping was asking for all along. */
+.logo-wall {
+  display: grid;
+  gap: 10px;
+}
+.logo-wall__tile {
+  /* One height for every tile so the row reads as a band; the marks size
+     themselves inside it (see EmployerMark). The 104/18 pair is not free
+     space — TATA's canvas is 2.15× the base height because its ink is 19% of
+     its file, and it needs 65px of slot to put 12px of wordmark on screen. */
+  min-height: 104px;
+  height: 100%;
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--r-md);
+  /* The base every mark's scale is measured against. */
+  --mark-h: 30px;
+  transition: border-color .22s ease, box-shadow .22s ease, transform .22s var(--ease-spring);
+}
+.logo-wall__tile:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+@media (max-width: 899px) {
+  .logo-wall__tile { min-height: 88px; padding: 14px; --mark-h: 25px; }
+}
+
 /* ── Employer logos (grid tiles + ticker) ──
    Brand logos render in their own colours at rest — no grayscale-until-hover.
    Hover only adds a small lift so the tile still feels interactive. */
@@ -804,6 +1064,9 @@ img{display:block;max-width:100%;}
   display: inline-flex;
   gap: 0;
   animation: ticker 38s linear infinite;
+}
+.ticker-inner.ticker-reverse {
+  animation-direction: reverse;
 }
 
 /* ── Scrollbar ── */
@@ -1139,7 +1402,11 @@ textarea:focus-visible {
   align-items: center;
   gap: var(--sp-2);
   font-family: var(--mono);
-  font-size: var(--text-xs);
+  /* 12, not the 11px --text-xs it shared with card meta and image captions.
+     A kicker that measures the same as the smallest type on the page cannot
+     open a section; one step up is enough to rank it without touching the
+     heading below. */
+  font-size: 12px;
   letter-spacing: var(--tr-mono);
   text-transform: uppercase;
   color: var(--accent-text);
@@ -1168,6 +1435,91 @@ textarea:focus-visible {
   width: 20px;
   height: 1px;
   background: var(--border-strong);
+}
+
+/* ── Section Head ──
+   The row that OPENS a band — an icon, a label, and a rule to the edge.
+
+   Before this, a band of cards was introduced by an 11px accent-blue kicker,
+   sometimes beside a 40px gradient plate, sometimes beside a bare 18px icon,
+   sometimes alone. Three problems compounded: the label measured the same as
+   the meta text inside the cards it was naming, accent-blue at that size
+   optically recedes on parchment, and the three icon treatments meant no two
+   bands opened the same way. Groups stopped reading as groups.
+
+   The fix is one row, used everywhere:
+     · the LABEL takes ink and steps to 13px — it now outranks everything in
+       the cards below it, which is the whole job of a group heading;
+     · the ACCENT moves to the leading `//` and the icon plate, so the band
+       keeps its colour without spending it on legibility;
+     · a RULE runs from the label to the container edge. A label alone floats;
+       a label on a rule is a boundary, and that is what makes the group below
+       it read as one thing.
+
+   `--tone-rgb` re-tints the whole row (icon plate, slashes, rule) from one
+   place — set it per section where a band has its own colour. */
+.section-head {
+  --tone-rgb: var(--accent-rgb);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-5);
+}
+.section-head::after {
+  content: '';
+  flex: 1 1 24px;
+  height: 1px;
+  background: linear-gradient(to right, rgba(var(--tone-rgb), .30), rgba(var(--tone-rgb), 0));
+}
+.section-head__icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: var(--r-md);
+  background: rgba(var(--tone-rgb), .11);
+  border: 1px solid rgba(var(--tone-rgb), .22);
+  color: rgb(var(--tone-rgb));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.section-head__label {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--text);
+}
+.section-head__label::before {
+  content: '//';
+  margin-right: .5em;
+  color: rgb(var(--tone-rgb));
+  opacity: .55;
+}
+/* Optional count/meta sitting between the label and the rule. */
+.section-head__count {
+  flex-shrink: 0;
+  font-family: var(--mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tr-caps);
+  text-transform: uppercase;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+/* On always-dark bands the ink label would vanish; the rule needs a light
+   source too, since a 30%-accent hairline is invisible on #0D1B2A. */
+.section-head--on-dark .section-head__label { color: var(--text-inv); }
+.section-head--on-dark::after {
+  background: linear-gradient(to right, rgba(255,255,255,.22), rgba(255,255,255,0));
+}
+@media (max-width: 599px) {
+  /* The rule is the first thing to give up its width — the label must stay on
+     as few lines as possible. */
+  .section-head { gap: var(--sp-2); }
+  .section-head__icon { width: 34px; height: 34px; }
+  .section-head__label { font-size: 12px; }
 }
 
 /* ── Chip ──

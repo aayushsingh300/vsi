@@ -56,35 +56,99 @@ export function programThumb(slug: string): string | undefined {
   return COURSE_THUMBS[slug] ?? DIPLOMA_THUMBS[slug] ?? VOC_THUMBS[slug] ?? CATEGORY_THUMBS[slug];
 }
 
-// Employer logos — local, size-optimised files in /public/logos.
-// Keys must match the names in EMPLOYERS (see content.ts).
-export const EMPLOYER_LOGOS: Record<string, string> = {
-  "TATA Motors": "/logos/tata.png",
-  "Foxconn": "/logos/foxconn.svg",
-  "Reliance": "/logos/reliance.svg",
-  "Yazaki": "/logos/yazaki.svg",
-  "Wistron": "/logos/wistron.svg",
-  "Amazon": "/logos/amazon.svg",
-  "Flipkart": "/logos/flipkart.svg",
-  "Blinkit": "/logos/blinkit.svg",
-  "Zepto": "/logos/zepto.svg",
-  "Apna Mart": "/logos/apna-mart.svg",
-  "Jupiter Hospitals": "/logos/jupiter-hospitals.png",
-  "HM Hospitals": "/logos/hm-hospitals.png",
-  "AIG Hospitals": "/logos/aig-hospitals.png",
-  "NU MED Super Speciality Hospitals": "/logos/numed.png",
-  "2050 Healthcare": "/logos/2050-healthcare.png",
-  "S.P. Apparels": "/logos/sp-apparels.jpg",
-  "Modenik Lifestyle": "/logos/modenik.svg",
-  "Orient Craft": "/logos/orient-craft.png",
-  "Ayuda": "/logos/ayuda.png",
-  "L&T": "/logos/lt.svg",
-  "Wipro": "/logos/wipro.png",
-  "Infosys": "/logos/infosys.webp",
-  "Cognizant": "/logos/cognizant.jpg",
-  "TCS": "/logos/tcs.webp",
-  "HCL": "/logos/hcl.png",
+// ════════════════════════════════════════════════════════════════════
+//  Employer artwork
+// ════════════════════════════════════════════════════════════════════
+
+/**
+ * Employer logos — local, size-optimised files in /public/logos — carrying the
+ * two numbers a logo wall needs.
+ *
+ * `ratio` is the FILE's width ÷ height, so a mark can be laid out from a single
+ * height without ever being squashed.
+ *
+ * `scale` is the optical correction, and on this set it is doing real work.
+ * Dropped into equal boxes with `object-fit: contain`, these logos rendered at
+ * wildly different sizes for two compounding reasons:
+ *
+ *   1. Aspect ratio. In a box wider than it is tall, a 3:1 wordmark is
+ *      height-limited and fills the box, while an 11:1 wordmark is
+ *      width-limited and renders as a sliver. Equal boxes ≠ equal marks.
+ *   2. Baked-in padding. Half the raster files are artwork centred on a 16:9
+ *      canvas — TATA's wordmark is 462×50 of ink on a 480×270 field, i.e. 18%
+ *      of the height it claims. `contain` fits the CANVAS, so the ink came out
+ *      at a fifth the size of a tightly-cropped SVG beside it.
+ *
+ * So `scale` is derived, not eyeballed. Each file was rendered to a canvas and
+ * its painted pixels measured, giving the ink's own aspect ratio and the
+ * fraction of the file's height the ink actually occupies. From those:
+ *
+ *   target ink height  ←  a ladder on the INK ratio, because a square mark
+ *                         reads well tall and a wordmark reads well short:
+ *                         ≤1.3 → 30px, ≤2.2 → 27, ≤3.3 → 23, ≤5 → 19,
+ *                         ≤8 → 15, else 12
+ *   scale              =  target ÷ (ink height fraction × 30px base)
+ *
+ * The `// ink a:b · h%` comments record the measurement each scale came from.
+ * Note this is not a raster/vector split: half the SVGs are padded too —
+ * Foxconn's wordmark is 32% of its viewBox height.
+ *
+ * If artwork is replaced, re-measure rather than guessing. A tightly-cropped
+ * ~3:1 file wants a scale near 0.77.
+ *
+ * The healthcare and apparel marks then sit one step above what the ladder
+ * gives them: they are lockups that stack a mark over a tagline, and the
+ * tagline occupies height without adding any presence, so measured alongside
+ * a plain wordmark they come out looking a size smaller.
+ */
+export type EmployerMark = { src: string; ratio: number; scale: number };
+
+export const EMPLOYER_MARKS: Record<string, EmployerMark> = {
+  // Automotive & manufacturing
+  "TATA Motors": { src: "/logos/tata.png", ratio: 1.778, scale: 2.15 },      // ink 9.18:1 · 19%
+  "Foxconn": { src: "/logos/foxconn.svg", ratio: 3.333, scale: 1.55 },       // ink 7.78:1 · 32%
+  "Wistron": { src: "/logos/wistron.svg", ratio: 5.146, scale: 0.53 },       // ink 5.34:1 · 95%
+  "Reliance": { src: "/logos/reliance.svg", ratio: 3.333, scale: 1.22 },     // ink 5.96:1 · 41%
+  "Yazaki": { src: "/logos/yazaki.svg", ratio: 3.333, scale: 1.25 },         // ink 5.36:1 · 40%
+
+  // Logistics & e-commerce
+  "Amazon": { src: "/logos/amazon.svg", ratio: 3.313, scale: 0.63 },         // ink 3.32:1 · 100%
+  "Flipkart": { src: "/logos/flipkart.svg", ratio: 1.5, scale: 2.08 },       // ink 3.79:1 · 31%
+  "Blinkit": { src: "/logos/blinkit.svg", ratio: 1, scale: 1 },              // app-icon roundel
+  "Zepto": { src: "/logos/zepto.svg", ratio: 3, scale: 0.78 },               // ink 3.06:1 · 98%
+  "Apna Mart": { src: "/logos/apna-mart.svg", ratio: 11.198, scale: 0.4 },   // ink 11.1:1 · 100%
+
+  // Healthcare
+  "Jupiter Hospitals": { src: "/logos/jupiter-hospitals.png", ratio: 2.775, scale: 0.9 },
+  "HM Hospitals": { src: "/logos/hm-hospitals.png", ratio: 2.143, scale: 1.05 },
+  "AIG Hospitals": { src: "/logos/aig-hospitals.png", ratio: 1.936, scale: 1.05 },   // ink 2:1 · 91%
+  "NU MED Super Speciality Hospitals": { src: "/logos/numed.png", ratio: 3.204, scale: 0.92 },
+  "2050 Healthcare": { src: "/logos/2050-healthcare.png", ratio: 2.442, scale: 0.92 },
+
+  // Apparel & textiles
+  "S.P. Apparels": { src: "/logos/sp-apparels.jpg", ratio: 5.852, scale: 0.62 },
+  "Modenik Lifestyle": { src: "/logos/modenik.svg", ratio: 6.619, scale: 0.51 },
+  "Orient Craft": { src: "/logos/orient-craft.png", ratio: 2.133, scale: 1.05 },
+  "Ayuda": { src: "/logos/ayuda.png", ratio: 2.977, scale: 0.9 },
+
+  // IT services & retail — used on the ticker and course pages
+  "L&T": { src: "/logos/lt.svg", ratio: 3.816, scale: 0.91 },                // ink 4.84:1 · 69%
+  "Myntra": { src: "/logos/myntra.png", ratio: 1.778, scale: 1.38 },         // ink 3.06:1 · 56%
+  "Wipro": { src: "/logos/wipro.png", ratio: 1.778, scale: 1.02 },           // ink 1.25:1 · 99%
+  "Infosys": { src: "/logos/infosys.webp", ratio: 2.706, scale: 0.88 },
+  "Cognizant": { src: "/logos/cognizant.jpg", ratio: 1.778, scale: 1.62 },   // ink 5.47:1 · 31%
+  "TCS": { src: "/logos/tcs.webp", ratio: 2.485, scale: 1.12 },              // ink 3.62:1 · 57%
+  "HCL": { src: "/logos/hcl.png", ratio: 1.778, scale: 1.95 },               // ink 6.85:1 · 26%
 };
+
+// Path-only view, for the call sites that just need a src.
+export const EMPLOYER_LOGOS: Record<string, string> = Object.fromEntries(
+  Object.entries(EMPLOYER_MARKS).map(([name, m]) => [name, m.src])
+);
+
+export function employerMark(name: string): EmployerMark | undefined {
+  return EMPLOYER_MARKS[name];
+}
 
 // Homepage / brand logo (full VSI colour wordmark, vector).
 export const VSI_LOGO = "/logos/vsi.svg";
@@ -100,22 +164,30 @@ export const LOGO_INVERT_SET = new Set(["Modenik Lifestyle", "Apna Mart"]);
 /**
  * `ratio` is the artwork's own width ÷ height, so a mark can be laid out from a
  * single height without ever being squashed. `scale` then corrects for optical
- * weight: NSDC stacks an emblem over a wordmark and a tagline, and AICTE and
- * Skill India each carry two lines of type — set to the same height as the
- * Autodesk wordmark, which is nothing but capital letters, they read far
- * smaller than it does.
+ * weight — NSDC stacks an emblem over a wordmark, Autodesk is nothing but
+ * capitals, and set to one height the two read nothing alike.
+ *
+ * Same derivation as EMPLOYER_MARKS: each file was rendered and its painted
+ * pixels measured, then the scale solved so the INK lands on a target height
+ * chosen from the ink's own aspect ratio — 24px at 1:1 down to 9.5px past 9:1,
+ * against the 15px base the hero strip sets. Equal area beats equal height:
+ * a 7:1 wordmark set as tall as a roundel dwarfs it.
  */
 export type OrgLogo = { src: string; ratio: number; scale: number };
 
 export const ORG_LOGOS: Record<string, OrgLogo> = {
-  NASSCOM: { src: "/logos/orgs/nasscom.svg", ratio: 1000 / 168, scale: 1 },
-  NSDC: { src: "/logos/orgs/nsdc.svg", ratio: 620.49 / 596.1, scale: 1.8 },
-  AICTE: { src: "/logos/orgs/aicte.png", ratio: 380 / 73, scale: 1.2 },
-  Autodesk: { src: "/logos/orgs/autodesk.svg", ratio: 100 / 11, scale: 0.8 },
-  "Skill India": { src: "/logos/orgs/skill-india.svg", ratio: 1229 / 341, scale: 1.25 },
-  ASDC: { src: "/logos/orgs/asdc.png", ratio: 164 / 64, scale: 1.45 },
-  UPSDM: { src: "/logos/orgs/upsdm.png", ratio: 1, scale: 1.8 },
-  RJSD: { src: "/logos/orgs/rjsd.png", ratio: 344 / 147, scale: 1.15 },
+  // NASSCOM sits a step below its computed size and AICTE a step above:
+  // NASSCOM's wordmark is set in a heavy lowercase that carries more weight
+  // per pixel than anything else in the row, and AICTE's seal-plus-two-lines
+  // lockup carries less.
+  NASSCOM: { src: "/logos/orgs/nasscom.svg", ratio: 1000 / 168, scale: 0.82 },   // ink 7.06:1 · 84%
+  NSDC: { src: "/logos/orgs/nsdc.svg", ratio: 620.49 / 596.1, scale: 1.92 },     // ink 1.04:1 · 90%
+  AICTE: { src: "/logos/orgs/aicte.png", ratio: 380 / 73, scale: 0.98 },         // ink 5.21:1 · 100%
+  Autodesk: { src: "/logos/orgs/autodesk.svg", ratio: 100 / 11, scale: 0.70 },   // ink 9.63:1 · 94%
+  "Skill India": { src: "/logos/orgs/skill-india.svg", ratio: 1229 / 341, scale: 1.08 }, // ink 3.61:1 · 100%
+  ASDC: { src: "/logos/orgs/asdc.png", ratio: 164 / 64, scale: 1.34 },           // ink 3.38:1 · 75%
+  UPSDM: { src: "/logos/orgs/upsdm.png", ratio: 1, scale: 2.09 },                // ink 1.11:1 · 77%
+  RJSD: { src: "/logos/orgs/rjsd.png", ratio: 344 / 147, scale: 1.32 },          // ink 2.48:1 · 94%
 };
 
 /**

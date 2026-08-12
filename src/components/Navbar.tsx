@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import {
   X,
   Menu,
+  Home,
   GraduationCap,
   Briefcase,
   Handshake,
@@ -46,7 +47,10 @@ function useScrolled(threshold = 20) {
   return scrolled;
 }
 
+// Home duplicates the logo's destination on purpose: the logo is a brand mark
+// first and only a link by convention, so the row now names the way back.
 const NAV_LINKS: { href: string; key: string; Icon: LucideIcon }[] = [
+  { href: "/", key: "navHome", Icon: Home },
   { href: "/courses", key: "navCourses", Icon: GraduationCap },
   { href: "/services", key: "navServices", Icon: Briefcase },
   { href: "/placements", key: "navRecruiters", Icon: Handshake },
@@ -84,7 +88,10 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
   const formRef = useRef<HTMLDivElement>(null);
   const [formHeight, setFormHeight] = useState(0);
   const { lang, setLang, t } = useLang();
-  const isMobile = useIsMobile(900);
+  // The drawer takes over at 1100, not 900: with Home the row is nine links,
+  // and between 900 and 1100 it could only fit by shrinking the labels to a
+  // size the rest of the site never uses. The drawer carries the same nine.
+  const isMobile = useIsMobile(1100);
   const scrolled = useScrolled();
   const navH = scrolled ? 58 : 68;
 
@@ -167,13 +174,15 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
           })()}
         </Link>
 
-        {/* Two clusters — the 8 links, then the actions — with a wider gap
-            between them. The break reads as far less "packed" than one
-            evenly-spaced row. All gaps are fluid: airy on wide screens,
-            tightening toward 1440 so the row can't clip. */}
+        {/* The link row is centred on the *viewport*, not on the space left
+            over between the logo and the actions — those two flanks have very
+            different widths, so a flex-distributed row always sat visibly
+            right of centre. `.nav-center` pins it to 50% once the window is
+            wide enough for the flanks to clear it (see globals.css); below
+            that it falls back to sitting in flow beside the actions. */}
         {!isMobile && (
-          <div style={{ display: "flex", gap: "clamp(20px, 2vw, 40px)", alignItems: "center" }}>
-            <div style={{ display: "flex", gap: "clamp(12px, 1.3vw, 24px)", alignItems: "center" }}>
+          <>
+            <div className="nav-center">
               {NAV_LINKS.map((n) => {
                 const isActive = n.href === "/" ? pathname === "/" : pathname.startsWith(n.href);
                 return (
@@ -185,7 +194,7 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
               })}
             </div>
 
-            <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+            <div className="nav-actions">
             <div
               role="group"
               aria-label="Language"
@@ -218,7 +227,7 @@ export default function Navbar({ formOpen, setFormOpen }: NavbarProps) {
               {t("enquireNow")}
             </button>
             </div>
-          </div>
+          </>
         )}
 
         {isMobile && (

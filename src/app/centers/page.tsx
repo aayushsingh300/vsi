@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
 import TabSwitch from "@/components/TabSwitch";
+import IndiaOrb from "@/components/IndiaOrb";
 import Link from "next/link";
 import { INFRA_TABS, TRAINING_INSTITUTIONS, SMART_CITY_BLOCKS, CENTERS, POLYTECHNIC_COLLEGES, ITI_COLLEGES } from "@/data/content";
 import { useLang } from "@/context/LangContext";
@@ -18,6 +19,8 @@ const BLOCK_ICONS = [Building, GraduationCap, Landmark, Home];
 export default function CentersPage() {
   const [formOpen, setFormOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("institution");
+  // Shared by the centre list and the map orb — hovering either lights both.
+  const [activeCentre, setActiveCentre] = useState<number | null>(null);
   const { t } = useLang();
   const isMobile = useIsMobile(900);
 
@@ -144,9 +147,10 @@ export default function CentersPage() {
       <section style={{ padding: isMobile ? "0 6% 64px" : "0 5% 96px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
-            <p className="eyebrow-label eyebrow-label--slash" style={{ marginBottom: 12 }}>
-              Training Institutions Directory
-            </p>
+            <div className="section-head">
+              <span className="section-head__icon"><GraduationCap size={18} /></span>
+              <span className="section-head__label">Training Institutions Directory</span>
+            </div>
           </AnimateIn>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 16 }}>
             {TRAINING_INSTITUTIONS.map((inst, i) => (
@@ -247,56 +251,83 @@ export default function CentersPage() {
         </div>
       </section>
 
-      {/* Existing Centers list */}
+      {/* ── Centre locations — map orb + list ──
+          The list used to run down the left of a 1100px column with the right
+          half empty, so seven addresses read as a form rather than a network.
+          Pairing it with the map fills the column and, more usefully, answers
+          the question the list cannot: where these places are relative to each
+          other. Hover either side and the other lights up. */}
       <section style={{ padding: isMobile ? "64px 6%" : "96px 5%" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
-            <p className="eyebrow-label eyebrow-label--slash" style={{ marginBottom: 12 }}>
-              Centre Locations
-            </p>
+            <div className="section-head">
+              <span className="section-head__icon"><MapPin size={18} /></span>
+              <span className="section-head__label">Centre Locations</span>
+              <span className="section-head__count">{CENTERS.length} centres</span>
+            </div>
           </AnimateIn>
-          {CENTERS.map((c, i) => (
-            <AnimateIn key={i} animation="slideUp" delay={i * 0.08}>
-              <div style={{
-                display: "flex", justifyContent: "space-between", alignItems: "start",
-                gap: 32, padding: "28px 0",
-                borderBottom: "1px solid rgba(var(--ink-rgb),.08)",
-                flexWrap: "wrap",
-              }}>
-                <div style={{ flex: 1 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8, flexWrap: "wrap" }}>
-                    <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>
-                      {c.city}, {c.state}
-                    </h3>
-                    {c.kind && (
-                      <span style={{
-                        fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase",
-                        background: "rgba(var(--accent-rgb),.08)", color: "var(--accent)",
-                        border: "1px solid rgba(var(--accent-rgb),.18)", padding: "4px 9px", borderRadius: "var(--r-sm)", fontWeight: 500,
-                      }}>{c.kind}</span>
-                    )}
-                    {c.flagship && <span style={{ background: "var(--ink)", color: "var(--text-inv)", fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", padding: "3px 8px", borderRadius: "var(--r-sm)", textTransform: "uppercase" }}>Flagship</span>}
+
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: isMobile ? "1fr" : "1fr minmax(320px, 420px)",
+            gap: isMobile ? 40 : 56,
+            alignItems: "start",
+          }}>
+            {/* List */}
+            <div>
+              {CENTERS.map((c, i) => (
+                <AnimateIn key={i} animation="slideUp" delay={Math.min(i, 5) * 0.06}>
+                  <div
+                    onMouseEnter={() => setActiveCentre(i)}
+                    onMouseLeave={() => setActiveCentre(null)}
+                    style={{
+                      padding: isMobile ? "22px 14px" : "24px 18px",
+                      borderBottom: "1px solid rgba(var(--ink-rgb),.08)",
+                      // The active row is marked by the pin's own orange, so
+                      // the link between the two halves needs no explaining.
+                      background: activeCentre === i ? "rgba(var(--momentum-orange-rgb),.06)" : "transparent",
+                      boxShadow: activeCentre === i ? "inset 3px 0 0 var(--accent-orange)" : "none",
+                      transition: "background .22s ease, box-shadow .22s ease",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8, flexWrap: "wrap" }}>
+                      <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>
+                        {c.city}, {c.state}
+                      </h3>
+                      {c.kind && <span className="chip">{c.kind}</span>}
+                      {c.flagship && <span style={{ background: "var(--ink)", color: "var(--text-inv)", fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", padding: "3px 8px", borderRadius: "var(--r-sm)", textTransform: "uppercase" }}>Flagship</span>}
+                    </div>
+                    <div style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: 14 }}>
+                      <MapPin size={14} color="rgba(var(--ink-rgb),.3)" style={{ marginTop: 3, flexShrink: 0 }} />
+                      <span style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "rgba(var(--ink-rgb),.45)", lineHeight: 1.5 }}>{c.addr}</span>
+                    </div>
+                    <div style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase", color: "rgba(var(--ink-rgb),.3)", marginBottom: 8 }}>
+                      Trades Taught
+                    </div>
+                    <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                      {c.labs.map(lab => (
+                        <span key={lab} style={{
+                          background: "rgba(var(--ink-rgb),.04)", border: "1px solid rgba(var(--ink-rgb),.08)",
+                          borderRadius: "var(--r-sm)", padding: "5px 10px",
+                          fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "rgba(var(--ink-rgb),.4)",
+                        }}>{lab}</span>
+                      ))}
+                    </div>
                   </div>
-                  <div style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: 14 }}>
-                    <MapPin size={14} color="rgba(var(--ink-rgb),.3)" style={{ marginTop: 3, flexShrink: 0 }} />
-                    <span style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "rgba(var(--ink-rgb),.45)", lineHeight: 1.5 }}>{c.addr}</span>
-                  </div>
-                  <div style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase", color: "rgba(var(--ink-rgb),.3)", marginBottom: 8 }}>
-                    Trades Taught
-                  </div>
-                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                    {c.labs.map(lab => (
-                      <span key={lab} style={{
-                        background: "rgba(var(--ink-rgb),.04)", border: "1px solid rgba(var(--ink-rgb),.08)",
-                        borderRadius: "var(--r-sm)", padding: "5px 10px",
-                        fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "rgba(var(--ink-rgb),.4)",
-                      }}>{lab}</span>
-                    ))}
-                  </div>
-                </div>
+                </AnimateIn>
+              ))}
+            </div>
+
+            {/* Map orb — sticks alongside the list while it scrolls past. */}
+            {/* On a phone the map leads: seven address cards ahead of it is a
+                long scroll to reach the one element that shows the shape of
+                the network. */}
+            <AnimateIn animation="scaleIn" delay={0.1} style={{ order: isMobile ? -1 : 0 }}>
+              <div style={{ position: isMobile ? "static" : "sticky", top: "calc(var(--nav-h) + 32px)" }}>
+                <IndiaOrb active={activeCentre} onSelect={setActiveCentre} />
               </div>
             </AnimateIn>
-          ))}
+          </div>
         </div>
       </section>
 

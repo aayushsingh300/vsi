@@ -371,31 +371,43 @@ export default function HeroVideo() {
            1+2+2 across ordinary phone widths — every orphan needing a different
            size tweak to chase away. Grouping fixes the split at 3+2 everywhere.
 
-           The groups are themselves flex items with the same gap as the marks
-           inside them, so where the panel is wide enough for both — the stacked
-           layout below 900px — they sit side by side and read as one unbroken
-           row of five. */
+           Each line is then a grid of EQUAL columns rather than a flex row of
+           intrinsic widths. Packed left, the five marks — which run from a
+           28px roundel to a 109px wordmark — left a ragged hole at the end of
+           the short line and clumped the wide ones together; on equal columns
+           every mark owns the same slice of the panel and centres inside it,
+           so both lines read as one evenly-spaced block. */
         .hero-accred-row {
           display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          column-gap: clamp(14px, 1.6vw, 18px);
-          row-gap: 12px;
+          flex-direction: column;
+          row-gap: clamp(10px, 1.2vw, 14px);
           /* Read by OrgMark; one value drives every mark in the row. Set for
              legibility on the three marks that carry type, and small enough
              that a line of three still clears a 320px screen. */
           --org-h: 15px;
         }
         .hero-accred-line {
-          display: flex;
+          display: grid;
+          grid-auto-flow: column;
+          grid-auto-columns: minmax(0, 1fr);
           align-items: center;
-          gap: clamp(14px, 1.6vw, 18px);
+          column-gap: clamp(10px, 1.2vw, 14px);
         }
         .hero-accred-mark {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          /* One row height for every mark, so a 1:1 roundel and a 9:1 wordmark
+             sit on the same baseline band instead of bobbing against it. */
+          min-height: calc(var(--org-h) * 1.85);
           filter: brightness(0) invert(1);
           opacity: .62;
           transition: opacity .28s ease;
         }
+        /* The artwork keeps its own aspect (OrgMark sizes it) but can never
+           outgrow its column — Autodesk's wordmark is 4× the width of NSDC's
+           roundel at the same height. */
+        .hero-accred-mark > span { max-width: 100%; }
         .hero-accred-mark:hover { opacity: .95; }
 
         /* ─────────────  Scroll cue  ───────────── */
@@ -437,10 +449,9 @@ export default function HeroVideo() {
           .hero-scroll { display: none; }
         }
         @media (max-width: 640px) {
-          /* At 13px the row squeezes four marks onto the first line and strands
-             the fifth; a hair larger tips it back to the balanced 3 + 2, and
-             holds that down to a 320px screen. */
-          .hero-accred-row { --org-h: 14px; column-gap: 16px; }
+          /* Three equal columns of a 320px screen are ~100px each; this is the
+             largest height at which the widest mark still clears one. */
+          .hero-accred-row { --org-h: 13px; }
         }
         @media (max-width: 380px) {
           /* Scoped to the metric tiles: the same tag style labels the marks

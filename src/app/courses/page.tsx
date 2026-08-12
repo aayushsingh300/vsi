@@ -28,6 +28,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
 import TabSwitch from "@/components/TabSwitch";
+import CampusImage from "@/components/CampusImage";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useLang } from "@/context/LangContext";
 import { ToolCard } from "@/components/ToolCard";
@@ -130,29 +131,38 @@ function CategoryCard({ c }: { c: CourseCategory }) {
   );
 }
 
-// Campus card for the Polytechnic / ITI directory.
+// Campus card for the Polytechnic / ITI directory. Links through to the
+// campus landing page at /colleges/[slug].
 function CollegeCard({ c }: { c: College }) {
   return (
-    <article style={{
-      background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--r-md)",
-      padding: "22px 20px", display: "flex", flexDirection: "column", gap: 8, height: "100%",
-    }}>
-      <span style={{
-        fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase",
-        color: "var(--accent)", fontWeight: 500,
-      }}>{c.type}</span>
-      <h4 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-md)", color: "var(--text)", letterSpacing: "var(--tr-body)", lineHeight: 1.3 }}>
-        {c.name}
-      </h4>
-      {c.aka && (
-        <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", fontStyle: "italic", lineHeight: 1.5 }}>
-          Also referred to as {c.aka}
-        </p>
-      )}
-      <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)", letterSpacing: "var(--tr-caps)", marginTop: "auto", paddingTop: 6 }}>
-        <MapPin size={11} strokeWidth={1.8} /> {c.district} district, {c.state}
-      </span>
-    </article>
+    <Link href={`/colleges/${c.slug}`} style={{ textDecoration: "none", display: "block", height: "100%" }}>
+      <article className="hover-lift" style={{
+        background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--r-md)",
+        overflow: "hidden", display: "flex", flexDirection: "column", height: "100%",
+      }}>
+        <div style={{ position: "relative", aspectRatio: "16/9", background: "var(--bg-muted)" }}>
+          <CampusImage src={c.image} alt={c.name} />
+          <span style={{
+            position: "absolute", top: 10, left: 10, background: "rgba(13,27,42,.78)", color: "var(--accent-gold)",
+            fontFamily: "var(--mono)", fontWeight: 500, fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)",
+            padding: "3px 8px", borderRadius: "var(--r-sm)", textTransform: "uppercase",
+          }}>{c.type}</span>
+        </div>
+        <div style={{ padding: "18px 20px 20px", display: "flex", flexDirection: "column", gap: 8, flex: 1 }}>
+          <h4 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-md)", color: "var(--text)", letterSpacing: "var(--tr-body)", lineHeight: 1.3 }}>
+            {c.name}
+          </h4>
+          {c.aka && (
+            <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", fontStyle: "italic", lineHeight: 1.5 }}>
+              Also referred to as {c.aka}
+            </p>
+          )}
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)", letterSpacing: "var(--tr-caps)", marginTop: "auto", paddingTop: 6 }}>
+            <MapPin size={11} strokeWidth={1.8} /> {c.district} district, {c.state}
+          </span>
+        </div>
+      </article>
+    </Link>
   );
 }
 
@@ -163,9 +173,13 @@ export default function CoursesPage() {
   const { t } = useLang();
 
   const cadCount = COURSES_CERT.length + CAD_DIPLOMAS.length;
+  // The Polytechnic / ITI count is campuses, not programs, so it stays out of
+  // the "All Programs" total — that number counts courses.
+  const campusCount = POLYTECHNIC_COLLEGES.length + ITI_COLLEGES.length;
   const filters = [
     { id: "all", key: "tabAll", n: cadCount + COMPUTER_APP_COURSES.length + COURSES_COMP_APP.length + COURSES_DATA_SCIENCE.length + COURSES_DESIGN.length + COURSES_VOC.length },
     { id: "cad", key: "tabCAD", n: cadCount },
+    { id: "polyiti", key: "tabPolyITI", n: campusCount },
     { id: "compapp", key: "tabCompApp", n: COMPUTER_APP_COURSES.length + COURSES_COMP_APP.length },
     { id: "data", key: "tabDataBA", n: COURSES_DATA_SCIENCE.length },
     { id: "design", key: "tabDesign", n: COURSES_DESIGN.length },
@@ -219,7 +233,7 @@ export default function CoursesPage() {
       {show("cad") && (
         <section className="grid-bg" style={{ padding: isMobile ? "56px 6%" : "72px 5%" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <SectionHead index="Section 01" title={t("tabCAD")} sub="CAD engineering certificates & AICTE diplomas · 200–320 hrs / 3-yr" isMobile={isMobile} />
+            <SectionHead index="Section 01" title={t("tabCAD")} sub="CAD engineering certificates & Polytechnic / ITI diplomas · 200–320 hrs / 3-yr" isMobile={isMobile} />
             {/* Certificate CAD programs */}
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: isMobile ? 16 : 22 }}>
               {COURSES_CERT.map((c, i) => (
@@ -289,7 +303,7 @@ export default function CoursesPage() {
       )}
 
       {/* Polytechnic / ITI campuses — dedicated directory */}
-      {show("cad") && (
+      {show("polyiti") && (
         <section style={{ padding: isMobile ? "56px 6%" : "72px 5%", background: "var(--bg-muted)", borderTop: "1px solid var(--border)" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <AnimateIn animation="slideUp">
@@ -299,6 +313,7 @@ export default function CoursesPage() {
               </h2>
               <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", marginTop: 6, marginBottom: 32, maxWidth: 640, lineHeight: 1.7 }}>
                 We operate three Government Polytechnic colleges in Uttar Pradesh and two ITI colleges in Jharkhand.
+                Open a campus to see its location, gallery and admissions contact.
               </p>
             </AnimateIn>
 
@@ -331,7 +346,7 @@ export default function CoursesPage() {
       {show("compapp") && (
         <section className="dot-bg" style={{ padding: isMobile ? "56px 6%" : "72px 5%", background: filter === "all" ? "var(--bg-muted)" : "transparent" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <SectionHead index="Section 02" title={t("tabCompApp")} sub="Short-term computer courses & 3-year AICTE-recognized diplomas" isMobile={isMobile} />
+            <SectionHead index="Section 02" title={t("tabCompApp")} sub="Short-term computer courses & 3-year Polytechnic / ITI diplomas" isMobile={isMobile} />
 
             <p style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
               Short-Term Computer Courses
@@ -345,7 +360,7 @@ export default function CoursesPage() {
             </div>
 
             <p style={{ fontFamily: "var(--mono)", fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
-              Polytechnic Diplomas
+              Polytechnic / ITI Diplomas
             </p>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? 16 : 20 }}>
               {COMPUTER_APP_COURSES.map((c, i) => (

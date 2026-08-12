@@ -3,7 +3,7 @@
 import { use, useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronRight, CheckCircle2, ArrowRight, Download } from "lucide-react";
+import { ChevronRight, CheckCircle2, ArrowRight, Download, Quote } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
@@ -11,11 +11,12 @@ import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
 import useIsMobile from "@/hooks/useIsMobile";
 import Image from "next/image";
-import { getProgram, ALL_PROGRAMS, EMPLOYERS } from "@/data/content";
+import { getProgram, ALL_PROGRAMS, EMPLOYERS, courseTestimonials } from "@/data/content";
 import { programThumb, EMPLOYER_LOGOS, LOGO_INVERT_SET } from "@/data/assets";
 import { useLang } from "@/context/LangContext";
 import { ToolCard } from "@/components/ToolCard";
 import MasteredTools from "@/components/MasteredTools";
+import CourseTestimonial from "@/components/CourseTestimonial";
 
 
 // Image that fills its container and falls back to a soft gradient placeholder
@@ -60,6 +61,10 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
   const related = ALL_PROGRAMS.filter(
     (c) => c.kind === course.kind && c.slug !== course.slug
   ).slice(0, 3);
+
+  // Only this programme's alumni. Empty for programmes we hold no story for,
+  // and the section is dropped rather than filled with someone else's.
+  const stories = courseTestimonials(course.slug);
 
   // Hero stat row adapts to the programme type (vocational has no fixed fee).
   const heroStats = course.fee
@@ -477,6 +482,27 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
           </AnimateIn>
         </div>
       </section>
+
+      {/* ── Alumni story from THIS programme ──
+          Sits directly after the salary bands: the numbers make the claim,
+          the story is the person it happened to. */}
+      {stories.length > 0 && (
+        <section style={{ padding: isMobile ? "56px 6%" : "80px 5%" }}>
+          <div style={{ maxWidth: 1180, margin: "0 auto" }}>
+            <AnimateIn animation="slideUp">
+              <div className="section-head">
+                <span className="section-head__icon"><Quote size={17} /></span>
+                <span className="section-head__label">From this programme</span>
+              </div>
+            </AnimateIn>
+            <div style={{ display: "grid", gap: 16 }}>
+              {stories.map((s) => (
+                <CourseTestimonial key={s.name} story={s} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── Enquiry CTA (replaces the old hero form) ── */}
       <section style={{ padding: isMobile ? "56px 6%" : "72px 5%", background: "var(--bg-muted)", textAlign: "center" }}>

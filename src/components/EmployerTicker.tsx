@@ -4,6 +4,74 @@ import Image from "next/image";
 import { EMPLOYERS } from "@/data/content";
 import { EMPLOYER_LOGOS, LOGO_INVERT_SET } from "@/data/assets";
 
+const MID = Math.ceil(EMPLOYERS.length / 2);
+const ROW_1 = EMPLOYERS.slice(0, MID);
+const ROW_2 = EMPLOYERS.slice(MID);
+
+function TickerRow({ employers, reverse }: { employers: string[]; reverse?: boolean }) {
+  return (
+    <div className="ticker-wrap" style={{ position: "relative" }}>
+      <div className={`ticker-inner${reverse ? " ticker-reverse" : ""}`}>
+        {[...employers, ...employers].map((e, i) => {
+          const logoPath = EMPLOYER_LOGOS[e];
+          return (
+            <span
+              key={i}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 148,
+                height: 48,
+                padding: "0 20px",
+                flexShrink: 0,
+              }}
+            >
+              {logoPath ? (
+                <span
+                  className={`logo-mono${LOGO_INVERT_SET.has(e) ? " logo-invert" : ""}`}
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "default",
+                  }}
+                >
+                  <Image
+                    src={logoPath}
+                    alt={e}
+                    fill
+                    sizes="148px"
+                    style={{ objectFit: "contain" }}
+                  />
+                </span>
+              ) : (
+                <span
+                  style={{
+                    fontFamily: "var(--serif)",
+                    fontStyle: "italic",
+                    fontWeight: 700,
+                    fontSize: "var(--text-base)",
+                    color: "var(--text-muted)",
+                    letterSpacing: "var(--tr-body)",
+                    whiteSpace: "nowrap",
+                    opacity: 0.75,
+                  }}
+                >
+                  {e}
+                </span>
+              )}
+            </span>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export default function EmployerTicker() {
   return (
     <section
@@ -63,65 +131,10 @@ export default function EmployerTicker() {
         </p>
       </div>
 
-      {/* Ticker with gradient fade masks */}
-      <div className="ticker-wrap" style={{ position: "relative" }}>
-        <div className="ticker-inner">
-          {[...EMPLOYERS, ...EMPLOYERS].map((e, i) => {
-            const logoPath = EMPLOYER_LOGOS[e];
-            return (
-              <span
-                key={i}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: 148,
-                  height: 48,
-                  padding: "0 20px",
-                  flexShrink: 0,
-                }}
-              >
-                {logoPath ? (
-                  <span
-                    className={`logo-mono${LOGO_INVERT_SET.has(e) ? " logo-invert" : ""}`}
-                    style={{
-                      position: "relative",
-                      width: "100%",
-                      height: "100%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      cursor: "default",
-                    }}
-                  >
-                    <Image
-                      src={logoPath}
-                      alt={e}
-                      fill
-                      sizes="148px"
-                      style={{ objectFit: "contain" }}
-                    />
-                  </span>
-                ) : (
-                  <span
-                    style={{
-                      fontFamily: "var(--serif)",
-                      fontStyle: "italic",
-                      fontWeight: 700,
-                      fontSize: "var(--text-base)",
-                      color: "var(--text-muted)",
-                      letterSpacing: "var(--tr-body)",
-                      whiteSpace: "nowrap",
-                      opacity: 0.75,
-                    }}
-                  >
-                    {e}
-                  </span>
-                )}
-              </span>
-            );
-          })}
-        </div>
+      {/* Two belts of logos, scrolling in opposite directions */}
+      <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+        <TickerRow employers={ROW_1} />
+        <TickerRow employers={ROW_2} reverse />
       </div>
     </section>
   );

@@ -210,11 +210,9 @@ export default function WorkAbroadPage() {
       >
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-              <Globe size={18} color="var(--accent)" />
-              <p className="eyebrow-label eyebrow-label--slash" style={{ marginBottom: 0 }}>
-                Active Deployment Corridors
-              </p>
+            <div className="section-head section-head--on-dark">
+              <span className="section-head__icon"><Globe size={18} /></span>
+              <span className="section-head__label">Active Deployment Corridors</span>
             </div>
             <h2
               style={{
@@ -541,11 +539,9 @@ export default function WorkAbroadPage() {
               
               {/* Left Column: Program Text */}
               <div>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-                  <HeartPulse size={20} color="#FFB703" />
-                  <p className="eyebrow-label eyebrow-label--slash eyebrow-label--on-dark">
-                    Global Healthcare Pathways
-                  </p>
+                <div className="section-head section-head--on-dark">
+                  <span className="section-head__icon"><HeartPulse size={18} /></span>
+                  <span className="section-head__label">Global Healthcare Pathways</span>
                 </div>
                 <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(26px,3.5vw,42px)", color: "#FFFFFF", marginBottom: 20, letterSpacing: "var(--tr-display)", lineHeight: 1.15 }}>
                   German International Exchange Program

@@ -547,7 +547,7 @@ export default function AboutPage() {
       <section style={{ padding: "64px 5%", background: "var(--bg)", borderTop: "1px solid var(--border)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
           <AnimateIn animation="slideUp">
-            <p className="eyebrow-label" style={{ marginBottom: 24 }}>Certifications, Affiliations & Accreditations</p>
+            <p className="eyebrow-label eyebrow-label--centered" style={{ marginBottom: 24 }}>Certifications, Affiliations &amp; Accreditations</p>
           </AnimateIn>
           <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap" }}>
             {ACCREDITATIONS.map((acc, i) => (

@@ -319,11 +319,9 @@ export default function CSRPage() {
       <section id="compliance-section" style={{ padding: isMobile ? "64px 6%" : "96px 5%", background: "var(--bg)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-              <ShieldCheck size={18} color="var(--accent)" />
-              <span className="eyebrow-label">
-                Regulatory & Operational Compliance
-              </span>
+            <div className="section-head">
+              <span className="section-head__icon"><ShieldCheck size={18} /></span>
+              <span className="section-head__label">Regulatory &amp; Operational Compliance</span>
             </div>
 
             <h2 style={{
@@ -385,11 +383,9 @@ export default function CSRPage() {
       <section style={{ padding: isMobile ? "64px 6%" : "96px 5%", background: "var(--surface)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-              <HeartHandshake size={18} color="var(--accent)" />
-              <span className="eyebrow-label">
-                Corporate Alliances
-              </span>
+            <div className="section-head">
+              <span className="section-head__icon"><HeartHandshake size={18} /></span>
+              <span className="section-head__label">Corporate Alliances</span>
             </div>
 
             <h2 style={{
@@ -563,11 +559,9 @@ export default function CSRPage() {
       <section style={{ padding: isMobile ? "64px 6%" : "96px 5%", background: "var(--surface)", borderTop: "1px solid var(--border)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-              <Users size={18} color="var(--accent)" />
-              <span className="eyebrow-label">
-                On-The-Ground Photography
-              </span>
+            <div className="section-head">
+              <span className="section-head__icon"><Users size={18} /></span>
+              <span className="section-head__label">On-The-Ground Photography</span>
             </div>
 
             <h2 style={{
@@ -679,11 +673,9 @@ export default function CSRPage() {
       <section style={{ padding: isMobile ? "64px 6%" : "96px 5%", background: "var(--bg)", borderTop: "1px solid var(--border)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-              <User size={18} color="var(--accent)" />
-              <span className="eyebrow-label">
-                Beneficiary Stories
-              </span>
+            <div className="section-head">
+              <span className="section-head__icon"><User size={18} /></span>
+              <span className="section-head__label">Beneficiary Stories</span>
             </div>
 
             <h2 style={{
@@ -744,8 +736,8 @@ export default function CSRPage() {
       <section style={{ padding: "64px 5%", background: "var(--surface)", borderTop: "1px solid var(--border)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto", textAlign: "center" }}>
           <AnimateIn animation="slideUp">
-            <p className="eyebrow-label" style={{ marginBottom: 24 }}>
-              Recognized & Accredited Institutions
+            <p className="eyebrow-label eyebrow-label--centered" style={{ marginBottom: 24 }}>
+              Recognized &amp; Accredited Institutions
             </p>
           </AnimateIn>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>

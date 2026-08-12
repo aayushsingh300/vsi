@@ -952,24 +952,88 @@ export const COMPUTER_APP_COURSES: CourseDip[] = COURSES_DIP.filter(
 // ════════════════════════════════════════════════════════════════════
 
 export type College = {
+  /** URL segment for the campus landing page at /colleges/[slug]. */
+  slug: string;
   name: string;
   aka?: string;
   district: string;
   state: string;
   type: "Polytechnic" | "ITI";
   image: string;
+  /** One-line summary shown on directory cards and the landing page hero. */
+  blurb: string;
+  /**
+   * The college's own website. Left empty until the official URLs are
+   * confirmed — the UI only renders the outbound link when this is set, so an
+   * unfilled entry degrades to the internal landing page rather than a dead
+   * link.
+   */
+  website?: string;
+  /**
+   * Campus photo paths. Files are dropped into /public/centres later; missing
+   * ones render as labelled placeholder tiles rather than broken images.
+   */
+  gallery: string[];
 };
 
 export const POLYTECHNIC_COLLEGES: College[] = [
-  { name: "Government Polytechnic College, Sardhana", district: "Meerut", state: "Uttar Pradesh", type: "Polytechnic", image: "/centres/polytechnic-sardhana.png" },
-  { name: "Government Polytechnic College, Ghugulpur", aka: "Government Polytechnic College, Balrampur", district: "Balrampur", state: "Uttar Pradesh", type: "Polytechnic", image: "/centres/polytechnic-ghugulpur.png" },
-  { name: "Government Girls Polytechnic College, Atrauli", district: "Aligarh", state: "Uttar Pradesh", type: "Polytechnic", image: "/centres/polytechnic-atrauli.png" },
+  {
+    slug: "polytechnic-sardhana",
+    name: "Government Polytechnic College, Sardhana",
+    district: "Meerut", state: "Uttar Pradesh", type: "Polytechnic",
+    image: "/centres/polytechnic-sardhana.png",
+    blurb: "A Government Polytechnic College in Sardhana, Meerut district, operated by Venture Skill India in PPP mode with the Government of Uttar Pradesh.",
+    website: "",
+    gallery: ["/centres/polytechnic-sardhana.png", "/centres/gallery/sardhana-1.png", "/centres/gallery/sardhana-2.png", "/centres/gallery/sardhana-3.png"],
+  },
+  {
+    slug: "polytechnic-ghugulpur",
+    name: "Government Polytechnic College, Ghugulpur",
+    aka: "Government Polytechnic College, Balrampur",
+    district: "Balrampur", state: "Uttar Pradesh", type: "Polytechnic",
+    image: "/centres/polytechnic-ghugulpur.png",
+    blurb: "A Government Polytechnic College at Ghugulpur in Balrampur district, operated by Venture Skill India in PPP mode with the Government of Uttar Pradesh.",
+    website: "",
+    gallery: ["/centres/polytechnic-ghugulpur.png", "/centres/gallery/ghugulpur-1.png", "/centres/gallery/ghugulpur-2.png", "/centres/gallery/ghugulpur-3.png"],
+  },
+  {
+    slug: "polytechnic-atrauli",
+    name: "Government Girls Polytechnic College, Atrauli",
+    district: "Aligarh", state: "Uttar Pradesh", type: "Polytechnic",
+    image: "/centres/polytechnic-atrauli.png",
+    blurb: "A Government Girls Polytechnic College in Atrauli, Aligarh district, operated by Venture Skill India in PPP mode with the Government of Uttar Pradesh.",
+    website: "",
+    gallery: ["/centres/polytechnic-atrauli.png", "/centres/gallery/atrauli-1.png", "/centres/gallery/atrauli-2.png", "/centres/gallery/atrauli-3.png"],
+  },
 ];
 
 export const ITI_COLLEGES: College[] = [
-  { name: "ITI College, Basantrai", district: "Godda", state: "Jharkhand", type: "ITI", image: "/centres/iti-basantrai.png" },
-  { name: "ITI College, Saraikela", district: "Kharsawan", state: "Jharkhand", type: "ITI", image: "/centres/iti-saraikela.png" },
+  {
+    slug: "iti-basantrai",
+    name: "ITI College, Basantrai",
+    district: "Godda", state: "Jharkhand", type: "ITI",
+    image: "/centres/iti-basantrai.png",
+    blurb: "An Industrial Training Institute at Basantrai in Godda district, Jharkhand, run by Venture Skill India.",
+    website: "",
+    gallery: ["/centres/iti-basantrai.png", "/centres/gallery/basantrai-1.png", "/centres/gallery/basantrai-2.png", "/centres/gallery/basantrai-3.png"],
+  },
+  {
+    slug: "iti-saraikela",
+    name: "ITI College, Saraikela",
+    district: "Kharsawan", state: "Jharkhand", type: "ITI",
+    image: "/centres/iti-saraikela.png",
+    blurb: "An Industrial Training Institute at Saraikela in Kharsawan district, Jharkhand, run by Venture Skill India.",
+    website: "",
+    gallery: ["/centres/iti-saraikela.png", "/centres/gallery/saraikela-1.png", "/centres/gallery/saraikela-2.png", "/centres/gallery/saraikela-3.png"],
+  },
 ];
+
+/** Every campus in the directory — used for routing, sitemap and lookups. */
+export const ALL_COLLEGES: College[] = [...POLYTECHNIC_COLLEGES, ...ITI_COLLEGES];
+
+export function getCollege(slug: string): College | undefined {
+  return ALL_COLLEGES.find((c) => c.slug === slug);
+}
 
 // ════════════════════════════════════════════════════════════════════
 //  Services Page Data
@@ -996,13 +1060,71 @@ export const SERVICES_PPP = [
   { name: "Empowering Government Schools", icon: "school", desc: "Establishing vocational skill labs across 400+ government schools — embedding employable, hands-on skills into mainstream school education." },
 ];
 
-export const GOVT_MANDATES = [
-  { name: "DDU-GKY Project", fullName: "Deen Dayal Upadhyaya Grameen Kaushalya Yojana", desc: "Rural youth skill training and placement programme under the Ministry of Rural Development." },
-  { name: "SJGKY Project", fullName: "Swarnajayanti Gram Swarozgar Yojana / State Skill Initiatives", desc: "State-level self-employment and skill-building initiatives for gram panchayat youth." },
-  { name: "Birsa Scheme", fullName: "Jharkhand Skill Projects", desc: "Targeted tribal youth training and employment programmes across Jharkhand." },
-  { name: "DDU-KK", fullName: "Deen Dayal Upadhyaya Kaushal Kendras", desc: "Multi-skill training centres under the National Skill Qualification Framework." },
-  { name: "Samagra Shiksha", fullName: "Samagra Shiksha School Project", desc: "Integrated school education programme with vocational and skill components.", sheet: "District-wise school directory — sheet to be attached" },
+export type GovtMandate = {
+  slug: string;
+  name: string;
+  fullName: string;
+  /** One-line summary shown in the mandate menu. */
+  desc: string;
+  /** Expanded copy for the detail panel. */
+  longDesc: string;
+  /** Placeholder path — drop the real photograph in /public/mandates/. */
+  image: string;
+  /** Renders the district-wise school table instead of a plain panel. */
+  hasDistrictSheet?: boolean;
+};
+
+export const GOVT_MANDATES: GovtMandate[] = [
+  {
+    slug: "ddu-gky",
+    name: "DDU-GKY Project",
+    fullName: "Deen Dayal Upadhyaya Grameen Kaushalya Yojana",
+    desc: "Rural youth skill training and placement programme under the Ministry of Rural Development.",
+    longDesc: "Deen Dayal Upadhyaya Grameen Kaushalya Yojana is the Ministry of Rural Development's placement-linked skilling programme for rural youth. Venture Skill India runs DDU-GKY centres that recruit candidates from rural households, train them against National Skill Qualification Framework job roles, and carry them through to verified placement — with residential training, on-the-job support and post-placement tracking built into the delivery model.",
+    image: "/mandates/ddu-gky.png",
+  },
+  {
+    slug: "sjgky",
+    name: "SJGKY Project",
+    fullName: "Swarnajayanti Gram Swarozgar Yojana / State Skill Initiatives",
+    desc: "State-level self-employment and skill-building initiatives for gram panchayat youth.",
+    longDesc: "Swarnajayanti Gram Swarozgar Yojana and the state skill initiatives that followed it focus on self-employment at the gram panchayat level. Our delivery combines trade training with the enterprise basics a first-time earner needs — costing, credit linkage and market access — so that candidates who will not migrate for a job can still build an income where they live.",
+    image: "/mandates/sjgky.png",
+  },
+  {
+    slug: "birsa",
+    name: "Birsa Scheme",
+    fullName: "Jharkhand Skill Projects",
+    desc: "Targeted tribal youth training and employment programmes across Jharkhand.",
+    longDesc: "The Birsa scheme is Jharkhand's targeted skilling programme for tribal youth. Venture Skill India delivers training across districts in the state, mobilising candidates through panchayat and community networks, running trade training in local languages, and connecting graduates to employers inside and outside Jharkhand.",
+    image: "/mandates/birsa.png",
+  },
+  {
+    slug: "ddu-kk",
+    name: "DDU-KK",
+    fullName: "Deen Dayal Upadhyaya Kaushal Kendras",
+    desc: "Multi-skill training centres under the National Skill Qualification Framework.",
+    longDesc: "Deen Dayal Upadhyaya Kaushal Kendras are multi-skill centres delivering several NSQF-aligned trades under one roof. Each centre carries the lab infrastructure for its trade mix, assessment against national standards, and a placement cell — letting a single campus serve a district's demand across manufacturing, services and IT-enabled roles.",
+    image: "/mandates/ddu-kk.png",
+  },
+  {
+    slug: "samagra-shiksha",
+    name: "Samagra Shiksha",
+    fullName: "Samagra Shiksha School Project",
+    desc: "Integrated school education programme with vocational and skill components.",
+    longDesc: "Samagra Shiksha is the Government of India's integrated scheme for school education. Under it we place vocational trainers and build vocational labs inside government schools, embedding hands-on employable skills into mainstream schooling from the secondary stage onwards. The district-wise breakdown below lists the schools we cover under the programme.",
+    image: "/mandates/samagra-shiksha.png",
+    hasDistrictSheet: true,
+  },
 ];
+
+/**
+ * District-wise school coverage under Samagra Shiksha.
+ *
+ * Awaiting the source sheet from Aryan — the table renders an "awaiting data"
+ * state while this is empty, and fills in as soon as rows are added here.
+ */
+export const SAMAGRA_SHIKSHA_DISTRICTS: { district: string; state: string; schools: number }[] = [];
 
 // Services page — six delivery verticals (final restructuring input).
 export const SERVICES_VERTICALS = [
@@ -1384,6 +1506,11 @@ export const AWARDS = [
   },
 ];
 
+/**
+ * `lat` / `lng` place each centre on the map orb (see components/IndiaOrb).
+ * City-centre coordinates, decimal degrees — precise enough for a 400px map
+ * and the only thing the orb needs from this list.
+ */
 export const CENTERS: {
   city: string;
   state: string;
@@ -1391,14 +1518,16 @@ export const CENTERS: {
   flagship?: boolean;
   kind?: string;
   labs: string[];
+  lat: number;
+  lng: number;
 }[] = [
-  { city: "Ranchi", state: "Jharkhand", addr: "601, 6th Floor, Panchwati Plaza, Kutchery Road, Ranchi – 834001", flagship: true, kind: "Corporate Head Office", labs: ["VIFT — Fashion & Interior", "EV Training", "Drone Tech", "CAD Labs"] },
-  { city: "Godda", state: "Jharkhand", addr: "Godda DDU-KK Mega Skill Centre", kind: "DDU-KK Mega Skill", labs: ["Vocational Training", "Computer Application", "Healthcare"] },
-  { city: "Kanke", state: "Jharkhand", addr: "Kanke DDU-KK Mega Skill Centre", kind: "DDU-KK Mega Skill", labs: ["Vocational Training", "Retail & Logistics", "Computer Application"] },
-  { city: "Bokaro", state: "Jharkhand", addr: "Bokaro Skill Centre", kind: "Skill Centre", labs: ["Vocational Training", "Computer Application"] },
-  { city: "Aligarh", state: "Uttar Pradesh", addr: "Aligarh DDU-GKY Skill Centre", kind: "DDU-GKY Skill Centre", labs: ["Apparel & Textiles", "Computer Application", "Retail"] },
-  { city: "Balrampur", state: "Uttar Pradesh", addr: "Balrampur DDU-GKY Skill Centre", kind: "DDU-GKY Skill Centre", labs: ["Apparel & Textiles", "Computer Application", "Retail"] },
-  { city: "Meerut", state: "Uttar Pradesh", addr: "Meerut DDU-GKY Skill Centre", kind: "DDU-GKY Skill Centre", labs: ["CAD Labs", "Electrical CAD", "Mechanical CAD"] },
+  { city: "Ranchi", state: "Jharkhand", addr: "601, 6th Floor, Panchwati Plaza, Kutchery Road, Ranchi – 834001", flagship: true, kind: "Corporate Head Office", labs: ["VIFT — Fashion & Interior", "EV Training", "Drone Tech", "CAD Labs"], lat: 23.34, lng: 85.31 },
+  { city: "Godda", state: "Jharkhand", addr: "Godda DDU-KK Mega Skill Centre", kind: "DDU-KK Mega Skill", labs: ["Vocational Training", "Computer Application", "Healthcare"], lat: 24.83, lng: 87.21 },
+  { city: "Kanke", state: "Jharkhand", addr: "Kanke DDU-KK Mega Skill Centre", kind: "DDU-KK Mega Skill", labs: ["Vocational Training", "Retail & Logistics", "Computer Application"], lat: 23.43, lng: 85.32 },
+  { city: "Bokaro", state: "Jharkhand", addr: "Bokaro Skill Centre", kind: "Skill Centre", labs: ["Vocational Training", "Computer Application"], lat: 23.67, lng: 86.15 },
+  { city: "Aligarh", state: "Uttar Pradesh", addr: "Aligarh DDU-GKY Skill Centre", kind: "DDU-GKY Skill Centre", labs: ["Apparel & Textiles", "Computer Application", "Retail"], lat: 27.90, lng: 78.06 },
+  { city: "Balrampur", state: "Uttar Pradesh", addr: "Balrampur DDU-GKY Skill Centre", kind: "DDU-GKY Skill Centre", labs: ["Apparel & Textiles", "Computer Application", "Retail"], lat: 27.43, lng: 82.18 },
+  { city: "Meerut", state: "Uttar Pradesh", addr: "Meerut DDU-GKY Skill Centre", kind: "DDU-GKY Skill Centre", labs: ["CAD Labs", "Electrical CAD", "Mechanical CAD"], lat: 28.98, lng: 77.71 },
 ];
 
 // Leadership board — kept separate from teaching faculty.
@@ -1426,11 +1555,45 @@ export const NEWS = [
   { date: "2017", t: "Venture Mega Skill Centre Inaugurated", s: "Flagship multi-program centre opens in Ranchi, marking a major expansion." },
 ];
 
-export const TESTIMONIALS = [
-  { q: "Before VSI, I had no idea CAD was a career. Two years later I'm a junior designer at L&T in Hyderabad. The EV lab training put me ahead of every other candidate in the interview.", name: "Ritu Kumari", course: "Civil CAD · 2022 Batch", placed: "L&T, Hyderabad", from: "Godda, Jharkhand" },
-  { q: "The fashion lab here was better equipped than institutes in Patna or Kolkata. I didn't have to leave home to learn what I needed.", name: "Priya Soren", course: "Fashion CAD · 2023 Batch", placed: "Myntra, Bangalore", from: "Ranchi, Jharkhand" },
-  { q: "EV training gave me a skill almost nobody else had. That's exactly what got me the job at Tata Motors when they were hiring for their EV division.", name: "Amit Kumar", course: "Mechanical CAD · 2022 Batch", placed: "TATA Motors, Pune", from: "Godda, Jharkhand" },
+/**
+ * Student stories.
+ *
+ * `slug` binds a story to the programme page it came out of — the detail page
+ * shows only stories from its own programme, because a Civil CAD outcome under
+ * an Architecture CAD heading is a claim about a course that never made it.
+ * A story with no `slug` is site-wide only (homepage / placements carousel).
+ *
+ * `photo` is a portrait in /public/images/students; `employer` is a key into
+ * EMPLOYER_MARKS, so the card can show where they landed in the company's own
+ * artwork. Both are optional and both degrade: no photo falls back to a
+ * monogram, no employer simply omits the mark. See the README in that folder
+ * for the filenames the three stories below are waiting on.
+ */
+export type Testimonial = {
+  q: string;
+  name: string;
+  course: string;
+  placed: string;
+  from: string;
+  slug?: string;
+  photo?: string;
+  employer?: string;
+};
+
+export const TESTIMONIALS: Testimonial[] = [
+  { q: "Before VSI, I had no idea CAD was a career. Two years later I'm a junior designer at L&T in Hyderabad. The EV lab training put me ahead of every other candidate in the interview.", name: "Ritu Kumari", course: "Civil CAD · 2022 Batch", placed: "L&T, Hyderabad", from: "Godda, Jharkhand", slug: "civil-cad", photo: "/images/students/ritu-kumari.jpg", employer: "L&T" },
+  { q: "The fashion lab here was better equipped than institutes in Patna or Kolkata. I didn't have to leave home to learn what I needed.", name: "Priya Soren", course: "Fashion CAD · 2023 Batch", placed: "Myntra, Bangalore", from: "Ranchi, Jharkhand", slug: "fashion-cad", photo: "/images/students/priya-soren.jpg", employer: "Myntra" },
+  { q: "EV training gave me a skill almost nobody else had. That's exactly what got me the job at Tata Motors when they were hiring for their EV division.", name: "Amit Kumar", course: "Mechanical CAD · 2022 Batch", placed: "TATA Motors, Pune", from: "Godda, Jharkhand", slug: "mechanical-cad", photo: "/images/students/amit-kumar.jpg", employer: "TATA Motors" },
 ];
+
+/**
+ * Stories belonging to one programme. Returns empty for programmes we hold no
+ * story for — Architecture CAD, Electrical CAD and GIS today — and the detail
+ * page drops the section rather than borrowing another course's alumnus.
+ */
+export function courseTestimonials(slug: string): Testimonial[] {
+  return TESTIMONIALS.filter((t) => t.slug === slug);
+}
 
 export const EMPLOYERS = ["TATA Motors", "Foxconn", "Wistron", "Reliance", "Yazaki", "Amazon", "Flipkart", "Blinkit", "Zepto", "Apna Mart", "Jupiter Hospitals", "HM Hospitals", "AIG Hospitals", "NU MED Super Speciality Hospitals", "2050 Healthcare", "S.P. Apparels", "Modenik Lifestyle", "Orient Craft", "Ayuda", "L&T", "Wipro", "Infosys", "Cognizant", "TCS", "HCL"];
 
@@ -1536,6 +1699,7 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     tabDataBA: "Data Science & BA",
     tabDesign: "Design Courses",
     tabVoc: "Free Vocational",
+    tabPolyITI: "Polytechnic / ITI",
     // Form
     yourName: "Your name",
     phoneNumber: "Phone number",
@@ -1673,6 +1837,7 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     tabDataBA: "डेटा साइंस और BA",
     tabDesign: "डिज़ाइन कोर्स",
     tabVoc: "मुफ्त व्यावसायिक",
+    tabPolyITI: "पॉलिटेक्निक / ITI",
     yourName: "आपका नाम",
     phoneNumber: "फ़ोन नंबर",
     yourEmail: "ईमेल",

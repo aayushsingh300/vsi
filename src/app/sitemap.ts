@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
-import { ALL_PROGRAMS } from "@/data/content";
+import { ALL_PROGRAMS, ALL_COLLEGES } from "@/data/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -35,5 +35,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticEntries, ...courseEntries];
+  // One entry per polytechnic / ITI campus landing page.
+  const collegeEntries: MetadataRoute.Sitemap = ALL_COLLEGES.map((c) => ({
+    url: `${SITE_URL}/colleges/${c.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  return [...staticEntries, ...courseEntries, ...collegeEntries];
 }

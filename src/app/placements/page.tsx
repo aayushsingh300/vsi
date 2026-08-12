@@ -3,17 +3,27 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Globe, Mail, Phone, Briefcase, UserRound, X, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, Globe, Mail, Phone, Briefcase, UserRound, X, CheckCircle2, Factory, Truck, HeartPulse, Shirt, type LucideIcon } from "lucide-react";
 import AnimateIn from "@/components/AnimateIn";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
+import EmployerMark from "@/components/EmployerMark";
 import { TESTIMONIALS, RECRUITER_SECTORS, CONTACT_CHANNELS, COUNSELING_COURSE_OPTIONS } from "@/data/content";
 import { EMPLOYER_LOGOS, LOGO_INVERT_SET } from "@/data/assets";
 import { useInView, useCountUp } from "@/hooks/useAnimations";
 import { useLang } from "@/context/LangContext";
 import useIsMobile from "@/hooks/useIsMobile";
 import Icon from "@/components/Icon";
+
+// Keyed by RECRUITER_SECTORS[].sector — the sector name is the only thing the
+// content layer knows, and an icon is presentation.
+const SECTOR_ICONS: Record<string, LucideIcon> = {
+  "Automotive & Manufacturing": Factory,
+  "Logistics & E-Commerce": Truck,
+  "Healthcare Ecosystems": HeartPulse,
+  "Apparel & Textiles": Shirt,
+};
 
 const PLACEMENT_STATS = [
   { val: 45000, sfx: "+", lbl: "Total Students Placed" },
@@ -282,36 +292,57 @@ export default function PlacementsPage() {
         </div>
       </section>
 
-      {/* Recruiter Grid — By Sector */}
+      {/* ── Recruiter wall — by sector ──
+          Rebuilt from a 4-up grid whose cells were hairline gaps over a grey
+          plate. Two things were wrong with it. Every sector holds five
+          companies, so the fifth wrapped alone and the plate showed through
+          the three empty cells as a large grey slab — the loudest shape in
+          the section was a hole. And the logos were dropped into equal boxes
+          on `contain`, which sizes the FILE: tightly-cropped SVGs filled
+          their box while wordmarks padded onto a 16:9 canvas rendered at a
+          fifth the size, so the wall read as a jumble.
+          Now: five self-contained tiles to a row (a sector per row, exactly),
+          nothing behind them to show through, and each mark sized off its own
+          measured artwork via <EmployerMark>. */}
       <section style={{ padding: isMobile ? "64px 6%" : "96px 5%" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <AnimateIn animation="slideUp">
             <p className="eyebrow-label eyebrow-label--slash" style={{ marginBottom: 10 }}>Top Corporate Recruiters</p>
-            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(24px,3vw,42px)", color: "var(--text)", marginBottom: 48 }}>Where our alumni work.</h2>
+            <h2 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontStyle: "italic", fontSize: "clamp(24px,3vw,42px)", color: "var(--text)", marginBottom: 14 }}>Where our alumni work.</h2>
+            <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-base)", color: "var(--text-muted)", lineHeight: 1.75, maxWidth: 620, marginBottom: 56 }}>
+              Hiring partners who return to our batches season after season, grouped by the sector they recruit into.
+            </p>
           </AnimateIn>
 
           {RECRUITER_SECTORS.map((sector, si) => (
-            <div key={sector.sector} style={{ marginBottom: 48 }}>
-              <AnimateIn animation="slideUp" delay={si * 0.08}>
-                <h3 style={{
-                  fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-xs)", letterSpacing: "var(--tr-mono)", textTransform: "uppercase",
-                  color: "var(--accent)", marginBottom: 16, paddingBottom: 10,
-                  borderBottom: "1px solid var(--border)",
-                }}>{sector.sector}</h3>
+            <div key={sector.sector} style={{ marginBottom: isMobile ? 40 : 56 }}>
+              <AnimateIn animation="slideUp" delay={si * 0.06}>
+                <div className="section-head">
+                  <span className="section-head__icon">
+                    {(() => {
+                      const SectorIcon = SECTOR_ICONS[sector.sector] ?? Briefcase;
+                      return <SectorIcon size={18} />;
+                    })()}
+                  </span>
+                  <span className="section-head__label">{sector.sector}</span>
+                  <span className="section-head__count">{sector.companies.length} partners</span>
+                </div>
               </AnimateIn>
-              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : `repeat(${Math.min(sector.companies.length, 4)},1fr)`, gap: 1, background: "rgba(var(--ink-rgb),.07)", borderRadius: "var(--r-md)", overflow: "hidden" }}>
+
+              <div
+                className="logo-wall"
+                style={{ gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(auto-fill, minmax(190px, 1fr))" }}
+              >
                 {sector.companies.map((company, ci) => (
                   <AnimateIn key={company} animation="scaleIn" delay={ci * 0.04}>
-                    <div className={`course-row employer-tile${LOGO_INVERT_SET.has(company) ? " logo-invert" : ""}`} style={{
-                      background: "var(--surface)", padding: "28px 18px", display: "flex", flexDirection: "column",
-                      alignItems: "center", justifyContent: "center", gap: 8, minHeight: 90,
-                    }}>
+                    <div
+                      className={`logo-wall__tile employer-tile${LOGO_INVERT_SET.has(company) ? " logo-invert" : ""}`}
+                      title={company}
+                    >
                       {EMPLOYER_LOGOS[company] ? (
-                        <span style={{ position: "relative", display: "block", width: "100%", height: 36 }}>
-                          <Image src={EMPLOYER_LOGOS[company]} alt={company} fill sizes="160px" style={{ objectFit: "contain" }} />
-                        </span>
+                        <EmployerMark name={company} />
                       ) : (
-                        <span style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-sm)", color: "var(--text)", letterSpacing: "var(--tr-caps)" }}>{company}</span>
+                        <span style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: "var(--text-sm)", color: "var(--text)", letterSpacing: "var(--tr-caps)", textAlign: "center" }}>{company}</span>
                       )}
                     </div>
                   </AnimateIn>
