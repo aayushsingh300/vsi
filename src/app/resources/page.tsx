@@ -28,7 +28,8 @@ const ADS = [
 ];
 
 // Reusable thumbnail strip for news cards
-function NewsThumbnail({ featured, index }: { featured?: boolean; index: number }) {
+function NewsThumbnail({ featured, index, img, alt }: { featured?: boolean; index: number; img?: string; alt?: string }) {
+  const [errored, setErrored] = useState(false);
   const palettes = [
     { from: "#0d1f3c", to: "#1565c0", accent: "#4fc3f7" },
     { from: "#0d2818", to: "#0d7a55", accent: "#69f0ae" },
@@ -42,7 +43,7 @@ function NewsThumbnail({ featured, index }: { featured?: boolean; index: number 
     <div
       style={{
         width: "100%",
-        height: 130,
+        aspectRatio: "16/9",
         borderRadius: "8px 8px 0 0",
         background: `linear-gradient(135deg, ${p.from} 0%, ${p.to} 100%)`,
         position: "relative",
@@ -50,31 +51,48 @@ function NewsThumbnail({ featured, index }: { featured?: boolean; index: number 
         flexShrink: 0,
       }}
     >
-      {/* Grid lines */}
-      <div style={{
-        position: "absolute", inset: 0,
-        backgroundImage: "linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px)",
-        backgroundSize: "32px 32px",
-      }} />
-      {/* Glow blob */}
-      <div style={{
-        position: "absolute", top: "20%", left: "50%", transform: "translateX(-50%)",
-        width: 80, height: 80, borderRadius: "50%",
-        background: `radial-gradient(circle, ${p.accent}33 0%, transparent 70%)`,
-      }} />
-      {/* Icon. Emoji render in the OS font — a different typeface, weight and
-          colour on every platform — so they never match the lucide set used
-          everywhere else on the site. */}
-      <div style={{
-        position: "absolute", top: "50%", left: "50%",
-        transform: "translate(-50%, -50%)",
-      }}>
-        <Newspaper size={30} strokeWidth={1.25} color={p.accent} aria-hidden="true" />
-      </div>
+      {img && !errored ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={img}
+          alt={alt || "News thumbnail"}
+          onError={() => setErrored(true)}
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
+      ) : (
+        <>
+          {/* Grid lines */}
+          <div style={{
+            position: "absolute", inset: 0,
+            backgroundImage: "linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+          }} />
+          {/* Glow blob */}
+          <div style={{
+            position: "absolute", top: "20%", left: "50%", transform: "translateX(-50%)",
+            width: 80, height: 80, borderRadius: "50%",
+            background: `radial-gradient(circle, ${p.accent}33 0%, transparent 70%)`,
+          }} />
+          <div style={{
+            position: "absolute", top: "50%", left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}>
+            <Newspaper size={30} strokeWidth={1.25} color={p.accent} aria-hidden="true" />
+          </div>
+        </>
+      )}
+
       {/* Featured badge */}
       {featured && (
         <div style={{
-          position: "absolute", top: 10, right: 10,
+          position: "absolute", top: 10, right: 10, zIndex: 2,
           fontFamily: "var(--sans)", fontSize: "var(--text-xs)", fontWeight: 700, letterSpacing: "var(--tr-mono)",
           background: "rgba(var(--accent-rgb),.9)", color: "#fff",
           padding: "3px 8px", borderRadius: "var(--r-sm)", textTransform: "uppercase",
@@ -84,7 +102,7 @@ function NewsThumbnail({ featured, index }: { featured?: boolean; index: number 
       )}
       {/* Accent line */}
       <div style={{
-        position: "absolute", bottom: 0, left: 0, right: 0, height: 2,
+        position: "absolute", bottom: 0, left: 0, right: 0, height: 2, zIndex: 2,
         background: `linear-gradient(to right, ${p.accent}, transparent)`,
       }} />
     </div>
@@ -124,28 +142,48 @@ function AdsThumbnail({ color, tag, index }: { color: string; tag: string; index
   );
 }
 
-function RecognitionThumbnail({ index }: { index: number }) {
+function RecognitionThumbnail({ index, img, alt }: { index: number; img?: string; alt?: string }) {
+  const [errored, setErrored] = useState(false);
   const bg = ["linear-gradient(135deg,#2d1a00,#c9952a88)", "linear-gradient(135deg,#0d1f3c,#1565c088)", "linear-gradient(135deg,#1a0d3c,#6a1b9a88)"][index % 3];
   const accent = ["#ffcc02", "#4fc3f7", "#ce93d8"][index % 3];
   return (
     <div style={{
-      width: "100%", height: 100,
+      width: "100%", aspectRatio: "16/9",
       borderRadius: "8px 8px 0 0",
       background: bg,
       position: "relative", overflow: "hidden", flexShrink: 0,
     }}>
+      {img && !errored ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={img}
+          alt={alt || "Award photograph"}
+          onError={() => setErrored(true)}
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
+      ) : (
+        <>
+          <div style={{
+            position: "absolute", inset: 0,
+            background: `radial-gradient(ellipse at 50% 80%, ${accent}22 0%, transparent 70%)`,
+          }} />
+          <div style={{
+            position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)",
+            filter: "drop-shadow(0 0 12px rgba(255,200,0,.35))",
+          }}>
+            <Trophy size={30} strokeWidth={1.25} color={accent} aria-hidden="true" />
+          </div>
+        </>
+      )}
       <div style={{
-        position: "absolute", inset: 0,
-        background: `radial-gradient(ellipse at 50% 80%, ${accent}22 0%, transparent 70%)`,
-      }} />
-      <div style={{
-        position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)",
-        filter: "drop-shadow(0 0 12px rgba(255,200,0,.35))",
-      }}>
-        <Trophy size={30} strokeWidth={1.25} color={accent} aria-hidden="true" />
-      </div>
-      <div style={{
-        position: "absolute", bottom: 0, left: 0, right: 0, height: 2,
+        position: "absolute", bottom: 0, left: 0, right: 0, height: 2, zIndex: 2,
         background: `linear-gradient(to right, ${accent}, transparent)`,
       }} />
     </div>
@@ -230,7 +268,7 @@ export default function ResourcesPage() {
                     background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: "var(--r-md)",
                     display: "flex", flexDirection: "column", overflow: "hidden", height: "100%",
                   }}>
-                    <NewsThumbnail featured={item.featured} index={i} />
+                    <NewsThumbnail featured={item.featured} index={i} img={item.img} alt={item.t} />
                     <div style={{ padding: "20px 22px", display: "flex", flexDirection: "column", gap: 8, flex: 1 }}>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                         <span className="eyebrow-label">{item.date}</span>
@@ -275,7 +313,7 @@ export default function ResourcesPage() {
                     border: "1px solid rgba(var(--gold-rgb),.15)", borderRadius: "var(--r-md)",
                     display: "flex", flexDirection: "column", overflow: "hidden", height: "100%",
                   }}>
-                    <RecognitionThumbnail index={i} />
+                    <RecognitionThumbnail index={i} img={award.img} alt={award.t} />
                     <div style={{ padding: "20px 22px", display: "flex", flexDirection: "column", gap: 10, flex: 1, textAlign: "center" }}>
                       <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-md)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>{award.t}</h3>
                       <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6 }}>{award.s}</p>

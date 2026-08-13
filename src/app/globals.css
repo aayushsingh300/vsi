@@ -666,72 +666,102 @@ img{display:block;max-width:100%;}
   transition: transform .22s var(--ease-spring);
 }
 
-/* ═══ India map orb (centres page) ═══
-   A dark glass sphere holding a dotted India, with the centres pinned proud
-   of the map surface. See components/IndiaOrb for the geometry; everything
-   here is the material — glass, light, and the pins.
+/* ═══ India relief map (centres page) ═══
+   The real coastline, extruded, with the centres pinned above it. See
+   components/IndiaMap for the geometry and the 3D stage; everything here is
+   the material — the face, the wall, the light and the pins.
 
    The section it anchors was a single column of address rows against an empty
-   right half. The orb takes that half and gives the list something to point
+   right half. The map takes that half and gives the list something to point
    at: hovering either side lights the other. */
-.orb-frame {
+.imap-frame {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
 }
-.orb {
+.imap {
   position: relative;
   width: 100%;
-  max-width: 420px;
+  max-width: 460px;
   aspect-ratio: 1;
-  border-radius: 50%;
-  /* Shallow enough that a 15° tilt reads as rotation, not as a wide-angle
-     lens swinging the far edge away. */
-  perspective: 900px;
-  background:
-    radial-gradient(circle at 32% 24%, rgba(var(--accent-rgb), .22) 0%, transparent 48%),
-    radial-gradient(circle at 50% 50%, #14263E 0%, #060B12 76%);
-  box-shadow:
-    inset 0 0 70px rgba(0, 0, 0, .55),
-    inset 0 1px 0 rgba(255, 255, 255, .12),
-    0 0 0 1px rgba(var(--accent-rgb), .20),
-    0 24px 60px rgba(1, 1, 1, .28),
-    0 0 90px rgba(var(--accent-rgb), .16);
+  /* Shallow enough that a 14° tilt reads as rotation rather than as a
+     wide-angle lens swinging the far edge away. */
+  perspective: 1100px;
+  /* How far the markers stand off the surface. One value, because the pin
+     plane and the stems that reach back down to the land have to agree: if the
+     stem is shorter it dangles, if it is longer it spears through the map.
+     Kept just above the 16px the relief is thick — enough parallax to read as
+     floating, not so much that a pin drifts off its own city when tilted. */
+  --imap-pin-z: 22px;
   /* Vertical swipes must still scroll the page on a phone. */
   touch-action: pan-y;
 }
-.orb-stage {
+.imap-stage {
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
   will-change: transform;
+  /* Matches the resting lean the component animates around, so the map is not
+     flat for the one frame before the loop starts. */
+  transform: rotateX(6deg);
 }
-.orb-map {
+
+/* The slices that make the wall, and the face that caps them, are the same
+   box — only their z differs. */
+.imap-slice,
+.imap-face {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  overflow: visible;
 }
-.orb-grid {
-  fill: none;
-  stroke: rgba(var(--accent-rgb), .16);
-  stroke-width: .35;
-}
-.orb-dots path { stroke: none; }
-.orb-dots--lit { fill: rgba(var(--accent-rgb), .92); }
-.orb-dots--mid { fill: rgba(var(--accent-rgb), .62); }
-.orb-dots--dim { fill: rgba(var(--accent-rgb), .34); }
-
-/* Pins ride 34px in front of the map plane — the parallax between the two is
-   what the tilt is for. */
-.orb-pins {
+/* The map's own outline, dropped down-right and blurred. An ellipse was tried
+   first and read as a grey smudge beside the country: a cast shadow has to have
+   the shape of the thing casting it, or the eye files it as dirt on the page. */
+.imap-shadow {
   position: absolute;
   inset: 0;
-  transform: translateZ(34px);
+  width: 100%;
+  height: 100%;
+  transform: translate(2.5%, 3%) scale(.985);
+  fill: rgba(20, 38, 62, .3);
+  filter: blur(11px);
+  pointer-events: none;
+}
+
+.imap-plate { fill: url(#imapFace); }
+.imap-state {
+  fill: url(#imapFace);
+  stroke: rgba(120, 186, 240, .34);
+  stroke-width: .22;
+  vector-effect: non-scaling-stroke;
+}
+/* The two states that actually hold centres are lifted out of the wash, so the
+   map answers "where does VSI operate" before a single pin is read. */
+.imap-state.is-live {
+  fill: url(#imapLive);
+  stroke: rgba(150, 205, 250, .5);
+}
+/* Coastline: a rim-light along the top edge of the wall. */
+.imap-coast {
+  fill: none;
+  stroke: rgba(var(--accent-rgb), .55);
+  stroke-width: .5;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Pins ride well in front of the face — the parallax between the two is what
+   the tilt is for. */
+.imap-pins {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(var(--imap-pin-z));
   transform-style: preserve-3d;
 }
-.orb-pin {
+.imap-pin {
   position: absolute;
   transform: translate(-50%, -50%);
   width: 28px;
@@ -742,20 +772,44 @@ img{display:block;max-width:100%;}
   cursor: pointer;
   display: grid;
   place-items: center;
+  /* The stem is rotated out of this element's plane; without preserve-3d here
+     the button flattens it and the stem lies across the map as a stray dash. */
+  transform-style: preserve-3d;
 }
-.orb-pin__dot {
-  width: 8px;
-  height: 8px;
+.imap-pin__dot {
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   /* Momentum Orange against a blue map: the one pairing on the brand palette
-     that cannot be mistaken for the map it sits on. */
+     that cannot be mistaken for the land it sits on. */
   background: var(--accent-orange);
+  /* A tight white keyline separates the marker from the land; the glow beyond
+     it is kept short, because a wide one hazes over the state borders it is
+     meant to be sitting on. */
   box-shadow:
-    0 0 0 2px rgba(255, 255, 255, .8),
-    0 0 14px rgba(var(--momentum-orange-rgb), .9);
+    0 0 0 1.5px rgba(255, 255, 255, .92),
+    0 1px 4px rgba(10, 24, 42, .5),
+    0 0 8px rgba(var(--momentum-orange-rgb), .55);
   transition: transform .22s var(--ease-spring);
 }
-.orb-pin__ring {
+/* Drops from the marker to the land below it. Without it the pins read as
+   dots floating in front of the map rather than as points on it.
+
+   rotateX(-90deg) about the top edge swings the bar out of the pin plane and
+   backwards along z, so its far end lands exactly on the surface the pin plane
+   was pushed forward from. Positive 90 would send the stem out towards the
+   viewer instead. */
+.imap-pin__stem {
+  position: absolute;
+  top: 50%;
+  width: 1px;
+  height: var(--imap-pin-z);
+  transform-origin: top center;
+  transform: rotateX(-90deg);
+  background: linear-gradient(rgba(var(--momentum-orange-rgb), .85), rgba(var(--momentum-orange-rgb), 0));
+  pointer-events: none;
+}
+.imap-pin__ring {
   position: absolute;
   width: 28px;
   height: 28px;
@@ -765,88 +819,81 @@ img{display:block;max-width:100%;}
   transform: scale(.4);
   transition: opacity .28s ease, transform .28s var(--ease-spring);
 }
-/* A fanned cluster still overlaps a little; the one being pointed at comes
-   to the front so its ring is never drawn under a neighbour. */
-.orb-pin:hover,
-.orb-pin:focus-visible,
-.orb-pin.is-active { z-index: 2; }
-.orb-pin:hover .orb-pin__ring,
-.orb-pin:focus-visible .orb-pin__ring,
-.orb-pin.is-active .orb-pin__ring {
+/* A fanned cluster still overlaps a little; the one being pointed at comes to
+   the front so its ring is never drawn under a neighbour. */
+.imap-pin:hover,
+.imap-pin:focus-visible,
+.imap-pin.is-active { z-index: 2; }
+.imap-pin:hover .imap-pin__ring,
+.imap-pin:focus-visible .imap-pin__ring,
+.imap-pin.is-active .imap-pin__ring {
   opacity: 1;
   transform: scale(1);
 }
-.orb-pin.is-active .orb-pin__dot { transform: scale(1.5); }
-.orb-pin.is-flagship .orb-pin__dot { width: 11px; height: 11px; }
-.orb-pin.is-flagship::before {
+.imap-pin.is-active .imap-pin__dot { transform: scale(1.5); }
+.imap-pin.is-flagship .imap-pin__dot { width: 12px; height: 12px; }
+.imap-pin.is-flagship::before {
   content: '';
   position: absolute;
   width: 28px;
   height: 28px;
   border-radius: 50%;
   border: 1px solid rgba(var(--momentum-orange-rgb), .5);
-  animation: orbPing 2.6s ease-out infinite;
+  animation: imapPing 2.6s ease-out infinite;
 }
-@keyframes orbPing {
+@keyframes imapPing {
   0%   { transform: scale(.35); opacity: .9; }
   70%  { transform: scale(1.5); opacity: 0; }
   100% { transform: scale(1.5); opacity: 0; }
 }
 
-/* Fixed to the sphere, not to the map: a highlight that rotated with the
-   contents would read as a decal stuck on the glass. */
-.orb-gloss {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 55% 40% at 30% 16%, rgba(255, 255, 255, .16) 0%, transparent 70%),
-    radial-gradient(ellipse 90% 60% at 50% 118%, rgba(0, 0, 0, .45) 0%, transparent 60%);
-}
-.orb-readout {
-  position: absolute;
-  left: 50%;
-  bottom: 8%;
-  transform: translateX(-50%);
+/* Now that it sits on the page rather than inside a dark sphere, it is styled
+   as page furniture: a light chip on parchment. The old dark pill read as a
+   hole punched in the section. */
+.imap-readout {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  padding: 8px 16px;
+  justify-content: center;
+  gap: 3px;
+  /* Held at the height of its tallest state — city over state — so selecting a
+     pin does not shunt the caption down the page. */
+  min-height: 54px;
+  padding: 8px 20px;
   border-radius: var(--r-pill);
-  background: rgba(6, 11, 18, .72);
-  border: 1px solid rgba(255, 255, 255, .12);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(var(--ink-rgb), .03);
+  border: 1px solid rgba(var(--ink-rgb), .1);
   white-space: nowrap;
   pointer-events: none;
-  transition: border-color .25s ease;
+  transition: border-color .25s ease, background-color .25s ease;
 }
-.orb-readout.is-on { border-color: rgba(var(--momentum-orange-rgb), .45); }
-.orb-readout__city {
+.imap-readout.is-on {
+  background: rgba(var(--momentum-orange-rgb), .07);
+  border-color: rgba(var(--momentum-orange-rgb), .38);
+}
+.imap-readout__city {
   font-family: var(--sans);
   font-weight: 700;
   font-size: var(--text-sm);
   letter-spacing: var(--tr-caps);
   text-transform: uppercase;
-  color: #FFF;
+  color: var(--text);
 }
-.orb-readout__state,
-.orb-readout__hint {
+.imap-readout__state,
+.imap-readout__hint {
   font-family: var(--mono);
   font-size: var(--text-xs);
   letter-spacing: var(--tr-mono);
   text-transform: uppercase;
-  color: rgba(255, 255, 255, .45);
+  color: var(--text-faint);
 }
 /* "Hover" is a lie on a phone. */
-.orb-readout__hint--touch { display: none; }
+.imap-readout__hint--touch { display: none; }
 @media (hover: none) {
-  .orb-readout__hint--pointer { display: none; }
-  .orb-readout__hint--touch { display: inline; }
+  .imap-readout__hint--pointer { display: none; }
+  .imap-readout__hint--touch { display: inline; }
 }
-.orb-caption {
+.imap-caption {
   font-family: var(--mono);
   font-size: var(--text-xs);
   letter-spacing: var(--tr-mono);
@@ -855,7 +902,7 @@ img{display:block;max-width:100%;}
   text-align: center;
 }
 @media (prefers-reduced-motion: reduce) {
-  .orb-pin.is-flagship::before { animation: none; opacity: .5; transform: scale(1); }
+  .imap-pin.is-flagship::before { animation: none; opacity: .5; transform: scale(1); }
 }
 
 /* ── Logo wall ──

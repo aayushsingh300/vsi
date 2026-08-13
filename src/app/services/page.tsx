@@ -338,13 +338,20 @@ export default function ServicesPage() {
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 16, marginBottom: 64 }}>
             {EMPLOYMENT_SECTORS.map((sector, i) => (
               <AnimateIn key={sector.name} animation="slideUp" delay={i * 0.06}>
-                <div className="course-row" style={{
+                <div className="hover-lift" style={{
                   background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: "var(--r-md)",
-                  padding: "28px 24px", display: "flex", flexDirection: "column", gap: 12, height: "100%",
+                  overflow: "hidden", display: "flex", flexDirection: "column", height: "100%",
                 }}>
-                  <div className="icon-box"><Icon name={sector.icon} size={19} color="var(--accent)" /></div>
-                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>{sector.name}</h3>
-                  <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6 }}>{sector.desc}</p>
+                  <div style={{ position: "relative", width: "100%", aspectRatio: "16/10", background: "var(--bg-muted)" }}>
+                    <CampusImage src={sector.image} alt={sector.name} caption={sector.name} />
+                  </div>
+                  <div style={{ padding: "22px 20px 24px", display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <div className="icon-box"><Icon name={sector.icon} size={17} color="var(--accent)" /></div>
+                      <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>{sector.name}</h3>
+                    </div>
+                    <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6 }}>{sector.desc}</p>
+                  </div>
                 </div>
               </AnimateIn>
             ))}
@@ -363,12 +370,19 @@ export default function ServicesPage() {
                 <div className="hover-lift" style={{
                   background: "linear-gradient(145deg, var(--bg-card) 0%, rgba(var(--accent-rgb),.04) 100%)",
                   border: "1px solid var(--border-card)", borderRadius: "var(--r-md)",
-                  padding: "28px 24px", display: "flex", flexDirection: "column", gap: 12, height: "100%",
+                  overflow: "hidden", display: "flex", flexDirection: "column", height: "100%",
                   transition: "box-shadow .3s ease",
                 }}>
-                  <div className="icon-box"><Icon name={tech.icon} size={19} color="var(--accent-green)" /></div>
-                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>{tech.name}</h3>
-                  <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6 }}>{tech.desc}</p>
+                  <div style={{ position: "relative", width: "100%", aspectRatio: "16/10", background: "var(--bg-muted)" }}>
+                    <CampusImage src={tech.image} alt={tech.name} caption={tech.name} />
+                  </div>
+                  <div style={{ padding: "22px 20px 24px", display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <div className="icon-box"><Icon name={tech.icon} size={17} color="var(--accent-green)" /></div>
+                      <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>{tech.name}</h3>
+                    </div>
+                    <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6 }}>{tech.desc}</p>
+                  </div>
                 </div>
               </AnimateIn>
             ))}
@@ -390,12 +404,19 @@ export default function ServicesPage() {
                 <div className="hover-lift" style={{
                   background: "linear-gradient(145deg, var(--bg-card) 0%, rgba(var(--gold-rgb),.04) 100%)",
                   border: "1px solid var(--border-card)", borderRadius: "var(--r-md)",
-                  padding: "28px 24px", display: "flex", flexDirection: "column", gap: 12, height: "100%",
+                  overflow: "hidden", display: "flex", flexDirection: "column", height: "100%",
                   transition: "box-shadow .3s ease",
                 }}>
-                  <div className="icon-box"><Icon name={item.icon} size={19} color="var(--accent)" /></div>
-                  <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>{item.name}</h3>
-                  <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6 }}>{item.desc}</p>
+                  <div style={{ position: "relative", width: "100%", aspectRatio: "16/10", background: "var(--bg-muted)" }}>
+                    <CampusImage src={item.image} alt={item.name} caption={item.name} />
+                  </div>
+                  <div style={{ padding: "22px 20px 24px", display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <div className="icon-box"><Icon name={item.icon} size={17} color="var(--accent)" /></div>
+                      <h3 style={{ fontFamily: "var(--serif)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--text)", letterSpacing: "var(--tr-heading)" }}>{item.name}</h3>
+                    </div>
+                    <p style={{ fontFamily: "var(--body)", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.6 }}>{item.desc}</p>
+                  </div>
                 </div>
               </AnimateIn>
             ))}

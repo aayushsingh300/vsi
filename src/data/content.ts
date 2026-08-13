@@ -1040,24 +1040,24 @@ export function getCollege(slug: string): College | undefined {
 // ════════════════════════════════════════════════════════════════════
 
 export const EMPLOYMENT_SECTORS = [
-  { name: "IT / ITeS", icon: "computer", desc: "Software development, IT support, BPO and tech-enabled services." },
-  { name: "Apparel & Textiles", icon: "textiles", desc: "Garment manufacturing, quality, and fashion CAD roles." },
-  { name: "Logistics & E-Commerce", icon: "logistics", desc: "Warehousing, fulfilment, supply-chain and last-mile delivery." },
-  { name: "Automotive", icon: "automotive", desc: "Vehicle manufacturing, servicing, EV assembly and maintenance." },
-  { name: "Healthcare", icon: "healthcare", desc: "Hospital support, nursing assistance and patient care." },
+  { name: "IT / ITeS", icon: "computer", image: "/images/voc-it.png", desc: "Software development, IT support, BPO and tech-enabled services." },
+  { name: "Apparel & Textiles", icon: "textiles", image: "/images/voc-apparel.png", desc: "Garment manufacturing, quality, and fashion CAD roles." },
+  { name: "Logistics & E-Commerce", icon: "logistics", image: "/images/voc-retail.png", desc: "Warehousing, fulfilment, supply-chain and last-mile delivery." },
+  { name: "Automotive", icon: "automotive", image: "/images/voc-automotive.png", desc: "Vehicle manufacturing, servicing, EV assembly and maintenance." },
+  { name: "Healthcare", icon: "healthcare", image: "/images/voc-healthcare.png", desc: "Hospital support, nursing assistance and patient care." },
 ];
 
 export const EMERGING_TECH = [
-  { name: "Drone Technology", icon: "drone", desc: "Unmanned aerial vehicle operation, maintenance and surveying applications." },
-  { name: "Industrial Automation", icon: "automation", desc: "PLC, SCADA, robotics and smart manufacturing systems." },
-  { name: "Electric Vehicle (EV)", icon: "ev", desc: "EV servicing, battery technology, charging infrastructure and assembly." },
+  { name: "Drone Technology", icon: "drone", image: "/images/drone-lab.png", desc: "Unmanned aerial vehicle operation, maintenance and surveying applications." },
+  { name: "Industrial Automation", icon: "automation", image: "/images/thumb-plc-automation.png", desc: "PLC, SCADA, robotics and smart manufacturing systems." },
+  { name: "Electric Vehicle (EV)", icon: "ev", image: "/images/ev-lab.png", desc: "EV servicing, battery technology, charging infrastructure and assembly." },
 ];
 
 // PPP & Workforce initiatives (Priyadarshan Sir's input)
 export const SERVICES_PPP = [
-  { name: "Transforming Public Education", icon: "government", desc: "Operating PPP-model Polytechnic and ITI institutions — modernizing government technical education with industry-grade curriculum, labs and placement delivery." },
-  { name: "Workforce for Industries", icon: "industry", desc: "Sourcing, training and supplying job-ready workforce directly to manufacturing, service and infrastructure-sector industries at scale." },
-  { name: "Empowering Government Schools", icon: "school", desc: "Establishing vocational skill labs across 400+ government schools — embedding employable, hands-on skills into mainstream school education." },
+  { name: "Transforming Public Education", icon: "government", image: "/centres/polytechnic-sardhana.png", desc: "Operating PPP-model Polytechnic and ITI institutions — modernizing government technical education with industry-grade curriculum, labs and placement delivery." },
+  { name: "Workforce for Industries", icon: "industry", image: "/images/placements-drive.png", desc: "Sourcing, training and supplying job-ready workforce directly to manufacturing, service and infrastructure-sector industries at scale." },
+  { name: "Empowering Government Schools", icon: "school", image: "/mandates/samagra-shiksha.png", desc: "Establishing vocational skill labs across 400+ government schools — embedding employable, hands-on skills into mainstream school education." },
 ];
 
 export type GovtMandate = {
@@ -1507,9 +1507,10 @@ export const AWARDS = [
 ];
 
 /**
- * `lat` / `lng` place each centre on the map orb (see components/IndiaOrb).
- * City-centre coordinates, decimal degrees — precise enough for a 400px map
- * and the only thing the orb needs from this list.
+ * `lat` / `lng` place each centre on the relief map (see components/IndiaMap).
+ * City-centre coordinates, decimal degrees. They are projected onto the real
+ * coastline rather than eyeballed, so an error here puts a pin in the wrong
+ * district — check a new centre's coordinates before adding it.
  */
 export const CENTERS: {
   city: string;
@@ -1547,12 +1548,12 @@ export const FACULTY = [
 ];
 
 export const NEWS = [
-  { date: "2024", t: "EV Training Centre Inaugurated by JSDM", s: "Jharkhand Skill Development Mission inaugurates a state-of-the-art EV training facility at our Ranchi centre.", featured: true },
-  { date: "2023", t: "CM Hemant Soren Visits Drone Technology Lab", s: "Hon. Chief Minister tours VSI's drone technology infrastructure during state skill development showcase." },
-  { date: "2022", t: "Excellence Award for Tribal Student Placement", s: "Cabinet Minister Arjun Munda recognizes VSI's contribution to tribal youth employment." },
-  { date: "2019", t: "Skoch Award · Excellence in Skill Development", s: "National recognition for sustained impact on India's skill development ecosystem." },
-  { date: "2019", t: "Best Placement Award by Union Minister", s: "Dharmendra Pradhan, Minister of Skill Development & Entrepreneurship, honors VSI." },
-  { date: "2017", t: "Venture Mega Skill Centre Inaugurated", s: "Flagship multi-program centre opens in Ranchi, marking a major expansion." },
+  { date: "2024", t: "EV Training Centre Inaugurated by JSDM", s: "Jharkhand Skill Development Mission inaugurates a state-of-the-art EV training facility at our Ranchi centre.", featured: true, img: "/images/ev-lab.png" },
+  { date: "2023", t: "CM Hemant Soren Visits Drone Technology Lab", s: "Hon. Chief Minister tours VSI's drone technology infrastructure during state skill development showcase.", img: "/images/drone-lab.png" },
+  { date: "2022", t: "Excellence Award for Tribal Student Placement", s: "Cabinet Minister Arjun Munda recognizes VSI's contribution to tribal youth employment.", img: "/images/awards/excellence-award.jpg" },
+  { date: "2019", t: "Skoch Award · Excellence in Skill Development", s: "National recognition for sustained impact on India's skill development ecosystem.", img: "/images/awards/skoch-award.jpg" },
+  { date: "2019", t: "Best Placement Award by Union Minister", s: "Dharmendra Pradhan, Minister of Skill Development & Entrepreneurship, honors VSI.", img: "/images/awards/best-placement-award.jpg" },
+  { date: "2017", t: "Venture Mega Skill Centre Inaugurated", s: "Flagship multi-program centre opens in Ranchi, marking a major expansion.", img: "/images/award-ceremony.png" },
 ];
 
 /**

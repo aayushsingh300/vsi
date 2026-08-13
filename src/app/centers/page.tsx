@@ -8,7 +8,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWA from "@/components/FloatingWA";
 import TabSwitch from "@/components/TabSwitch";
-import IndiaOrb from "@/components/IndiaOrb";
+import IndiaMap from "@/components/IndiaMap";
 import Link from "next/link";
 import { INFRA_TABS, TRAINING_INSTITUTIONS, SMART_CITY_BLOCKS, CENTERS, POLYTECHNIC_COLLEGES, ITI_COLLEGES } from "@/data/content";
 import { useLang } from "@/context/LangContext";
@@ -318,13 +318,13 @@ export default function CentersPage() {
               ))}
             </div>
 
-            {/* Map orb — sticks alongside the list while it scrolls past. */}
+            {/* Relief map — sticks alongside the list while it scrolls past. */}
             {/* On a phone the map leads: seven address cards ahead of it is a
                 long scroll to reach the one element that shows the shape of
                 the network. */}
             <AnimateIn animation="scaleIn" delay={0.1} style={{ order: isMobile ? -1 : 0 }}>
               <div style={{ position: isMobile ? "static" : "sticky", top: "calc(var(--nav-h) + 32px)" }}>
-                <IndiaOrb active={activeCentre} onSelect={setActiveCentre} />
+                <IndiaMap active={activeCentre} onSelect={setActiveCentre} />
               </div>
             </AnimateIn>
           </div>
